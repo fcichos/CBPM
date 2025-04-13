@@ -1,0 +1,26 @@
+---
+title: "CBPM Seminar Questions"
+format:
+  live-html:
+    toc: true
+    toc-location: right
+pyodide:
+  autorun: false
+  packages:
+    - numpy
+---
+
+Please answer the following questions to help tailor the seminar to your needs.
+Your responses are anonymous and will be used only to adapt the teaching to your
+level of experience.
+
+```{=html}
+<iframe src="https://forms.gle/QSeoMC2F88KDW2JT9"
+  width="100%"
+  height="1800px"
+  frameborder="0"
+  marginheight="0"
+  marginwidth="0">
+  Loading…
+</iframe>
+```
