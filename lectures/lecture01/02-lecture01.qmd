@@ -7,7 +7,7 @@ format:
     highlight-style: github
     code-fold: show
     code-tools: true
-    css: ../../assets/custom.css
+    css: ../../assets/css/custom.css
 pyodide:
   autorun: false
   packages:

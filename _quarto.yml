@@ -4,7 +4,7 @@ project:
 format:
   live-html:
     theme: cosmo
-    css: styles.css
+    css: assets/css/styles.css
     toc: true
     toc-depth: 3
 
@@ -22,7 +22,7 @@ website:
       - icon: github
   sidebar:
     style: "floating" # Options: "floating", "sticky"
-    logo: mona_logo.png
+    logo: assets/images/mona_logo.png
     collapse-level: 3
     contents:
       - text: Home
