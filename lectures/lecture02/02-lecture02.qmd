@@ -1,0 +1,310 @@
+---
+title: "Python Overview"
+format:
+  live-html:
+    toc: true
+    toc-location: right
+pyodide:
+  autorun: false
+  packages:
+    - matplotlib
+    - numpy
+notebook-url: "https://github.com/fcichos/EMPP24/blob/main/lectures/lecture01/01-lecture01.ipynb"
+---
+
+## Control Structures and Functions
+
+Building on our understanding of Python's basic data types and operations, we'll now explore how to control program flow and create reusable code blocks. These structures allow us to write more sophisticated programs that can make decisions, repeat operations, and organize code efficiently.
+
+
+### Functions
+Functions are reusable blocks of code that can be executed multiple times from different parts of your program. They help in organizing code, making it more readable, and reducing redundancy. Functions can take input arguments and return output values.
+
+::: {.panel-tabset}
+#### Defining a Function
+
+A function in Python is defined using the `def` keyword followed by the name of the function, which is usually descriptive and indicates what the function does. The parameters inside the parentheses indicate what data the function expects to receive. The `->` symbol is used to specify the return type of the function.
+
+Here's an example:
+
+```{pyodide}
+#| autorun: false
+# Define a function that takes two numbers
+# as input and returns their sum
+def add_numbers(a: int, b: int) -> int:
+  return a + b
+```
+
+#### Calling a Function
+
+Functions can be called by specifying the name of the function followed by parentheses containing the arguments. The arguments passed to the function should match the number and type of parameters defined in the function.
+Here's an example:
+
+```{pyodide}
+#| autorun: false
+# Call the function with two numbers as input
+result = add_numbers(2, 3)
+print(result)  # prints 5
+```
+:::
+
+### Loops
+
+Loops are used to execute a block of code repeatedly. There are two main types of loops in Python: `for` loops and `while` loops.
+
+
+::: {.panel-tabset}
+#### For Loop
+
+A `for` loop in Python is used to iterate over a sequence (such as a list or string) and execute a block of code for each item in the sequence. Here's an example:
+
+```{pyodide}
+#| autorun: false
+# Define a function that prints numbers from 1 to 10
+def print_numbers():
+  for i in range(1, 11):
+    print(i)
+
+print_numbers()
+```
+
+#### While Loop
+
+A `while` loop in Python is used to execute a block of code while a certain condition is met. The loop continues as long as the condition is true. Here's an example:
+
+```{pyodide}
+#| autorun: false
+# Define a function that prints numbers from 1 to 10 using a while loop
+def print_numbers_while():
+  i = 1
+  while i <= 10:
+    print(i)
+    i += 1
+
+print_numbers_while()
+```
+:::
+
+### Conditional Statements
+
+Conditional statements are used to control the flow of your program based on conditions. The main conditional statements in Python are `if`, `else`, and `elif`.
+
+::: {.panel-tabset}
+#### If Statement
+
+An `if` statement in Python is used to execute a block of code if a certain condition is met. Here's an example:
+
+```{pyodide}
+#| autorun: false
+# Define a function that prints "hello" or "goodbye" depending on the hour of day
+def print_hello():
+  current_hour = 12
+  if current_hour < 18:
+    print("hello")
+
+print_hello()
+```
+
+
+#### Else Statement
+
+An `else` statement in Python is used to execute a block of code if the condition in an `if` statement is not met.  Here's an example:
+
+```{pyodide}
+#| autorun: false
+# Define a function that prints "hello" or "goodbye" depending on the hour of day
+def print_hello_or_goodbye():
+  current_hour = 12
+  if current_hour < 18:
+    print("hello")
+  else:
+    print("goodbye")
+
+print_hello_or_goodbye()
+```
+
+#### Elif Statement
+
+An `elif` statement in Python is used to execute a block of code if the condition in an `if` statement is not met but under an extra condition.  Here's an example:
+
+```{pyodide}
+#| autorun: false
+# Define a function that prints "hello","goodbye" or "good night" depending on the hour of day
+def print_hello_or_goodbye():
+  current_hour = 12
+  if current_hour < 18:
+    print("hello")
+  elif current_hour<20:
+    print("goodbye")
+  else:
+    print("good night")
+
+print_hello_or_goodbye()
+```
+:::
+
+
+
+
+## Exercises
+
+The following exercises will help you practice using functions with conditional logic.
+
+::: {.callout-note}
+### Exercise 1: Temperature Conversion Function
+Create a function that converts temperatures between Fahrenheit and Celsius scales. This exercise demonstrates how to define and use functions with conditional logic to perform different types of conversions based on user input.
+
+The conversion formulas are:
+- Celsius to Fahrenheit: $F = (C \times 9/5) + 32$
+- Fahrenheit to Celsius: $C = (F - 32) \times 5/9$
+
+*Time estimate: 15-20 minutes*
+
+```{pyodide}
+#| exercise: temp_convert
+
+def convert_temperature(temp, scale):
+    """
+    Convert temperature between Celsius and Fahrenheit
+
+    Parameters:
+    temp (float): The temperature value to convert
+    scale (str): The current scale of the temperature ('C' or 'F')
+
+    Returns:
+    tuple: (converted_temp, new_scale)
+    """
+    # Write your function implementation here
+    # If scale is 'C', convert to Fahrenheit
+    # If scale is 'F', convert to Celsius
+    # Return both the converted temperature and the new scale
+
+    ____
+
+# Test your function with these values
+test_cases = [(100, 'C'), (32, 'F'), (0, 'C'), (98.6, 'F')]
+
+for temp, scale in test_cases:
+    converted, new_scale = convert_temperature(temp, scale)
+    print(f"{temp}°{scale} = {converted:.1f}°{new_scale}")
+```
+::: {.hint exercise="temp_convert"}
+::: { .callout-tip collapse="false"}
+Use an if-else statement to check the scale parameter. Depending on whether it's 'C' or 'F', apply the appropriate conversion formula. Remember to return both the converted temperature value and the new scale designation (either 'F' or 'C').
+:::
+:::
+
+::: {.solution exercise="temp_convert"}
+::: {.callout-note collapse="false"}
+```{pyodide}
+def convert_temperature(temp, scale):
+    """
+    Convert temperature between Celsius and Fahrenheit
+
+    Parameters:
+    temp (float): The temperature value to convert
+    scale (str): The current scale of the temperature ('C' or 'F')
+
+    Returns:
+    tuple: (converted_temp, new_scale)
+    """
+    if scale == 'C':
+        # Convert from Celsius to Fahrenheit
+        converted_temp = (temp * 9/5) + 32
+        new_scale = 'F'
+    elif scale == 'F':
+        # Convert from Fahrenheit to Celsius
+        converted_temp = (temp - 32) * 5/9
+        new_scale = 'C'
+    else:
+        # Handle invalid scale input
+        return "Invalid scale. Use 'C' or 'F'.", None
+
+    return converted_temp, new_scale
+
+# Test your function with these values
+test_cases = [(100, 'C'), (32, 'F'), (0, 'C'), (98.6, 'F')]
+
+for temp, scale in test_cases:
+    converted, new_scale = convert_temperature(temp, scale)
+    print(f"{temp}°{scale} = {converted:.1f}°{new_scale}")
+```
+:::
+:::
+:::
+
+::: {.callout-note}
+### Exercise 2: Prime Number Checker
+Create a function that checks whether a given number is prime. This exercise demonstrates the use of loops, conditional statements, and early return to solve a common mathematical problem.
+
+A prime number is a natural number greater than 1 that cannot be formed by multiplying two smaller natural numbers.
+
+*Time estimate: 15-20 minutes*
+
+```{pyodide}
+#| exercise: prime_check
+
+def is_prime(number):
+    """
+    Check if a number is prime
+
+    Parameters:
+    number (int): The number to check
+
+    Returns:
+    bool: True if the number is prime, False otherwise
+    """
+    # Write your function implementation here
+    # Remember:
+    # - Numbers less than 2 are not prime
+    # - A number is prime if it's only divisible by 1 and itself
+
+    ____
+
+# Test the function with various numbers
+for num in [2, 7, 10, 13, 15, 23, 24, 29]:
+    result = is_prime(num)
+    print(f"{num} is {'prime' if result else 'not prime'}")
+```
+::: {.hint exercise="prime_check"}
+::: { .callout-tip collapse="false"}
+First, check if the number is less than 2 (not prime). Then, use a loop to check if the number is divisible by any integer from 2 to the square root of the number. If you find a divisor, the number is not prime. If no divisors are found, the number is prime.
+:::
+:::
+
+::: {.solution exercise="prime_check"}
+::: {.callout-note collapse="false"}
+```{pyodide}
+def is_prime(number):
+    """
+    Check if a number is prime
+
+    Parameters:
+    number (int): The number to check
+
+    Returns:
+    bool: True if the number is prime, False otherwise
+    """
+    # Numbers less than 2 are not prime
+    if number < 2:
+        return False
+
+    # Check for divisibility from 2 to the square root of number
+    # We only need to check up to the square root because
+    # if number = a*b, either a or b must be ≤ sqrt(number)
+    import math
+    for i in range(2, int(math.sqrt(number)) + 1):
+        if number % i == 0:
+            return False
+
+    # If we didn't find any divisors, the number is prime
+    return True
+
+# Test the function with various numbers
+for num in [2, 7, 10, 13, 15, 23, 24, 29]:
+    result = is_prime(num)
+    print(f"{num} is {'prime' if result else 'not prime'}")
+```
+:::
+:::
+:::

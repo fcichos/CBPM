@@ -1,0 +1,288 @@
+---
+title: "Variables & Numbers"
+format:
+  revealjs:
+    theme: default
+    slide-number: true
+    chalkboard: true
+    code-fold: false
+    center: true
+    include-in-header:
+      text: |
+        <script>
+          window.addEventListener('load', function() {
+            // Find all slides and adjust content
+            var slides = document.querySelectorAll('.reveal .slides section');
+            slides.forEach(function(slide) {
+              if (slide.scrollHeight > slide.clientHeight) {
+                slide.classList.add('scrollable');
+              }
+            });
+          });
+        </script>
+pyodide:
+  autorun: false
+  packages:
+    - numpy
+---
+
+## Variables in Python
+
+### Symbol Names
+
+::: {.content-hidden when-format="reavealjs"}
+Variable names in Python can include alphanumerical characters `a-z`, `A-Z`, `0-9`, and the special character `_`. Normal variable names must start with a letter or an underscore. By convention, variable names typically start with a lower-case letter, while Class names start with a capital letter and internal variables start with an underscore.
+:::
+
+::: {.callout-warning title="Reserved Keywords"}
+Python has keywords that cannot be used as variable names. The most common ones you'll encounter in physics programming are:
+
+`if`, `else`, `for`, `while`, `return`, `and`, `or`, `lambda`
+
+Note that `lambda` is particularly relevant as it could naturally appear in physics code, but since it's reserved for anonymous functions in Python, it cannot be used as a variable name.
+:::
+
+### Variable Assignment
+
+The assignment operator in Python is `=`. Python is a dynamically typed language, so we do not need to specify the type of a variable when we create one.
+
+Assigning a value to a new variable creates the variable:
+
+```{pyodide}
+#| autorun: false
+# variable assignments
+x = 1.0
+my_favorite_variable = 12.2
+x
+```
+
+Although not explicitly specified, a variable does have a type associated with it (e.g., integer, float, string).
+The type is derived from the value that was assigned to it. To determine the type of a variable, we can use the `type` function.
+
+```{pyodide}
+#| autorun: false
+type(x)
+```
+
+If we assign a new value to a variable, its type can change.
+
+```{pyodide}
+#| autorun: false
+x = 1
+```
+
+```{pyodide}
+#| autorun: false
+type(x)
+```
+
+If we try to use a variable that has not yet been defined, we get a `NameError` error.
+
+
+```{pyodide}
+#| autorun: false
+#print(g)
+```
+
+## Number Types
+
+Python supports various number types, including integers, floating-point numbers, and complex numbers. These are some of the basic building blocks of doing arithmetic in any programming language. We will discuss each of these types in more detail.
+
+### Comparison of Number Types
+
+| Type    | Example       | Description                          | Limits                                                      | Use Cases                           |
+|---------|---------------|--------------------------------------|-------------------------------------------------------------|-------------------------------------|
+| **int** | 42            | Whole numbers                        | Unlimited precision (bounded by available memory)           | Counting, indexing                  |
+| **float** | 3.14159       | Decimal numbers                      | Typically ±1.8e308 with 15-17 digits of precision (64-bit)  | Scientific calculations, prices     |
+| **complex** | 2 + 3j        | Numbers with real and imaginary parts| Same as float for both real and imaginary parts             | Signal processing, electrical engineering |
+| **bool**    | True / False  | Logical values                       | Only two values: True (1) and False (0)                     | Conditional operations, flags       |
+
+
+::: {.callout-note title="Examples for Number Types" collapse=true}
+
+### Integers
+
+**Integer Representation:**  Integers are whole numbers without a decimal point.
+
+
+```{pyodide}
+#| autorun: false
+x = 1
+type(x)
+```
+
+**Binary, Octal, and Hexadecimal:** Integers can be represented in different bases:
+
+```{pyodide}
+#| autorun: false
+0b1010111110  # Binary
+0x0F          # Hexadecimal
+```
+
+### Floating Point Numbers
+
+**Floating Point Representation:** Numbers with a decimal point are treated as floating-point values.
+
+```{pyodide}
+#| autorun: false
+x = 3.141
+type(x)
+```
+
+**Maximum Float Value:** Python handles large floats, converting them to infinity if they exceed the maximum representable value.
+
+```{pyodide}
+#| autorun: false
+1.7976931348623157e+308 * 2  # Output: inf
+```
+
+### Complex Numbers
+
+**Complex Number Representation:** Complex numbers have a real and an imaginary part.
+
+```{pyodide}
+#| autorun: false
+c = 2 + 4j
+type(c)
+```
+
+- **Accessors for Complex Numbers:**
+  - `c.real`: Real part of the complex number.
+  - `c.imag`: Imaginary part of the complex number.
+
+```{pyodide}
+#| autorun: false
+print(c.real)
+print(c.imag)
+```
+
+**Complex Conjugate:** Use the `.conjugate()` method to get the complex conjugate.
+
+```{pyodide}
+#| autorun: false
+c = c.conjugate()
+print(c)
+```
+
+:::
+
+
+## Operators
+
+Python provides a variety of operators for performing operations on variables and values. Here we'll cover the most common operators used in scientific programming.
+
+### Arithmetic Operators
+
+These operators perform basic mathematical operations:
+
+| Operator | Name | Example | Result |
+|----------|------|---------|--------|
+| `+` | Addition | `5 + 3` | 8 |
+| `-` | Subtraction | `5 - 3` | 2 |
+| `*` | Multiplication | `5 * 3` | 15 |
+| `/` | Division | `5 / 3` | 1.6666... |
+| `//` | Floor Division | `5 // 3` | 1 |
+| `%` | Modulus (remainder) | `5 % 3` | 2 |
+| `**` | Exponentiation | `5 ** 3` | 125 |
+
+```{pyodide}
+#| autorun: false
+# Examples of arithmetic operators
+print(f"Addition: 5 + 3 = {5 + 3}")
+print(f"Division: 5 / 3 = {5 / 3}")
+print(f"Floor Division: 5 // 3 = {5 // 3}")
+print(f"Exponentiation: 5 ** 3 = {5 ** 3}")
+```
+
+### Comparison Operators
+
+These operators are used to compare values:
+
+| Operator | Description | Example |
+|----------|-------------|---------|
+| `==` | Equal to | `x == y` |
+| `!=` | Not equal to | `x != y` |
+| `>` | Greater than | `x > y` |
+| `<` | Less than | `x < y` |
+| `>=` | Greater than or equal to | `x >= y` |
+| `<=` | Less than or equal to | `x <= y` |
+
+```{pyodide}
+#| autorun: false
+# Examples of comparison operators
+x, y = 5, 3
+print(f"x = {x}, y = {y}")
+print(f"x == y: {x == y}")
+print(f"x > y: {x > y}")
+print(f"x <= y: {x <= y}")
+```
+
+### Logical Operators
+
+Used to combine conditional statements:
+
+| Operator | Description | Example |
+|----------|-------------|---------|
+| `and` | Returns True if both statements are true | `x > 0 and x < 10` |
+| `or` | Returns True if one of the statements is true | `x < 0 or x > 10` |
+| `not` | Reverses the result, returns False if the result is true | `not(x > 0 and x < 10)` |
+
+```{pyodide}
+#| autorun: false
+# Examples of logical operators
+x = 7
+print(f"x = {x}")
+print(f"x > 0 and x < 10: {x > 0 and x < 10}")
+print(f"x < 0 or x > 10: {x < 0 or x > 10}")
+print(f"not(x > 0): {not(x > 0)}")
+```
+
+### Assignment Operators
+
+Python provides shorthand operators for updating variables:
+
+| Operator | Example | Equivalent to |
+|----------|---------|---------------|
+| `=` | `x = 5` | `x = 5` |
+| `+=` | `x += 3` | `x = x + 3` |
+| `-=` | `x -= 3` | `x = x - 3` |
+| `*=` | `x *= 3` | `x = x * 3` |
+| `/=` | `x /= 3` | `x = x / 3` |
+| `//=` | `x //= 3` | `x = x // 3` |
+| `%=` | `x %= 3` | `x = x % 3` |
+| `**=` | `x **= 3` | `x = x ** 3` |
+
+```{pyodide}
+#| autorun: false
+# Examples of assignment operators
+x = 10
+print(f"Initial x: {x}")
+
+x += 5
+print(f"After x += 5: {x}")
+
+x *= 2
+print(f"After x *= 2: {x}")
+```
+
+::: {.callout-tip title="Operator Precedence" collapse=true}
+Python follows the standard mathematical order of operations (PEMDAS):
+
+1. Parentheses
+2. Exponentiation (`**`)
+3. Multiplication and Division (`*`, `/`, `//`, `%`)
+4. Addition and Subtraction (`+`, `-`)
+
+When operators have the same precedence, they are evaluated from left to right.
+
+```{pyodide}
+#| autorun: false
+# Operator precedence example
+result = 2 + 3 * 4 ** 2
+print(f"2 + 3 * 4 ** 2 = {result}")  # 2 + 3 * 16 = 2 + 48 = 50
+
+# Using parentheses to change precedence
+result = (2 + 3) * 4 ** 2
+print(f"(2 + 3) * 4 ** 2 = {result}")  # 5 * 16 = 80
+```
+:::

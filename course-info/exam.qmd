@@ -1,0 +1,39 @@
+---
+title: "Exams"
+format:
+  live-html:
+    toc: true
+    toc-location: right
+---
+
+
+## First-time participants
+The examination in this case consists of the following parts:
+
+1. **Exercises**:
+   - 6 series of assignments that are not graded
+   - At least 50% of the total points for all assignments must be achieved.
+
+2. **Two Tests**:
+   - Each test lasts 45 minutes.
+   - The test will take place in person.
+   - The tests will be announced in advance.
+   - The scores from both tests are added together to give an overall grade.
+
+Both parts (exercises and tests) must be passed to successfully complete the module.
+
+## Students that already did the module
+
+- **Students that did the module in SS 2024**: The examination consists of exercises and project submission.
+  - If you have achieved ≥ 50% in the summer semester 2024: Only project submission required
+  - If you have achieved < 50% in the summer semester 2024: Exercises and project submission required
+
+- **Students that did the module in SS 2023**: The examination consists of the submission of a project and a 5-minute video about your project instead of the exercises.
+
+- **Enrollment**:
+  - New registration for the module not necessary when you are repeating the module.
+  - For Moodle access: Contact Andrea Kramer (firstname.surname@uni-leipzig.de) via university email.
+
+- **Project Submission**:
+  - Deadline: September 3, 2025, 1:00 pm sharp.
+  - Later Submissions will not be considered.

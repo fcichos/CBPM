@@ -1,0 +1,26 @@
+---
+title: Webpages
+format:
+  live-html:
+    toc: true
+    toc-location: right
+---
+
+# These Webpages
+
+This website contains all the information required for our course **Computer Based Physical Modelling**. You will find a new lecture and a new assignment here each week. The lecture notes are accompanied by videos that explain the content of the lecture **in English**, but you can also get by with just reading.
+From these web pages, you will be guided to various resources that you can use to learn programming in Python. We will use some great tools from the internet, such as:
+
+1. **Google Colab** service, to host Jupyter Notebooks (https://colab.research.google.com). The Google Colab project provides a useful environment for sharing notebooks.
+
+   ![google colab screen](img/colab.png){width=600px fig-align="center"}
+
+   While we don't use direct Colab links in this course, you can use this service on your own to work with the Jupyter Notebooks. Google Colab provides a free, cloud-based environment that allows you to run Python code without installing anything on your local machine. If you prefer to use Colab, you can upload the notebook files to your Google Drive and open them with Colab.
+
+2. **GitHub and GitHub Pages** service for hosting websites (https://github.com). GitHub is a great place to host your collaborative coding projects including version control. In the upper right corner, you will also find a link to the GitHub repository where the notebooks are hosted.
+
+   ![github screen](img/github.png){width=600px fig-align="center"}
+
+3. **Anaconda Jupyter package** for notebooks on your own computer (https://www.anaconda.com/distribution/). The anaconda package provides you with the Jupyter Notebook environment including Python. If you want to use Jupyter at home without online access, this is a good package to install.
+
+   ![anaconda screen](img/anaconda.png){width=600px fig-align="center"}

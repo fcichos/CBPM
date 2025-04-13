@@ -1,0 +1,26 @@
+---
+title: "Assignments"
+format:
+  live-html:
+    toc: true
+    toc-location: right
+---
+
+A total of 6 exercise sheets will be provided. *The exercise sheets are part of the examination!* The exercise sheets are not graded, but completing them is required for the successful completion of the module. More detailed information on the evaluation of the exercise sheets can be found on the [Exam](https://fcichos.github.io/CBPM25/course-info/exam.html) page.
+
+### Provision and Submission of Exercises
+
+- **Publication**: Every Tuesday at 1:00 PM (starting second week)
+- **Submission deadline**: By the following Tuesday at 12:00 PM
+- **Processing period**: One week (minus one hour)
+- **Platform**: University Moodle
+  - Both for working on and submitting assignments
+
+  **Important**:
+  - Make sure to submit on time within the specified deadline.
+  - After the deadline expires, the assignment is no longer available and cannot be submitted.
+  - Please note that submitting the same assignment multiple times reduces the score by 10% with each submission
+
+### Moodle page with Assignments
+
+![Moodle Link ](../assets/images/QR_frame.png)

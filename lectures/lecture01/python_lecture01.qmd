@@ -1,0 +1,177 @@
+---
+title: "Python & Anatomy of a Python Program"
+format:
+  live-html:
+    toc: true
+    toc-location: right
+pyodide:
+  autorun: false
+  packages:
+    - numpy
+---
+
+## What is Python?
+
+Python is a high-level, interpreted programming language known for its readability and simplicity. Created by Guido van Rossum in 1991, it emphasizes code readability with its clear syntax and use of indentation. Python supports multiple programming paradigms, including procedural, object-oriented, and functional programming. It comes with a comprehensive standard library and has a vast ecosystem of third-party packages, making it suitable for various applications such as web development, data analysis, artificial intelligence, scientific computing, and automation. Python's "batteries included" philosophy and gentle learning curve have contributed to its popularity among beginners and experienced developers alike.
+
+For physics students specifically, Python has become the language of choice for data analysis, simulation, and visualization in scientific research. Libraries like NumPy, SciPy, and Matplotlib provide powerful tools for solving physics problems, from basic mechanics to quantum mechanics.
+
+## Anatomy of a Python Program
+
+Understanding the basic structure of a Python program is essential for beginners. Let's break down the fundamental elements that make up a typical Python program.
+
+### Basic Elements
+
+| Element | Description | Example |
+|---------|-------------|---------|
+| **Statements** | Individual instructions that Python executes | `x = 10` |
+| **Expressions** | Combinations of values, variables, and operators that evaluate to a value | `x + 5` |
+| **Blocks** | Groups of statements indented at the same level | Function bodies, loops |
+| **Functions** | Reusable blocks of code that perform specific tasks | `def calculate_area(radius):` |
+| **Comments** | Notes in the code that are ignored by the interpreter | `# This is a comment` |
+| **Imports** | Statements that give access to external modules | `import numpy as np` |
+
+### Visual Structure of a Python Program
+
+```python
+# 1. Import statements (external libraries)
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint  # For solving differential equations
+
+# 2. Constants and global variables
+GRAVITY = 9.81  # m/s^2
+PLANCK_CONSTANT = 6.626e-34  # J·s
+ELECTRON_MASS = 9.109e-31  # kg
+
+# 3. Function definitions
+def calculate_kinetic_energy(mass, velocity):
+    """
+    Calculate the kinetic energy of an object.
+
+    Parameters:
+        mass (float): Mass of the object in kg
+        velocity (float): Velocity of the object in m/s
+
+    Returns:
+        float: Kinetic energy in Joules
+    """
+    return 0.5 * mass * velocity**2
+
+def spring_force(k, displacement):
+    """
+    Calculate the force exerted by a spring.
+
+    Parameters:
+        k (float): Spring constant in N/m
+        displacement (float): Displacement from equilibrium in m
+
+    Returns:
+        float: Force in Newtons (negative for restoring force)
+    """
+    return -k * displacement
+
+# 4. Class definitions (if applicable)
+class Particle:
+    def __init__(self, mass, position, velocity):
+        self.mass = mass
+        self.position = position
+        self.velocity = velocity
+
+    def update_position(self, time_step):
+        # Simple Euler integration
+        self.position += self.velocity * time_step
+
+    def potential_energy(self, height, g=GRAVITY):
+        """Calculate gravitational potential energy"""
+        return self.mass * g * height
+
+    def momentum(self):
+        """Calculate momentum"""
+        return self.mass * self.velocity
+
+# 5. Main execution code
+if __name__ == "__main__":
+    # Create objects or variables
+    particle = Particle(1.0, np.array([0.0, 0.0]), np.array([1.0, 2.0]))
+
+    # Set up simulation parameters
+    time_step = 0.01  # seconds
+    total_time = 1.0  # seconds
+    n_steps = int(total_time / time_step)
+
+    # Arrays to store results
+    positions = np.zeros((n_steps, 2))
+    times = np.zeros(n_steps)
+
+    # Process data/perform calculations - simulate motion
+    for i in range(n_steps):
+        particle.update_position(time_step)
+        positions[i] = particle.position
+        times[i] = i * time_step
+
+    # Output results
+    print(f"Final position: {particle.position}")
+    print(f"Final kinetic energy: {calculate_kinetic_energy(particle.mass, np.linalg.norm(particle.velocity))} J")
+
+    # Visualize results (if applicable)
+    plt.figure(figsize=(10, 6))
+    plt.subplot(1, 2, 1)
+    plt.plot(positions[:, 0], positions[:, 1], 'r-')
+    plt.xlabel('X position (m)')
+    plt.ylabel('Y position (m)')
+    plt.title('Particle Trajectory')
+    plt.grid(True)
+
+    plt.subplot(1, 2, 2)
+    plt.plot(times, positions[:, 0], 'b-', label='x-position')
+    plt.plot(times, positions[:, 1], 'g-', label='y-position')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Position (m)')
+    plt.title('Position vs Time')
+    plt.legend()
+    plt.grid(True)
+
+    plt.tight_layout()
+    plt.show()
+```
+
+### Key Concepts
+
+1. **Modularity**: Python programs are typically organized into functions and classes that encapsulate specific functionality.
+
+2. **Indentation**: Python uses indentation (typically 4 spaces) to define code blocks, unlike other languages that use braces `{}`.
+
+3. **Documentation**: Good Python code includes docstrings (triple-quoted strings) that explain what functions and classes do.
+
+4. **Main Block**: The `if __name__ == "__main__":` block ensures code only runs when the file is executed directly, not when imported.
+
+5. **Readability**: Python emphasizes code readability with clear variable names and logical organization.
+
+6. **Physics Modeling**: For physics problems, we typically model physical systems as objects with properties (mass, position, etc.) and behaviors (update_position, calculate_energy, etc.).
+
+7. **Numerical Integration**: Many physics problems require solving differential equations numerically using methods like Euler integration or Runge-Kutta.
+
+8. **Units**: Always include appropriate SI units in your comments and documentation to ensure clarity in physics calculations.
+
+::: {.callout-tip title="Best Practices" collapse=true}
+- Keep functions short and focused on a single task
+- Use meaningful variable and function names
+- Include comments to explain *why* rather than *what* (the code should be self-explanatory)
+- Follow PEP 8 style guidelines for consistent formatting
+- Structure larger programs into multiple modules (files)
+- For physics simulations, validate your code against known analytical solutions when possible
+- Remember to handle units consistently throughout your calculations
+- Consider the appropriate numerical methods for the physical system you're modeling
+:::
+
+::: {.callout-note title="Physics-Specific Python Libraries" collapse=true}
+- **NumPy**: Provides array operations and mathematical functions
+- **SciPy**: Scientific computing tools including optimization, integration, and differential equations
+- **Matplotlib**: Plotting and visualization
+- **SymPy**: Symbolic mathematics for analytical solutions
+- **Pandas**: Data manipulation and analysis
+- **astropy**: Astronomy and astrophysics
+- **scikit-learn**: Machine learning for data analysis
+- **PyMC**: Probabilistic programming for statistical analysis
+:::

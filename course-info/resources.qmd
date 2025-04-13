@@ -1,0 +1,58 @@
+---
+title: "Resources"
+format:
+  live-html:
+    toc: true
+    toc-location: right
+---
+
+
+Above all else, it is important for this course that you have internet access during the lectures. We will conduct many examples and exercises that refer to online resources.
+
+Within the university, the Eduroam networks can be used. You can find the necessary profile data [here](https://www.urz.uni-leipzig.de/servicedesk-und-hilfe/hilfe-zu-unseren-services/netz-und-zugang/hilfe-wireless-lan-wlan-eduroam).
+
+Furthermore, there are many other well-structured resources about Python available online. Below you will find only a very small selection.
+
+## Molecular Nanophotonics Group
+
+* [Molecular Nanophotonics Group Website](https://home.uni-leipzig.de/~physik/sites/mona/)
+
+## Additional Advanced Courses
+
+* Rosenow Group (Theory), Master Course on [Statistical Mechanics of Deep Learning](https://home.uni-leipzig.de/stp/Statistical_Deep_SS21.html)
+
+## Python Documentation
+
+* [Python](https://docs.python.org/3.12/)
+* [Matplotlib](https://matplotlib.org/stable/users/index)
+* [Pandas](https://pandas.pydata.org/docs/user_guide/index.html)
+
+## Python Tutorials
+
+* [Introduction to Python for Science](https://physics.nyu.edu/pine/pymanual/html/pymanMaster.html)
+* [Nice MatPlotLib tutorial](https://github.com/rougier/matplotlib-tutorial)
+
+
+## Further Reading
+
+* [Python Official Documentation on Functions](https://docs.python.org/3/tutorial/controlflow.html#defining-functions)
+* [Real Python: Python Loops and Iterators](https://realpython.com/python-for-loop/)
+* [Python Conditional Statements](https://www.w3schools.com/python/python_conditions.asp)
+
+For interactive practice:
+
+* [Codecademy Python Course](https://www.codecademy.com/learn/learn-python-3)
+* [HackerRank Python Practice](https://www.hackerrank.com/domains/python)
+
+
+## Marimo Reactive Notebook
+
+* [Marimo Webpage](https://marimo.io/)
+
+## Julia Tutorial
+
+* [Julia Programming Language](https://julialang.org)
+
+## Pluto NoteBook
+
+* [Pluto GitHub Webpage](https://github.com/fonsp/Pluto.jl)

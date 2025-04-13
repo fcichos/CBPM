@@ -1,0 +1,444 @@
+---
+title: Data Types
+format:
+  live-html:
+    toc: true
+    toc-location: right
+pyodide:
+  packages:
+    - numpy
+---
+
+It's time to look at different data types we may find useful in our course. Besides the number types mentioned previously, there are also other types like **strings**, **lists**, **tuples**, **dictionaries** and **sets**.
+
+| Data Types | Classes | Description |
+| :--- | :--- | :--- |
+| Numeric | int, float, complex | Holds numeric values |
+| String | str | Stores sequence of characters |
+| Sequence | list, tuple, range | Stores ordered collection of items |
+| Mapping | dict | Stores data as key-value pairs |
+| Boolean | bool | Holds either True or False |
+| Set | set, frozenset | Holds collection of unique items |
+
+
+Each of these data types has a number of connected `methods` (functions) which allow you to manipulate the data contained in a variable. If you want to know which methods are available for a certain object use the command `dir`, e.g.
+
+```
+s = "string"
+dir(s)
+```
+
+The output would be:
+
+```
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__',
+'__doc__', '__eq__', '__format__', '__ge__', '__getattribute__',
+'__getitem__', '__getnewargs__', '__gt__', '__hash__', '__init__',
+'__init_subclass__', '__iter__', '__le__', '__len__', '__lt__',
+'__mod__', '__mul__', '__ne__', '__new__', '__reduce__',
+'__reduce_ex__', '__repr__', '__rmod__', '__rmul__', '__setattr__',
+'__sizeof__', '__str__', '__subclasshook__', 'capitalize', 'casefold',
+'center', 'count', 'encode', 'endswith', 'expandtabs', 'find',
+'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isascii',
+'isdecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric',
+'isprintable', 'isspace', 'istitle', 'isupper', 'join', 'ljust',
+'lower', 'lstrip', 'maketrans', 'partition', 'removeprefix',
+'removesuffix', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition',
+'rsplit', 'rstrip', 'split', 'splitlines', 'startswith', 'strip',
+'swapcase', 'title', 'translate', 'upper', 'zfill']
+```
+
+
+
+The following few cells will give you a short introduction into each type.
+
+## Data Types
+
+
+::: {.panel-tabset}
+### Numeric Types
+
+Python supports several numeric data types including **integers**, **floats**, and **complex** numbers.
+
+```{pyodide}
+#| autorun: false
+
+x = 10      # integer
+y = 3.14    # float
+z = 2+3j    # complex number
+
+type(x), type(y), type(z)
+```
+
+You can perform various arithmetic operations with numeric types:
+
+```{pyodide}
+#| autorun: false
+# Basic arithmetic
+print(x + y)  # Addition
+print(x - y)  # Subtraction
+print(x * y)  # Multiplication
+print(x / y)  # Division
+```
+
+Type conversion works between numeric types:
+
+```{pyodide}
+#| autorun: false
+# Converting between numeric types
+int_num = int(3.9)    # Truncates to 3
+float_num = float(5)  # Converts to 5.0
+
+print(int_num, float_num)
+```
+
+
+
+### Strings
+
+**Strings** are lists of keyboard characters as well as other characters not on your keyboard. They are useful for printing results on the screen, during reading and writing of data.
+
+```{pyodide}
+#| autorun: false
+s="Hello" # string variable
+type(s)
+```
+
+```{pyodide}
+#| autorun: false
+t="world!"
+```
+
+String can be concatenated using the *+* operator.
+
+```{pyodide}
+#| autorun: false
+c=s+' '+t
+```
+
+```{pyodide}
+#| autorun: false
+print(c)
+```
+
+As strings are lists, each character in a string can be accessed by addressing the position in the string (see Lists section)
+
+```{pyodide}
+#| autorun: false
+c[1]
+```
+
+Strings can also be made out of numbers.
+
+```{pyodide}
+#| autorun: false
+"975"+"321"
+```
+
+If you want to obtain a number of a string, you can use what is known as type casting. Using type casting you may convert the string or any other data type into a different type if this is possible. To find out if a string is a pure number you may use the `str.isnumeric` method. For the above string, we may want to do a conversion to the type *int* by typing:
+
+```{pyodide}
+#| autorun: false
+# you may use as well str.isnumeric("975"+"321")
+("975"+"321").isnumeric()
+```
+
+```{pyodide}
+#| autorun: false
+int("975"+"321")
+```
+
+There are a number of methods connected to the string data type. Usually the relate to formatting or finding sub-strings. Formatting will be a topic in our next lecture. Here we just refer to one simple find example.
+
+```{pyodide}
+#| autorun: false
+t
+```
+
+```{pyodide}
+#| autorun: false
+t.find('rld') ## returns the index at which the sub string 'ld' starts in t
+```
+
+```{pyodide}
+#| autorun: false
+t[2:5]
+```
+
+```{pyodide}
+#| autorun: false
+t.capitalize()
+```
+
+### Lists
+
+**Lists** are ordered, mutable collections that can store items of different data types.
+
+```{pyodide}
+#| autorun: false
+my_list = [1, 2.5, "hello", True]
+print(type(my_list))
+print(my_list)
+```
+
+You can access and modify list elements:
+
+```{pyodide}
+#| autorun: false
+# Accessing elements
+print(my_list[0])       # First element
+print(my_list[-1])      # Last element
+print(my_list[1:3])     # Slicing
+
+# Modifying elements
+my_list[0] = 100
+print(my_list)
+
+# Adding elements
+my_list.append("new item")
+print(my_list)
+```
+
+Common list methods:
+
+```{pyodide}
+#| autorun: false
+sample_list = [3, 1, 4, 1, 5, 9]
+
+sample_list.sort()    # Sort the list in-place
+print(sample_list)
+
+sample_list.reverse() # Reverse the list in-place
+print(sample_list)
+
+print(len(sample_list))  # Get the length of the list
+```
+
+### Tuples
+
+**Tuples** are ordered, immutable sequences.
+
+```{pyodide}
+#| autorun: false
+my_tuple = (1, 2, "three", 4.0)
+print(type(my_tuple))
+print(my_tuple)
+```
+
+Tuples are immutable, meaning you cannot change their elements after creation:
+
+```{pyodide}
+#| autorun: false
+# Accessing tuple elements
+print(my_tuple[0])
+print(my_tuple[-1])
+print(my_tuple[1:3])
+
+# This would cause an error
+# my_tuple[0] = 100  # TypeError: 'tuple' object does not support item assignment
+```
+
+### Dictionaries
+
+**Dictionaries** store data as key-value pairs. They are mutable and unordered.
+
+```{pyodide}
+#| autorun: false
+student = {
+    "name": "Alice",
+    "age": 21,
+    "courses": ["Math", "Physics", "Computer Science"],
+    "active": True
+}
+
+print(type(student))
+print(student)
+```
+
+Accessing and modifying dictionary elements:
+
+```{pyodide}
+#| autorun: false
+# Accessing values
+print(student["name"])
+print(student.get("age"))  # Safer method if key might not exist
+
+# Modifying values
+student["age"] = 22
+print(student)
+
+# Adding new key-value pair
+student["graduation_year"] = 2023
+print(student)
+
+# Removing key-value pair
+del student["active"]
+print(student)
+```
+
+Common dictionary methods:
+
+```{pyodide}
+#| autorun: false
+# Get all keys and values
+print(student.keys())
+print(student.values())
+print(student.items())  # Returns key-value pairs as tuples
+```
+
+### Boolean
+
+The **Boolean** type has only two possible values: `True` and `False`.
+
+```{pyodide}
+#| autorun: false
+x = True
+y = False
+print(type(x), x)
+print(type(y), y)
+```
+
+Boolean values are commonly used in conditional statements:
+
+```{pyodide}
+#| autorun: false
+age = 20
+is_adult = age >= 18
+print(is_adult)
+
+if is_adult:
+    print("Person is an adult")
+else:
+    print("Person is a minor")
+```
+
+Boolean operations:
+
+```{pyodide}
+#| autorun: false
+a = True
+b = False
+
+print(a and b)  # Logical AND
+print(a or b)   # Logical OR
+print(not a)    # Logical NOT
+```
+
+### Sets
+
+**Sets** are unordered collections of unique elements.
+
+```{pyodide}
+#| autorun: false
+my_set = {1, 2, 3, 4, 5}
+print(type(my_set))
+print(my_set)
+
+# Duplicates are automatically removed
+duplicate_set = {1, 2, 2, 3, 4, 4, 5}
+print(duplicate_set)  # Still {1, 2, 3, 4, 5}
+```
+
+Common set operations:
+
+```{pyodide}
+#| autorun: false
+set_a = {1, 2, 3, 4, 5}
+set_b = {4, 5, 6, 7, 8}
+
+# Union
+print(set_a | set_b)  # or set_a.union(set_b)
+
+# Intersection
+print(set_a & set_b)  # or set_a.intersection(set_b)
+
+# Difference
+print(set_a - set_b)  # or set_a.difference(set_b)
+
+# Symmetric difference
+print(set_a ^ set_b)  # or set_a.symmetric_difference(set_b)
+```
+
+Adding and removing elements:
+
+```{pyodide}
+#| autorun: false
+fruits = {"apple", "banana", "cherry"}
+
+# Adding elements
+fruits.add("orange")
+print(fruits)
+
+# Removing elements
+fruits.remove("banana")  # Raises error if element doesn't exist
+print(fruits)
+
+fruits.discard("kiwi")   # No error if element doesn't exist
+```
+
+:::
+
+
+## Quiz: Data Types in Python
+
+Let's test your understanding of Python data types!
+
+::: {.quiz}
+
+1. What is the output of the following code?
+   ```python
+   a = [1, 2, 3]
+   b = (1, 2, 3)
+   print(type(a), type(b))
+   ```
+
+   - [ ] `<class 'list'> <class 'list'>`
+   - [ ] `<class 'list'> <class 'tuple'>`
+   - [ ] `<class 'tuple'> <class 'list'>`
+   - [ ] `<class 'tuple'> <class 'tuple'>`
+
+2. Which of the following is mutable?
+
+   - [ ] List
+   - [ ] Tuple
+   - [ ] String
+   - [ ] Integer
+
+3. What will be the output of this code?
+   ```python
+   my_dict = {'a': 1, 'b': 2, 'c': 3}
+   print(my_dict['b'])
+   ```
+
+   - [ ] a
+   - [ ] 2
+   - [ ] b
+   - [ ] KeyError
+
+4. How do you create an empty set in Python?
+
+   - [ ] `{}`
+   - [ ] `[]`
+   - [ ] `set()`
+   - [ ] `()`
+
+5. What is the result of `3 + 4.0`?
+
+   - [ ] 7
+   - [ ] 7.0
+   - [ ] '7.0'
+   - [ ] TypeError
+
+:::
+
+
+::: {.callout-tip collapse="true"}
+## Click to reveal answers
+
+1. `<class 'list'> <class 'tuple'>`
+2. List
+3. 2
+4. `set()`
+5. 7.0
+
+:::

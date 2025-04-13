@@ -1,0 +1,39 @@
+project:
+  type: book
+  output-dir: pdf_output
+execute:
+  echo: false # This will hide the code
+  output: true # This will show the output
+  freeze: false # This will freeze the output
+book:
+  title: "Introduction to Computer-based Physical Modeling"
+  author:
+    name: "Frank Cichos"
+    email: cichos@physik.uni-leipzig.de
+    affiliation:
+      - name: Leipzig University
+        city: Leipzig
+        url: http://www.uni-leipzig.de/~mona
+  date: "8/14/2024"
+  chapters:
+    - index.qmd
+    - part: "Lecture 1"
+      chapters:
+        - lectures/lecture01/00-lecture01.qmd
+        - lectures/lecture01/01-lecture01.qmd
+        - lectures/lecture01/python_lecture01.qmd
+        - lectures/lecture01/02-lecture01.qmd
+
+format:
+  pdf:
+    documentclass: book
+    papersize: a4
+    toc: true
+    number-sections: true
+    number-depth: 2
+    colorlinks: true
+    geometry:
+      - top=30mm
+      - left=20mm
+      - right=20mm
+      - bottom=30mm

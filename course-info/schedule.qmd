@@ -1,0 +1,26 @@
+---
+title: Course Schedule
+format:
+  live-html:
+    toc: true
+    toc-location: right
+---
+
+## Lectures
+
+The course will be updated weekly with the lecture schedule. Therefore, expect a new lecture every
+
+**Tuesday from April 8, 2025, at 13:15, Thoeretical Lecture Hall**
+
+and a new assignment from 1:00 pm (starting the second week).
+
+Experience has shown that the best results are achieved when you are present in the lecture hall for the lectures. However, all material will also be available online, so you can access it at any time to learn whenever it suits you.
+
+
+## Seminars
+
+**Seminars will be held on Tuesday from April 15, 2025, at 15:00, , Thoeretical Lecture Hall**
+
+In the seminars, we will discuss the solutions to the exercises from the previous week and provide advanced insights and examples as well as discuss the topics covered in the lectures.
+
+The topics covered in the seminars depend on **YOU** and your interests! We will tailor the content to your needs and preferences!
