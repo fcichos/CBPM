@@ -206,58 +206,6 @@
     "text": "Integrating Newtons Euqation of Motion\nWhen we have the forces on a particle we have in principle its acceleration. To get the velocity and the position of the particle we need to integrate the equations of motion. There are several methods to do this, but we will start with the simplest one, the Euler method.\n\nEuler Method\nTo obtain this one first needs to know about the Taylor expansion of a function in general. The Taylor expansion of a function \\(f(x)\\) around a point \\(x_0\\) is providing an approximation of the function in the vicinity of \\(x_0\\). It is given by:\n\\[f(x) = f(x_0) + f'(x_0)(x - x_0) + \\frac{1}{2}f''(x_0)(x - x_0)^2 + \\cdots\\]\nwhere \\(f'(x_0)\\) is the first derivative of \\(f(x)\\) at \\(x_0\\), \\(f''(x_0)\\) is the second derivative of \\(f(x)\\) at \\(x_0\\), and so on. We can demonstrate that by expanding a sine function around \\(x_0 = 0\\):\n\\[\\sin(x) = \\sin(0) + \\cos(0)x - \\frac{1}{2}\\sin(0)x^2 + \\cdots = x - \\frac{1}{6}x^3 + \\cdots\\]\nPlotting this yields:\n\n\nCode\nx = np.linspace(-2*np.pi, 2*np.pi, 1000)\ny = np.sin(x)\ny_taylor = x - 1/6*x**3\n\nplt.figure(figsize=get_size(8, 6),dpi=150)\nplt.plot(x, y, 'b-', label='sin(x)', linewidth=2)\nplt.plot(x, y_taylor, 'r--', label='Taylor expansion', linewidth=2)\nplt.grid(True)\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.xlim(-2,2)\nplt.ylim(-2,2)\nplt.title('Taylor Expansion of sin(x)')\nplt.legend()\nplt.show()\n\n\n\n\n\n\n\n\n\nThe expansion is therefore a good approximation in a region close to \\(x_0\\).\n\n\nVelocity Verlet Algorithm\nThe velocity Verlet algorithm is a second-order algorithm that is more accurate than the Euler method. It can be derived from the Taylor expansion of the position and velocity vectors\n\\[\\mathbf{r}(t + \\Delta t) = \\mathbf{r}(t) + \\mathbf{v}(t)\\Delta t + \\frac{1}{2}\\frac{\\mathbf{F}(t)}{m}\\Delta t^2+ O(\\Delta t^3)\\]\nThe higher order terms in the Taylor expansion are neglected, which results in an error of order \\(\\Delta t^3\\). As compared to that the Euler method is obtained by neglecting the higher order terms in the Taylor expansion of the velocity vector:\n\\[\\mathbf{v}(t + \\Delta t) = \\mathbf{v}(t) + \\frac{\\mathbf{F}(t)}{m}\\Delta t + O(\\Delta t^2)\\]\nand is therefore only first order accurate with an error of order \\(\\Delta t^2\\).\nThe velocity Verlet algorithm consists of three steps:\n\nUpdate positions: \\(\\mathbf{r}(t + \\Delta t) = \\mathbf{r}(t) + \\mathbf{v}(t)\\Delta t + \\frac{1}{2}\\frac{\\mathbf{F}(t)}{m}\\Delta t^2\\)\nCalculate new forces: \\(\\mathbf{F}(t + \\Delta t) = \\mathbf{F}(\\mathbf{r}(t + \\Delta t))\\)\nUpdate velocities: \\(\\mathbf{v}(t + \\Delta t) = \\mathbf{v}(t) + \\frac{1}{2}\\frac{\\mathbf{F}(t) + \\mathbf{F}(t + \\Delta t)}{m}\\Delta t\\)\n\nwhere: - \\(\\mathbf{r}\\) is the position vector - \\(\\mathbf{v}\\) is the velocity vector - \\(\\mathbf{F}\\) is the force vector - \\(m\\) is the mass - \\(\\Delta t\\) is the timestep\n\n\nSimple Integration Example: Free Fall\nLet’s start and try to integrate the equation of motion for a particle in free fall with the help of the Velocity Verlet algorithm. The only force acting on the particle is gravity. The equation of motion is:\nNewton’s equation of motion: \\(\\mathbf{F} = m\\mathbf{a}\\)\nFor gravity: \\(\\mathbf{F} = -mg\\hat{\\mathbf{y}}\\)\nTherefore: \\(\\ddot{y} = -g\\)\nThe analytical solution is:\n\nPosition: \\(y(t) = y_0 + v_0t - \\frac{1}{2}gt^2\\)\nVelocity: \\(v(t) = v_0 - gt\\)\n\n\n\nCode\n# Parameters\n\ng = 9.81  # m/s^2\ndt = 0.01  # time step\nt_max = 2.0  # total simulation time\nsteps = int(t_max/dt)\n\n# Initial conditions\ny0 = 20.0  # initial height\nv0 = 0.0   # initial velocity\n\n\n# Arrays to store results\nt = np.zeros(steps)\ny = np.zeros(steps)\nv = np.zeros(steps)\na = np.zeros(steps)\n\n# Initial values\ny[0] = y0\nv[0] = v0\na[0] = -g\n\n# Velocity Verlet integration\nfor i in range(1, steps):\n    t[i] = i * dt\n    y[i] = y[i-1] + v[i-1] * dt + 0.5 * a[i-1] * dt**2  # update position\n    a_new = -g                                          # new acceleration (assuming constant gravity)\n    v[i] = v[i-1] + 0.5 * (a[i-1] + a_new) * dt         # update velocity\n    a[i] = a_new                                        # store new acceleration\n\ny_analytical = y0 + v0*t - 0.5*g*t**2\nplt.figure(figsize=get_size(8, 6), dpi=150)\nplt.plot(t, y)\nplt.plot(t, y_analytical, 'r--')\n\nplt.xlabel('Time (s)')\nplt.ylabel('Height (m)')\nplt.title('Free Fall Motion')\nplt.grid(True)\nplt.show()"
   },
   {
-    "objectID": "seminars/seminar01/01-seminar01.html",
-    "href": "seminars/seminar01/01-seminar01.html",
-    "title": "Seminar 1",
-    "section": "",
-    "text": "Calculate the average of all of the integers from 1 to 10.\n\n\n\n\n\n\n\nuse the sum() and len() functions\nn = range(1, 11)\n\n\n1n = range(1, 11)\n2sum(n)/len(n)\n\n1\n\ncreate the range of numbers from 1 to 10.\n\n2\n\ncalculate the sum of the numbers and divide by the number of elements in the list."
-  },
-  {
-    "objectID": "seminars/seminar01/MDSimulation.html",
-    "href": "seminars/seminar01/MDSimulation.html",
-    "title": "Molecular Dynamics Simulations in EMPP 2024",
-    "section": "",
-    "text": "import numpy as np\nimport matplotlib.pyplot as plt\nplt.rcParams.update({'font.size': 8,\n                     'lines.linewidth': 1,\n                     'lines.markersize': 10,\n                     'axes.labelsize': 10,\n                     'axes.titlesize': 10,\n                     'xtick.labelsize' : 10,\n                     'ytick.labelsize' : 10,\n                     'xtick.top' : True,\n                     'xtick.direction' : 'in',\n                     'ytick.right' : True,\n                     'ytick.direction' : 'in',})\n\ndef get_size(w,h):\n    return((w/2.54,h/2.54))"
-  },
-  {
-    "objectID": "seminars/seminar01/MDSimulation.html#lenard-jones-potential",
-    "href": "seminars/seminar01/MDSimulation.html#lenard-jones-potential",
-    "title": "Molecular Dynamics Simulations in EMPP 2024",
-    "section": "Lenard-Jones Potential",
-    "text": "Lenard-Jones Potential\n\ndef lennard_jones(r, epsilon=1, sigma=1):\n    return 4 * epsilon * ((sigma/r)**12 - (sigma/r)**6)\n\nr = np.linspace(0.8, 3, 1000)\nV = lennard_jones(r)\n\nplt.figure(figsize=get_size(8, 6),dpi=150)\nplt.plot(r, V, 'b-', linewidth=2)\nplt.grid(True)\nplt.xlabel('r/σ')\nplt.ylabel('V/ε')\nplt.title('Lennard-Jones Potential')\nplt.axhline(y=0, color='k', linestyle='-', alpha=0.3)\nplt.ylim(-1.5, 3)\nplt.show()"
-  },
-  {
-    "objectID": "seminars/seminar01/MDSimulation.html#taylor-expansion",
-    "href": "seminars/seminar01/MDSimulation.html#taylor-expansion",
-    "title": "Molecular Dynamics Simulations in EMPP 2024",
-    "section": "Taylor Expansion",
-    "text": "Taylor Expansion\n\nx = np.linspace(-2*np.pi, 2*np.pi, 1000)\ny = np.sin(x)\ny_taylor = x - 1/6*x**3\ny_taylor1 = x - 1/6*x**3+x**5/120\n\n\nplt.figure(figsize=get_size(8, 6),dpi=150)\nplt.plot(x, y, 'b-', label='sin(x)', linewidth=2)\nplt.plot(x, y_taylor, 'r--', label='O(5)', linewidth=2)\nplt.plot(x, y_taylor1, 'g--', label='O(7)', linewidth=2)\nplt.grid(True)\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.xlim(-2,2)\nplt.ylim(-1.3,1.3)\nplt.title('Taylor Expansion of sin(x)')\nplt.legend()\nplt.show()"
-  },
-  {
-    "objectID": "seminars/seminar01/MDSimulation.html#velocity-verlet",
-    "href": "seminars/seminar01/MDSimulation.html#velocity-verlet",
-    "title": "Molecular Dynamics Simulations in EMPP 2024",
-    "section": "Velocity Verlet",
-    "text": "Velocity Verlet\n\ng = 9.81  # m/s^2\ndt = 0.01  # time step\nt_max = 2.0  # total simulation time\nsteps = int(t_max/dt)\n\n# Initial conditions\ny0 = 20.0  # initial height\nv0 = 0.0   # initial velocity\n\n\n# Arrays to store results\nt = np.zeros(steps)\ny = np.zeros(steps)\nv = np.zeros(steps)\na = np.zeros(steps)\n\n# Initial values\ny[0] = y0\nv[0] = v0\na[0] = -g\n\n# Velocity Verlet integration\nfor i in range(1, steps):\n    t[i] = i * dt\n    y[i] = y[i-1] + v[i-1] * dt + 0.5 * a[i-1] * dt**2  # update position\n    a_new = -g                                          # new acceleration (assuming constant gravity)\n    v[i] = v[i-1] + 0.5 * (a[i-1] + a_new) * dt  # update velocity\n    a[i] = a_new  # store new acceleration\n\nplt.figure(figsize=get_size(8, 6), dpi=150)\nplt.plot(t, y)\nplt.xlabel('Time (s)')\nplt.ylabel('Height (m)')\nplt.title('Free Fall Motion')\nplt.grid(True)\nplt.show()"
-  },
-  {
-    "objectID": "seminars/seminar01/MDSimulation.html#class-for-an-atom",
-    "href": "seminars/seminar01/MDSimulation.html#class-for-an-atom",
-    "title": "Molecular Dynamics Simulations in EMPP 2024",
-    "section": "Class for an Atom",
-    "text": "Class for an Atom"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "CBPM 2025",
-    "section": "",
-    "text": "Welcome to the Course Computer-Based Physical Modelling!\nThe programming language Python is useful for all kinds of scientific and technical tasks. You can use it to analyze and visualize data. You can also use it to numerically solve scientific problems that are difficult or impossible to solve analytically. Python is freely available and, due to its modular structure, has been expanded with an almost infinite number of modules for various purposes.\nThis course aims to introduce you to programming with Python. It is primarily aimed at beginners, but we hope it will also be interesting for advanced users. We begin the course with an introduction to the Jupyter Notebook environment, which we will use throughout the entire course. Afterward, we will provide an introduction to Python and show you some basic functions, such as plotting and analyzing data through curve fitting, reading and writing files, which are some of the tasks you will encounter during your physics studies. We will also show you some advanced topics such as animation in Jupyter and the simulation of physical processes in\n\nMechanics\nElectrostatics\nWaves\nOptics\n\nIf there is time left at the end of the course, we will also take a look at machine learning methods, which have become an important tool in physics as well.\nWe will not present a comprehensive list of numerical simulation schemes, but rather use the examples to spark your curiosity. Since there are slight differences in the syntax of the various Python versions, we will always refer to the Python 3 standard in the following.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
     "objectID": "seminars/seminar01/mdX.html",
     "href": "seminars/seminar01/mdX.html",
     "title": "Computer-Based Physical Modelling",
@@ -298,6 +246,70 @@
     "title": "Computer-Based Physical Modelling",
     "section": "5. Example Usage",
     "text": "5. Example Usage\n# Initialize system\nn_particles = 100\nbox_length = 10.0\npositions = np.random.rand(n_particles, 3) * box_length\nvelocities = np.zeros((n_particles, 3))\nmass = 1.0\ndt = 0.001\n\n# Create simulation\nsim = MolecularMDSimulation(\n    positions, velocities, mass, box_length, dt,\n    bonds=[(0, 1, 1000.0, 1.0)],  # Example bond\n    angles=[(0, 1, 2, 100.0, np.pi)]  # Example angle\n)\n\n# Run simulation\nn_steps = 1000\nfor step in range(n_steps):\n    sim.velocity_verlet_step()\nHere’s a suggested basic structure:\nclass Atom:\n    def __init__(self, atom_id, atom_type, position, velocity=None, mass=None):\n        self.id = atom_id          # unique identifier\n        self.type = atom_type      # e.g., 'H', 'C', 'O'\n        self.position = position   # numpy array [x, y, z]\n        self.velocity = velocity if velocity is not None else np.zeros(3)\n        self.mass = mass\n        self.force = np.zeros(3)   # current force on atom\n\n        # Optional attributes that might be useful later:\n        self.bonded_atoms = []     # list of atoms this atom is bonded to\n        self.charges = 0.0         # for electrostatic interactions\nThen you can later create classes for: 1. Bond (connects two Atom objects)\nclass Bond:\n    def __init__(self, atom1, atom2, k, r0):\n        self.atom1 = atom1\n        self.atom2 = atom2\n        self.k = k      # force constant\n        self.r0 = r0    # equilibrium distance\n\nAngle (three Atom objects)\n\nclass Angle:\n    def __init__(self, atom1, atom2, atom3, k, theta0):\n        self.atoms = [atom1, atom2, atom3]\n        self.k = k          # force constant\n        self.theta0 = theta0  # equilibrium angle\n\nDihedral (four Atom objects)\n\nThis modular approach makes it easier to: - Add features incrementally - Debug each interaction type separately - Keep track of connectivity - Calculate forces systematically\nclass Atom:\n    def __init__(self, atom_id, atom_type, position, velocity=None, mass=None):\n        self.id = atom_id\n        self.type = atom_type\n        self.position = position\n        self.velocity = velocity if velocity is not None else np.zeros(3)\n        self.mass = mass\n        self.force = np.zeros(3)\n\n    def add_force(self, force):\n        \"\"\"Add force contribution to total force on atom\"\"\"\n        self.force += force\n\n    def reset_force(self):\n        \"\"\"Reset force to zero at start of each step\"\"\"\n        self.force = np.zeros(3)\n\n    def update_position(self, dt):\n        \"\"\"First step of velocity Verlet: update position\"\"\"\n        self.position += self.velocity * dt + 0.5 * (self.force/self.mass) * dt**2\n\n    def update_velocity(self, dt, new_force):\n        \"\"\"Second step of velocity Verlet: update velocity using average force\"\"\"\n        self.velocity += 0.5 * (new_force + self.force)/self.mass * dt\n        self.force = new_force\n\nclass ForceField:\n    def __init__(self, sigma, epsilon):\n        self.sigma = sigma\n        self.epsilon = epsilon\n\n    def calculate_lj_force(self, atom1, atom2):\n        \"\"\"Calculate LJ force between two atoms\"\"\"\n        r = atom1.position - atom2.position\n        r_mag = np.linalg.norm(r)\n        # LJ force calculation\n        force = 24 * self.epsilon * (2 * (self.sigma/r_mag)**12\n                                   - (self.sigma/r_mag)**6) * r/r_mag**2\n        return force\n\nclass MDSimulation:\n    def __init__(self, atoms, forcefield):\n        self.atoms = atoms\n        self.forcefield = forcefield\n\n    def calculate_forces(self):\n        # Reset all forces\n        for atom in self.atoms:\n            atom.reset_force()\n\n        # Calculate forces between all pairs\n        for i, atom1 in enumerate(self.atoms):\n            for atom2 in self.atoms[i+1:]:\n                force = self.forcefield.calculate_lj_force(atom1, atom2)\n                atom1.add_force(force)\n                atom2.add_force(-force)  # Newton's third law\n\nNew lecture\nclass Atom: def init(self, atom_id, atom_type, position, velocity=None, mass=None): self.id = atom_id self.type = atom_type # e.g., ‘A’, ‘B’, etc. self.position = position self.velocity = velocity if velocity is not None else np.zeros(2) self.mass = mass self.force = np.zeros(2)\nclass ForceField: def init(self): # Dictionary to store interaction parameters between atom types self.pair_parameters = {}\ndef add_pair_parameters(self, type1, type2, epsilon, sigma):\n    \"\"\"Add interaction parameters for a pair of atom types\"\"\"\n    # Store parameters symmetrically\n    key = tuple(sorted([type1, type2]))\n    self.pair_parameters[key] = {'epsilon': epsilon, 'sigma': sigma}\n\ndef get_pair_parameters(self, type1, type2):\n    \"\"\"Get interaction parameters for a pair of atom types\"\"\"\n    key = tuple(sorted([type1, type2]))\n    if key not in self.pair_parameters:\n        raise ValueError(f\"No parameters defined for atom types {type1} and {type2}\")\n    return self.pair_parameters[key]\n\ndef calculate_lj_force(self, atom1, atom2, r_vec, r_mag):\n    \"\"\"Calculate LJ force with type-specific parameters\"\"\"\n    params = self.get_pair_parameters(atom1.type, atom2.type)\n    epsilon = params['epsilon']\n    sigma = params['sigma']\n\n    force_mag = 24.0 * epsilon * (2.0 * (sigma/r_mag)**13\n                                - (sigma/r_mag)**7)\n    return force_mag * r_vec / r_mag\n\n\n\n\n    def setup_simulation():\n        # Create force field and add parameters\n        ff = ForceField()\n\n        # Add parameters for different combinations\n        ff.add_pair_parameters('A', 'A', epsilon=1.0, sigma=1.0)  # A-A interaction\n        ff.add_pair_parameters('B', 'B', epsilon=0.5, sigma=1.2)  # B-B interaction\n        ff.add_pair_parameters('A', 'B', epsilon=0.7, sigma=1.1)  # A-B interaction\n\n        # Create atoms of different types\n        atoms = [\n            Atom(0, 'A', np.array([1.0, 1.0]), mass=1.0),\n            Atom(1, 'A', np.array([2.0, 2.0]), mass=1.0),\n            Atom(2, 'B', np.array([3.0, 3.0]), mass=1.5),\n            Atom(3, 'B', np.array([4.0, 4.0]), mass=1.5)\n        ]\n\n        return ff, atoms"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CBPM 2025",
+    "section": "",
+    "text": "Welcome to the Course Computer-Based Physical Modelling!\nThe programming language Python is useful for all kinds of scientific and technical tasks. You can use it to analyze and visualize data. You can also use it to numerically solve scientific problems that are difficult or impossible to solve analytically. Python is freely available and, due to its modular structure, has been expanded with an almost infinite number of modules for various purposes.\nThis course aims to introduce you to programming with Python. It is primarily aimed at beginners, but we hope it will also be interesting for advanced users. We begin the course with an introduction to the Jupyter Notebook environment, which we will use throughout the entire course. Afterward, we will provide an introduction to Python and show you some basic functions, such as plotting and analyzing data through curve fitting, reading and writing files, which are some of the tasks you will encounter during your physics studies. We will also show you some advanced topics such as animation in Jupyter and the simulation of physical processes in\n\nMechanics\nElectrostatics\nWaves\nOptics\n\nIf there is time left at the end of the course, we will also take a look at machine learning methods, which have become an important tool in physics as well.\nWe will not present a comprehensive list of numerical simulation schemes, but rather use the examples to spark your curiosity. Since there are slight differences in the syntax of the various Python versions, we will always refer to the Python 3 standard in the following.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "seminars/seminar01/MDSimulation.html",
+    "href": "seminars/seminar01/MDSimulation.html",
+    "title": "Molecular Dynamics Simulations in EMPP 2024",
+    "section": "",
+    "text": "import numpy as np\nimport matplotlib.pyplot as plt\nplt.rcParams.update({'font.size': 8,\n                     'lines.linewidth': 1,\n                     'lines.markersize': 10,\n                     'axes.labelsize': 10,\n                     'axes.titlesize': 10,\n                     'xtick.labelsize' : 10,\n                     'ytick.labelsize' : 10,\n                     'xtick.top' : True,\n                     'xtick.direction' : 'in',\n                     'ytick.right' : True,\n                     'ytick.direction' : 'in',})\n\ndef get_size(w,h):\n    return((w/2.54,h/2.54))"
+  },
+  {
+    "objectID": "seminars/seminar01/MDSimulation.html#lenard-jones-potential",
+    "href": "seminars/seminar01/MDSimulation.html#lenard-jones-potential",
+    "title": "Molecular Dynamics Simulations in EMPP 2024",
+    "section": "Lenard-Jones Potential",
+    "text": "Lenard-Jones Potential\n\ndef lennard_jones(r, epsilon=1, sigma=1):\n    return 4 * epsilon * ((sigma/r)**12 - (sigma/r)**6)\n\nr = np.linspace(0.8, 3, 1000)\nV = lennard_jones(r)\n\nplt.figure(figsize=get_size(8, 6),dpi=150)\nplt.plot(r, V, 'b-', linewidth=2)\nplt.grid(True)\nplt.xlabel('r/σ')\nplt.ylabel('V/ε')\nplt.title('Lennard-Jones Potential')\nplt.axhline(y=0, color='k', linestyle='-', alpha=0.3)\nplt.ylim(-1.5, 3)\nplt.show()"
+  },
+  {
+    "objectID": "seminars/seminar01/MDSimulation.html#taylor-expansion",
+    "href": "seminars/seminar01/MDSimulation.html#taylor-expansion",
+    "title": "Molecular Dynamics Simulations in EMPP 2024",
+    "section": "Taylor Expansion",
+    "text": "Taylor Expansion\n\nx = np.linspace(-2*np.pi, 2*np.pi, 1000)\ny = np.sin(x)\ny_taylor = x - 1/6*x**3\ny_taylor1 = x - 1/6*x**3+x**5/120\n\n\nplt.figure(figsize=get_size(8, 6),dpi=150)\nplt.plot(x, y, 'b-', label='sin(x)', linewidth=2)\nplt.plot(x, y_taylor, 'r--', label='O(5)', linewidth=2)\nplt.plot(x, y_taylor1, 'g--', label='O(7)', linewidth=2)\nplt.grid(True)\nplt.xlabel('x')\nplt.ylabel('f(x)')\nplt.xlim(-2,2)\nplt.ylim(-1.3,1.3)\nplt.title('Taylor Expansion of sin(x)')\nplt.legend()\nplt.show()"
+  },
+  {
+    "objectID": "seminars/seminar01/MDSimulation.html#velocity-verlet",
+    "href": "seminars/seminar01/MDSimulation.html#velocity-verlet",
+    "title": "Molecular Dynamics Simulations in EMPP 2024",
+    "section": "Velocity Verlet",
+    "text": "Velocity Verlet\n\ng = 9.81  # m/s^2\ndt = 0.01  # time step\nt_max = 2.0  # total simulation time\nsteps = int(t_max/dt)\n\n# Initial conditions\ny0 = 20.0  # initial height\nv0 = 0.0   # initial velocity\n\n\n# Arrays to store results\nt = np.zeros(steps)\ny = np.zeros(steps)\nv = np.zeros(steps)\na = np.zeros(steps)\n\n# Initial values\ny[0] = y0\nv[0] = v0\na[0] = -g\n\n# Velocity Verlet integration\nfor i in range(1, steps):\n    t[i] = i * dt\n    y[i] = y[i-1] + v[i-1] * dt + 0.5 * a[i-1] * dt**2  # update position\n    a_new = -g                                          # new acceleration (assuming constant gravity)\n    v[i] = v[i-1] + 0.5 * (a[i-1] + a_new) * dt  # update velocity\n    a[i] = a_new  # store new acceleration\n\nplt.figure(figsize=get_size(8, 6), dpi=150)\nplt.plot(t, y)\nplt.xlabel('Time (s)')\nplt.ylabel('Height (m)')\nplt.title('Free Fall Motion')\nplt.grid(True)\nplt.show()"
+  },
+  {
+    "objectID": "seminars/seminar01/MDSimulation.html#class-for-an-atom",
+    "href": "seminars/seminar01/MDSimulation.html#class-for-an-atom",
+    "title": "Molecular Dynamics Simulations in EMPP 2024",
+    "section": "Class for an Atom",
+    "text": "Class for an Atom"
+  },
+  {
+    "objectID": "seminars/seminar01/01-seminar01.html",
+    "href": "seminars/seminar01/01-seminar01.html",
+    "title": "Seminar 1",
+    "section": "",
+    "text": "Calculate the average of all of the integers from 1 to 10.\n\n\n\n\n\n\n\nuse the sum() and len() functions\nn = range(1, 11)\n\n\n1n = range(1, 11)\n2sum(n)/len(n)\n\n1\n\ncreate the range of numbers from 1 to 10.\n\n2\n\ncalculate the sum of the numbers and divide by the number of elements in the list."
+  },
+  {
+    "objectID": "seminars/seminar01/00-seminar01.html",
+    "href": "seminars/seminar01/00-seminar01.html",
+    "title": "CBPM Seminar Questions",
+    "section": "",
+    "text": "Please answer the following questions to help tailor the seminar to your needs. Your responses are anonymous and will be used only to adapt the teaching to your level of experience.\n\n  Loading…",
+    "crumbs": [
+      "Seminars",
+      "Seminar01",
+      "Seminar Questions"
+    ]
   },
   {
     "objectID": "course-info/resources.html",
