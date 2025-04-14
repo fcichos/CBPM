@@ -8,7 +8,8 @@ format:
 
 ![](assets/images/CompSoft_banner.png)
 
-# Welcome to the Course Computer-Based Physical Modelling!
+
+# Welcome to Computer-Based Physical Modelling!
 
 The programming language Python is useful for all kinds of scientific and technical tasks. You can use it to analyze and visualize data. You can also use it to numerically solve scientific problems that are difficult or impossible to solve analytically. Python is freely available and, due to its modular structure, has been expanded with an almost infinite number of modules for various purposes.
 
