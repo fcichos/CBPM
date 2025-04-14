@@ -4,7 +4,6 @@ format: live-html
 live:
   show-hints: true
   show-solutions: true
-notebook-url: "https://github.com/yourusername/yourrepository/blob/main/notebooks/my-document.ipynb"
 ---
 
 
