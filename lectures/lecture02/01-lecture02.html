@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -299,6 +265,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Seminar Questions</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar01/01-seminar01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Seminar Quizz</span></a>
+  </div>
+</li>
       </ul>
   </li>
       </ul>
@@ -314,7 +286,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#data-types" id="toc-data-types" class="nav-link active" data-scroll-target="#data-types">Data Types</a></li>
-  <li><a href="#quiz-data-types-in-python" id="toc-quiz-data-types-in-python" class="nav-link" data-scroll-target="#quiz-data-types-in-python">Quiz: Data Types in Python</a></li>
   </ul>
 </nav>
     </div>
@@ -675,76 +646,6 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InNl
 eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZydWl0cyA9IHtcImFwcGxlXCIsIFwiYmFuYW5hXCIsIFwiY2hlcnJ5XCJ9XG5cbiMgQWRkaW5nIGVsZW1lbnRzXG5mcnVpdHMuYWRkKFwib3JhbmdlXCIpXG5wcmludChmcnVpdHMpXG5cbiMgUmVtb3ZpbmcgZWxlbWVudHNcbmZydWl0cy5yZW1vdmUoXCJiYW5hbmFcIikgICMgUmFpc2VzIGVycm9yIGlmIGVsZW1lbnQgZG9lc24ndCBleGlzdFxucHJpbnQoZnJ1aXRzKVxuXG5mcnVpdHMuZGlzY2FyZChcImtpd2lcIikgICAjIE5vIGVycm9yIGlmIGVsZW1lbnQgZG9lc24ndCBleGlzdCJ9
 </script>
 </div>
-</div>
-</div>
-</div>
-</section>
-<section id="quiz-data-types-in-python" class="level2">
-<h2 class="anchored" data-anchor-id="quiz-data-types-in-python">Quiz: Data Types in Python</h2>
-<p>Let’s test your understanding of Python data types!</p>
-<div class="quiz">
-<ol type="1">
-<li><p>What is the output of the following code?</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a), <span class="bu">type</span>(b))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox"><code>&lt;class 'list'&gt; &lt;class 'list'&gt;</code></label></li>
-<li><label><input type="checkbox"><code>&lt;class 'list'&gt; &lt;class 'tuple'&gt;</code></label></li>
-<li><label><input type="checkbox"><code>&lt;class 'tuple'&gt; &lt;class 'list'&gt;</code></label></li>
-<li><label><input type="checkbox"><code>&lt;class 'tuple'&gt; &lt;class 'tuple'&gt;</code></label></li>
-</ul></li>
-<li><p>Which of the following is mutable?</p>
-<ul class="task-list">
-<li><label><input type="checkbox">List</label></li>
-<li><label><input type="checkbox">Tuple</label></li>
-<li><label><input type="checkbox">String</label></li>
-<li><label><input type="checkbox">Integer</label></li>
-</ul></li>
-<li><p>What will be the output of this code?</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {<span class="st">'a'</span>: <span class="dv">1</span>, <span class="st">'b'</span>: <span class="dv">2</span>, <span class="st">'c'</span>: <span class="dv">3</span>}</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_dict[<span class="st">'b'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox">a</label></li>
-<li><label><input type="checkbox">2</label></li>
-<li><label><input type="checkbox">b</label></li>
-<li><label><input type="checkbox">KeyError</label></li>
-</ul></li>
-<li><p>How do you create an empty set in Python?</p>
-<ul class="task-list">
-<li><label><input type="checkbox"><code>{}</code></label></li>
-<li><label><input type="checkbox"><code>[]</code></label></li>
-<li><label><input type="checkbox"><code>set()</code></label></li>
-<li><label><input type="checkbox"><code>()</code></label></li>
-</ul></li>
-<li><p>What is the result of <code>3 + 4.0</code>?</p>
-<ul class="task-list">
-<li><label><input type="checkbox">7</label></li>
-<li><label><input type="checkbox">7.0</label></li>
-<li><label><input type="checkbox">‘7.0’</label></li>
-<li><label><input type="checkbox">TypeError</label></li>
-</ul></li>
-</ol>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Click to reveal answers
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ol type="1">
-<li><code>&lt;class 'list'&gt; &lt;class 'tuple'&gt;</code></li>
-<li>List</li>
-<li>2</li>
-<li><code>set()</code></li>
-<li>7.0</li>
-</ol>
 </div>
 </div>
 </div>

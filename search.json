@@ -93,18 +93,6 @@
     ]
   },
   {
-    "objectID": "lectures/lecture02/01-lecture02.html#quiz-data-types-in-python",
-    "href": "lectures/lecture02/01-lecture02.html#quiz-data-types-in-python",
-    "title": "Data Types",
-    "section": "Quiz: Data Types in Python",
-    "text": "Quiz: Data Types in Python\nLet’s test your understanding of Python data types!\n\n\nWhat is the output of the following code?\na = [1, 2, 3]\nb = (1, 2, 3)\nprint(type(a), type(b))\n\n&lt;class 'list'&gt; &lt;class 'list'&gt;\n&lt;class 'list'&gt; &lt;class 'tuple'&gt;\n&lt;class 'tuple'&gt; &lt;class 'list'&gt;\n&lt;class 'tuple'&gt; &lt;class 'tuple'&gt;\n\nWhich of the following is mutable?\n\nList\nTuple\nString\nInteger\n\nWhat will be the output of this code?\nmy_dict = {'a': 1, 'b': 2, 'c': 3}\nprint(my_dict['b'])\n\na\n2\nb\nKeyError\n\nHow do you create an empty set in Python?\n\n{}\n[]\nset()\n()\n\nWhat is the result of 3 + 4.0?\n\n7\n7.0\n‘7.0’\nTypeError\n\n\n\n\n\n\n\n\n\nClick to reveal answers\n\n\n\n\n\n\n&lt;class 'list'&gt; &lt;class 'tuple'&gt;\nList\n2\nset()\n7.0",
-    "crumbs": [
-      "Python Basics",
-      "Lecture 2",
-      "Data Types"
-    ]
-  },
-  {
     "objectID": "course-info/assignments.html",
     "href": "course-info/assignments.html",
     "title": "Assignments",
@@ -297,7 +285,24 @@
     "href": "seminars/seminar01/01-seminar01.html",
     "title": "Seminar 1",
     "section": "",
-    "text": "Calculate the average of all of the integers from 1 to 10.\n\n\n\n\n\n\n\nuse the sum() and len() functions\nn = range(1, 11)\n\n\n1n = range(1, 11)\n2sum(n)/len(n)\n\n1\n\ncreate the range of numbers from 1 to 10.\n\n2\n\ncalculate the sum of the numbers and divide by the number of elements in the list."
+    "text": "Let’s test your understanding of Python data types!\n\n\nWhat is the output of the following code?\na = [1, 2, 3]\nb = (1, 2, 3)\nprint(type(a), type(b))\n\n&lt;class 'list'&gt; &lt;class 'list'&gt;\n&lt;class 'list'&gt; &lt;class 'tuple'&gt;\n&lt;class 'tuple'&gt; &lt;class 'list'&gt;\n&lt;class 'tuple'&gt; &lt;class 'tuple'&gt;\n\nWhich of the following is mutable?\n\nList\nTuple\nString\nInteger\n\nWhat will be the output of this code?\nmy_dict = {'a': 1, 'b': 2, 'c': 3}\nprint(my_dict['b'])\n\na\n2\nb\nKeyError\n\nHow do you create an empty set in Python?\n\n{}\n[]\nset()\n()\n\nWhat is the result of 3 + 4.0?\n\n7\n7.0\n‘7.0’\nTypeError\n\n\n\n\n\n\n\n\n\nClick to reveal answers\n\n\n\n\n\n\n&lt;class 'list'&gt; &lt;class 'tuple'&gt;\nList\n2\nset()\n7.0",
+    "crumbs": [
+      "Seminars",
+      "Seminar01",
+      "Seminar Quizz"
+    ]
+  },
+  {
+    "objectID": "seminars/seminar01/01-seminar01.html#quiz-data-types-in-python",
+    "href": "seminars/seminar01/01-seminar01.html#quiz-data-types-in-python",
+    "title": "Seminar 1",
+    "section": "",
+    "text": "Let’s test your understanding of Python data types!\n\n\nWhat is the output of the following code?\na = [1, 2, 3]\nb = (1, 2, 3)\nprint(type(a), type(b))\n\n&lt;class 'list'&gt; &lt;class 'list'&gt;\n&lt;class 'list'&gt; &lt;class 'tuple'&gt;\n&lt;class 'tuple'&gt; &lt;class 'list'&gt;\n&lt;class 'tuple'&gt; &lt;class 'tuple'&gt;\n\nWhich of the following is mutable?\n\nList\nTuple\nString\nInteger\n\nWhat will be the output of this code?\nmy_dict = {'a': 1, 'b': 2, 'c': 3}\nprint(my_dict['b'])\n\na\n2\nb\nKeyError\n\nHow do you create an empty set in Python?\n\n{}\n[]\nset()\n()\n\nWhat is the result of 3 + 4.0?\n\n7\n7.0\n‘7.0’\nTypeError\n\n\n\n\n\n\n\n\n\nClick to reveal answers\n\n\n\n\n\n\n&lt;class 'list'&gt; &lt;class 'tuple'&gt;\nList\n2\nset()\n7.0",
+    "crumbs": [
+      "Seminars",
+      "Seminar01",
+      "Seminar Quizz"
+    ]
   },
   {
     "objectID": "seminars/seminar01/00-seminar01.html",
