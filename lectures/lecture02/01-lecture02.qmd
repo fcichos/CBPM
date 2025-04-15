@@ -49,6 +49,12 @@ The output would be:
 ```
 
 
+```{pyodide}
+#| autorun: false
+s = "string"
+dir(s)
+```
+
 
 The following few cells will give you a short introduction into each type.
 
