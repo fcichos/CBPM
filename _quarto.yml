@@ -67,6 +67,8 @@ website:
             contents:
               - text: Seminar Questions
                 href: seminars/seminar01/00-seminar01.qmd
+              - text: Seminar Quizz
+                href: seminars/seminar01/01-seminar01.qmd
           #     - text: Jupyter Notebook
           #       href: https://github.com/fcichos/EMPP24/blob/0a72930701cb672ff404d6b93048c898a132bcbe/docs/seminars/seminar01/MDSimulation.ipynb
 

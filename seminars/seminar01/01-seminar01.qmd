@@ -7,42 +7,67 @@ live:
 ---
 
 
-Calculate the average of all of the integers from 1 to 10.
 
-```{pyodide}
-#| exercise: ex_1_py
-n = range(1, 11)
-______
-```
+## Quiz: Data Types in Python
 
-::: { .hint exercise="ex_1_py"}
-use the sum() and len() functions
+Let's test your understanding of Python data types!
 
-```python
-n = range(1, 11)
-```
+::: {.quiz}
+
+1. What is the output of the following code?
+   ```python
+   a = [1, 2, 3]
+   b = (1, 2, 3)
+   print(type(a), type(b))
+   ```
+
+   - [ ] `<class 'list'> <class 'list'>`
+   - [ ] `<class 'list'> <class 'tuple'>`
+   - [ ] `<class 'tuple'> <class 'list'>`
+   - [ ] `<class 'tuple'> <class 'tuple'>`
+
+2. Which of the following is mutable?
+
+   - [ ] List
+   - [ ] Tuple
+   - [ ] String
+   - [ ] Integer
+
+3. What will be the output of this code?
+   ```python
+   my_dict = {'a': 1, 'b': 2, 'c': 3}
+   print(my_dict['b'])
+   ```
+
+   - [ ] a
+   - [ ] 2
+   - [ ] b
+   - [ ] KeyError
+
+4. How do you create an empty set in Python?
+
+   - [ ] `{}`
+   - [ ] `[]`
+   - [ ] `set()`
+   - [ ] `()`
+
+5. What is the result of `3 + 4.0`?
+
+   - [ ] 7
+   - [ ] 7.0
+   - [ ] '7.0'
+   - [ ] TypeError
+
 :::
 
 
-::: { .solution exercise="ex_1_py" }
-```python
-n = range(1, 11)                            #<1>
-sum(n)/len(n)                               #<2>
-```
-1. create the range of numbers from 1 to 10.
-2. calculate the sum of the numbers and divide by the number of elements in the list.
+::: {.callout-tip collapse="true"}
+## Click to reveal answers
+
+1. `<class 'list'> <class 'tuple'>`
+2. List
+3. 2
+4. `set()`
+5. 7.0
+
 :::
-
-```{pyodide}
-#| exercise: ex_1_py
-#| check: true
-n = range(1, 11)
-mean = sum(n)/len(n)
-feedback = None
-
-if (result == mean):
-  feedback = { "correct": True, "message": "Nice work!" }
-else:
-  feedback = { "correct": False, "message": "That's incorrect, sorry." }
-feedback
-```

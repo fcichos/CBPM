@@ -9,7 +9,6 @@ pyodide:
   packages:
     - matplotlib
     - numpy
-notebook-url: "https://github.com/fcichos/EMPP24/blob/main/lectures/lecture01/01-lecture01.ipynb"
 ---
 
 ## Control Structures and Functions
