@@ -1,0 +1,70 @@
+/* Improved section headers */
+h2 {
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 8px;
+    margin-top: 30px;
+}
+
+h3 {
+    border-left: 3px solid #3498db;
+    padding-left: 10px;
+    margin-top: 20px;
+}
+
+/* Code block enhancements */
+.cell-output {
+    background-color: #f8f8f8;
+    border-left: 3px solid #28a745;
+    padding-left: 10px;
+}
+
+/* Callout styling */
+.callout {
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+table th {
+    background-color: #f0f7ff;
+}
+
+/* Tab panels for related content */
+.panel-tabset {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.exercise {
+    border-left: 5px solid #4caf50; /* Green border */
+    background-color: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.exercise-header {
+    font-weight: bold;
+    color: #2e7d32; /* Darker green for header */
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.exercise-body {
+    color: #333;
+}
+
+.exercise-time {
+    font-style: italic;
+    color: #666;
+    margin-top: 5px;
+    font-size: 0.9em;
+}

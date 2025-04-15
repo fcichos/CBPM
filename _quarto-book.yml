@@ -23,6 +23,10 @@ book:
         - lectures/lecture01/01-lecture01.qmd
         - lectures/lecture01/python_lecture01.qmd
         - lectures/lecture01/02-lecture01.qmd
+    - part: "Lecture 2"
+      chapters:
+        - lectures/lecture02/01-lecture02.qmd
+        - lectures/lecture02/02-lecture02.qmd
 
 format:
   pdf:
