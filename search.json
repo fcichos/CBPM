@@ -93,6 +93,18 @@
     ]
   },
   {
+    "objectID": "lectures/lecture02/01-lecture02.html#type-casting",
+    "href": "lectures/lecture02/01-lecture02.html#type-casting",
+    "title": "Data Types",
+    "section": "Type Casting",
+    "text": "Type Casting\nType casting is the process of converting a value from one data type to another. Python provides built-in functions for type conversion.\n\nCommon Type Conversion Functions\n\nint(): Converts to integer\nfloat(): Converts to float\nstr(): Converts to string\nbool(): Converts to boolean\nlist(): Converts to list\ntuple(): Converts to tuple\nset(): Converts to set\ndict(): Converts from mappings or iterables of key-value pairs\n\n\n\nExamples of Type Casting\nLet’s explore various type conversion examples with practical code demonstrations. These examples show how Python handles conversions between different data types.\n\nNumeric Conversions\nWhen converting between numeric types, it’s important to understand how precision and data may change. For example, converting floats to integers removes the decimal portion without rounding.\n\n\n\n\n\n\n\n\nString Conversions\nString conversions are commonly used when processing user input or preparing data for output. Python provides straightforward functions for converting between strings and numeric types.\n\n\n\n\n\n\n\n\nCollection Type Conversions\nPython allows for easy conversion between different collection types, which is useful for changing the properties of your data structure (like making elements unique with sets).\n\n\n\n\n\n\n\n\n\nBoolean Conversion\nBoolean conversion is essential for conditional logic. Python follows specific rules to determine truthiness of values, with certain “empty” or “zero” values converting to False.\nWhen converting to boolean with bool(), the following values are considered False: - 0 (integer) - 0.0 (float) - \"\" (empty string) - [] (empty list) - () (empty tuple) - {} (empty dictionary) - set() (empty set) - None\nEverything else converts to True.\n\n\n\n\n\n\n\n\nSpecial Cases and Errors\nType conversion can sometimes fail, especially when the source value cannot be logically converted to the target type. Understanding these limitations helps prevent runtime errors in your code.\nNot all type conversions are possible. Python will raise an error when the conversion is not possible.\n\n\n\n\n\n\nTo handle potential errors in type conversion, you can use exception handling with try/except blocks:",
+    "crumbs": [
+      "Python Basics",
+      "Lecture 2",
+      "Data Types"
+    ]
+  },
+  {
     "objectID": "course-info/assignments.html",
     "href": "course-info/assignments.html",
     "title": "Assignments",
