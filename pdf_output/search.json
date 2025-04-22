@@ -164,6 +164,17 @@
     ]
   },
   {
+    "objectID": "lectures/lecture02/01-lecture02.html#type-casting",
+    "href": "lectures/lecture02/01-lecture02.html#type-casting",
+    "title": "6  Data Types",
+    "section": "6.2 Type Casting",
+    "text": "6.2 Type Casting\nType casting is the process of converting a value from one data type to another. Python provides built-in functions for type conversion.\nPython offers several built-in functions for type conversion: - int(): Converts to integer - float(): Converts to float - str(): Converts to string - bool(): Converts to boolean - list(): Converts to list - tuple(): Converts to tuple - set(): Converts to set - dict(): Converts from mappings or iterables of key-value pairs\nLet’s explore various type conversion examples with practical code demonstrations. These examples show how Python handles conversions between different data types.\nNumeric Conversions\nWhen converting between numeric types, it’s important to understand how precision and data may change. For example, converting floats to integers removes the decimal portion without rounding.\n\n\n\n\n\n\nString Conversions\nString conversions are commonly used when processing user input or preparing data for output. Python provides straightforward functions for converting between strings and numeric types.\n\n\n\n\n\n\nCollection Type Conversions\nPython allows for easy conversion between different collection types, which is useful for changing the properties of your data structure (like making elements unique with sets).\n\n\n\n\n\n\nBoolean Conversion\nBoolean conversion is essential for conditional logic. Python follows specific rules to determine truthiness of values, with certain “empty” or “zero” values converting to False.\nWhen converting to boolean with bool(), the following values are considered False: - 0 (integer) - 0.0 (float) - \"\" (empty string) - [] (empty list) - () (empty tuple) - {} (empty dictionary) - set() (empty set) - None\nEverything else converts to True.\n\n\n\n\n\n\nSpecial Cases and Errors\nType conversion can sometimes fail, especially when the source value cannot be logically converted to the target type. Understanding these limitations helps prevent runtime errors in your code.\nNot all type conversions are possible. Python will raise an error when the conversion is not possible.\n\n\n\n\n\n\nTo handle potential errors in type conversion, you can use exception handling with try/except blocks:",
+    "crumbs": [
+      "Lecture 2",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Data Types</span>"
+    ]
+  },
+  {
     "objectID": "lectures/lecture02/02-lecture02.html",
     "href": "lectures/lecture02/02-lecture02.html",
     "title": "7  Python Overview",
@@ -194,6 +205,193 @@
     "crumbs": [
       "Lecture 2",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Python Overview</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/01-lecture03.html",
+    "href": "lectures/lecture03/01-lecture03.html",
+    "title": "8  Modules",
+    "section": "",
+    "text": "Most of the functionality in Python is provided by modules. The Python Standard Library is a large collection of modules that provides cross-platform implementations of common facilities such as access to the operating system, file I/O, string management, network communication, math, web-scraping, text manipulation, machine learning and much more.\nTo use a module in a Python module it first has to be imported. A module can be imported using the import statement. For example, to import the module math, which contains many standard mathematical functions, we can do:\n\n\n\n\n\n\nThis includes the whole module and makes it available for use later in the program. Alternatively, we can chose to import all symbols (functions and variables) in a module so that we don’t need to use the prefix “math.” every time we use something from the math module:\n\n\n\n\n\n\nThis pattern can be very convenient, but in large programs that include many modules it is often a good idea to keep the symbols from each module in their own namespaces, by using the import math pattern. This would eliminate potentially confusing problems.\n\n8.0.1 Namespaces\n\n\n\n\n\n\nNamespaces\n\n\n\nA namespace is an identifier used to organize objects, e.g. the methods and variables of a module. The prefix math. we have used in the previous section is such a namespace. You may also create your own namespace for a module. This is done by using the import math as mymath pattern.\n\n\n\n\n\n\n\n\nYou may also only import specific functions of a module.\n\n\n\n\n\n\n\n\n8.0.2 Directory of a module\nOnce a module is imported, we can list the symbols it provides using the dir function:\n\n\n\n\n\n\nAnd using the function help we can get a description of each function (almost .. not all functions have docstrings, as they are technically called, but the vast majority of functions are documented this way).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWe can also use the help function directly on modules: Try\nhelp(math)\nSome very useful modules form the Python standard library are os, sys, math, shutil, re, subprocess, multiprocessing, threading.\nA complete lists of standard modules for Python 3 is available at http://docs.python.org/3/library/ .\n\n\n8.0.3 Advanced topics\n\n\n\n\n\n\nCreate Your Own Modules\n\n\n\n\n\nCreating your own modules in Python is a great way to organize your code and make it reusable. A module is simply a file containing Python definitions and statements. Here’s how you can create and use your own module:\n\n8.0.3.1 Creating a Module\nTo create a module, you just need to save your Python code in a file with a .py extension. For example, let’s create a module named mymodule.py with the following content:\n# mymodule.py\n\ndef greet(name: str) -&gt; str:\n    return f\"Hello, {name}!\"\n\ndef add(a: int, b: int) -&gt; int:\n    return a + b\n\n\n8.0.3.2 Using Your Module\nOnce you have created your module, you can import it into other Python scripts using the import statement. Here’s an example of how to use the mymodule we just created:\n# main.py\n\nimport mymodule\n\n# Use the functions from mymodule\nprint(mymodule.greet(\"Alice\"))\nprint(mymodule.add(5, 3))\n\n\n8.0.3.3 Importing Specific Functions\nYou can also import specific functions from a module using the from ... import ... syntax:\n# main.py\n\nfrom mymodule import greet, add\n\n# Use the imported functions directly\nprint(greet(\"Bob\"))\nprint(add(10, 7))\n\n\n8.0.3.4 Module Search Path\nWhen you import a module, Python searches for the module in the following locations: 1. The directory containing the input script (or the current directory if no script is specified). 2. The directories listed in the PYTHONPATH environment variable. 3. The default directory where Python is installed.\nYou can view the module search path by printing the sys.path variable:\nimport sys\nprint(sys.path)\n\n\n8.0.3.5 Creating Packages\nA package is a way of organizing related modules into a directory hierarchy. A package is simply a directory that contains a special file named __init__.py, which can be empty. Here’s an example of how to create a package:\nmypackage/\n    __init__.py\n    module1.py\n    module2.py\nYou can then import modules from the package using the dot notation:\n# main.py\n\nfrom mypackage import module1, module2\n\n# Use the functions from the modules\nprint(module1.some_function())\nprint(module2.another_function())\nCreating and using modules and packages in Python helps you organize your code better and makes it easier to maintain and reuse.\n\n\n8.0.3.6 Namespaces in Packages\nYou can also create sub-packages by adding more directories with __init__.py files. This allows you to create a hierarchical structure for your modules:\nmypackage/\n    __init__.py\n    subpackage/\n        __init__.py\n        submodule.py\nYou can then import submodules using the full package name:\n# main.py\n\nfrom mypackage.subpackage import submodule\n\n# Use the functions from the submodule\nprint(submodule.some_sub_function())",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Modules</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/02-lecture03.html",
+    "href": "lectures/lecture03/02-lecture03.html",
+    "title": "9  NumPy Module",
+    "section": "",
+    "text": "9.1 Creating Numpy Arrays\nNumpy is the core library for scientific computing in Python. It provides a high-performance multidimensional array object and tools for working with these arrays. The NumPy array, formally called ndarray in NumPy documentation, is the real workhorse of data structures for scientific and engineering applications. The NumPy array is similar to a list but where all the elements of the list are of the same type. The elements of a NumPy array are usually numbers, but can also be booleans, strings, or other objects. When the elements are numbers, they must all be of the same type.\nFor physics applications, NumPy is essential because it enables efficient numerical calculations on large datasets, handling of vectors and matrices, and implementation of mathematical models that describe physical phenomena. Whether simulating particle motion, analyzing experimental data, or solving equations of motion, NumPy provides the computational foundation needed for modern physics.\nThere are a number of ways to initialize new numpy arrays, for example from",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>NumPy Module</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/02-lecture03.html#creating-numpy-arrays",
+    "href": "lectures/lecture03/02-lecture03.html#creating-numpy-arrays",
+    "title": "9  NumPy Module",
+    "section": "",
+    "text": "a Python list or tuples\nusing functions that are dedicated to generating numpy arrays, such as arange, linspace, etc.\nreading data from files which will be covered in the files section\n\n\nFrom listsUsing array-generating functions\n\n\nFor example, to create new vector and matrix arrays from Python lists we can use the numpy.array function.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFor larger arrays it is impractical to initialize the data manually, using explicit python lists. Instead we can use one of the many functions in numpy that generate arrays of different forms. Some of the more common are:\n\n\n\n\n\n\n\n\n\n\n\n\n\n9.1.0.1 linspace and logspace\nThe linspace function creates an array of N evenly spaced points between a starting point and an ending point. The form of the function is linspace(start, stop, N).If the third argument N is omitted,then N=50.\n\n\n\n\n\n\nlogspace is doing equivalent things with logarithmic spacing. Other types of array creation techniques are listed below. Try around with these commands to get a feeling what they do.\n\n\n\n\n\n\n\n\n9.1.0.2 mgrid\nmgrid generates a multi-dimensional matrix with increasing value entries, for example in columns and rows:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9.1.0.3 diag\ndiag generates a diagonal matrix with the list supplied to it. The values can be also offset from the main diagonal.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9.1.0.4 zeros and ones\nzeros and ones creates a matrix with the dimensions given in the argument and filled with 0 or 1.",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>NumPy Module</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/02-lecture03.html#array-attributes",
+    "href": "lectures/lecture03/02-lecture03.html#array-attributes",
+    "title": "9  NumPy Module",
+    "section": "9.2 Array Attributes",
+    "text": "9.2 Array Attributes\nNumPy arrays have several attributes that provide information about their size, shape, and data type. These attributes are essential for understanding and debugging your code.\n\nshapesizedtype\n\n\nThe shape attribute returns a tuple that gives the size of the array along each dimension.\n\n\n\n\n\n\n\n\nThe size attribute returns the total number of elements in the array.\n\n\n\n\n\n\n\n\nThe dtype attribute returns the data type of the array’s elements.\n\n\n\n\n\n\n\n\n\n\n\n\nThese attributes are particularly useful when debugging operations between arrays, as many NumPy functions require arrays of specific shapes or compatible data types.",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>NumPy Module</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/02-lecture03.html#manipulating-numpy-arrays",
+    "href": "lectures/lecture03/02-lecture03.html#manipulating-numpy-arrays",
+    "title": "9  NumPy Module",
+    "section": "9.3 Manipulating NumPy arrays",
+    "text": "9.3 Manipulating NumPy arrays\n\nSlicingReshapingAdding a new dimension: newaxisStacking and repeating arrays\n\n\nSlicing is the name for extracting part of an array by the syntax M[lower:upper:step]\n\n\n\n\n\n\n\n\n\n\n\n\nAny of the three parameters in M[lower:upper:step] can be ommited.\n\n\n\n\n\n\n\n\n\n\n\n\nNegative indices counts from the end of the array (positive index from the begining):\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nIndex slicing works exactly the same way for multidimensional arrays:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDifferences\n\n\n\nSlicing can be effectively used to calculate differences for example for the calculation of derivatives. Here the position \\(y_i\\) of an object has been measured at times \\(t_i\\) and stored in an array each. We wish to calculate the average velocity at the times \\(t_{i}\\) from the arrays by\n\\[\\begin{equation}\nv_{i}=\\frac{y_i-y_{i-1}}{t_{i}-t_{i-1}}\n\\end{equation}\\]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nArrays can be reshaped into any form, which contains the same number of elements.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWith newaxis, we can insert new dimensions in an array, for example converting a vector to a column or row matrix.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nUsing function repeat, tile, vstack, hstack, and concatenate we can create larger vectors and matrices from smaller ones. Please try the individual functions yourself in your notebook. We wont discuss them in detail.\n\n9.3.0.1 Tile and repeat\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9.3.0.2 Concatenate\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n9.3.0.3 Hstack and vstack",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>NumPy Module</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/02-lecture03.html#applying-mathematical-functions",
+    "href": "lectures/lecture03/02-lecture03.html#applying-mathematical-functions",
+    "title": "9  NumPy Module",
+    "section": "9.4 Applying mathematical functions",
+    "text": "9.4 Applying mathematical functions\nAll kinds of mathematical operations can be carried out on arrays. Typically these operation act element wise as seen from the examples below.\n\nOperation involving one arrayOperations involving multiple arraysRandom Numbers\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVector operations enable efficient element-wise calculations where corresponding elements at matching positions are processed simultaneously. Instead of handling elements one by one, these operations work on entire arrays at once, making them particularly fast. When multiplying two vectors using these operations, the result is not a single number (as in a dot product) but rather a new array where each element is the product of the corresponding elements from the input vectors. This element-wise multiplication is just one example of vector operations, which can include addition, subtraction, and other mathematical functions.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNumPy provides powerful tools for generating random numbers, which are essential for simulations in statistical physics, quantum mechanics, and other fields:\n\n\n\n\n\n\nThese random number generators are particularly useful for Monte Carlo simulations, modeling thermal noise, or simulating quantum mechanical systems.",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>NumPy Module</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/02-lecture03.html#broadcasting",
+    "href": "lectures/lecture03/02-lecture03.html#broadcasting",
+    "title": "9  NumPy Module",
+    "section": "9.5 Broadcasting",
+    "text": "9.5 Broadcasting\nBroadcasting is a powerful mechanism that allows NumPy to work with arrays of different shapes when performing arithmetic operations. The smaller array is “broadcast” across the larger array so that they have compatible shapes.\nThe rules for broadcasting are:\n\nIf the arrays don’t have the same rank, prepend the shape of the lower rank array with 1s until both shapes have the same length.\nThe size in each dimension of the output shape is the maximum of the sizes of the input arrays along that dimension.\nAn input can be used in the calculation if its size in a particular dimension matches the output size or if its value is exactly 1.\nIf an input has a dimension size of 1, the first element is used for all calculations along that dimension.\n\nLet’s see some examples:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBroadcasting enables efficient computation without the need to create copies of arrays, saving memory and computation time.",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>NumPy Module</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/02-lecture03.html#physics-example-force-calculations",
+    "href": "lectures/lecture03/02-lecture03.html#physics-example-force-calculations",
+    "title": "9  NumPy Module",
+    "section": "9.6 Physics Example: Force Calculations",
+    "text": "9.6 Physics Example: Force Calculations\nBroadcasting is particularly useful in physics when applying the same operation to multiple objects. For example, when calculating the gravitational force between one massive object and multiple other objects using Newton’s law of universal gravitation:\n\\[\\begin{equation}\nF = \\frac{G M m}{r^2}\n\\end{equation}\\]\nwhere \\(F\\) is the gravitational force, \\(G\\) is the gravitational constant, \\(M\\) and \\(m\\) are the masses of the two objects, and \\(r\\) is the distance between them.",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>NumPy Module</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/03-lecture03.html",
+    "href": "lectures/lecture03/03-lecture03.html",
+    "title": "10  Basic Plotting with Matplotlib",
+    "section": "",
+    "text": "10.1 Basic Plotting\nData visualization is an essential skill for analyzing and presenting scientific data effectively. Python itself doesn’t include plotting capabilities in its core language, but Matplotlib provides powerful and flexible tools for creating visualizations. Matplotlib is the most widely used plotting library in Python and serves as an excellent starting point for creating basic plots.\nMatplotlib works well with NumPy, Python’s numerical computing library, to create a variety of plot types including line plots, scatter plots, bar charts, and more. For this document, we’ve already imported both libraries as you can see in the code below:\nWe’ve also set up some default styling parameters to make our plots more readable and professional-looking:\nThese settings configure the appearance of our plots with appropriate font sizes, line widths, and tick marks. The get_size() function helps us convert dimensions from centimeters to inches, which is useful when specifying figure sizes. With these preparations complete, we’re ready to create various types of visualizations to effectively display our data.\nMatplotlib offers multiple levels of functionality for creating plots. Throughout this section, we’ll primarily focus on using commands that leverage default settings. This approach simplifies the process, as Matplotlib automatically handles much of the graph layout. These high-level commands are ideal for quickly creating effective visualizations without delving into intricate details. Later in this course, we’ll briefly touch upon more advanced techniques that provide greater control over plot elements and layout.\nTo create a basic line plot, use the following command:\nBy default, this generates a line plot. However, you can customize the appearance by adjusting various parameters within the plot() function. For instance, you can modify it to resemble a scatter plot by changing certain arguments. The versatility of this command allows for a range of visual representations beyond simple line plots.\nLet’s create a simple line plot of the sine function over the interval [0, 4π]. We’ll use NumPy to generate the x-values and calculate the corresponding y-values. The following code snippet demonstrates this process:\nHere is the code in a Python cell:\nTry to change the values of the x and y arrays and see how the plot changes.",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Basic Plotting with Matplotlib</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/03-lecture03.html#basic-plotting",
+    "href": "lectures/lecture03/03-lecture03.html#basic-plotting",
+    "title": "10  Basic Plotting with Matplotlib",
+    "section": "",
+    "text": "plt.plot(x, y)\n\n\n1x = np.linspace(0, 4.*np.pi, 100)\n2y = np.sin(x)\n\n3plt.figure(figsize=get_size(8,6))\n4plt.plot(x, y)\n5plt.tight_layout()\n6plt.show()\n\n1\n\nCreate an array of 100 values between 0 and 4π.\n\n2\n\nCalculate the sine of each value in the array.\n\n3\n\ncreate a new figure with a size of (8,6) cm\n\n4\n\nplot the data\n\n5\n\nautomatically adjust the layout\n\n6\n\nshow the figure\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWhy use plt.tight_layout()\n\n\n\n\n\nplt.tight_layout() is a very useful function in Matplotlib that automatically adjusts the spacing between plot elements to prevent overlapping and ensure that all elements fit within the figure area. Here’s what it does:\n\nPadding Adjustment: It adjusts the padding between and around subplots to prevent overlapping of axis labels, titles, and other elements.\nSubplot Spacing: It optimizes the space between multiple subplots in a figure.\nText Accommodation: It ensures that all text elements (like titles, labels, and legends) fit within the figure without being cut off.\nMargin Adjustment: It adjusts the margins around the entire figure to make sure everything fits neatly.\nAutomatic Resizing: If necessary, it can slightly resize subplot areas to accommodate all elements.\nLegend Positioning: It takes into account the presence and position of legends when adjusting layouts.\n\nKey benefits of using plt.tight_layout():\n\nIt saves time in manual adjustment of plot elements.\nIt helps create more professional-looking and readable plots.\nIt’s particularly useful when creating figures with multiple subplots or when saving figures to files.\n\nYou typically call plt.tight_layout() just before plt.show() or plt.savefig(). For example:\nplt.figure()\n# ... (your plotting code here)\nplt.tight_layout()\nplt.show()",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Basic Plotting with Matplotlib</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/03-lecture03.html#customizing-plots",
+    "href": "lectures/lecture03/03-lecture03.html#customizing-plots",
+    "title": "10  Basic Plotting with Matplotlib",
+    "section": "10.2 Customizing Plots",
+    "text": "10.2 Customizing Plots\n\nAxis LabelsLegendsPlotting Multiple LinesCustomizing Line AppearancePlots with Error BarsVisualizing NumPy Arrays\n\n\nTo enhance the clarity and interpretability of our plots, it’s crucial to provide context through proper labeling. The following commands add descriptive axis labels to our diagram:\nplt.xlabel('x-label')\nplt.ylabel('y-label')\nHere’s an example of adding labels to our sine plot:\n\n\n\n\n\n\n\n\nWhen plotting multiple datasets, it’s important to include a legend to identify each line. Use these commands:\nplt.plot(..., label='Label name')\nplt.legend(loc='lower left')\nHere’s an example with a legend:\n\n\n\n\n\n\n\n\nYou can add multiple lines to the same plot:\n\n\n\n\n\n\n\n\nYou can customize the appearance of lines with additional parameters:\n\n\n\n\n\n\n\n\nWhen plotting experimental data, it’s customary to include error bars that graphically indicate measurement uncertainty. The errorbar function can be used to display both vertical and horizontal error bars:\nplt.errorbar(x, y, xerr=x_errors, yerr=y_errors, fmt='format', label='label')\nHere’s an example of a plot with error bars:\n\n\n\n\n\n\n\n\nWe can visualize 2D arrays created with NumPy:",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Basic Plotting with Matplotlib</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/03-lecture03.html#saving-figures",
+    "href": "lectures/lecture03/03-lecture03.html#saving-figures",
+    "title": "10  Basic Plotting with Matplotlib",
+    "section": "10.3 Saving Figures",
+    "text": "10.3 Saving Figures\nTo save a figure to a file, use the savefig method. Matplotlib supports multiple formats including PNG, JPG, EPS, SVG, PGF and PDF:\nplt.savefig('filename.extension')\nHere’s an example of creating and saving a figure:\n\n\n\n\n\n\nFor scientific papers, PDF format is recommended whenever possible. LaTeX documents compiled with pdflatex can include PDFs using the includegraphics command. PGF can also be a good alternative in some cases.",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Basic Plotting with Matplotlib</span>"
+    ]
+  },
+  {
+    "objectID": "lectures/lecture03/03-lecture03.html#numpy-with-visualization",
+    "href": "lectures/lecture03/03-lecture03.html#numpy-with-visualization",
+    "title": "10  Basic Plotting with Matplotlib",
+    "section": "10.4 NumPy with Visualization",
+    "text": "10.4 NumPy with Visualization\nThe arrays and calculations we’ve learned in NumPy form the foundation for scientific data visualization. In the next section, we’ll explore how to use Matplotlib to create visual representations of NumPy arrays, allowing us to interpret and communicate our physics results more effectively.\nFor example, we can visualize the planetary force calculations from our broadcasting example:",
+    "crumbs": [
+      "Lecture 3",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Basic Plotting with Matplotlib</span>"
+    ]
+  },
+  {
+    "objectID": "seminars/seminar02/md1.html",
+    "href": "seminars/seminar02/md1.html",
+    "title": "11  Step-by-Step Development of a Molecular Dynamics Simulation",
+    "section": "",
+    "text": "11.1 Molecular Dynamics Simulations\nReal molecular dynamics (MD) simulations are complex and computationally expensive but very cool, as they give you a glimpse into the world of atoms and molecules. Here, we will develop a simple MD simulation from scratch in Python. The goal is to understand the basic concepts and algorithms behind MD simulations and get something running which can be extended later but also what we are proud of at the end of the course.\nBefore we can start with implementing a simulation, we need to understand the basic concepts and algorithms behind MD simulations. The following sections will guide you through the development of a simple MD simulation. The Jupyter Notebook below will help you to copy and paste the code to test the snippets presented.",
+    "crumbs": [
+      "Seminar 2",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Step-by-Step Development of a Molecular Dynamics Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "seminars/seminar02/md1.html#molecular-dynamics-simulations",
+    "href": "seminars/seminar02/md1.html#molecular-dynamics-simulations",
+    "title": "11  Step-by-Step Development of a Molecular Dynamics Simulation",
+    "section": "",
+    "text": "Open in New Window",
+    "crumbs": [
+      "Seminar 2",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Step-by-Step Development of a Molecular Dynamics Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "seminars/seminar02/md1.html#basic-physical-concepts",
+    "href": "seminars/seminar02/md1.html#basic-physical-concepts",
+    "title": "11  Step-by-Step Development of a Molecular Dynamics Simulation",
+    "section": "11.2 Basic Physical Concepts",
+    "text": "11.2 Basic Physical Concepts\n\n11.2.1 Newton’s Equations of Motion\nThe motion of particles in a molecular dynamics simulation is governed by Newton’s equations of motion:\n\\[m_i \\frac{d^2\\vec{r}_i}{dt^2} = \\vec{F}_i\\]\nwhere \\(m_i\\) is the mass of particle \\(i\\), \\(\\vec{r}_i\\) is the position of particle \\(i\\), and \\(\\vec{F}_i\\) is the force acting on particle \\(i\\).\nThe force acting on a particle is the sum of all forces acting on it:\n\\[\\vec{F}_i = \\sum_{j \\neq i} \\vec{F}_{ij}\\]\nwhere \\(\\vec{F}_{ij}\\) is the force acting on particle \\(i\\) due to particle \\(j\\).\n\n\n11.2.2 Potential Energy Functions and Forces\nThe force \\(\\vec{F}_{ij}\\) is usually derived from a potential energy function and may result from a variety of interactions, such as:\n\n\n\n\n\n\n\n\nInteraction Type\nSubtype\nIllustration\n\n\n\n\nBonded interactions\nBond stretching\n\n\n\n\nBond angle bending\n\n\n\n\nTorsional interactions\n\n\n\nNon-bonded interactions\nElectrostatic interactions\n\n\n\n\nVan der Waals interactions\n\n\n\nExternal forces\n\n\n\n\n\nWe will implement some of them but not all of them.\n\n11.2.2.1 Lennard-Jones Potential\nThe most common potential energy function used in MD simulations is the Lennard-Jones potential. It is belonging to the class of non-bonded interactions. The force and the potential energy of the Lennard-Jones potential are given by:\n\\[V_{LJ}(r) = 4\\epsilon \\left[\\left(\\frac{\\sigma}{r}\\right)^{12} - \\left(\\frac{\\sigma}{r}\\right)^6\\right]\\]\nand\n\\[F_{LJ}(r) = -\\frac{dV_{LJ}}{dr} = 24\\epsilon \\left[2\\left(\\frac{\\sigma}{r}\\right)^{12} - \\left(\\frac{\\sigma}{r}\\right)^6\\right]\\frac{\\vec{r}}{r^2}\\]\nwhere \\(\\frac{\\vec{r}}{r^2}\\) represents the direction of the force (the unit vector \\(\\hat{r} = \\frac{\\vec{r}}{r}\\)) multiplied by \\(\\frac{1}{r}\\), and \\(\\epsilon\\) is the depth of the potential well, \\(\\sigma\\) is the distance at which the potential is zero, and \\(r\\) is the distance between particles.\nThe Lenard Jones potential is good for describing the interaction of non-bonded atoms in a molecular system e.g. in a gas or a liquid and is therefore well suited if we first want to simulate a gas or a liquid.\n\n\n\n\n\n\n\n\n\nThe figure above shows the Lennard-Jones potential as a function of the distance between particles. The potential energy is zero at the equilibrium distance \\(r = \\sigma\\) and has a minimum at \\(r = 2^{1/6}\\sigma\\). The potential energy is positive for \\(r &lt; \\sigma\\) and negative for \\(r &gt; \\sigma\\).\n\n\n\n\n\n\nValues for atomic hydrogen\n\n\n\nFor atomic hydrogen (H), typical Lennard-Jones parameters are:\n\n\\(\\sigma \\approx 2.38\\) Å = \\(2.38 \\times 10^{-10}\\) meters\n\\(\\epsilon \\approx 0.0167\\) kcal/mol = \\(1.16 \\times 10^{-21}\\) joules\n\n\n\nLater, if we manage to advance to some more complicated systems, we may want to introduce:\n\nforce in bonds between two atoms\nforce in bond angles between three atoms\nforce in dihedral angles between four atoms\n\nBut for now, we will stick to the Lennard-Jones potential.",
+    "crumbs": [
+      "Seminar 2",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Step-by-Step Development of a Molecular Dynamics Simulation</span>"
+    ]
+  },
+  {
+    "objectID": "seminars/seminar02/md1.html#integrating-newtons-equation-of-motion",
+    "href": "seminars/seminar02/md1.html#integrating-newtons-equation-of-motion",
+    "title": "11  Step-by-Step Development of a Molecular Dynamics Simulation",
+    "section": "11.3 Integrating Newton’s Equation of Motion",
+    "text": "11.3 Integrating Newton’s Equation of Motion\nWhen we have the forces on a particle we have in principle its acceleration. To get the velocity and the position of the particle we need to integrate the equations of motion. There are several methods to do this, but we will start with the simplest one, the Euler method.\n\n11.3.1 Euler Method\nTo obtain this one first needs to know about the Taylor expansion of a function in general. The Taylor expansion of a function \\(f(x)\\) around a point \\(x_0\\) is providing an approximation of the function in the vicinity of \\(x_0\\). It is given by:\n\\[f(x) = f(x_0) + f'(x_0)(x - x_0) + \\frac{1}{2}f''(x_0)(x - x_0)^2 + \\cdots\\]\nwhere \\(f'(x_0)\\) is the first derivative of \\(f(x)\\) at \\(x_0\\), \\(f''(x_0)\\) is the second derivative of \\(f(x)\\) at \\(x_0\\), and so on. We can demonstrate that by expanding a sine function around \\(x_0 = 0\\):\n\\[\\sin(x) = \\sin(0) + \\cos(0)x - \\frac{1}{2}\\sin(0)x^2 + \\cdots = x - \\frac{1}{6}x^3 + \\cdots\\]\nPlotting this yields:\n\n\n\n\n\n\n\n\n\nThe expansion is therefore a good approximation in a region close to \\(x_0\\).\n\n\n11.3.2 Velocity Verlet Algorithm\nThe velocity Verlet algorithm is a second-order algorithm that offers greater accuracy than the Euler method. It can be derived from the Taylor expansion of the position and velocity vectors:\n\\[\\mathbf{r}(t + \\Delta t) = \\mathbf{r}(t) + \\mathbf{v}(t)\\Delta t + \\frac{1}{2}\\frac{\\mathbf{F}(t)}{m}\\Delta t^2+ O(\\Delta t^3)\\]\nThe higher order terms in the Taylor expansion are neglected, which results in an error of order \\(\\Delta t^3\\). In contrast, the Euler method is obtained by neglecting the higher order terms in the Taylor expansion of the velocity vector:\n\\[\\mathbf{v}(t + \\Delta t) = \\mathbf{v}(t) + \\frac{\\mathbf{F}(t)}{m}\\Delta t + O(\\Delta t^2)\\]\nThis makes the Euler method only first order accurate with an error of order \\(\\Delta t^2\\).\nThe Velocity Verlet algorithm is particularly valuable for molecular dynamics simulations because it offers several advantages over the Euler method. It does a much better job preserving the total energy of the system over long simulation times. The algorithm is also time-reversible, which is a property of the exact equations of motion. Furthermore, it provides symplectic integration, preserving the phase space volume, another important property for physical simulations. These properties make the Velocity Verlet algorithm much more stable for long simulations, which is crucial when modeling molecular systems over meaningful timescales.\nThe velocity Verlet algorithm provides a stable and accurate way to integrate the equations of motion through a three-stage process. First, we update positions using current velocities and forces: \\[\\mathbf{r}(t + \\Delta t) = \\mathbf{r}(t) + \\mathbf{v}(t)\\Delta t + \\frac{1}{2}\\frac{\\mathbf{F}(t)}{m}\\Delta t^2\\]\nNext, we calculate new forces based on these updated positions: \\[\\mathbf{F}(t + \\Delta t) = \\mathbf{F}(\\mathbf{r}(t + \\Delta t))\\]\nFinally, we update velocities using an average of old and new forces: \\[\\mathbf{v}(t + \\Delta t) = \\mathbf{v}(t) + \\frac{1}{2}\\frac{\\mathbf{F}(t) + \\mathbf{F}(t + \\Delta t)}{m}\\Delta t\\]\nIn these equations, \\(\\mathbf{r}\\) represents the position vector, \\(\\mathbf{v}\\) is the velocity vector, \\(\\mathbf{F}\\) is the force vector, \\(m\\) stands for mass, and \\(\\Delta t\\) is the timestep. This approach ensures greater accuracy and stability in our molecular dynamics simulations compared to simpler methods.\n\n\n11.3.3 Simple Integration Example: Free Fall\nLet’s start by integrating the equation of motion for a particle in free fall using the Velocity Verlet algorithm. This is an ideal starting example since the physics is straightforward, with gravity being the only force acting on the particle, and we can compare our numerical solution to the well-known analytical one.\nNewton’s equation of motion: \\[\\mathbf{F} = m\\mathbf{a}\\]\nFor gravity, the only force acting on our particle is the gravitational force pointing downward: \\[\\mathbf{F} = -mg\\hat{\\mathbf{y}}\\]\nTherefore, the acceleration in the y-direction is constant: \\[\\ddot{y} = -g\\]\nThe analytical solution to this differential equation gives us the position and velocity at any time \\(t\\). The position is given by \\[y(t) = y_0 + v_0t - \\frac{1}{2}gt^2\\], and the velocity is expressed as \\[v(t) = v_0 - gt\\]. Here, \\(y_0\\) is the initial height, \\(v_0\\) is the initial velocity, and \\(g\\) is the acceleration due to gravity. We can use this exact solution to verify our numerical integration method.",
+    "crumbs": [
+      "Seminar 2",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Step-by-Step Development of a Molecular Dynamics Simulation</span>"
     ]
   }
 ]

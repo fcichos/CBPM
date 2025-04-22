@@ -389,8 +389,7 @@ fruits.discard("kiwi")   # No error if element doesn't exist
 
 Type casting is the process of converting a value from one data type to another. Python provides built-in functions for type conversion.
 
-### Common Type Conversion Functions
-
+Python offers several built-in functions for type conversion:
 - `int()`: Converts to integer
 - `float()`: Converts to float
 - `str()`: Converts to string
@@ -400,11 +399,10 @@ Type casting is the process of converting a value from one data type to another.
 - `set()`: Converts to set
 - `dict()`: Converts from mappings or iterables of key-value pairs
 
-### Examples of Type Casting
-
 Let's explore various type conversion examples with practical code demonstrations. These examples show how Python handles conversions between different data types.
 
-#### Numeric Conversions
+**Numeric Conversions**
+
 When converting between numeric types, it's important to understand how precision and data may change. For example, converting floats to integers removes the decimal portion without rounding.
 
 ```{pyodide}
@@ -415,7 +413,8 @@ print(float(5))       # Int to float
 print(complex(3, 4))  # Creating complex number
 ```
 
-#### String Conversions
+**String Conversions**
+
 String conversions are commonly used when processing user input or preparing data for output. Python provides straightforward functions for converting between strings and numeric types.
 
 ```{pyodide}
@@ -426,7 +425,8 @@ print(int("456"))     # String to number
 print(float("3.14"))  # String to float
 ```
 
-#### Collection Type Conversions
+**Collection Type Conversions**
+
 Python allows for easy conversion between different collection types, which is useful for changing the properties of your data structure (like making elements unique with sets).
 
 ```{pyodide}
@@ -437,7 +437,7 @@ print(tuple([1, 2, 3]))          # List to tuple
 print(set([1, 2, 2, 3, 3, 3]))   # List to set (removes duplicates)
 ```
 
-### Boolean Conversion
+**Boolean Conversion**
 
 Boolean conversion is essential for conditional logic. Python follows specific rules to determine truthiness of values, with certain "empty" or "zero" values converting to False.
 
@@ -464,7 +464,7 @@ print(bool([]))     # False
 print(bool([1, 2])) # True
 ```
 
-### Special Cases and Errors
+**Special Cases and Errors**
 
 Type conversion can sometimes fail, especially when the source value cannot be logically converted to the target type. Understanding these limitations helps prevent runtime errors in your code.
 

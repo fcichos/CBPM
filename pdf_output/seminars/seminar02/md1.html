@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Programming Background Questionnaire – Introduction to Computer-based Physical Modeling</title>
+<title>11&nbsp; Step-by-Step Development of a Molecular Dynamics Simulation – Introduction to Computer-based Physical Modeling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../lectures/lecture01/01-lecture01.html" rel="next">
-<link href="../../index.html" rel="prev">
+<link href="../../lectures/lecture03/03-lecture03.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -73,6 +72,35 @@ ul.task-list li input[type="checkbox"] {
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
@@ -86,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../lectures/lecture01/00-lecture01.html">Lecture 1</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture01/00-lecture01.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Background Questionnaire</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../seminars/seminar02/md1.html">Seminar 2</a></li><li class="breadcrumb-item"><a href="../../seminars/seminar02/md1.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Step-by-Step Development of a Molecular Dynamics Simulation</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -128,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../lectures/lecture01/00-lecture01.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../lectures/lecture01/00-lecture01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Background Questionnaire</span></span></a>
   </div>
 </li>
@@ -215,7 +243,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../seminars/seminar02/md1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../seminars/seminar02/md1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Step-by-Step Development of a Molecular Dynamics Simulation</span></span></a>
   </div>
 </li>
@@ -226,15 +254,32 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#molecular-dynamics-simulations" id="toc-molecular-dynamics-simulations" class="nav-link active" data-scroll-target="#molecular-dynamics-simulations"><span class="header-section-number">11.1</span> Molecular Dynamics Simulations</a></li>
+  <li><a href="#basic-physical-concepts" id="toc-basic-physical-concepts" class="nav-link" data-scroll-target="#basic-physical-concepts"><span class="header-section-number">11.2</span> Basic Physical Concepts</a>
+  <ul class="collapse">
+  <li><a href="#newtons-equations-of-motion" id="toc-newtons-equations-of-motion" class="nav-link" data-scroll-target="#newtons-equations-of-motion"><span class="header-section-number">11.2.1</span> Newton’s Equations of Motion</a></li>
+  <li><a href="#potential-energy-functions-and-forces" id="toc-potential-energy-functions-and-forces" class="nav-link" data-scroll-target="#potential-energy-functions-and-forces"><span class="header-section-number">11.2.2</span> Potential Energy Functions and Forces</a></li>
+  </ul></li>
+  <li><a href="#integrating-newtons-equation-of-motion" id="toc-integrating-newtons-equation-of-motion" class="nav-link" data-scroll-target="#integrating-newtons-equation-of-motion"><span class="header-section-number">11.3</span> Integrating Newton’s Equation of Motion</a>
+  <ul class="collapse">
+  <li><a href="#euler-method" id="toc-euler-method" class="nav-link" data-scroll-target="#euler-method"><span class="header-section-number">11.3.1</span> Euler Method</a></li>
+  <li><a href="#velocity-verlet-algorithm" id="toc-velocity-verlet-algorithm" class="nav-link" data-scroll-target="#velocity-verlet-algorithm"><span class="header-section-number">11.3.2</span> Velocity Verlet Algorithm</a></li>
+  <li><a href="#simple-integration-example-free-fall" id="toc-simple-integration-example-free-fall" class="nav-link" data-scroll-target="#simple-integration-example-free-fall"><span class="header-section-number">11.3.3</span> Simple Integration Example: Free Fall</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../lectures/lecture01/00-lecture01.html">Lecture 1</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture01/00-lecture01.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Background Questionnaire</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../seminars/seminar02/md1.html">Seminar 2</a></li><li class="breadcrumb-item"><a href="../../seminars/seminar02/md1.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Step-by-Step Development of a Molecular Dynamics Simulation</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Background Questionnaire</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Step-by-Step Development of a Molecular Dynamics Simulation</span></h1>
 </div>
 
 
@@ -251,10 +296,181 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Please complete this short questionnaire to help tailor the course to your needs. Your responses are anonymous and will be used only to adapt the teaching to your level of experience.</p>
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeKOwJd0ZefMgOvS1PPq_feViOQDEPQJ-8fG-BDBiiX3mmJUA/viewform?embedded=true" width="100%" height="1800px" frameborder="0" marginheight="0" marginwidth="0">
-  Loading…
-</iframe>
+<section id="molecular-dynamics-simulations" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="molecular-dynamics-simulations"><span class="header-section-number">11.1</span> Molecular Dynamics Simulations</h2>
+<p>Real molecular dynamics (MD) simulations are complex and computationally expensive but very cool, as they give you a glimpse into the world of atoms and molecules. Here, we will develop a simple MD simulation from scratch in Python. The goal is to understand the basic concepts and algorithms behind MD simulations and get something running which can be extended later but also what we are proud of at the end of the course.</p>
+<p>Before we can start with implementing a simulation, we need to understand the basic concepts and algorithms behind MD simulations. The following sections will guide you through the development of a simple MD simulation. The Jupyter Notebook below will help you to copy and paste the code to test the snippets presented.</p>
+<button onclick="openInNewWindow()" style="background-color: #4CAF50; color: white; padding: 5px 15px; border: none; border-radius: 8px; cursor: pointer; box-shadow: none;">Open in New Window</button>
+<iframe id="myIframe" src="https://jupyterlite.github.io/demo/" width="100%" height="600px" allowfullscreen=""></iframe>
+
+<script>
+function openInNewWindow() {
+  window.open('https://jupyterlite.github.io/demo/', '_blank', 'width=1024,height=768');
+}
+</script>
+</section>
+<section id="basic-physical-concepts" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="basic-physical-concepts"><span class="header-section-number">11.2</span> Basic Physical Concepts</h2>
+<section id="newtons-equations-of-motion" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="newtons-equations-of-motion"><span class="header-section-number">11.2.1</span> Newton’s Equations of Motion</h3>
+<p>The motion of particles in a molecular dynamics simulation is governed by Newton’s equations of motion:</p>
+<p><span class="math display">\[m_i \frac{d^2\vec{r}_i}{dt^2} = \vec{F}_i\]</span></p>
+<p>where <span class="math inline">\(m_i\)</span> is the mass of particle <span class="math inline">\(i\)</span>, <span class="math inline">\(\vec{r}_i\)</span> is the position of particle <span class="math inline">\(i\)</span>, and <span class="math inline">\(\vec{F}_i\)</span> is the force acting on particle <span class="math inline">\(i\)</span>.</p>
+<p>The force acting on a particle is the sum of all forces acting on it:</p>
+<p><span class="math display">\[\vec{F}_i = \sum_{j \neq i} \vec{F}_{ij}\]</span></p>
+<p>where <span class="math inline">\(\vec{F}_{ij}\)</span> is the force acting on particle <span class="math inline">\(i\)</span> due to particle <span class="math inline">\(j\)</span>.</p>
+</section>
+<section id="potential-energy-functions-and-forces" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="potential-energy-functions-and-forces"><span class="header-section-number">11.2.2</span> Potential Energy Functions and Forces</h3>
+<p>The force <span class="math inline">\(\vec{F}_{ij}\)</span> is usually derived from a potential energy function and may result from a variety of interactions, such as:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 22%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Interaction Type</th>
+<th>Subtype</th>
+<th>Illustration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bonded interactions</td>
+<td>Bond stretching</td>
+<td><img src="img/bond.png" class="img-fluid" style="width:50.0%" alt="Bond Stretching"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Bond angle bending</td>
+<td><img src="img/bond_angle.png" class="img-fluid" style="width:50.0%" alt="Bond Stretching"></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Torsional interactions</td>
+<td><img src="img/dihedral.png" class="img-fluid" style="width:50.0%" alt="Bond Stretching"></td>
+</tr>
+<tr class="even">
+<td>Non-bonded interactions</td>
+<td>Electrostatic interactions</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Van der Waals interactions</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>External forces</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>We will implement some of them but not all of them.</p>
+<section id="lennard-jones-potential" class="level4" data-number="11.2.2.1">
+<h4 data-number="11.2.2.1" class="anchored" data-anchor-id="lennard-jones-potential"><span class="header-section-number">11.2.2.1</span> Lennard-Jones Potential</h4>
+<p>The most common potential energy function used in MD simulations is the Lennard-Jones potential. It is belonging to the class of non-bonded interactions. The force and the potential energy of the Lennard-Jones potential are given by:</p>
+<p><span class="math display">\[V_{LJ}(r) = 4\epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]\]</span></p>
+<p>and</p>
+<p><span class="math display">\[F_{LJ}(r) = -\frac{dV_{LJ}}{dr} = 24\epsilon \left[2\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]\frac{\vec{r}}{r^2}\]</span></p>
+<p>where <span class="math inline">\(\frac{\vec{r}}{r^2}\)</span> represents the direction of the force (the unit vector <span class="math inline">\(\hat{r} = \frac{\vec{r}}{r}\)</span>) multiplied by <span class="math inline">\(\frac{1}{r}\)</span>, and <span class="math inline">\(\epsilon\)</span> is the depth of the potential well, <span class="math inline">\(\sigma\)</span> is the distance at which the potential is zero, and <span class="math inline">\(r\)</span> is the distance between particles.</p>
+<p>The Lenard Jones potential is good for describing the interaction of non-bonded atoms in a molecular system e.g.&nbsp;in a gas or a liquid and is therefore well suited if we first want to simulate a gas or a liquid.</p>
+<div id="c591a9ee" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="md1_files/figure-html/cell-3-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="463" height="389"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The figure above shows the Lennard-Jones potential as a function of the distance between particles. The potential energy is zero at the equilibrium distance <span class="math inline">\(r = \sigma\)</span> and has a minimum at <span class="math inline">\(r = 2^{1/6}\sigma\)</span>. The potential energy is positive for <span class="math inline">\(r &lt; \sigma\)</span> and negative for <span class="math inline">\(r &gt; \sigma\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Values for atomic hydrogen
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For atomic hydrogen (H), typical Lennard-Jones parameters are:</p>
+<ul>
+<li><span class="math inline">\(\sigma \approx 2.38\)</span> Å = <span class="math inline">\(2.38 \times 10^{-10}\)</span> meters</li>
+<li><span class="math inline">\(\epsilon \approx 0.0167\)</span> kcal/mol = <span class="math inline">\(1.16 \times 10^{-21}\)</span> joules</li>
+</ul>
+</div>
+</div>
+<p>Later, if we manage to advance to some more complicated systems, we may want to introduce:</p>
+<ol type="1">
+<li>force in bonds between two atoms</li>
+<li>force in bond angles between three atoms</li>
+<li>force in dihedral angles between four atoms</li>
+</ol>
+<p>But for now, we will stick to the Lennard-Jones potential.</p>
+<!--
+## Periodic Boundary Conditions
+In most molecular dynamics simulations, we use periodic boundary conditions (PBC) to mimic an infinite system while simulating only a finite number of particles. When a particle leaves the simulation box on one side, it re-enters from the opposite side. This eliminates artificial boundary effects and allows us to simulate bulk properties with relatively few particles.
+
+![Periodic Boundary Conditions](img/periodic_boundaries.png){width=50%}
+-->
+</section>
+</section>
+</section>
+<section id="integrating-newtons-equation-of-motion" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="integrating-newtons-equation-of-motion"><span class="header-section-number">11.3</span> Integrating Newton’s Equation of Motion</h2>
+<p>When we have the forces on a particle we have in principle its acceleration. To get the velocity and the position of the particle we need to integrate the equations of motion. There are several methods to do this, but we will start with the simplest one, the Euler method.</p>
+<section id="euler-method" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="euler-method"><span class="header-section-number">11.3.1</span> Euler Method</h3>
+<p>To obtain this one first needs to know about the Taylor expansion of a function in general. The Taylor expansion of a function <span class="math inline">\(f(x)\)</span> around a point <span class="math inline">\(x_0\)</span> is providing an approximation of the function in the vicinity of <span class="math inline">\(x_0\)</span>. It is given by:</p>
+<p><span class="math display">\[f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2}f''(x_0)(x - x_0)^2 + \cdots\]</span></p>
+<p>where <span class="math inline">\(f'(x_0)\)</span> is the first derivative of <span class="math inline">\(f(x)\)</span> at <span class="math inline">\(x_0\)</span>, <span class="math inline">\(f''(x_0)\)</span> is the second derivative of <span class="math inline">\(f(x)\)</span> at <span class="math inline">\(x_0\)</span>, and so on. We can demonstrate that by expanding a sine function around <span class="math inline">\(x_0 = 0\)</span>:</p>
+<p><span class="math display">\[\sin(x) = \sin(0) + \cos(0)x - \frac{1}{2}\sin(0)x^2 + \cdots = x - \frac{1}{6}x^3 + \cdots\]</span></p>
+<p>Plotting this yields:</p>
+<div id="facc1526" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="md1_files/figure-html/cell-4-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="470" height="389"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The expansion is therefore a good approximation in a region close to <span class="math inline">\(x_0\)</span>.</p>
+</section>
+<section id="velocity-verlet-algorithm" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="velocity-verlet-algorithm"><span class="header-section-number">11.3.2</span> Velocity Verlet Algorithm</h3>
+<p>The velocity Verlet algorithm is a second-order algorithm that offers greater accuracy than the Euler method. It can be derived from the Taylor expansion of the position and velocity vectors:</p>
+<p><span class="math display">\[\mathbf{r}(t + \Delta t) = \mathbf{r}(t) + \mathbf{v}(t)\Delta t + \frac{1}{2}\frac{\mathbf{F}(t)}{m}\Delta t^2+ O(\Delta t^3)\]</span></p>
+<p>The higher order terms in the Taylor expansion are neglected, which results in an error of order <span class="math inline">\(\Delta t^3\)</span>. In contrast, the Euler method is obtained by neglecting the higher order terms in the Taylor expansion of the velocity vector:</p>
+<p><span class="math display">\[\mathbf{v}(t + \Delta t) = \mathbf{v}(t) + \frac{\mathbf{F}(t)}{m}\Delta t + O(\Delta t^2)\]</span></p>
+<p>This makes the Euler method only first order accurate with an error of order <span class="math inline">\(\Delta t^2\)</span>.</p>
+<p>The Velocity Verlet algorithm is particularly valuable for molecular dynamics simulations because it offers several advantages over the Euler method. It does a much better job preserving the total energy of the system over long simulation times. The algorithm is also time-reversible, which is a property of the exact equations of motion. Furthermore, it provides symplectic integration, preserving the phase space volume, another important property for physical simulations. These properties make the Velocity Verlet algorithm much more stable for long simulations, which is crucial when modeling molecular systems over meaningful timescales.</p>
+<p>The velocity Verlet algorithm provides a stable and accurate way to integrate the equations of motion through a three-stage process. First, we update positions using current velocities and forces: <span class="math display">\[\mathbf{r}(t + \Delta t) = \mathbf{r}(t) + \mathbf{v}(t)\Delta t + \frac{1}{2}\frac{\mathbf{F}(t)}{m}\Delta t^2\]</span></p>
+<p>Next, we calculate new forces based on these updated positions: <span class="math display">\[\mathbf{F}(t + \Delta t) = \mathbf{F}(\mathbf{r}(t + \Delta t))\]</span></p>
+<p>Finally, we update velocities using an average of old and new forces: <span class="math display">\[\mathbf{v}(t + \Delta t) = \mathbf{v}(t) + \frac{1}{2}\frac{\mathbf{F}(t) + \mathbf{F}(t + \Delta t)}{m}\Delta t\]</span></p>
+<p>In these equations, <span class="math inline">\(\mathbf{r}\)</span> represents the position vector, <span class="math inline">\(\mathbf{v}\)</span> is the velocity vector, <span class="math inline">\(\mathbf{F}\)</span> is the force vector, <span class="math inline">\(m\)</span> stands for mass, and <span class="math inline">\(\Delta t\)</span> is the timestep. This approach ensures greater accuracy and stability in our molecular dynamics simulations compared to simpler methods.</p>
+</section>
+<section id="simple-integration-example-free-fall" class="level3" data-number="11.3.3">
+<h3 data-number="11.3.3" class="anchored" data-anchor-id="simple-integration-example-free-fall"><span class="header-section-number">11.3.3</span> Simple Integration Example: Free Fall</h3>
+<p>Let’s start by integrating the equation of motion for a particle in free fall using the Velocity Verlet algorithm. This is an ideal starting example since the physics is straightforward, with gravity being the only force acting on the particle, and we can compare our numerical solution to the well-known analytical one.</p>
+<p>Newton’s equation of motion: <span class="math display">\[\mathbf{F} = m\mathbf{a}\]</span></p>
+<p>For gravity, the only force acting on our particle is the gravitational force pointing downward: <span class="math display">\[\mathbf{F} = -mg\hat{\mathbf{y}}\]</span></p>
+<p>Therefore, the acceleration in the y-direction is constant: <span class="math display">\[\ddot{y} = -g\]</span></p>
+<p>The analytical solution to this differential equation gives us the position and velocity at any time <span class="math inline">\(t\)</span>. The position is given by <span class="math display">\[y(t) = y_0 + v_0t - \frac{1}{2}gt^2\]</span>, and the velocity is expressed as <span class="math display">\[v(t) = v_0 - gt\]</span>. Here, <span class="math inline">\(y_0\)</span> is the initial height, <span class="math inline">\(v_0\)</span> is the initial velocity, and <span class="math inline">\(g\)</span> is the acceleration due to gravity. We can use this exact solution to verify our numerical integration method.</p>
+<div id="f08d663f" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="md1_files/figure-html/cell-5-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="460" height="389"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 <script type="ojs-module-contents">
@@ -271,6 +487,8 @@ eyJjb250ZW50cyI6W119
 <script type="vfs-file">
 W10=
 </script>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
@@ -278,7 +496,7 @@ eyJjb250ZW50cyI6W119
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../lectures/lecture01";
+window._ojs.paths.runtimeToDoc = "../../seminars/seminar02";
 window._ojs.paths.runtimeToRoot = "../..";
 window._ojs.paths.docToRoot = "../..";
 window._ojs.selfContained = false;
@@ -703,14 +921,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../index.html" class="pagination-link" aria-label="CBPM 2025">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CBPM 2025</span></span>
+      <a href="../../lectures/lecture03/03-lecture03.html" class="pagination-link" aria-label="Basic Plotting with Matplotlib">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Basic Plotting with Matplotlib</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../lectures/lecture01/01-lecture01.html" class="pagination-link" aria-label="Jupyter Notebooks">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Jupyter Notebooks</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

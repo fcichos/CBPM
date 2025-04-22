@@ -59,7 +59,14 @@ website:
                 href: lectures/lecture02/01-lecture02.qmd
               - text: Control Structures & Functions
                 href: lectures/lecture02/02-lecture02.qmd
-
+          - section: "Lecture 3"
+            contents:
+              - text: Modules
+                href: lectures/lecture03/01-lecture03.qmd
+              - text: Numpy Module
+                href: lectures/lecture03/02-lecture03.qmd
+              - text: Basic Plotting
+                href: lectures/lecture03/03-lecture03.qmd
       - text: "---" # This creates a divider
       - section: "Seminars"
         contents:
@@ -69,6 +76,11 @@ website:
                 href: seminars/seminar01/00-seminar01.qmd
               - text: Seminar Quizz
                 href: seminars/seminar01/01-seminar01.qmd
+          - section: "Seminar02"
+            contents:
+              - text: MD Simulation
+                href: seminars/seminar02/md1.qmd
+          #     - text: Jupyter Notebook
           #     - text: Jupyter Notebook
           #       href: https://github.com/fcichos/EMPP24/blob/0a72930701cb672ff404d6b93048c898a132bcbe/docs/seminars/seminar01/MDSimulation.ipynb
 

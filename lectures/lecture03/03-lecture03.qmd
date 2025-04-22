@@ -1,0 +1,324 @@
+---
+title: "Basic Plotting with Matplotlib"
+format: live-html
+pyodide:
+  autorun: true
+  packages:
+    - matplotlib
+    - numpy
+---
+
+Data visualization is an essential skill for analyzing and presenting scientific data effectively. Python itself doesn't include plotting capabilities in its core language, but Matplotlib provides powerful and flexible tools for creating visualizations. [Matplotlib](https://matplotlib.org/stable/index.html) is the most widely used plotting library in Python and serves as an excellent starting point for creating basic plots.
+
+Matplotlib works well with NumPy, Python's numerical computing library, to create a variety of plot types including line plots, scatter plots, bar charts, and more. For this document, we've already imported both libraries as you can see in the code below:
+
+```{pyodide}
+#| autorun: true
+
+import numpy as np
+import matplotlib.pyplot as plt
+```
+
+We've also set up some default styling parameters to make our plots more readable and professional-looking:
+
+```{pyodide}
+#| autorun: true
+
+plt.rcParams.update({'font.size': 12,
+                     'lines.linewidth': 1,
+                     'lines.markersize': 10,
+                     'axes.labelsize': 11,
+                     'xtick.labelsize' : 10,
+                     'ytick.labelsize' : 10,
+                     'xtick.top' : True,
+                     'xtick.direction' : 'in',
+                     'ytick.right' : True,
+                     'ytick.direction' : 'in',
+                     'figure.figsize': (4, 3),
+                     'figure.dpi': 150})
+
+def get_size(w,h):
+      return((w/2.54,h/2.54))
+```
+
+These settings configure the appearance of our plots with appropriate font sizes, line widths, and tick marks. The `get_size()` function helps us convert dimensions from centimeters to inches, which is useful when specifying figure sizes. With these preparations complete, we're ready to create various types of visualizations to effectively display our data.
+
+Matplotlib offers multiple levels of functionality for creating plots. Throughout this section, we'll primarily focus on using commands that leverage default settings. This approach simplifies the process, as Matplotlib automatically handles much of the graph layout. These high-level commands are ideal for quickly creating effective visualizations without delving into intricate details. Later in this course, we'll briefly touch upon more advanced techniques that provide greater control over plot elements and layout.
+
+## Basic Plotting
+
+To create a basic line plot, use the following command:
+
+```python
+plt.plot(x, y)
+```
+
+By default, this generates a line plot. However, you can customize the appearance by adjusting various parameters within the `plot()` function. For instance, you can modify it to resemble a scatter plot by changing certain arguments. The versatility of this command allows for a range of visual representations beyond simple line plots.
+
+Let's create a simple line plot of the sine function over the interval [0, 4π]. We'll use NumPy to generate the x-values and calculate the corresponding y-values. The following code snippet demonstrates this process:
+
+```python
+x = np.linspace(0, 4.*np.pi, 100)       #<1>
+y = np.sin(x)     #<2>
+
+plt.figure(figsize=get_size(8,6))      #<3>
+plt.plot(x, y)        #<4>
+plt.tight_layout()          #<5>
+plt.show()          #<6>
+```
+1. Create an array of 100 values between 0 and 4π.
+2. Calculate the sine of each value in the array.
+3. create a new figure with a size of (8,6) cm
+4. plot the data
+5. automatically adjust the layout
+6. show the figure
+
+Here is the code in a Python cell:
+
+```{pyodide}
+#| autorun: true
+
+x = np.linspace(0, 4.*np.pi, 100)
+y = np.sin(x)
+
+plt.figure(figsize=get_size(8,6))
+plt.plot(x, y)
+plt.tight_layout()
+plt.show()
+```
+
+Try to change the values of the `x` and `y` arrays and see how the plot changes.
+
+::: {.callout-tip title="Why use plt.tight_layout()" collapse=true}
+
+`plt.tight_layout()` is a very useful function in Matplotlib that automatically adjusts the spacing between plot elements to prevent overlapping and ensure that all elements fit within the figure area. Here's what it does:
+
+1. Padding Adjustment: It adjusts the padding between and around subplots to prevent overlapping of axis labels, titles, and other elements.
+
+2. Subplot Spacing: It optimizes the space between multiple subplots in a figure.
+
+3. Text Accommodation: It ensures that all text elements (like titles, labels, and legends) fit within the figure without being cut off.
+
+4. Margin Adjustment: It adjusts the margins around the entire figure to make sure everything fits neatly.
+
+5. Automatic Resizing: If necessary, it can slightly resize subplot areas to accommodate all elements.
+
+6. Legend Positioning: It takes into account the presence and position of legends when adjusting layouts.
+
+Key benefits of using `plt.tight_layout()`:
+
+- It saves time in manual adjustment of plot elements.
+- It helps create more professional-looking and readable plots.
+- It's particularly useful when creating figures with multiple subplots or when saving figures to files.
+
+You typically call `plt.tight_layout()` just before `plt.show()` or `plt.savefig()`. For example:
+
+```python
+plt.figure()
+# ... (your plotting code here)
+plt.tight_layout()
+plt.show()
+```
+:::
+
+## Customizing Plots
+
+::: {.panel-tabset}
+### Axis Labels
+
+To enhance the clarity and interpretability of our plots, it's crucial to provide context through proper labeling. The following commands add descriptive axis labels to our diagram:
+
+```python
+plt.xlabel('x-label')
+plt.ylabel('y-label')
+```
+
+Here's an example of adding labels to our sine plot:
+
+```{pyodide}
+#| autorun: false
+
+x = np.linspace(0, 4.*np.pi, 100)
+y = np.sin(x)
+
+plt.figure(figsize=get_size(8,6))
+plt.plot(x, y)
+plt.xlabel('t')                # set the x-axis label
+plt.ylabel('sin(t)')           # set the y-axis label
+plt.tight_layout()
+plt.show()
+```
+
+### Legends
+
+When plotting multiple datasets, it's important to include a legend to identify each line. Use these commands:
+
+```python
+plt.plot(..., label='Label name')
+plt.legend(loc='lower left')
+```
+
+Here's an example with a legend:
+
+```{pyodide}
+#| autorun: false
+
+x = np.linspace(0, 4.*np.pi, 100)
+
+plt.figure(figsize=get_size(8,6))
+plt.plot(x, np.sin(x), "ko", markersize=5, label=r"$\delta(t)$")   # define a label
+plt.xlabel('t')
+plt.ylabel(r'$\sin(t)$')
+plt.legend(loc='lower left')                                        # add the legend
+plt.tight_layout()
+plt.show()
+```
+
+
+### Plotting Multiple Lines
+
+You can add multiple lines to the same plot:
+
+```{pyodide}
+#| autorun: false
+x = np.linspace(0, 2*np.pi, 100)
+
+plt.figure(figsize=get_size(8, 8))
+plt.plot(x, np.sin(x), label='sin(x)')         # Add a label for the legend
+plt.plot(x, np.cos(x), label='cos(x)')         # Second line
+plt.plot(x, np.sin(2*x), label='sin(2x)')      # Third line
+plt.legend()                                    # Display the legend
+plt.title('Trigonometric Functions')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.tight_layout()
+plt.show()
+```
+
+### Customizing Line Appearance
+
+You can customize the appearance of lines with additional parameters:
+
+```{pyodide}
+#| autorun: false
+x = np.linspace(0, 2*np.pi, 100)
+
+plt.figure(figsize=get_size(14, 8))
+# Format string: color, marker, line style
+plt.plot(x, np.sin(x), 'r-', label='sin(x)')      # Red solid line
+plt.plot(x, np.cos(x), 'b--', label='cos(x)')     # Blue dashed line
+plt.plot(x, np.sin(2*x), 'g.', label='sin(2x)')   # Green dots
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')  # Place legend outside plot
+plt.xlabel('x')
+plt.ylabel('y')
+plt.subplots_adjust(right=0.8)  # Add space for the legend
+plt.tight_layout()
+
+plt.show()
+```
+### Plots with Error Bars
+
+When plotting experimental data, it's customary to include error bars that graphically indicate measurement uncertainty. The `errorbar` function can be used to display both vertical and horizontal error bars:
+
+```python
+plt.errorbar(x, y, xerr=x_errors, yerr=y_errors, fmt='format', label='label')
+```
+
+Here's an example of a plot with error bars:
+
+```{pyodide}
+#| autorun: false
+
+xdata = np.arange(0.5, 3.5, 0.5)
+ydata = 210-40/xdata
+yerror = 2e3/ydata
+
+plt.figure(figsize=get_size(8,6))
+plt.errorbar(xdata, ydata, fmt="ro", label="data",
+             xerr=0.15, yerr=yerror, ecolor="black")
+plt.xlabel("x")
+plt.ylabel("t-displacement")
+plt.legend(loc="lower right")
+plt.tight_layout()
+plt.show()
+```
+
+### Visualizing NumPy Arrays
+
+We can visualize 2D arrays created with NumPy:
+
+```{pyodide}
+#| autorun: false
+# Create a 2D array using mgrid
+x, y = np.mgrid[0:5:0.1, 0:5:0.1]
+z = np.sin(x) * np.cos(y)
+
+plt.figure(figsize=get_size(12, 8))
+plt.pcolormesh(x, y, z, cmap='viridis',edgecolors="none")  # Color mesh plot
+plt.colorbar(label='sin(x)cos(y)')      # Add color scale
+plt.xlabel('x')
+plt.ylabel('y')
+plt.tight_layout()
+plt.show()
+```
+
+:::
+
+
+
+## Saving Figures
+
+To save a figure to a file, use the `savefig` method. Matplotlib supports multiple formats including PNG, JPG, EPS, SVG, PGF and PDF:
+
+```python
+plt.savefig('filename.extension')
+```
+
+Here's an example of creating and saving a figure:
+
+```{pyodide}
+#| autorun: false
+
+theta = np.linspace(0.01, 10., 100)
+ytan = np.sin(2*theta) + np.cos(3.1*theta)
+
+plt.figure(figsize=get_size(8,6))
+plt.plot(theta, ytan)
+plt.xlabel(r'$\theta$')
+plt.ylabel('y')
+plt.tight_layout()
+plt.savefig('filename.pdf')    # save figure before showing it
+plt.show()
+```
+
+For scientific papers, PDF format is recommended whenever possible. LaTeX documents compiled with `pdflatex` can include PDFs using the `includegraphics` command. PGF can also be a good alternative in some cases.
+
+
+
+## NumPy with Visualization
+
+The arrays and calculations we've learned in NumPy form the foundation for scientific data visualization. In the next section, we'll explore how to use Matplotlib to create visual representations of NumPy arrays, allowing us to interpret and communicate our physics results more effectively.
+
+For example, we can visualize the planetary force calculations from our broadcasting example:
+
+```{pyodide}
+#| autorun: false
+
+# Planet names for our example
+planets = ['Mercury', 'Venus', 'Earth', 'Mars']
+
+# Calculate gravitational forces (code from previous example)
+G = 6.67430e-11
+M = 1.989e30
+planet_masses = np.array([3.3e23, 4.87e24, 5.97e24, 6.42e23])
+distances = np.array([5.79e10, 1.08e11, 1.5e11, 2.28e11])
+forces = G * M * planet_masses / distances**2
+
+# Plotting
+plt.figure(figsize=get_size(8, 8))
+plt.bar(planets, forces)
+plt.ylabel('Gravitational Force (N)')
+#plt.title('Gravitational Force from Sun to Planets')
+plt.tight_layout()
+plt.show()
+```
