@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Seminar 1 – Computer-Based Physical Modelling</title>
+<title>Step-by-Step Development of a Molecular Dynamics Simulation – Computer-Based Physical Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../seminars/seminar02/md1.html" rel="next">
-<link href="../../seminars/seminar01/00-seminar01.html" rel="prev">
+<link href="../../seminars/seminar01/01-seminar01.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -74,9 +73,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-d4d76bf8491c20bad77d141916dc28e1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-ae44de7e3b26b230a7801128389852ee.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="../../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-04e05babf5366152c71ece0916dcb6dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -104,14 +101,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-<link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../assets/css/styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-sidebar floating nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -139,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Seminars</li><li class="breadcrumb-item"><a href="../../seminars/seminar01/00-seminar01.html">Seminar01</a></li><li class="breadcrumb-item"><a href="../../seminars/seminar01/01-seminar01.html">Seminar Quizz</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Seminars</li><li class="breadcrumb-item"><a href="../../seminars/seminar02/md1.html">Seminar02</a></li><li class="breadcrumb-item"><a href="../../seminars/seminar02/md1.html">MD Simulation</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -330,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../seminars/seminar01/01-seminar01.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../seminars/seminar01/01-seminar01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Seminar Quizz</span></a>
   </div>
 </li>
@@ -347,7 +370,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../seminars/seminar02/md1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../seminars/seminar02/md1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">MD Simulation</span></a>
   </div>
 </li>
@@ -360,21 +383,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#quiz-data-types-in-python" id="toc-quiz-data-types-in-python" class="nav-link active" data-scroll-target="#quiz-data-types-in-python">Quiz: Data Types in Python</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Seminars</li><li class="breadcrumb-item"><a href="../../seminars/seminar01/00-seminar01.html">Seminar01</a></li><li class="breadcrumb-item"><a href="../../seminars/seminar01/01-seminar01.html">Seminar Quizz</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Seminars</li><li class="breadcrumb-item"><a href="../../seminars/seminar02/md1.html">Seminar02</a></li><li class="breadcrumb-item"><a href="../../seminars/seminar02/md1.html">MD Simulation</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Seminar 1</h1>
+<h1 class="title">Step-by-Step Development of a Molecular Dynamics Simulation</h1>
 </div>
 
 
@@ -391,105 +406,267 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="quiz-data-types-in-python" class="level2">
-<h2 class="anchored" data-anchor-id="quiz-data-types-in-python">Quiz: Data Types in Python</h2>
-<p>Let’s test your understanding of Python data types!</p>
-<div class="quiz">
-<ol type="1">
-<li><p>What is the output of the following code?</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(a), <span class="bu">type</span>(b))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox"><code>&lt;class 'list'&gt; &lt;class 'list'&gt;</code></label></li>
-<li><label><input type="checkbox"><code>&lt;class 'list'&gt; &lt;class 'tuple'&gt;</code></label></li>
-<li><label><input type="checkbox"><code>&lt;class 'tuple'&gt; &lt;class 'list'&gt;</code></label></li>
-<li><label><input type="checkbox"><code>&lt;class 'tuple'&gt; &lt;class 'tuple'&gt;</code></label></li>
-</ul></li>
-<li><p>Which of the following is mutable?</p>
-<ul class="task-list">
-<li><label><input type="checkbox">List</label></li>
-<li><label><input type="checkbox">Tuple</label></li>
-<li><label><input type="checkbox">String</label></li>
-<li><label><input type="checkbox">Integer</label></li>
-</ul></li>
-<li><p>What will be the output of this code?</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {<span class="st">'a'</span>: <span class="dv">1</span>, <span class="st">'b'</span>: <span class="dv">2</span>, <span class="st">'c'</span>: <span class="dv">3</span>}</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(my_dict[<span class="st">'b'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox">a</label></li>
-<li><label><input type="checkbox">2</label></li>
-<li><label><input type="checkbox">b</label></li>
-<li><label><input type="checkbox">KeyError</label></li>
-</ul></li>
-<li><p>How do you create an empty set in Python?</p>
-<ul class="task-list">
-<li><label><input type="checkbox"><code>{}</code></label></li>
-<li><label><input type="checkbox"><code>[]</code></label></li>
-<li><label><input type="checkbox"><code>set()</code></label></li>
-<li><label><input type="checkbox"><code>()</code></label></li>
-</ul></li>
-<li><p>What is the result of <code>3 + 4.0</code>?</p>
-<ul class="task-list">
-<li><label><input type="checkbox">7</label></li>
-<li><label><input type="checkbox">7.0</label></li>
-<li><label><input type="checkbox">‘7.0’</label></li>
-<li><label><input type="checkbox">TypeError</label></li>
-</ul></li>
-</ol>
+<section id="molecular-dynamics-simulations" class="level2">
+<h2 class="anchored" data-anchor-id="molecular-dynamics-simulations">Molecular Dynamics Simulations</h2>
+<p>Real molecular dynamics (MD) simulations are complex and computationally expensive but very cool, as they give you a glimpse into the world of atoms and molecules. Here, we will develop a simple MD simulation from scratch in Python. The goal is to understand the basic concepts and algorithms behind MD simulations and get something running which can be extended later but also what we are proud of at the end of the course.</p>
+<p>Before we can start with implementing a simulation, we need to understand the basic concepts and algorithms behind MD simulations. The following sections will guide you through the development of a simple MD simulation. The Jupyter Notebook below will help you to copy and paste the code to test the snippets presented.</p>
+<button onclick="openInNewWindow()" style="background-color: #4CAF50; color: white; padding: 5px 15px; border: none; border-radius: 8px; cursor: pointer; box-shadow: none;">Open in New Window</button>
+<iframe id="myIframe" src="https://jupyterlite.github.io/demo/" width="100%" height="600px" allowfullscreen=""></iframe>
+
+<script>
+function openInNewWindow() {
+  window.open('https://jupyterlite.github.io/demo/', '_blank', 'width=1024,height=768');
+}
+</script>
+</section>
+<section id="basic-physical-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="basic-physical-concepts">Basic Physical Concepts</h2>
+<section id="newtons-equations-of-motion" class="level3">
+<h3 class="anchored" data-anchor-id="newtons-equations-of-motion">Newton’s Equations of Motion</h3>
+<p>The motion of particles in a molecular dynamics simulation is governed by Newton’s equations of motion:</p>
+<p><span class="math display">\[m_i \frac{d^2\vec{r}_i}{dt^2} = \vec{F}_i\]</span></p>
+<p>where <span class="math inline">\(m_i\)</span> is the mass of particle <span class="math inline">\(i\)</span>, <span class="math inline">\(\vec{r}_i\)</span> is the position of particle <span class="math inline">\(i\)</span>, and <span class="math inline">\(\vec{F}_i\)</span> is the force acting on particle <span class="math inline">\(i\)</span>.</p>
+<p>The force acting on a particle is the sum of all forces acting on it:</p>
+<p><span class="math display">\[\vec{F}_i = \sum_{j \neq i} \vec{F}_{ij}\]</span></p>
+<p>where <span class="math inline">\(\vec{F}_{ij}\)</span> is the force acting on particle <span class="math inline">\(i\)</span> due to particle <span class="math inline">\(j\)</span>.</p>
+</section>
+<section id="potential-energy-functions-and-forces" class="level3">
+<h3 class="anchored" data-anchor-id="potential-energy-functions-and-forces">Potential Energy Functions and Forces</h3>
+<p>The force <span class="math inline">\(\vec{F}_{ij}\)</span> is usually derived from a potential energy function and may result from a variety of interactions, such as:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 22%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Interaction Type</th>
+<th>Subtype</th>
+<th>Illustration</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bonded interactions</td>
+<td>Bond stretching</td>
+<td><img src="img/bond.png" class="img-fluid" style="width:50.0%" alt="Bond Stretching"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Bond angle bending</td>
+<td><img src="img/bond_angle.png" class="img-fluid" style="width:50.0%" alt="Bond Stretching"></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Torsional interactions</td>
+<td><img src="img/dihedral.png" class="img-fluid" style="width:50.0%" alt="Bond Stretching"></td>
+</tr>
+<tr class="even">
+<td>Non-bonded interactions</td>
+<td>Electrostatic interactions</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Van der Waals interactions</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>External forces</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>We will implement some of them but not all of them.</p>
+<section id="lennard-jones-potential" class="level4">
+<h4 class="anchored" data-anchor-id="lennard-jones-potential">Lennard-Jones Potential</h4>
+<p>The most common potential energy function used in MD simulations is the Lennard-Jones potential. It is belonging to the class of non-bonded interactions. The force and the potential energy of the Lennard-Jones potential are given by:</p>
+<p><span class="math display">\[V_{LJ}(r) = 4\epsilon \left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]\]</span></p>
+<p>and</p>
+<p><span class="math display">\[F_{LJ}(r) = -\frac{dV_{LJ}}{dr} = 24\epsilon \left[2\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]\frac{\vec{r}}{r^2}\]</span></p>
+<p>where <span class="math inline">\(\frac{\vec{r}}{r^2}\)</span> represents the direction of the force (the unit vector <span class="math inline">\(\hat{r} = \frac{\vec{r}}{r}\)</span>) multiplied by <span class="math inline">\(\frac{1}{r}\)</span>, and <span class="math inline">\(\epsilon\)</span> is the depth of the potential well, <span class="math inline">\(\sigma\)</span> is the distance at which the potential is zero, and <span class="math inline">\(r\)</span> is the distance between particles.</p>
+<p>The Lenard Jones potential is good for describing the interaction of non-bonded atoms in a molecular system e.g.&nbsp;in a gas or a liquid and is therefore well suited if we first want to simulate a gas or a liquid.</p>
+<div id="2988cfa5" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lennard_jones(r, epsilon<span class="op">=</span><span class="dv">1</span>, sigma<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">4</span> <span class="op">*</span> epsilon <span class="op">*</span> ((sigma<span class="op">/</span>r)<span class="op">**</span><span class="dv">12</span> <span class="op">-</span> (sigma<span class="op">/</span>r)<span class="op">**</span><span class="dv">6</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.linspace(<span class="fl">0.8</span>, <span class="dv">3</span>, <span class="dv">1000</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> lennard_jones(r)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>get_size(<span class="dv">8</span>, <span class="dv">6</span>),dpi<span class="op">=</span><span class="dv">150</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>plt.plot(r, V, <span class="st">'b-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'r/σ'</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'V/ε'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Lennard-Jones Potential'</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'k'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="fl">1.5</span>, <span class="dv">3</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="md1_files/figure-html/cell-3-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="463" height="389"></p>
+</figure>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+</div>
+</div>
+<p>The figure above shows the Lennard-Jones potential as a function of the distance between particles. The potential energy is zero at the equilibrium distance <span class="math inline">\(r = \sigma\)</span> and has a minimum at <span class="math inline">\(r = 2^{1/6}\sigma\)</span>. The potential energy is positive for <span class="math inline">\(r &lt; \sigma\)</span> and negative for <span class="math inline">\(r &gt; \sigma\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Click to reveal answers
+Values for atomic hydrogen
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>For atomic hydrogen (H), typical Lennard-Jones parameters are:</p>
+<ul>
+<li><span class="math inline">\(\sigma \approx 2.38\)</span> Å = <span class="math inline">\(2.38 \times 10^{-10}\)</span> meters</li>
+<li><span class="math inline">\(\epsilon \approx 0.0167\)</span> kcal/mol = <span class="math inline">\(1.16 \times 10^{-21}\)</span> joules</li>
+</ul>
+</div>
+</div>
+<p>Later, if we manage to advance to some more complicated systems, we may want to introduce:</p>
 <ol type="1">
-<li><code>&lt;class 'list'&gt; &lt;class 'tuple'&gt;</code></li>
-<li>List</li>
-<li>2</li>
-<li><code>set()</code></li>
-<li>7.0</li>
+<li>force in bonds between two atoms</li>
+<li>force in bond angles between three atoms</li>
+<li>force in dihedral angles between four atoms</li>
 </ol>
+<p>But for now, we will stick to the Lennard-Jones potential.</p>
+<!--
+## Periodic Boundary Conditions
+In most molecular dynamics simulations, we use periodic boundary conditions (PBC) to mimic an infinite system while simulating only a finite number of particles. When a particle leaves the simulation box on one side, it re-enters from the opposite side. This eliminates artificial boundary effects and allows us to simulate bulk properties with relatively few particles.
+
+![Periodic Boundary Conditions](img/periodic_boundaries.png){width=50%}
+-->
+</section>
+</section>
+</section>
+<section id="integrating-newtons-equation-of-motion" class="level2">
+<h2 class="anchored" data-anchor-id="integrating-newtons-equation-of-motion">Integrating Newton’s Equation of Motion</h2>
+<p>When we have the forces on a particle we have in principle its acceleration. To get the velocity and the position of the particle we need to integrate the equations of motion. There are several methods to do this, but we will start with the simplest one, the Euler method.</p>
+<section id="euler-method" class="level3">
+<h3 class="anchored" data-anchor-id="euler-method">Euler Method</h3>
+<p>To obtain this one first needs to know about the Taylor expansion of a function in general. The Taylor expansion of a function <span class="math inline">\(f(x)\)</span> around a point <span class="math inline">\(x_0\)</span> is providing an approximation of the function in the vicinity of <span class="math inline">\(x_0\)</span>. It is given by:</p>
+<p><span class="math display">\[f(x) = f(x_0) + f'(x_0)(x - x_0) + \frac{1}{2}f''(x_0)(x - x_0)^2 + \cdots\]</span></p>
+<p>where <span class="math inline">\(f'(x_0)\)</span> is the first derivative of <span class="math inline">\(f(x)\)</span> at <span class="math inline">\(x_0\)</span>, <span class="math inline">\(f''(x_0)\)</span> is the second derivative of <span class="math inline">\(f(x)\)</span> at <span class="math inline">\(x_0\)</span>, and so on. We can demonstrate that by expanding a sine function around <span class="math inline">\(x_0 = 0\)</span>:</p>
+<p><span class="math display">\[\sin(x) = \sin(0) + \cos(0)x - \frac{1}{2}\sin(0)x^2 + \cdots = x - \frac{1}{6}x^3 + \cdots\]</span></p>
+<p>Plotting this yields:</p>
+<div id="fe41f169" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">1000</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>y_taylor <span class="op">=</span> x <span class="op">-</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span><span class="op">*</span>x<span class="op">**</span><span class="dv">3</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>get_size(<span class="dv">8</span>, <span class="dv">6</span>),dpi<span class="op">=</span><span class="dv">150</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">'b-'</span>, label<span class="op">=</span><span class="st">'sin(x)'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y_taylor, <span class="st">'r--'</span>, label<span class="op">=</span><span class="st">'Taylor expansion'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'f(x)'</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Taylor Expansion of sin(x)'</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="md1_files/figure-html/cell-4-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="470" height="389"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The expansion is therefore a good approximation in a region close to <span class="math inline">\(x_0\)</span>.</p>
+</section>
+<section id="velocity-verlet-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="velocity-verlet-algorithm">Velocity Verlet Algorithm</h3>
+<p>The velocity Verlet algorithm is a second-order algorithm that offers greater accuracy than the Euler method. It can be derived from the Taylor expansion of the position and velocity vectors:</p>
+<p><span class="math display">\[\mathbf{r}(t + \Delta t) = \mathbf{r}(t) + \mathbf{v}(t)\Delta t + \frac{1}{2}\frac{\mathbf{F}(t)}{m}\Delta t^2+ O(\Delta t^3)\]</span></p>
+<p>The higher order terms in the Taylor expansion are neglected, which results in an error of order <span class="math inline">\(\Delta t^3\)</span>. In contrast, the Euler method is obtained by neglecting the higher order terms in the Taylor expansion of the velocity vector:</p>
+<p><span class="math display">\[\mathbf{v}(t + \Delta t) = \mathbf{v}(t) + \frac{\mathbf{F}(t)}{m}\Delta t + O(\Delta t^2)\]</span></p>
+<p>This makes the Euler method only first order accurate with an error of order <span class="math inline">\(\Delta t^2\)</span>.</p>
+<p>The Velocity Verlet algorithm is particularly valuable for molecular dynamics simulations because it offers several advantages over the Euler method. It does a much better job preserving the total energy of the system over long simulation times. The algorithm is also time-reversible, which is a property of the exact equations of motion. Furthermore, it provides symplectic integration, preserving the phase space volume, another important property for physical simulations. These properties make the Velocity Verlet algorithm much more stable for long simulations, which is crucial when modeling molecular systems over meaningful timescales.</p>
+<p>The velocity Verlet algorithm provides a stable and accurate way to integrate the equations of motion through a three-stage process. First, we update positions using current velocities and forces: <span class="math display">\[\mathbf{r}(t + \Delta t) = \mathbf{r}(t) + \mathbf{v}(t)\Delta t + \frac{1}{2}\frac{\mathbf{F}(t)}{m}\Delta t^2\]</span></p>
+<p>Next, we calculate new forces based on these updated positions: <span class="math display">\[\mathbf{F}(t + \Delta t) = \mathbf{F}(\mathbf{r}(t + \Delta t))\]</span></p>
+<p>Finally, we update velocities using an average of old and new forces: <span class="math display">\[\mathbf{v}(t + \Delta t) = \mathbf{v}(t) + \frac{1}{2}\frac{\mathbf{F}(t) + \mathbf{F}(t + \Delta t)}{m}\Delta t\]</span></p>
+<p>In these equations, <span class="math inline">\(\mathbf{r}\)</span> represents the position vector, <span class="math inline">\(\mathbf{v}\)</span> is the velocity vector, <span class="math inline">\(\mathbf{F}\)</span> is the force vector, <span class="math inline">\(m\)</span> stands for mass, and <span class="math inline">\(\Delta t\)</span> is the timestep. This approach ensures greater accuracy and stability in our molecular dynamics simulations compared to simpler methods.</p>
+</section>
+<section id="simple-integration-example-free-fall" class="level3">
+<h3 class="anchored" data-anchor-id="simple-integration-example-free-fall">Simple Integration Example: Free Fall</h3>
+<p>Let’s start by integrating the equation of motion for a particle in free fall using the Velocity Verlet algorithm. This is an ideal starting example since the physics is straightforward, with gravity being the only force acting on the particle, and we can compare our numerical solution to the well-known analytical one.</p>
+<p>Newton’s equation of motion: <span class="math display">\[\mathbf{F} = m\mathbf{a}\]</span></p>
+<p>For gravity, the only force acting on our particle is the gravitational force pointing downward: <span class="math display">\[\mathbf{F} = -mg\hat{\mathbf{y}}\]</span></p>
+<p>Therefore, the acceleration in the y-direction is constant: <span class="math display">\[\ddot{y} = -g\]</span></p>
+<p>The analytical solution to this differential equation gives us the position and velocity at any time <span class="math inline">\(t\)</span>. The position is given by <span class="math display">\[y(t) = y_0 + v_0t - \frac{1}{2}gt^2\]</span>, and the velocity is expressed as <span class="math display">\[v(t) = v_0 - gt\]</span>. Here, <span class="math inline">\(y_0\)</span> is the initial height, <span class="math inline">\(v_0\)</span> is the initial velocity, and <span class="math inline">\(g\)</span> is the acceleration due to gravity. We can use this exact solution to verify our numerical integration method.</p>
+<div id="dffd3c5b" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="fl">9.81</span>  <span class="co"># m/s^2</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> <span class="fl">0.01</span>  <span class="co"># time step</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>t_max <span class="op">=</span> <span class="fl">2.0</span>  <span class="co"># total simulation time</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>steps <span class="op">=</span> <span class="bu">int</span>(t_max<span class="op">/</span>dt)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial conditions</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> <span class="fl">20.0</span>  <span class="co"># initial height</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>v0 <span class="op">=</span> <span class="fl">0.0</span>   <span class="co"># initial velocity</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrays to store results</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.zeros(steps)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.zeros(steps)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.zeros(steps)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.zeros(steps)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial values</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">0</span>] <span class="op">=</span> y0</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">0</span>] <span class="op">=</span> v0</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">0</span>] <span class="op">=</span> <span class="op">-</span>g</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Velocity Verlet integration</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, steps):</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    t[i] <span class="op">=</span> i <span class="op">*</span> dt</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    y[i] <span class="op">=</span> y[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> v[i<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> dt <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> a[i<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> dt<span class="op">**</span><span class="dv">2</span>  <span class="co"># update position</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    a_new <span class="op">=</span> <span class="op">-</span>g                                          <span class="co"># new acceleration (assuming constant gravity)</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    v[i] <span class="op">=</span> v[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> (a[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> a_new) <span class="op">*</span> dt         <span class="co"># update velocity</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    a[i] <span class="op">=</span> a_new                                        <span class="co"># store new acceleration</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>y_analytical <span class="op">=</span> y0 <span class="op">+</span> v0<span class="op">*</span>t <span class="op">-</span> <span class="fl">0.5</span><span class="op">*</span>g<span class="op">*</span>t<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>get_size(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">150</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>plt.plot(t, y)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>plt.plot(t, y_analytical, <span class="st">'r--'</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time (s)'</span>)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Height (m)'</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Free Fall Motion'</span>)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="md1_files/figure-html/cell-5-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="460" height="389"></p>
+</figure>
 </div>
 </div>
 </div>
 
 
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
-<div id="exercise-loading-status" class="d-flex gap-2">
-
-</div>
-<div class="spinner-grow spinner-grow-sm">
-
-</div>
-</div>
-<script type="vfs-file">
-W10=
-</script>
+</section>
 </section>
 
 </main> <!-- /main -->
-<script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
-</script>
-<script type="module">
-if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../seminars/seminar01";
-window._ojs.paths.runtimeToRoot = "../..";
-window._ojs.paths.docToRoot = "../..";
-window._ojs.selfContained = false;
-window._ojs.runtime.interpretFromScriptTags();
-</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -909,14 +1086,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../seminars/seminar01/00-seminar01.html" class="pagination-link" aria-label="Seminar Questions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Seminar Questions</span>
+      <a href="../../seminars/seminar01/01-seminar01.html" class="pagination-link" aria-label="Seminar Quizz">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Seminar Quizz</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../seminars/seminar02/md1.html" class="pagination-link" aria-label="MD Simulation">
-        <span class="nav-page-text">MD Simulation</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
