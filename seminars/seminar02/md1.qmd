@@ -45,9 +45,9 @@ The force $\vec{F}_{ij}$ is usually derived from a potential energy function and
 
 | Interaction Type | Subtype | Illustration |
 |-----------------|---------|--------------|
-| Bonded interactions | Bond stretching | ![Bond Stretching](img/bond.png){width=50%} |
-| | Bond angle bending | ![Bond Stretching](img/bond_angle.png){width=50%} |
-| | Torsional interactions | ![Bond Stretching](img/dihedral.png){width=50%} |
+| Bonded interactions | Bond stretching | ![Bond Stretching](img/bond.png){width=100%} |
+| | Bond angle bending | ![Bond Stretching](img/bond_angle.png){width=100%} |
+| | Torsional interactions | ![Bond Stretching](img/dihedral.png){width=100%} |
 | Non-bonded interactions | Electrostatic interactions | |
 | | Van der Waals interactions | |
 | External forces | | |
