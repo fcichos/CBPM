@@ -394,16 +394,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Most of the functionality in Python is provided by <em>modules</em>. The Python Standard Library is a large collection of modules that provides <em>cross-platform</em> implementations of common facilities such as access to the operating system, file I/O, string management, network communication, math, web-scraping, text manipulation, machine learning and much more.</p>
-<p>To use a module in a Python module it first has to be imported. A module can be imported using the <code>import</code> statement. For example, to import the module <code>math</code>, which contains many standard mathematical functions, we can do:</p>
+<p>To use a module in a Python program it first has to be imported. A module can be imported using the <code>import</code> statement. For example, to import the module <code>math</code>, which contains many standard mathematical functions, we can do:</p>
 <div>
 <div id="pyodide-1">
 
 </div>
 <script type="pyodide-1-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImltcG9ydCBtYXRoXG5pbXBvcnQgbnVtcHlcblxueG0gPSBtYXRoLnNxcnQoMiAqIG1hdGgucGkpXG54biA9IG51bXB5LnNxcnQoMiAqIG51bXB5LnBpKVxuXG5wcmludCh4bSx4bikifQ==
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImltcG9ydCBtYXRoXG5cbnggPSBtYXRoLnNxcnQoMiAqIG1hdGgucGkpXG5cbnByaW50KHgpIn0=
 </script>
 </div>
-<p>This includes the whole module and makes it available for use later in the program. Alternatively, we can chose to import all symbols (functions and variables) in a module so that we don’t need to use the prefix “<code>math.</code>” every time we use something from the <code>math</code> module:</p>
+<p>This includes the whole module and makes it available for use later in the program. Note that the functions of the module are accessed using the prefix <code>math.</code>, which is the namespace for the module.</p>
+<p>Alternatively, we can chose to import all symbols (functions and variables) in a module so that we don’t need to use the prefix “<code>math.</code>” every time we use something from the <code>math</code> module:</p>
 <div>
 <div id="pyodide-2">
 
@@ -484,8 +485,8 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6Im1h
 </div>
 <p>We can also use the <code>help</code> function directly on modules: Try</p>
 <pre><code>help(math)</code></pre>
-<p>Some very useful modules form the Python standard library are <code>os</code>, <code>sys</code>, <code>math</code>, <code>shutil</code>, <code>re</code>, <code>subprocess</code>, <code>multiprocessing</code>, <code>threading</code>.</p>
-<p>A complete lists of standard modules for Python 3 is available at http://docs.python.org/3/library/ .</p>
+<p>Some very useful modules from the Python standard library are <code>os</code>, <code>sys</code>, <code>math</code>, <code>shutil</code>, <code>re</code>, <code>subprocess</code>, <code>multiprocessing</code>, <code>threading</code>.</p>
+<p>A complete lists of standard modules for Python 3 is available at <a href="http://docs.python.org/3/library/">the python website</a> .</p>
 </section>
 <section id="advanced-topics" class="level3">
 <h3 class="anchored" data-anchor-id="advanced-topics">Advanced topics</h3>

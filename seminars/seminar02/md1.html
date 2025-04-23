@@ -450,17 +450,17 @@ function openInNewWindow() {
 <tr class="odd">
 <td>Bonded interactions</td>
 <td>Bond stretching</td>
-<td><img src="img/bond.png" class="img-fluid" style="width:50.0%" alt="Bond Stretching"></td>
+<td><img src="img/bond.png" class="img-fluid" style="width:100.0%" alt="Bond Stretching"></td>
 </tr>
 <tr class="even">
 <td></td>
 <td>Bond angle bending</td>
-<td><img src="img/bond_angle.png" class="img-fluid" style="width:50.0%" alt="Bond Stretching"></td>
+<td><img src="img/bond_angle.png" class="img-fluid" style="width:100.0%" alt="Bond Stretching"></td>
 </tr>
 <tr class="odd">
 <td></td>
 <td>Torsional interactions</td>
-<td><img src="img/dihedral.png" class="img-fluid" style="width:50.0%" alt="Bond Stretching"></td>
+<td><img src="img/dihedral.png" class="img-fluid" style="width:100.0%" alt="Bond Stretching"></td>
 </tr>
 <tr class="even">
 <td>Non-bonded interactions</td>
@@ -488,7 +488,7 @@ function openInNewWindow() {
 <p><span class="math display">\[F_{LJ}(r) = -\frac{dV_{LJ}}{dr} = 24\epsilon \left[2\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]\frac{\vec{r}}{r^2}\]</span></p>
 <p>where <span class="math inline">\(\frac{\vec{r}}{r^2}\)</span> represents the direction of the force (the unit vector <span class="math inline">\(\hat{r} = \frac{\vec{r}}{r}\)</span>) multiplied by <span class="math inline">\(\frac{1}{r}\)</span>, and <span class="math inline">\(\epsilon\)</span> is the depth of the potential well, <span class="math inline">\(\sigma\)</span> is the distance at which the potential is zero, and <span class="math inline">\(r\)</span> is the distance between particles.</p>
 <p>The Lenard Jones potential is good for describing the interaction of non-bonded atoms in a molecular system e.g.&nbsp;in a gas or a liquid and is therefore well suited if we first want to simulate a gas or a liquid.</p>
-<div id="2988cfa5" class="cell" data-execution_count="2">
+<div id="b897734d" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lennard_jones(r, epsilon<span class="op">=</span><span class="dv">1</span>, sigma<span class="op">=</span><span class="dv">1</span>):</span>
@@ -559,7 +559,7 @@ In most molecular dynamics simulations, we use periodic boundary conditions (PBC
 <p>where <span class="math inline">\(f'(x_0)\)</span> is the first derivative of <span class="math inline">\(f(x)\)</span> at <span class="math inline">\(x_0\)</span>, <span class="math inline">\(f''(x_0)\)</span> is the second derivative of <span class="math inline">\(f(x)\)</span> at <span class="math inline">\(x_0\)</span>, and so on. We can demonstrate that by expanding a sine function around <span class="math inline">\(x_0 = 0\)</span>:</p>
 <p><span class="math display">\[\sin(x) = \sin(0) + \cos(0)x - \frac{1}{2}\sin(0)x^2 + \cdots = x - \frac{1}{6}x^3 + \cdots\]</span></p>
 <p>Plotting this yields:</p>
-<div id="fe41f169" class="cell" data-execution_count="3">
+<div id="25e397a0" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">1000</span>)</span>
@@ -608,7 +608,7 @@ In most molecular dynamics simulations, we use periodic boundary conditions (PBC
 <p>For gravity, the only force acting on our particle is the gravitational force pointing downward: <span class="math display">\[\mathbf{F} = -mg\hat{\mathbf{y}}\]</span></p>
 <p>Therefore, the acceleration in the y-direction is constant: <span class="math display">\[\ddot{y} = -g\]</span></p>
 <p>The analytical solution to this differential equation gives us the position and velocity at any time <span class="math inline">\(t\)</span>. The position is given by <span class="math display">\[y(t) = y_0 + v_0t - \frac{1}{2}gt^2\]</span>, and the velocity is expressed as <span class="math display">\[v(t) = v_0 - gt\]</span>. Here, <span class="math inline">\(y_0\)</span> is the initial height, <span class="math inline">\(v_0\)</span> is the initial velocity, and <span class="math inline">\(g\)</span> is the acceleration due to gravity. We can use this exact solution to verify our numerical integration method.</p>
-<div id="dffd3c5b" class="cell" data-execution_count="4">
+<div id="333e4353" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters</span></span>
