@@ -307,6 +307,23 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar05/md4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Step-by-Step Development of a Molecular Dynamics Simulation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -436,7 +453,7 @@ function openInNewWindow() {
 <p><span class="math display">\[F_{LJ}(r) = -\frac{dV_{LJ}}{dr} = 24\epsilon \left[2\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]\frac{\vec{r}}{r^2}\]</span></p>
 <p>where <span class="math inline">\(\frac{\vec{r}}{r^2}\)</span> represents the direction of the force (the unit vector <span class="math inline">\(\hat{r} = \frac{\vec{r}}{r}\)</span>) multiplied by <span class="math inline">\(\frac{1}{r}\)</span>, and <span class="math inline">\(\epsilon\)</span> is the depth of the potential well, <span class="math inline">\(\sigma\)</span> is the distance at which the potential is zero, and <span class="math inline">\(r\)</span> is the distance between particles.</p>
 <p>The Lenard Jones potential is good for describing the interaction of non-bonded atoms in a molecular system e.g.&nbsp;in a gas or a liquid and is therefore well suited if we first want to simulate a gas or a liquid.</p>
-<div id="cdeb4b2c" class="cell" data-execution_count="2">
+<div id="8458498c" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -489,7 +506,7 @@ In most molecular dynamics simulations, we use periodic boundary conditions (PBC
 <p>where <span class="math inline">\(f'(x_0)\)</span> is the first derivative of <span class="math inline">\(f(x)\)</span> at <span class="math inline">\(x_0\)</span>, <span class="math inline">\(f''(x_0)\)</span> is the second derivative of <span class="math inline">\(f(x)\)</span> at <span class="math inline">\(x_0\)</span>, and so on. We can demonstrate that by expanding a sine function around <span class="math inline">\(x_0 = 0\)</span>:</p>
 <p><span class="math display">\[\sin(x) = \sin(0) + \cos(0)x - \frac{1}{2}\sin(0)x^2 + \cdots = x - \frac{1}{6}x^3 + \cdots\]</span></p>
 <p>Plotting this yields:</p>
-<div id="62d87c31" class="cell" data-execution_count="3">
+<div id="a6a493df" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -520,7 +537,7 @@ In most molecular dynamics simulations, we use periodic boundary conditions (PBC
 <p>For gravity, the only force acting on our particle is the gravitational force pointing downward: <span class="math display">\[\mathbf{F} = -mg\hat{\mathbf{y}}\]</span></p>
 <p>Therefore, the acceleration in the y-direction is constant: <span class="math display">\[\ddot{y} = -g\]</span></p>
 <p>The analytical solution to this differential equation gives us the position and velocity at any time <span class="math inline">\(t\)</span>. The position is given by <span class="math display">\[y(t) = y_0 + v_0t - \frac{1}{2}gt^2\]</span>, and the velocity is expressed as <span class="math display">\[v(t) = v_0 - gt\]</span>. Here, <span class="math inline">\(y_0\)</span> is the initial height, <span class="math inline">\(v_0\)</span> is the initial velocity, and <span class="math inline">\(g\)</span> is the acceleration due to gravity. We can use this exact solution to verify our numerical integration method.</p>
-<div id="dd35ac2f" class="cell" data-execution_count="4">
+<div id="18f82860" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">

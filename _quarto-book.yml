@@ -45,6 +45,9 @@ book:
     - part: "Seminar 4"
       chapters:
         - seminars/seminar04/md3.qmd
+    - part: "Seminar 5"
+      chapters:
+        - seminars/seminar05/md4.qmd
 
 format:
   pdf:
