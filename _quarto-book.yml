@@ -32,9 +32,19 @@ book:
         - lectures/lecture03/01-lecture03.qmd
         - lectures/lecture03/02-lecture03.qmd
         - lectures/lecture03/03-lecture03.qmd
+    - part: "Lecture 4"
+      chapters:
+        - lectures/lecture04/01-lecture04.qmd
+        - lectures/lecture04/02-lecture04.qmd
     - part: "Seminar 2"
       chapters:
         - seminars/seminar02/md1.qmd
+    - part: "Seminar 3"
+      chapters:
+        - seminars/seminar03/md2.qmd
+    - part: "Seminar 4"
+      chapters:
+        - seminars/seminar04/md3.qmd
 
 format:
   pdf:
