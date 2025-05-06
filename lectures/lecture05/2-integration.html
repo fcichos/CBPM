@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.29">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>integration – Computer-Based Physical Modelling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-9344fb9851b4da3cab95007ef9d770dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Computer-Based Physical Modelling</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../assets/images/mona_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Info</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../course-info/intructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructor</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../course-info/schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../course-info/resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ressources</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../course-info/assignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../course-info/exam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exams</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Python Basics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/00-lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Initial Questions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/01-lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Jupyter Notebooks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/python_lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python &amp; Anatomy of a Program</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/02-lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables &amp; Numbers</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture02/01-lecture02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture02/02-lecture02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Control Structures &amp; Functions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture03/01-lecture03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modules</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture03/02-lecture03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numpy Module</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture03/03-lecture03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Plotting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture04/01-lecture04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classes &amp; Objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture04/02-lecture04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Brownian Motion Part I</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture05/0_input_output.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Input &amp; Output</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture05/1-differentiation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical Differentiation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture05/02-integration.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical Integration</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminars</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar01</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar01/00-seminar01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Seminar Questions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar01/01-seminar01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Seminar Quizz</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar02</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar02/md1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MD Simulation 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar03</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar03/md2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MD Simulation 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar04</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar04/md3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MD Simulation 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar05</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar05/md4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MD Simulation 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-numerical-integration-in-physics" id="toc-introduction-to-numerical-integration-in-physics" class="nav-link active" data-scroll-target="#introduction-to-numerical-integration-in-physics">Introduction to Numerical Integration in Physics</a>
+  <ul class="collapse">
+  <li><a href="#box-method-rectangle-method" id="toc-box-method-rectangle-method" class="nav-link" data-scroll-target="#box-method-rectangle-method">Box Method (Rectangle Method)</a></li>
+  <li><a href="#trapezoid-method" id="toc-trapezoid-method" class="nav-link" data-scroll-target="#trapezoid-method">Trapezoid Method</a></li>
+  <li><a href="#simpsons-method" id="toc-simpsons-method" class="nav-link" data-scroll-target="#simpsons-method">Simpson’s Method</a></li>
+  <li><a href="#when-to-use-each-method" id="toc-when-to-use-each-method" class="nav-link" data-scroll-target="#when-to-use-each-method">When to Use Each Method</a></li>
+  </ul></li>
+  <li><a href="#error-analysis" id="toc-error-analysis" class="nav-link" data-scroll-target="#error-analysis">Error Analysis</a>
+  <ul class="collapse">
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="introduction-to-numerical-integration-in-physics" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-to-numerical-integration-in-physics">Introduction to Numerical Integration in Physics</h2>
+<p>Numerical integration stands as one of the fundamental computational tools in physics, enabling us to solve problems where analytical solutions are either impossible or impractical. In physics, we frequently encounter integrals when calculating quantities such as:</p>
+<ul>
+<li>Work done by a variable force</li>
+<li>Electric and magnetic fields from complex charge distributions</li>
+<li>Center of mass of irregularly shaped objects</li>
+<li>Probability distributions in quantum mechanics</li>
+<li>Energy levels in quantum wells with arbitrary potentials</li>
+<li>Heat flow in non-uniform materials</li>
+</ul>
+<p>The need for numerical integration arises because many physical systems are described by functions that cannot be integrated analytically. For example, the potential energy of a complex molecular system, the trajectory of a spacecraft under multiple gravitational influences, or the behavior of quantum particles in complex potentials.</p>
+<p>In this lecture, we’ll explore three progressively more accurate numerical integration methods: the Box method, Trapezoid method, and Simpson’s method. We’ll analyze their accuracy, efficiency, and appropriate applications in physical problems.</p>
+<div>
+<div id="pyodide-1">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiZXhlY3V0ZSI6dHJ1ZX0sImNvZGUiOiJcbmltcG9ydCBudW1weSBhcyBucFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuZnJvbSBzY2lweS5vcHRpbWl6ZSBpbXBvcnQgY3VydmVfZml0XG5cbiMgU2V0IGRlZmF1bHQgcGxvdHRpbmcgcGFyYW1ldGVyc1xucGx0LnJjUGFyYW1zLnVwZGF0ZSh7XG4gICAgJ2ZvbnQuc2l6ZSc6IDEyLFxuICAgICdsaW5lcy5saW5ld2lkdGgnOiAxLFxuICAgICdsaW5lcy5tYXJrZXJzaXplJzogNSxcbiAgICAnYXhlcy5sYWJlbHNpemUnOiAxMSxcbiAgICAneHRpY2subGFiZWxzaXplJzogMTAsXG4gICAgJ3l0aWNrLmxhYmVsc2l6ZSc6IDEwLFxuICAgICd4dGljay50b3AnOiBUcnVlLFxuICAgICd4dGljay5kaXJlY3Rpb24nOiAnaW4nLFxuICAgICd5dGljay5yaWdodCc6IFRydWUsXG4gICAgJ3l0aWNrLmRpcmVjdGlvbic6ICdpbicsXG59KVxuXG5kZWYgZ2V0X3NpemUodywgaCk6XG4gICAgcmV0dXJuICh3LzIuNTQsIGgvMi41NCkifQ==
+</script>
+</div>
+<section id="box-method-rectangle-method" class="level3">
+<h3 class="anchored" data-anchor-id="box-method-rectangle-method">Box Method (Rectangle Method)</h3>
+<section id="theory-and-implementation" class="level4">
+<h4 class="anchored" data-anchor-id="theory-and-implementation">Theory and Implementation</h4>
+<div id="fig-box" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/box.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Box Method Illustration
+</figcaption>
+</figure>
+</div>
+<p>The Box method (also known as the Rectangle method) represents the simplest approach for numerical integration. It approximates the function in each interval <span class="math inline">\(\Delta x\)</span> with a constant value taken at a specific point of the interval—typically the left endpoint, although midpoint or right endpoint variants exist.</p>
+<p>Mathematically, the definite integral is approximated as:</p>
+<p><span class="math display">\[\begin{equation}
+\int_{a}^{b} f(x) dx \approx \sum_{i=1}^{N} f(x_{i}) \Delta x
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are the integration limits</li>
+<li><span class="math inline">\(N\)</span> is the number of intervals</li>
+<li><span class="math inline">\(\Delta x = \frac{b-a}{N}\)</span> is the width of each interval</li>
+<li><span class="math inline">\(x_i\)</span> represents the left endpoint of each interval</li>
+</ul>
+<p>The method gets its name from the visual representation of the approximation as a series of rectangular boxes.</p>
+</section>
+<section id="box-method-applications" class="level4">
+<h4 class="anchored" data-anchor-id="box-method-applications">Box Method Applications</h4>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Physics Application: Work Calculation</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Convergence Analysis</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Consider a particle moving along a straight line under a variable force <span class="math inline">\(F(x) = kx^2\)</span> where <span class="math inline">\(k\)</span> is some constant. The work done by this force when moving the particle from position <span class="math inline">\(x=0\)</span> to <span class="math inline">\(x=L\)</span> is given by:</p>
+<p><span class="math display">\[\begin{equation}
+W = \int_{0}^{L} F(x) dx = \int_{0}^{L} kx^2 dx
+\end{equation}\]</span></p>
+<p>We can approximate this integral using the Box method, particularly useful when the force follows a complex pattern measured at discrete points.</p>
+<div>
+<div id="pyodide-2">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGYoeCk6XG4gICAgXCJcIlwiRXhhbXBsZSBmdW5jdGlvbiB0byBpbnRlZ3JhdGU6IGYoeCkgPSB4XCJcIlwiXG4gICAgcmV0dXJuIHhcblxuZGVmIGZvcmNlKHgsIGs9MS4wKTpcbiAgICBcIlwiXCJGb3JjZSBmdW5jdGlvbiBGKHgpID0ga3heMiBmb3Igd29yayBjYWxjdWxhdGlvblwiXCJcIlxuICAgIHJldHVybiBrICogeCoqMlxuXG5kZWYgaW50X2JveChmLCBhLCBiLCBOKTpcbiAgICBcIlwiXCJCb3ggbWV0aG9kIGludGVncmF0aW9uXCJcIlwiXG4gICAgaWYgTiA8IDI6XG4gICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoXCJOIG11c3QgYmUgYXQgbGVhc3QgMlwiKVxuICAgIHggPSBucC5saW5zcGFjZShhLCBiLCBOKVxuICAgIHkgPSBmKHgpXG4gICAgZHggPSAoYi1hKS8oTi0xKVxuICAgIHJldHVybiBucC5zdW0oeVs6LTFdICogZHgpICAjIFN1bSB1c2luZyBsZWZ0IGVuZHBvaW50c1xuXG4jIEV4YW1wbGU6IENhbGN1bGF0ZSB3b3JrIGRvbmUgYnkgYSBub25saW5lYXIgZm9yY2VcbkwgPSAyLjAgICMgbWV0ZXJzXG5rID0gMC41ICAjIE4vbV4zXG5OX3BvaW50cyA9IDEwMFxuXG53b3JrID0gaW50X2JveChsYW1iZGEgeDogZm9yY2UoeCwgayksIDAsIEwsIE5fcG9pbnRzKVxucHJpbnQoZlwiV29yayBkb25lIGJ5IGZvcmNlIEYoeCkgPSB7a314wrIgZnJvbSB4PTAgdG8geD17TH0gbTpcIilcbnByaW50KGZcIk51bWVyaWNhbCByZXN1bHQgKEJveCBtZXRob2QpOiB7d29yazouNmZ9IEpcIilcbnByaW50KGZcIkFuYWx5dGljYWwgcmVzdWx0OiB7aypMKiozLzM6LjZmfSBKXCIpXG5cbiMgRGVtb25zdHJhdGUgdGhlIG1ldGhvZCBncmFwaGljYWxseVxueF9kZW1vID0gbnAubGluc3BhY2UoMCwgMSwgNilcbnlfZGVtbyA9IHhfZGVtbyAgIyBVc2luZyBmKHgpID0geCBmb3IgZGVtb25zdHJhdGlvblxuZHhfZGVtbyA9IHhfZGVtb1sxXSAtIHhfZGVtb1swXVxuXG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTUsIDEwKSlcblxuIyBQbG90IHRoZSBhY3R1YWwgZnVuY3Rpb25cbnhfZmluZSA9IG5wLmxpbnNwYWNlKDAsIDEsIDEwMDApXG55X2ZpbmUgPSB4X2ZpbmVcbnBsdC5wbG90KHhfZmluZSwgeV9maW5lLCAnYi0nLCBsYWJlbD0nYWN0dWFsIGZ1bmN0aW9uIGYoeCkgPSB4JylcblxuIyBQbG90IHRoZSBib3hlc1xuZm9yIGkgaW4gcmFuZ2UobGVuKHhfZGVtbyktMSk6XG4gICAgcGx0LmZpbGxfYmV0d2VlbihbeF9kZW1vW2ldLCB4X2RlbW9baSsxXV0sIFt5X2RlbW9baV0sIHlfZGVtb1tpXV0sIGFscGhhPTAuMywgY29sb3I9J3JlZCcpXG4gICAgcGx0LnBsb3QoW3hfZGVtb1tpXSwgeF9kZW1vW2ldXSwgWzAsIHlfZGVtb1tpXV0sICdyLS0nLCBhbHBoYT0wLjUpXG5cbnBsdC5wbG90KHhfZGVtb1s6LTFdLCB5X2RlbW9bOi0xXSwgJ3JvJywgbGFiZWw9J1NhbXBsZSBwb2ludHMnKVxucGx0LnhsYWJlbCgneCcpXG5wbHQueWxhYmVsKCdmKHgpJylcbnBsdC5sZWdlbmQoKVxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div>
+<div id="pyodide-3">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBDb252ZXJnZW5jZSBkZW1vbnN0cmF0aW9uXG5OX3ZhbHVlcyA9IG5wLmFyYW5nZSgxMCwgMTAwMDAsIDEwMClcbmJveF9yZXN1bHRzID0gW2ludF9ib3goZiwgMCwgMSwgTikgZm9yIE4gaW4gTl92YWx1ZXNdXG5leGFjdF92YWx1ZSA9IDAuNSAgIyBFeGFjdCBpbnRlZ3JhbCBvZiBmKHgpID0geCBmcm9tIDAgdG8gMVxuXG4jIENhbGN1bGF0ZSBhYnNvbHV0ZSBlcnJvcnNcbmJveF9lcnJvcnMgPSBucC5hYnMobnAuYXJyYXkoYm94X3Jlc3VsdHMpIC0gZXhhY3RfdmFsdWUpXG5cbiMgRml0IGEgcG93ZXIgbGF3IHRvIGVycm9yIHZzIE5cbmRlZiBwb3dlcl9sYXcoeCwgYSwgYik6XG4gICAgcmV0dXJuIGEgKiB4KipiXG5cbnBvcHQsIF8gPSBjdXJ2ZV9maXQocG93ZXJfbGF3LCBOX3ZhbHVlcywgYm94X2Vycm9ycylcblxucGx0LmZpZ3VyZShmaWdzaXplPWdldF9zaXplKDE1LCAxMCkpXG5wbHQubG9nbG9nKE5fdmFsdWVzLCBib3hfZXJyb3JzLCAnbycsIGxhYmVsPSdCb3ggTWV0aG9kIEVycm9yJylcbnBsdC5sb2dsb2coTl92YWx1ZXMsIHBvd2VyX2xhdyhOX3ZhbHVlcywgKnBvcHQpLCAnLS0nLFxuICAgICAgICAgbGFiZWw9ZidQb3dlciBMYXcgRml0OiBlcnJvciDiiJ0gTl57cG9wdFsxXTouMmZ9JylcbnBsdC54bGFiZWwoJ251bWJlciBvZiBwb2ludHMgW05dJylcbnBsdC55bGFiZWwoJ2Fic29sdXRlIEVycm9yJylcbnBsdC5sZWdlbmQoKVxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpXG5cbnByaW50KGZcIkJveCBNZXRob2QgY29udmVyZ2VuY2UgcmF0ZTogYXBwcm94aW1hdGVseSBPKE5ee3BvcHRbMV06LjJmfSlcIikifQ==
+</script>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="trapezoid-method" class="level3">
+<h3 class="anchored" data-anchor-id="trapezoid-method">Trapezoid Method</h3>
+<section id="theory-and-implementation-1" class="level4">
+<h4 class="anchored" data-anchor-id="theory-and-implementation-1">Theory and Implementation</h4>
+<div id="fig-trap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-trap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/trapez.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Trapezoid Method Illustration
+</figcaption>
+</figure>
+</div>
+<p>The Trapezoid method improves upon the Box method by approximating the function with linear segments between consecutive points. Instead of using constant values within each interval, it connects adjacent points with straight lines, forming trapezoids.</p>
+<p>The mathematical formula for the Trapezoid method is:</p>
+<p><span class="math display">\[\begin{equation}
+\int_{a}^{b} f(x) dx \approx \sum_{i=1}^{N-1} \frac{f(x_i) + f(x_{i+1})}{2} \Delta x
+\end{equation}\]</span></p>
+<p>Where: - <span class="math inline">\(\Delta x = \frac{b-a}{N-1}\)</span> is the width of each interval - <span class="math inline">\(x_i\)</span> are the sample points</p>
+<p>This method is particularly effective for smoothly varying functions, which are common in physical systems.</p>
+</section>
+<section id="trapezoid-application" class="level4">
+<h4 class="anchored" data-anchor-id="trapezoid-application">Trapezoid Application</h4>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Physics Application: Electric Potential from Charge Distribution</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Convergence Analysis</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>A practical application in electromagnetism involves calculating the electric potential at a point due to a non-uniform charge distribution along a line. For a linear charge density <span class="math inline">\(\lambda(x)\)</span> along the x-axis, the potential at point <span class="math inline">\((0,d)\)</span> is given by:</p>
+<p><span class="math display">\[\begin{equation}
+V(0,d) = \frac{1}{4\pi\epsilon_0} \int_{a}^{b} \frac{\lambda(x)}{\sqrt{x^2 + d^2}} dx
+\end{equation}\]</span></p>
+<p>The Trapezoid method is well-suited for this calculation, especially when <span class="math inline">\(\lambda(x)\)</span> is provided as experimental data points.</p>
+<div>
+<div id="pyodide-4">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGludF90cmFwKGYsIGEsIGIsIE4pOlxuICAgIFwiXCJcIlRyYXBlem9pZCBtZXRob2QgaW50ZWdyYXRpb25cIlwiXCJcbiAgICBpZiBOIDwgMjpcbiAgICAgICAgcmFpc2UgVmFsdWVFcnJvcihcIk4gbXVzdCBiZSBhdCBsZWFzdCAyXCIpXG4gICAgeCA9IG5wLmxpbnNwYWNlKGEsIGIsIE4pXG4gICAgeSA9IGYoeClcbiAgICBkeCA9IChiLWEpLyhOLTEpXG4gICAgcmV0dXJuIG5wLnN1bSgoeVsxOl0gKyB5WzotMV0pICogZHgvMilcblxuIyBTaW1wbGUgZGVtb25zdHJhdGlvblxuZGVmIGZfZGVtbyh4KTpcbiAgICByZXR1cm4geCoqMiAgIyBVc2luZyBmKHgpID0geMKyIGZvciBkZW1vbnN0cmF0aW9uXG5cbiMgRGVtb25zdHJhdGUgdGhlIHRyYXBlem9pZCBtZXRob2QgdmlzdWFsbHlcbnhfZGVtbyA9IG5wLmxpbnNwYWNlKDAsIDEsIDYpXG55X2RlbW8gPSBmX2RlbW8oeF9kZW1vKVxuXG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTUsIDgpKVxuIyBQbG90IHRoZSBhY3R1YWwgZnVuY3Rpb25cbnhfZmluZSA9IG5wLmxpbnNwYWNlKDAsIDEsIDEwMDApXG55X2ZpbmUgPSBmX2RlbW8oeF9maW5lKVxucGx0LnBsb3QoeF9maW5lLCB5X2ZpbmUsICdiLScsIGxhYmVsPSdhY3R1YWwgZnVuY3Rpb24gZih4KSA9IHjCsicpXG5cbiMgUGxvdCB0aGUgdHJhcGV6b2lkc1xuZm9yIGkgaW4gcmFuZ2UobGVuKHhfZGVtbyktMSk6XG4gICAgcGx0LmZpbGxfYmV0d2VlbihbeF9kZW1vW2ldLCB4X2RlbW9baSsxXV0sXG4gICAgICAgICAgICAgICAgICAgIFt5X2RlbW9baV0sIHlfZGVtb1tpKzFdXSxcbiAgICAgICAgICAgICAgICAgICAgYWxwaGE9MC4zLCBjb2xvcj0nZ3JlZW4nKVxuICAgIHBsdC5wbG90KFt4X2RlbW9baV0sIHhfZGVtb1tpKzFdXSwgW3lfZGVtb1tpXSwgeV9kZW1vW2krMV1dLCAnZy0nKVxuXG5wbHQucGxvdCh4X2RlbW8sIHlfZGVtbywgJ2dvJywgbGFiZWw9J3NhbXBsZSBwb2ludHMnKVxucGx0LnhsYWJlbCgneCcpXG5wbHQueWxhYmVsKCdmKHgpJylcbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LmxlZ2VuZCgpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div>
+<div id="pyodide-5">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiXG4jIENvbnZlcmdlbmNlIGRlbW9uc3RyYXRpb25cbk5fdmFsdWVzID0gbnAuYXJhbmdlKDEwLCAxMDAwLCAxMClcbnRyYXBfcmVzdWx0cyA9IFtpbnRfdHJhcChmX2RlbW8sIDAsIDEsIE4pIGZvciBOIGluIE5fdmFsdWVzXVxuZXhhY3RfdmFsdWUgPSAxLzMgICMgRXhhY3QgaW50ZWdyYWwgb2YgeMKyIGZyb20gMCB0byAxXG5cbiMgQ2FsY3VsYXRlIGFic29sdXRlIGVycm9yc1xudHJhcF9lcnJvcnMgPSBucC5hYnMobnAuYXJyYXkodHJhcF9yZXN1bHRzKSAtIGV4YWN0X3ZhbHVlKVxuXG4jIEZpdCBhIHBvd2VyIGxhdyB0byBlcnJvciB2cyBOXG5kZWYgcG93ZXJfbGF3KHgsIGEsIGIpOlxuICAgIHJldHVybiBhICogeCoqYlxuXG5wb3B0LCBfID0gY3VydmVfZml0KHBvd2VyX2xhdywgTl92YWx1ZXMsIHRyYXBfZXJyb3JzKVxuXG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTIsIDEwKSlcbnBsdC5sb2dsb2coTl92YWx1ZXMsIHRyYXBfZXJyb3JzLCAnbycsIGxhYmVsPSd0cmFwZXpvaWQgbWV0aG9kIGVycm9yJylcbnBsdC5sb2dsb2coTl92YWx1ZXMsIHBvd2VyX2xhdyhOX3ZhbHVlcywgKnBvcHQpLCAnLS0nLFxuICAgICAgICAgbGFiZWw9Zidwb3dlciBsYXcgZml0OiBlcnJvciDiiJ0gTl57cG9wdFsxXTouMmZ9JylcbnBsdC54bGFiZWwoJ251bWJlciBvZiBwb2ludHMgW05dJylcbnBsdC55bGFiZWwoJ2Fic29sdXRlIGVycm9yJylcbnBsdC5sZWdlbmQoKVxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpXG5cbnByaW50KGZcIlRyYXBlem9pZCBNZXRob2QgY29udmVyZ2VuY2UgcmF0ZTogYXBwcm94aW1hdGVseSBPKE5ee3BvcHRbMV06LjJmfSlcIikifQ==
+</script>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="simpsons-method" class="level3">
+<h3 class="anchored" data-anchor-id="simpsons-method">Simpson’s Method</h3>
+<section id="theory-and-implementation-2" class="level4">
+<h4 class="anchored" data-anchor-id="theory-and-implementation-2">Theory and Implementation</h4>
+<div id="fig-simp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-simp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="img/simpson.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Simpson’s Method Illustration
+</figcaption>
+</figure>
+</div>
+<p>Simpson’s method represents a significant improvement in accuracy over the previous methods by approximating the function with parabolic segments rather than straight lines. This approach is particularly effective for functions with curvature, which are ubiquitous in physics problems.</p>
+<p>The mathematical formulation of Simpson’s rule is:</p>
+<p><span class="math display">\[\begin{equation}
+\int_{a}^{b} f(x) dx \approx \frac{\Delta x}{3} \sum_{i=0}^{(N-1)/2} \left(f(x_{2i}) + 4f(x_{2i+1}) + f(x_{2i+2})\right)
+\end{equation}\]</span></p>
+<p>Where: - <span class="math inline">\(N\)</span> is the number of intervals (must be even) - <span class="math inline">\(\Delta x = \frac{b-a}{N}\)</span> is the width of each interval</p>
+<p>Simpson’s rule is derived from fitting a quadratic polynomial through every three consecutive points and then integrating these polynomials.</p>
+</section>
+<section id="simpsons-nethod-applications" class="level4">
+<h4 class="anchored">Simpson’s Nethod Applications</h4>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Physics Application: Quantum Mechanical Probability</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Convergence Analysis</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>A fundamental application in quantum mechanics involves calculating the probability of finding a particle in a region of space. For a wavefunction <span class="math inline">\(\psi(x)\)</span>, the probability of finding the particle between positions <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> is:</p>
+<p><span class="math display">\[\begin{equation}
+P(a \leq x \leq b) = \int_{a}^{b} |\psi(x)|^2 dx
+\end{equation}\]</span></p>
+<p>Simpson’s method provides high accuracy for these calculations, especially important when dealing with oscillatory wavefunctions.</p>
+<div>
+<div id="pyodide-6">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGludF9zaW1wKGYsIGEsIGIsIE4pOlxuICAgIFwiXCJcIlNpbXBzb24ncyBtZXRob2QgaW50ZWdyYXRpb25cIlwiXCJcbiAgICBpZiBOICUgMiA9PSAwOlxuICAgICAgICBOID0gTiArIDEgICMgRW5zdXJlIE4gaXMgb2RkIGZvciBTaW1wc29uJ3MgcnVsZVxuXG4gICAgaWYgTiA8IDM6XG4gICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoXCJOIG11c3QgYmUgYXQgbGVhc3QgMyBmb3IgU2ltcHNvbidzIG1ldGhvZFwiKVxuXG4gICAgeCA9IG5wLmxpbnNwYWNlKGEsIGIsIE4pXG4gICAgeSA9IGYoeClcbiAgICBkeCA9IChiLWEpLyhOLTEpXG5cbiAgICAjIEFwcGx5IFNpbXBzb24ncyBmb3JtdWxhXG4gICAgcmV0dXJuIGR4LzMgKiBucC5zdW0oeVswOi0yOjJdICsgNCp5WzE6LTE6Ml0gKyB5WzI6OjJdKVxuXG4jIERlbW9uc3RyYXRlIFNpbXBzb24ncyBtZXRob2Qgd2l0aCBhIHNpbXBsZSBleGFtcGxlXG5kZWYgZl9kZW1vKHgpOlxuICAgIFwiXCJcIkV4YW1wbGUgZnVuY3Rpb246IHNpbih4KVwiXCJcIlxuICAgIHJldHVybiBucC5zaW4oeClcblxuIyBWaXN1YWxpemUgU2ltcHNvbidzIG1ldGhvZCB3aXRoIGEgZmV3IHNlZ21lbnRzXG54X2RlbW8gPSBucC5saW5zcGFjZSgwLCBucC5waSwgNykgICMgNiBpbnRlcnZhbHNcbnlfZGVtbyA9IGZfZGVtbyh4X2RlbW8pXG5cbnBsdC5maWd1cmUoZmlnc2l6ZT1nZXRfc2l6ZSgxNSwgOCkpXG4jIFBsb3QgdGhlIGFjdHVhbCBmdW5jdGlvblxueF9maW5lID0gbnAubGluc3BhY2UoMCwgbnAucGksIDEwMDApXG55X2ZpbmUgPSBmX2RlbW8oeF9maW5lKVxucGx0LnBsb3QoeF9maW5lLCB5X2ZpbmUsICdiLScsIGxhYmVsPSdmKHgpID0gc2luKHgpJylcblxuIyBQbG90IHRoZSBwYXJhYm9saWMgc2VnbWVudHNcbmZvciBpIGluIHJhbmdlKDAsIGxlbih4X2RlbW8pLTIsIDIpOlxuICAgIHhfc2VnbWVudCA9IG5wLmxpbnNwYWNlKHhfZGVtb1tpXSwgeF9kZW1vW2krMl0sIDUwKVxuXG4gICAgIyBGaXQgYSBxdWFkcmF0aWMgcG9seW5vbWlhbCB0aHJvdWdoIHRocmVlIHBvaW50c1xuICAgIHhfcG9pbnRzID0geF9kZW1vW2k6aSszXVxuICAgIHlfcG9pbnRzID0geV9kZW1vW2k6aSszXVxuICAgIGNvZWZmcyA9IG5wLnBvbHlmaXQoeF9wb2ludHMsIHlfcG9pbnRzLCAyKVxuICAgIHlfZml0ID0gbnAucG9seXZhbChjb2VmZnMsIHhfc2VnbWVudClcblxuICAgIHBsdC5wbG90KHhfc2VnbWVudCwgeV9maXQsICdyLScsIGFscGhhPTAuNylcbiAgICBwbHQuZmlsbF9iZXR3ZWVuKHhfc2VnbWVudCwgMCwgeV9maXQsIGFscGhhPTAuMiwgY29sb3I9J3B1cnBsZScpXG5cbnBsdC5wbG90KHhfZGVtbywgeV9kZW1vLCAnZ28nLCBsYWJlbD0nU2FtcGxlIHBvaW50cycpXG5wbHQueGxhYmVsKCd4JylcbnBsdC55bGFiZWwoJ2YoeCknKVxucGx0LnRpdGxlKFwiU2ltcHNvbidzIE1ldGhvZCBWaXN1YWxpemF0aW9uXCIpXG5wbHQuZ3JpZChUcnVlKVxucGx0LmxlZ2VuZCgpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div>
+<div id="pyodide-7">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBDb252ZXJnZW5jZSBkZW1vbnN0cmF0aW9uIHdpdGggYSBzaW1wbGUgdGVzdCBmdW5jdGlvblxuZl90ZXN0ID0gbGFtYmRhIHg6IHgqKjQgICMgV2UgY2FuIGludGVncmF0ZSB44oG0IGV4YWN0bHlcbmV4YWN0X3ZhbHVlID0gMS81ICAjIEV4YWN0IGludGVncmFsIG9mIHjigbQgZnJvbSAwIHRvIDFcblxuIyBDb21wYXJlIGFjY3VyYWN5IHdpdGggZGlmZmVyZW50IG51bWJlcnMgb2YgcG9pbnRzXG5OX3ZhbHVlcyA9IG5wLmFyYW5nZSgzLCAxMDEsIDIpICAjIE9kZCBudW1iZXJzIGZvciBTaW1wc29uJ3MgcnVsZVxuc2ltcF9lcnJvcnMgPSBbYWJzKGludF9zaW1wKGZfdGVzdCwgMCwgMSwgbikgLSBleGFjdF92YWx1ZSkgZm9yIG4gaW4gTl92YWx1ZXNdXG5cbiMgRml0IGEgcG93ZXIgbGF3IHRvIGVycm9yIHZzIE5cbnBvcHQsIF8gPSBjdXJ2ZV9maXQocG93ZXJfbGF3LCBOX3ZhbHVlcywgc2ltcF9lcnJvcnMpXG5cbnBsdC5maWd1cmUoZmlnc2l6ZT1nZXRfc2l6ZSgxMiwgMTApKVxucGx0LmxvZ2xvZyhOX3ZhbHVlcywgc2ltcF9lcnJvcnMsICdvJywgbGFiZWw9XCJTaW1wc29uJ3MgbWV0aG9kIGVycm9yXCIpXG5wbHQubG9nbG9nKE5fdmFsdWVzLCBwb3dlcl9sYXcoTl92YWx1ZXMsICpwb3B0KSwgJy0tJyxcbiAgICAgICAgIGxhYmVsPWYnUG93ZXIgbGF3IGZpdDogZXJyb3Ig4oidIE5ee3BvcHRbMV06LjJmfScpXG5wbHQueGxhYmVsKCdudW1iZXIgb2YgcG9pbnRzIFtOXScpXG5wbHQueWxhYmVsKCdhYnNvbHV0ZSBlcnJvcicpXG5wbHQubGVnZW5kKClcbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LnNob3coKVxuXG5wcmludChmXCJTaW1wc29uJ3MgTWV0aG9kIGNvbnZlcmdlbmNlIHJhdGU6IGFwcHJveGltYXRlbHkgTyhOXntwb3B0WzFdOi4yZn0pXCIpIn0=
+</script>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Simpson’s Rule for Numerical Integration
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Simpson’s Rule is a method for numerical integration that approximates the definite integral of a function by using quadratic polynomials.</p>
+<ol type="1">
+<li><p>For an integral <span class="math inline">\(\int_a^b f(x)dx\)</span>, Simpson’s Rule fits a quadratic function through three points:</p>
+<ul>
+<li><span class="math inline">\(f(a)\)</span></li>
+<li><span class="math inline">\(f(\frac{a+b}{2})\)</span></li>
+<li><span class="math inline">\(f(b)\)</span></li>
+</ul></li>
+<li><p>Let’s define:</p>
+<ul>
+<li><span class="math inline">\(h = \frac{b-a}{2}\)</span></li>
+<li><span class="math inline">\(x_0 = a\)</span></li>
+<li><span class="math inline">\(x_1 = \frac{a+b}{2}\)</span></li>
+<li><span class="math inline">\(x_2 = b\)</span></li>
+</ul></li>
+<li><p>The quadratic approximation has the form: <span class="math display">\[P(x) = Ax^2 + Bx + C\]</span></p></li>
+<li><p>This polynomial must satisfy: <span class="math display">\[f(x_0) = Ax_0^2 + Bx_0 + C\]</span> <span class="math display">\[f(x_1) = Ax_1^2 + Bx_1 + C\]</span> <span class="math display">\[f(x_2) = Ax_2^2 + Bx_2 + C\]</span></p></li>
+<li><p>Using Lagrange interpolation: <span class="math display">\[P(x) = f(x_0)L_0(x) + f(x_1)L_1(x) + f(x_2)L_2(x)\]</span></p>
+<p>where <span class="math inline">\(L_0\)</span>, <span class="math inline">\(L_1\)</span>, <span class="math inline">\(L_2\)</span> are the Lagrange basis functions.</p></li>
+</ol>
+<section id="final-formula" class="level4">
+<h4 class="anchored" data-anchor-id="final-formula">Final Formula</h4>
+<p>The integration of this polynomial leads to Simpson’s Rule:</p>
+<p><span class="math display">\[\int_a^b f(x)dx \approx \frac{h}{3}[f(a) + 4f(\frac{a+b}{2}) + f(b)]\]</span></p>
+</section>
+<section id="error-term" class="level3">
+<h3 class="anchored" data-anchor-id="error-term">Error Term</h3>
+<p>The error in Simpson’s Rule is proportional to:</p>
+<p><span class="math display">\[-\frac{h^5}{90}f^{(4)}(\xi)\]</span></p>
+<p>for some <span class="math inline">\(\xi \in [a,b]\)</span></p>
+<section id="composite-simpsons-rule" class="level4">
+<h4 class="anchored" data-anchor-id="composite-simpsons-rule">Composite Simpson’s Rule</h4>
+<p>For better accuracy, we can divide the interval into <span class="math inline">\(n\)</span> subintervals (where <span class="math inline">\(n\)</span> is even):</p>
+<p><span class="math display">\[\int_a^b f(x)dx \approx \frac{h}{3}[f(x_0) + 4\sum_{i=1}^{n/2}f(x_{2i-1}) + 2\sum_{i=1}^{n/2-1}f(x_{2i}) + f(x_n)]\]</span></p>
+<p>where <span class="math inline">\(h = \frac{b-a}{n}\)</span></p>
+<p>The method is particularly effective for integrating functions that can be well-approximated by quadratic polynomials over small intervals.</p>
+</section>
+</section>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="when-to-use-each-method" class="level3">
+<h3 class="anchored" data-anchor-id="when-to-use-each-method">When to Use Each Method</h3>
+<p>Choosing the appropriate numerical integration method for a physics problem requires consideration of several factors:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Error Order</th>
+<th>Optimal For</th>
+<th>Limitations</th>
+<th>Example Physics Applications</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Box</strong></td>
+<td><span class="math inline">\(O(N^{-1})\)</span></td>
+<td>- Simple, rapid calculations<br>- Step functions<br>- Real-time processing<br>- Discontinuous functions</td>
+<td>- Low accuracy<br>- Requires many points for decent results</td>
+<td>- Basic data analysis<br>- Signals with sharp transitions<br>- First approximations in mechanics</td>
+</tr>
+<tr class="even">
+<td><strong>Trapezoid</strong></td>
+<td><span class="math inline">\(O(N^{-2})\)</span></td>
+<td>- Smooth, continuous functions<br>- Moderate accuracy requirements<br>- Periodic functions</td>
+<td>- Struggles with sharp peaks<br>- Not ideal for higher derivatives</td>
+<td>- Electric and magnetic fields<br>- Orbital mechanics<br>- Path integrals<br>- Work/energy calculations</td>
+</tr>
+<tr class="odd">
+<td><strong>Simpson</strong></td>
+<td><span class="math inline">\(O(N^{-4})\)</span></td>
+<td>- Functions with significant curvature<br>- High precision requirements<br>- Oscillatory integrands</td>
+<td>- More computationally intensive<br>- Requires evenly spaced points</td>
+<td>- Quantum mechanical probabilities<br>- Wave optics<br>- Statistical mechanics<br>- Thermal physics</td>
+</tr>
+</tbody>
+</table>
+<section id="additional-considerations" class="level4">
+<h4 class="anchored" data-anchor-id="additional-considerations">Additional Considerations</h4>
+<ul>
+<li><strong>Adaptive methods</strong> can be more efficient when dealing with functions that have varying behavior across the integration range</li>
+<li><strong>Improper integrals</strong> (with infinite limits or singularities) often require specialized techniques beyond these basic methods</li>
+<li><strong>Higher-dimensional</strong> integration problems (common in statistical and quantum mechanics) may benefit from Monte Carlo methods rather than these quadrature rules</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="error-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="error-analysis">Error Analysis</h2>
+<p>The error behavior of numerical integration methods is crucial for understanding their applicability to physics problems:</p>
+<ul>
+<li><strong>Box Method</strong>: Error <span class="math inline">\(\propto\)</span> <span class="math inline">\(O(\Delta x)\)</span> = <span class="math inline">\(O(N^{-1})\)</span> (linear convergence)
+<ul>
+<li>The error is proportional to the step size</li>
+<li>The dominant error term comes from the first derivative of the function</li>
+</ul></li>
+<li><strong>Trapezoid Method</strong>: Error <span class="math inline">\(\propto\)</span> <span class="math inline">\(O(\Delta x^2)\)</span> = <span class="math inline">\(O(N^{-2})\)</span> (quadratic convergence)
+<ul>
+<li>The error is proportional to the square of the step size</li>
+<li>The dominant error term involves the second derivative of the function</li>
+</ul></li>
+<li><strong>Simpson’s Method</strong>: Error <span class="math inline">\(\propto\)</span> <span class="math inline">\(O(\Delta x^4)\)</span> = <span class="math inline">\(O(N^{-4})\)</span> (fourth-order convergence)
+<ul>
+<li>The error is proportional to the fourth power of the step size</li>
+<li>The dominant error term involves the fourth derivative of the function</li>
+</ul></li>
+</ul>
+<p>Consequently, if we double the number of points:</p>
+<ul>
+<li>Box method: error reduced by a factor of 2</li>
+<li>Trapezoid method: error reduced by a factor of 4</li>
+<li>Simpson’s method: error reduced by a factor of 16</li>
+</ul>
+<p>The practical impact of these convergence rates is substantial. For example, to achieve an error of <span class="math inline">\(10^{-6}\)</span> for a well-behaved function:</p>
+<ul>
+<li>Box method might require millions of points</li>
+<li>Trapezoid method might require thousands of points</li>
+<li>Simpson’s method might require only hundreds of points</li>
+</ul>
+<p>This explains why higher-order methods are generally preferred for physics applications requiring high precision, such as quantum mechanical calculations, gravitational wave analysis, or computational fluid dynamics.</p>
+<section id="conclusion" class="level3">
+<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
+<p>Numerical integration stands as a cornerstone of computational physics, bridging the gap between theoretical models and practical analysis of real-world systems. In this lecture, we’ve explored three fundamental methods—Box, Trapezoid, and Simpson’s method—that provide different balances of simplicity, accuracy, and computational efficiency.</p>
+<p>The key insights from our study include:</p>
+<ol type="1">
+<li><p><strong>Method selection matters</strong>: The choice of integration technique can dramatically impact both accuracy and computational efficiency. For typical physics applications requiring high precision, Simpson’s method often provides the optimal balance of accuracy and computation cost.</p></li>
+<li><p><strong>Error scaling</strong>: Understanding how errors scale with the number of sampling points is crucial for reliable scientific computation. The higher-order convergence of Simpson’s method (<span class="math inline">\(O(N^{-4})\)</span>) makes it particularly valuable for precision-critical applications in physics.</p></li>
+<li><p><strong>Physical context</strong>: The nature of the underlying physical system should guide your choice of numerical method. Smoothly varying functions benefit from higher-order methods, while functions with discontinuities may require adaptive or specialized approaches.</p></li>
+<li><p><strong>Verification</strong>: Always verify numerical results against analytical solutions when possible, or compare results from different numerical methods with increasing resolution to establish confidence in your calculations.</p></li>
+</ol>
+<p>As you progress in your physics education, these numerical integration techniques will become essential tools in your computational toolkit, enabling you to tackle increasingly complex physical systems from quantum mechanics to astrophysics, fluid dynamics, and beyond.</p>
+<p>In advanced courses, you’ll explore additional techniques such as Gaussian quadrature, Romberg integration, and specialized methods for oscillatory, singular, or multi-dimensional integrals—each designed to address specific challenges encountered in modern physics.</p>
+<p>Remember that numerical integration is not merely a computational technique but a powerful approach to understanding physical systems that resist analytical treatment, making it an indispensable skill for the modern physicist.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Advanced Topics in Numerical Integration
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="adaptive-integration-methods" class="level3">
+<h3 class="anchored" data-anchor-id="adaptive-integration-methods">Adaptive Integration Methods</h3>
+<p>The methods we’ve discussed so far use equal spacing between sampling points. However, most real-world physics problems involve functions that vary dramatically across the integration range. Adaptive methods adjust the point distribution to concentrate more points where the function changes rapidly.</p>
+<div>
+<div id="pyodide-8">
+
+</div>
+<script type="pyodide-8-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTaW1wbGUgZGVtb25zdHJhdGlvbiBvZiBhZGFwdGl2ZSBpbnRlZ3JhdGlvbiBjb25jZXB0XG5kZWYgYWRhcHRpdmVfZGVtbyhmLCBhLCBiLCB0b2w9MWUtNSwgbWF4X2RlcHRoPTEwKTpcbiAgICBcIlwiXCJTaW1wbGUgZGVtb25zdHJhdGlvbiBvZiBhZGFwdGl2ZSBpbnRlZ3JhdGlvbiBjb25jZXB0XCJcIlwiXG4gICAgZGVmIHJlY3Vyc2l2ZV9pbnRlZ3JhdGUoYSwgYiwgZGVwdGg9MCk6XG4gICAgICAgICMgQ29tcHV0ZSBtaWRwb2ludFxuICAgICAgICBjID0gKGEgKyBiKSAvIDJcblxuICAgICAgICAjIEVzdGltYXRlIGludGVncmFsIHVzaW5nIFNpbXBzb24ncyBydWxlIG9uIGVudGlyZSBpbnRlcnZhbFxuICAgICAgICBJX3dob2xlID0gKGItYSkvNiAqIChmKGEpICsgNCpmKGMpICsgZihiKSlcblxuICAgICAgICAjIEVzdGltYXRlIGludGVncmFsIHVzaW5nIFNpbXBzb24ncyBydWxlIG9uIGVhY2ggaGFsZlxuICAgICAgICBtaWQxID0gKGEgKyBjKSAvIDJcbiAgICAgICAgbWlkMiA9IChjICsgYikgLyAyXG4gICAgICAgIElfbGVmdCA9IChjLWEpLzYgKiAoZihhKSArIDQqZihtaWQxKSArIGYoYykpXG4gICAgICAgIElfcmlnaHQgPSAoYi1jKS82ICogKGYoYykgKyA0KmYobWlkMikgKyBmKGIpKVxuICAgICAgICBJX3BhcnRzID0gSV9sZWZ0ICsgSV9yaWdodFxuXG4gICAgICAgICMgQ2hlY2sgZXJyb3JcbiAgICAgICAgZXJyb3IgPSBhYnMoSV93aG9sZSAtIElfcGFydHMpXG5cbiAgICAgICAgIyBJZiBlcnJvciBpcyBzbWFsbCBlbm91Z2ggb3IgbWF4IGRlcHRoIHJlYWNoZWQsIHJldHVybiByZXN1bHRcbiAgICAgICAgaWYgZXJyb3IgPCB0b2wqKGItYSkgb3IgZGVwdGggPj0gbWF4X2RlcHRoOlxuICAgICAgICAgICAgcmV0dXJuIElfcGFydHMsIFsoYSwgYywgYiwgZXJyb3IpXVxuXG4gICAgICAgICMgT3RoZXJ3aXNlLCByZWN1cnNpdmVseSBpbnRlZ3JhdGUgZWFjaCBoYWxmXG4gICAgICAgIElfbGVmdF9yZXN1bHQsIGxlZnRfcmVnaW9ucyA9IHJlY3Vyc2l2ZV9pbnRlZ3JhdGUoYSwgYywgZGVwdGgrMSlcbiAgICAgICAgSV9yaWdodF9yZXN1bHQsIHJpZ2h0X3JlZ2lvbnMgPSByZWN1cnNpdmVfaW50ZWdyYXRlKGMsIGIsIGRlcHRoKzEpXG5cbiAgICAgICAgcmV0dXJuIElfbGVmdF9yZXN1bHQgKyBJX3JpZ2h0X3Jlc3VsdCwgbGVmdF9yZWdpb25zICsgcmlnaHRfcmVnaW9uc1xuXG4gICAgaW50ZWdyYWwsIHJlZ2lvbnMgPSByZWN1cnNpdmVfaW50ZWdyYXRlKGEsIGIpXG4gICAgcmV0dXJuIGludGVncmFsLCByZWdpb25zXG5cbiMgRGVmaW5lIGEgY2hhbGxlbmdpbmcgZnVuY3Rpb24gd2l0aCBhIHNoYXJwIHBlYWtcbmRlZiBjaGFsbGVuZ2luZ19mdW5jKHgpOlxuICAgIFwiXCJcIkZ1bmN0aW9uIHdpdGggYSBzaGFycCBwZWFrIGF0IHg9MC43XCJcIlwiXG4gICAgcmV0dXJuIDEgLyAoMC4wMSArICh4IC0gMC43KSoqMilcblxuIyBDYWxjdWxhdGUgaW50ZWdyYWwgdXNpbmcgYWRhcHRpdmUgYW5kIG5vbi1hZGFwdGl2ZSBtZXRob2RzXG5hLCBiID0gMCwgMVxubl9wb2ludHMgPSAxMDEgICMgVXNlIGEgZml4ZWQgbnVtYmVyIG9mIHBvaW50cyBmb3Igbm9uLWFkYXB0aXZlIG1ldGhvZHNcblxuIyBDYWxjdWxhdGUgdXNpbmcgbm9uLWFkYXB0aXZlIG1ldGhvZHNcbmJveF9yZXN1bHQgPSBpbnRfYm94KGNoYWxsZW5naW5nX2Z1bmMsIGEsIGIsIG5fcG9pbnRzKVxudHJhcF9yZXN1bHQgPSBpbnRfdHJhcChjaGFsbGVuZ2luZ19mdW5jLCBhLCBiLCBuX3BvaW50cylcbnNpbXBfcmVzdWx0ID0gaW50X3NpbXAoY2hhbGxlbmdpbmdfZnVuYywgYSwgYiwgbl9wb2ludHMpXG5cbiMgQ2FsY3VsYXRlIHVzaW5nIGFkYXB0aXZlIG1ldGhvZFxuYWRhcHRpdmVfcmVzdWx0LCByZWdpb25zID0gYWRhcHRpdmVfZGVtbyhjaGFsbGVuZ2luZ19mdW5jLCBhLCBiKVxuXG4jIENhbGN1bGF0ZSBhIHJlZmVyZW5jZSBzb2x1dGlvbiB1c2luZyBhIHZlcnkgaGlnaCBudW1iZXIgb2YgcG9pbnRzXG5yZWZlcmVuY2UgPSBpbnRfc2ltcChjaGFsbGVuZ2luZ19mdW5jLCBhLCBiLCAxMDAwMSlcblxuIyBWaXN1YWxpemUgdGhlIGZ1bmN0aW9uIGFuZCBpbnRlZ3JhdGlvbiBwb2ludHNcbnhfZmluZSA9IG5wLmxpbnNwYWNlKGEsIGIsIDEwMDApXG55X2ZpbmUgPSBbY2hhbGxlbmdpbmdfZnVuYyh4KSBmb3IgeCBpbiB4X2ZpbmVdXG5cbnBsdC5maWd1cmUoZmlnc2l6ZT1nZXRfc2l6ZSgxNSwgMTApKVxuXG4jIFBsb3QgdGhlIGZ1bmN0aW9uXG5wbHQucGxvdCh4X2ZpbmUsIHlfZmluZSwgJ2stJywgbGFiZWw9J2YoeCknKVxuXG4jIFBsb3QgdGhlIGFkYXB0aXZlIGludGVncmF0aW9uIHJlZ2lvbnNcbmZvciByZWdpb24gaW4gcmVnaW9uczpcbiAgICBhX3IsIG1fciwgYl9yLCBlcnJvciA9IHJlZ2lvblxuICAgIHBsdC5wbG90KFthX3IsIG1fciwgYl9yXSwgW2NoYWxsZW5naW5nX2Z1bmMoYV9yKSwgY2hhbGxlbmdpbmdfZnVuYyhtX3IpLCBjaGFsbGVuZ2luZ19mdW5jKGJfcildLFxuICAgICAgICAgICAgICdyby0nLCBhbHBoYT0wLjUpXG5cbnBsdC54bGFiZWwoJ3gnKVxucGx0LnlsYWJlbCgnZih4KScpXG5cblxuIyBBZGp1c3QgeS1heGlzIHRvIHNob3cgdGhlIGZ1bmN0aW9uJ3MgYmVoYXZpb3IgbW9yZSBjbGVhcmx5XG5wbHQueWxpbSgwLCA0MClcblxucGx0LmxlZ2VuZCgpXG5wbHQuc2hvdygpXG5cbiMgU2hvdyByZXN1bHRzXG5wcmludChcIlJlc3VsdHMgZm9yIGludGVncmF0aW5nIGEgZnVuY3Rpb24gd2l0aCBhIHNoYXJwIHBlYWs6XCIpXG5wcmludChmXCJCb3ggTWV0aG9kIChuPXtuX3BvaW50c30pOiB7Ym94X3Jlc3VsdDouOGZ9LCBFcnJvcjoge2Ficyhib3hfcmVzdWx0LXJlZmVyZW5jZSk6LjhmfVwiKVxucHJpbnQoZlwiVHJhcGV6b2lkIE1ldGhvZCAobj17bl9wb2ludHN9KToge3RyYXBfcmVzdWx0Oi44Zn0sIEVycm9yOiB7YWJzKHRyYXBfcmVzdWx0LXJlZmVyZW5jZSk6LjhmfVwiKVxucHJpbnQoZlwiU2ltcHNvbidzIE1ldGhvZCAobj17bl9wb2ludHN9KToge3NpbXBfcmVzdWx0Oi44Zn0sIEVycm9yOiB7YWJzKHNpbXBfcmVzdWx0LXJlZmVyZW5jZSk6LjhmfVwiKVxucHJpbnQoZlwiQWRhcHRpdmUgTWV0aG9kOiB7YWRhcHRpdmVfcmVzdWx0Oi44Zn0sIEVycm9yOiB7YWJzKGFkYXB0aXZlX3Jlc3VsdC1yZWZlcmVuY2UpOi44Zn1cIilcbnByaW50KGZcIlJlZmVyZW5jZSB2YWx1ZToge3JlZmVyZW5jZTouOGZ9XCIpXG5wcmludChmXCJOdW1iZXIgb2YgYWRhcHRpdmUgcmVnaW9uczoge2xlbihyZWdpb25zKX1cIikifQ==
+</script>
+</div>
+</section>
+<section id="multi-dimensional-integration" class="level3">
+<h3 class="anchored" data-anchor-id="multi-dimensional-integration">Multi-dimensional Integration</h3>
+<p>Many physics problems require integration over multiple dimensions, such as calculating mass moments of inertia, electric fields from volume charge distributions, or statistical mechanics partition functions.</p>
+<p>For 2D integration, we can extend our 1D methods using the concept of iterated integrals:</p>
+<p><span class="math display">\[\begin{equation}
+\int_{a}^{b}\int_{c}^{d} f(x,y) dy dx \approx \sum_{i=1}^{N_x} \sum_{j=1}^{N_y} w_i w_j f(x_i, y_j)
+\end{equation}\]</span></p>
+<p>Where <span class="math inline">\(w_i\)</span> and <span class="math inline">\(w_j\)</span> are the weights for the respective 1D methods.</p>
+<div>
+<div id="pyodide-9">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGludF8yZF90cmFwKGYsIHhfcmFuZ2UsIHlfcmFuZ2UsIG54LCBueSk6XG4gICAgXCJcIlwiMkQgaW50ZWdyYXRpb24gdXNpbmcgdGhlIFRyYXBlem9pZCBtZXRob2RcIlwiXCJcbiAgICB4ID0gbnAubGluc3BhY2UoeF9yYW5nZVswXSwgeF9yYW5nZVsxXSwgbngpXG4gICAgeSA9IG5wLmxpbnNwYWNlKHlfcmFuZ2VbMF0sIHlfcmFuZ2VbMV0sIG55KVxuICAgIGR4ID0gKHhfcmFuZ2VbMV0gLSB4X3JhbmdlWzBdKSAvIChueCAtIDEpXG4gICAgZHkgPSAoeV9yYW5nZVsxXSAtIHlfcmFuZ2VbMF0pIC8gKG55IC0gMSlcblxuICAgIHJlc3VsdCA9IDBcbiAgICBmb3IgaSBpbiByYW5nZShueC0xKTpcbiAgICAgICAgZm9yIGogaW4gcmFuZ2UobnktMSk6XG4gICAgICAgICAgICAjIEF2ZXJhZ2Ugb2YgZnVuY3Rpb24gdmFsdWVzIGF0IHRoZSBmb3VyIGNvcm5lcnMgb2YgZWFjaCBjZWxsXG4gICAgICAgICAgICBmX3ZhbHVlcyA9IFtcbiAgICAgICAgICAgICAgICBmKHhbaV0sIHlbal0pLFxuICAgICAgICAgICAgICAgIGYoeFtpKzFdLCB5W2pdKSxcbiAgICAgICAgICAgICAgICBmKHhbaV0sIHlbaisxXSksXG4gICAgICAgICAgICAgICAgZih4W2krMV0sIHlbaisxXSlcbiAgICAgICAgICAgIF1cbiAgICAgICAgICAgIHJlc3VsdCArPSBzdW0oZl92YWx1ZXMpIC8gNCAqIGR4ICogZHlcblxuICAgIHJldHVybiByZXN1bHRcblxuIyBFeGFtcGxlOiBFbGVjdHJpYyBwb3RlbnRpYWwgZnJvbSBhIHNxdWFyZSBjaGFyZ2UgZGlzdHJpYnV0aW9uXG5kZWYgcG90ZW50aWFsXzJkKHgsIHksIHo9MSk6XG4gICAgXCJcIlwiRWxlY3RyaWMgcG90ZW50aWFsIGF0ICh4LHkseikgZnJvbSBhIHNxdWFyZSBjaGFyZ2UgZGlzdHJpYnV0aW9uIGluIHRoZSB4LXkgcGxhbmVcIlwiXCJcbiAgICAjIEF2b2lkIGRpdmlzaW9uIGJ5IHplcm9cbiAgICBkZW5vbWluYXRvciA9ICh4KioyICsgeSoqMiArIHoqKjIpKiowLjVcbiAgICBpZiBkZW5vbWluYXRvciA8IDFlLTEwOlxuICAgICAgICByZXR1cm4gMFxuICAgIHJldHVybiAxIC8gZGVub21pbmF0b3JcblxuIyBDYWxjdWxhdGUgdGhlIGVsZWN0cmljIHBvdGVudGlhbCBhdCBhIHBvaW50IGFib3ZlIGEgY2hhcmdlZCBzcXVhcmVcbnogPSAxLjAgICMgaGVpZ2h0IGFib3ZlIHRoZSBwbGFuZVxucG90ZW50aWFsID0gaW50XzJkX3RyYXAobGFtYmRhIHgsIHk6IHBvdGVudGlhbF8yZCh4LCB5LCB6KSwgWy0xLCAxXSwgWy0xLCAxXSwgNTEsIDUxKVxuXG4jIFZpc3VhbGl6ZSB0aGUgcG90ZW50aWFsIGluIHRoZSBwbGFuZSBhYm92ZSB0aGUgY2hhcmdlXG54X3ZhbHMgPSBucC5saW5zcGFjZSgtMiwgMiwgNTApXG55X3ZhbHMgPSBucC5saW5zcGFjZSgtMiwgMiwgNTApXG5YLCBZID0gbnAubWVzaGdyaWQoeF92YWxzLCB5X3ZhbHMpXG5aID0gbnAuemVyb3NfbGlrZShYKVxuXG5mb3IgaSBpbiByYW5nZShsZW4oeF92YWxzKSk6XG4gICAgZm9yIGogaW4gcmFuZ2UobGVuKHlfdmFscykpOlxuICAgICAgICBaW2osIGldID0gcG90ZW50aWFsXzJkKFhbaiwgaV0sIFlbaiwgaV0sIHopXG5cbnBsdC5maWd1cmUoZmlnc2l6ZT1nZXRfc2l6ZSgxNSwgMTApKVxuXG4jIFBsb3QgdGhlIHBvdGVudGlhbCBhcyBhIGNvbnRvdXJcbmNvbnRvdXIgPSBwbHQuY29udG91cmYoWCwgWSwgWiwgNTAsIGNtYXA9J3ZpcmlkaXMnKVxucGx0LmNvbG9yYmFyKGxhYmVsPSdFbGVjdHJpYyBQb3RlbnRpYWwnKVxuXG4jIE1hcmsgdGhlIHNxdWFyZSBjaGFyZ2UgZGlzdHJpYnV0aW9uXG5wbHQucGxvdChbLTEsIDEsIDEsIC0xLCAtMV0sIFstMSwgLTEsIDEsIDEsIC0xXSwgJ3ItJywgbGluZXdpZHRoPTIpXG5cbnBsdC54bGFiZWwoJ3gnKVxucGx0LnlsYWJlbCgneScpXG5wbHQuYXhpcygnZXF1YWwnKVxuXG5wbHQuc2hvdygpXG5cbnByaW50KGZcIkVsZWN0cmljIHBvdGVudGlhbCBhdCBwb2ludCAoMCwwLHt6fSk6IHtwb3RlbnRpYWw6LjZmfVwiKVxucHJpbnQoZlwiQW5hbHl0aWNhbCB2YWx1ZSBhdCBjZW50ZXI6IHtucC5sb2coMSArIG5wLnNxcnQoMikpOi42Zn1cIikifQ==
+</script>
+</div>
+</section>
+<section id="monte-carlo-integration" class="level3">
+<h3 class="anchored" data-anchor-id="monte-carlo-integration">Monte Carlo Integration</h3>
+<p>For higher-dimensional integrals and complex domains, Monte Carlo methods become increasingly efficient. These methods use random sampling to approximate integrals and are particularly valuable in quantum and statistical physics.</p>
+<div>
+<div id="pyodide-10">
+
+</div>
+<script type="pyodide-10-contents">
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIG1vbnRlX2NhcmxvX2ludGVncmF0ZShmLCByYW5nZXMsIG5fc2FtcGxlcyk6XG4gICAgXCJcIlwiTW9udGUgQ2FybG8gaW50ZWdyYXRpb24gaW4gYXJiaXRyYXJ5IGRpbWVuc2lvbnNcIlwiXCJcbiAgICAjIEdlbmVyYXRlIHJhbmRvbSBzYW1wbGVzIHdpdGhpbiB0aGUgaW50ZWdyYXRpb24gZG9tYWluXG4gICAgZGltID0gbGVuKHJhbmdlcylcbiAgICBzYW1wbGVzID0gbnAucmFuZG9tLnVuaWZvcm0oXG4gICAgICAgIGxvdz1bclswXSBmb3IgciBpbiByYW5nZXNdLFxuICAgICAgICBoaWdoPVtyWzFdIGZvciByIGluIHJhbmdlc10sXG4gICAgICAgIHNpemU9KG5fc2FtcGxlcywgZGltKVxuICAgIClcblxuICAgICMgRXZhbHVhdGUgZnVuY3Rpb24gYXQgc2FtcGxlIHBvaW50c1xuICAgIGZfdmFsdWVzID0gbnAuYXJyYXkoW2YoKnNhbXBsZSkgZm9yIHNhbXBsZSBpbiBzYW1wbGVzXSlcblxuICAgICMgQ2FsY3VsYXRlIHZvbHVtZSBvZiBpbnRlZ3JhdGlvbiBkb21haW5cbiAgICB2b2x1bWUgPSBucC5wcm9kKFtyWzFdIC0gclswXSBmb3IgciBpbiByYW5nZXNdKVxuXG4gICAgIyBFc3RpbWF0ZSBpbnRlZ3JhbCBhbmQgZXJyb3JcbiAgICBpbnRlZ3JhbCA9IHZvbHVtZSAqIG5wLm1lYW4oZl92YWx1ZXMpXG4gICAgZXJyb3IgPSB2b2x1bWUgKiBucC5zdGQoZl92YWx1ZXMpIC8gbnAuc3FydChuX3NhbXBsZXMpXG5cbiAgICByZXR1cm4gaW50ZWdyYWwsIGVycm9yXG5cbiMgRXhhbXBsZTogQ2FsY3VsYXRlIHRoZSB2b2x1bWUgb2YgYSBuLWRpbWVuc2lvbmFsIGh5cGVyc3BoZXJlXG5kZWYgc3BoZXJlX2luZGljYXRvcih4LCB5LCB6KTpcbiAgICBcIlwiXCJSZXR1cm4gMSBpZiBwb2ludCBpcyBpbnNpZGUgdW5pdCBzcGhlcmUsIDAgb3RoZXJ3aXNlXCJcIlwiXG4gICAgcmV0dXJuIDEgaWYgeCoqMiArIHkqKjIgKyB6KioyIDw9IDEgZWxzZSAwXG5cbiMgQ2FsY3VsYXRlIHRoZSB2b2x1bWUgb2YgYSAzRCBzcGhlcmUgdXNpbmcgTW9udGUgQ2FybG9cbm5fc2FtcGxlcyA9IDEwMDAwMFxucmFuZ2VzID0gW1stMSwgMV0sIFstMSwgMV0sIFstMSwgMV1dICAjIEN1YmUgY29udGFpbmluZyB0aGUgc3BoZXJlXG52b2x1bWUsIGVycm9yID0gbW9udGVfY2FybG9faW50ZWdyYXRlKHNwaGVyZV9pbmRpY2F0b3IsIHJhbmdlcywgbl9zYW1wbGVzKVxuXG4jIFRoZSBleGFjdCB2b2x1bWUgb2YgYSB1bml0IHNwaGVyZSBpbiAzRCBpcyAoNC8zKc+AXG5leGFjdF92b2x1bWUgPSA0LzMgKiBucC5waVxuXG4jIFZpc3VhbGl6ZSB0aGUgY29udmVyZ2VuY2VcbnNhbXBsZV9zaXplcyA9IG5wLmxvZ3NwYWNlKDIsIDUsIDIwLCBkdHlwZT1pbnQpXG52b2x1bWVzID0gW11cbmVycm9ycyA9IFtdXG5cbmZvciBuIGluIHNhbXBsZV9zaXplczpcbiAgICB2LCBlID0gbW9udGVfY2FybG9faW50ZWdyYXRlKHNwaGVyZV9pbmRpY2F0b3IsIHJhbmdlcywgbilcbiAgICB2b2x1bWVzLmFwcGVuZCh2KVxuICAgIGVycm9ycy5hcHBlbmQoZSlcblxucGx0LmZpZ3VyZShmaWdzaXplPWdldF9zaXplKDE1LCAxMCkpXG5wbHQuc2VtaWxvZ3goc2FtcGxlX3NpemVzLCB2b2x1bWVzLCAnby0nLCBsYWJlbD0nTW9udGUgQ2FybG8gZXN0aW1hdGUnKVxucGx0LmZpbGxfYmV0d2VlbihcbiAgICBzYW1wbGVfc2l6ZXMsXG4gICAgW3YgLSBlIGZvciB2LCBlIGluIHppcCh2b2x1bWVzLCBlcnJvcnMpXSxcbiAgICBbdiArIGUgZm9yIHYsIGUgaW4gemlwKHZvbHVtZXMsIGVycm9ycyldLFxuICAgIGFscGhhPTAuM1xuKVxucGx0LmF4aGxpbmUoZXhhY3Rfdm9sdW1lLCBjb2xvcj0ncicsIGxpbmVzdHlsZT0nLS0nLCBsYWJlbD0nRXhhY3QgdmFsdWUnKVxucGx0LnhsYWJlbCgnTnVtYmVyIG9mIHNhbXBsZXMnKVxucGx0LnlsYWJlbCgnVm9sdW1lIG9mIHVuaXQgc3BoZXJlJylcbnBsdC5sZWdlbmQoKVxucGx0LnNob3coKVxuXG5wcmludChmXCJWb2x1bWUgb2YgdW5pdCBzcGhlcmUgKE1vbnRlIENhcmxvIHdpdGgge25fc2FtcGxlc30gc2FtcGxlcyk6IHt2b2x1bWU6LjZmfSDCsSB7ZXJyb3I6LjZmfVwiKVxucHJpbnQoZlwiRXhhY3Qgdm9sdW1lIG9mIHVuaXQgc3BoZXJlOiB7ZXhhY3Rfdm9sdW1lOi42Zn1cIilcbnByaW50KGZcIlJlbGF0aXZlIGVycm9yOiB7YWJzKHZvbHVtZSAtIGV4YWN0X3ZvbHVtZSkvZXhhY3Rfdm9sdW1lKjEwMDouNGZ9JVwiKSJ9
+</script>
+</div>
+</section>
+<section id="application-to-real-physics-problems" class="level3">
+<h3 class="anchored" data-anchor-id="application-to-real-physics-problems">Application to Real Physics Problems</h3>
+<p>Let’s examine two common scenarios in physics that benefit from numerical integration:</p>
+<ol type="1">
+<li><p><strong>Non-uniform Magnetic Field</strong>: When a charged particle moves through a non-uniform magnetic field, the work done can be calculated as:</p>
+<p><span class="math display">\[W = q\int_{\vec{r}_1}^{\vec{r}_2} \vec{v} \times \vec{B}(\vec{r}) \cdot d\vec{r}\]</span></p></li>
+<li><p><strong>Quantum Tunneling</strong>: The tunneling probability through a potential barrier is given by:</p>
+<p><span class="math display">\[T \approx \exp\left(-\frac{2}{\hbar}\int_{x_1}^{x_2} \sqrt{2m(V(x) - E)}\, dx\right)\]</span></p></li>
+</ol>
+<p>In both cases, the integrals frequently cannot be solved analytically due to the complex spatial dependence of the fields or potentials, making numerical integration indispensable for modern physics.</p>
+</section>
+</div>
+</div>
+</div>
+
+
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImluZGV4VVJMIjoiaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L3B5b2RpZGUvdjAuMjYuMS9mdWxsLyJ9LCJwYWNrYWdlcyI6eyJwa2dzIjpbInB5b2RpZGVfaHR0cCIsIm1pY3JvcGlwIiwiaXB5dGhvbiIsIm1hdHBsb3RsaWIiLCJudW1weSIsInNjaXB5Il19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTEwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTAgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTkiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl85ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzkgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzksIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS04LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzggPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl83ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS03LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoiX3B5b2RpZGVfdmFsdWVfMSA9IHtcbiAgY29uc3QgeyBoaWdobGlnaHRQeXRob24sIGI2NERlY29kZX0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBldmFsdWF0aW9uIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oe1xuICAgIGlkOiBcInB5b2RpZGUtMS1jb250ZW50c1wiLFxuICAgIGVjaG86IHRydWUsXG4gICAgb3V0cHV0OiB0cnVlXG4gIH0sIGJsb2NrLmF0dHIpO1xuXG4gIC8vIEV2YWx1YXRlIHRoZSBwcm92aWRlZCBQeXRob24gY29kZVxuICBjb25zdCByZXN1bHQgPSBweW9kaWRlT2pzLnByb2Nlc3Moe2NvZGU6IGJsb2NrLmNvZGUsIG9wdGlvbnN9LCB7fSk7XG5cbiAgLy8gRWFybHkgeWllbGQgd2hpbGUgd2Ugd2FpdCBmb3IgdGhlIGZpcnN0IGV2YWx1YXRpb24gYW5kIHJlbmRlclxuICBpZiAob3B0aW9ucy5vdXRwdXQgJiYgIShcIjFcIiBpbiBweW9kaWRlT2pzLnJlbmRlcmVkT2pzKSkge1xuICAgIGNvbnN0IGNvbnRhaW5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG4gICAgY29uc3Qgc3Bpbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG5cbiAgICBpZiAob3B0aW9ucy5lY2hvKSB7XG4gICAgICAvLyBTaG93IG91dHB1dCBhcyBoaWdobGlnaHRlZCBzb3VyY2VcbiAgICAgIGNvbnN0IHByZUVsZW0gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwicHJlXCIpO1xuICAgICAgY29udGFpbmVyLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZVwiO1xuICAgICAgcHJlRWxlbS5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGUgcHl0aG9uXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKGhpZ2hsaWdodFB5dGhvbihibG9jay5jb2RlKSk7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ncm93IHNwaW5uZXItZ3Jvdy1zbSBtLTIgcG9zaXRpb24tYWJzb2x1dGUgdG9wLTAgZW5kLTBcIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQocHJlRWxlbSk7XG4gICAgfSBlbHNlIHtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWJvcmRlciBzcGlubmVyLWJvcmRlci1zbVwiO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgIH1cblxuICAgIHlpZWxkIGNvbnRhaW5lcjtcbiAgfVxuXG4gIHB5b2RpZGVPanMucmVuZGVyZWRPanNbXCIxXCJdID0gdHJ1ZTtcbiAgeWllbGQgYXdhaXQgcmVzdWx0O1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtcHJlbHVkZSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InB5b2RpZGVPanMgPSB7XG4gIGNvbnN0IHtcbiAgICBQeW9kaWRlRXZhbHVhdG9yLFxuICAgIFB5b2RpZGVFbnZpcm9ubWVudE1hbmFnZXIsXG4gICAgc2V0dXBQeXRob24sXG4gICAgc3RhcnRQeW9kaWRlV29ya2VyLFxuICAgIGI2NERlY29kZSxcbiAgICBjb2xsYXBzZVBhdGgsXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../lectures/lecture05";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "../..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/fcichos\.github\.io\/CBPM\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

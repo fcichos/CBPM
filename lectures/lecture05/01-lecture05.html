@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Molecular Dynamics Simulations in EMPP 2024 – Computer-Based Physical Modelling</title>
+<title>Brownian Motion – Computer-Based Physical Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -107,6 +72,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
@@ -139,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Molecular Dynamics Simulations in EMPP 2024</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Brownian Motion</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -468,10 +462,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lenard-jones-potential" id="toc-lenard-jones-potential" class="nav-link active" data-scroll-target="#lenard-jones-potential">Lenard-Jones Potential</a></li>
-  <li><a href="#taylor-expansion" id="toc-taylor-expansion" class="nav-link" data-scroll-target="#taylor-expansion">Taylor Expansion</a></li>
-  <li><a href="#velocity-verlet" id="toc-velocity-verlet" class="nav-link" data-scroll-target="#velocity-verlet">Velocity Verlet</a></li>
-  <li><a href="#class-for-an-atom" id="toc-class-for-an-atom" class="nav-link" data-scroll-target="#class-for-an-atom">Class for an Atom</a></li>
+  <li><a href="#brownian-motion---object-oriented-implementation" id="toc-brownian-motion---object-oriented-implementation" class="nav-link active" data-scroll-target="#brownian-motion---object-oriented-implementation">Brownian Motion - Object-Oriented Implementation</a>
+  <ul class="collapse">
+  <li><a href="#why-use-a-class" id="toc-why-use-a-class" class="nav-link" data-scroll-target="#why-use-a-class">Why Use a Class?</a></li>
+  <li><a href="#class-design" id="toc-class-design" class="nav-link" data-scroll-target="#class-design">Class Design</a></li>
+  </ul></li>
+  <li><a href="#simulation-and-analysis" id="toc-simulation-and-analysis" class="nav-link" data-scroll-target="#simulation-and-analysis">Simulation and Analysis</a>
+  <ul class="collapse">
+  <li><a href="#simulating" id="toc-simulating" class="nav-link" data-scroll-target="#simulating">Simulating</a></li>
+  <li><a href="#plotting-the-trajectories" id="toc-plotting-the-trajectories" class="nav-link" data-scroll-target="#plotting-the-trajectories">Plotting the trajectories</a></li>
+  <li><a href="#characterizing-the-brownian-motion" id="toc-characterizing-the-brownian-motion" class="nav-link" data-scroll-target="#characterizing-the-brownian-motion">Characterizing the Brownian motion</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further Reading</a></li>
   </ul>
 </nav>
     </div>
@@ -480,7 +483,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Molecular Dynamics Simulations in EMPP 2024</h1>
+<h1 class="title">Brownian Motion</h1>
 </div>
 
 
@@ -497,135 +500,253 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="cell-2" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({<span class="st">'font.size'</span>: <span class="dv">8</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'lines.linewidth'</span>: <span class="dv">1</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'lines.markersize'</span>: <span class="dv">10</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'axes.labelsize'</span>: <span class="dv">10</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'axes.titlesize'</span>: <span class="dv">10</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'xtick.labelsize'</span> : <span class="dv">10</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'ytick.labelsize'</span> : <span class="dv">10</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'xtick.top'</span> : <span class="va">True</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'xtick.direction'</span> : <span class="st">'in'</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'ytick.right'</span> : <span class="va">True</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'ytick.direction'</span> : <span class="st">'in'</span>,})</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_size(w,h):</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span>((w<span class="op">/</span><span class="fl">2.54</span>,h<span class="op">/</span><span class="fl">2.54</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="lenard-jones-potential" class="level2">
-<h2 class="anchored" data-anchor-id="lenard-jones-potential">Lenard-Jones Potential</h2>
-<div id="cell-4" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lennard_jones(r, epsilon<span class="op">=</span><span class="dv">1</span>, sigma<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">4</span> <span class="op">*</span> epsilon <span class="op">*</span> ((sigma<span class="op">/</span>r)<span class="op">**</span><span class="dv">12</span> <span class="op">-</span> (sigma<span class="op">/</span>r)<span class="op">**</span><span class="dv">6</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.linspace(<span class="fl">0.8</span>, <span class="dv">3</span>, <span class="dv">1000</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> lennard_jones(r)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>get_size(<span class="dv">8</span>, <span class="dv">6</span>),dpi<span class="op">=</span><span class="dv">150</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.plot(r, V, <span class="st">'b-'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'r/σ'</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'V/ε'</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Lennard-Jones Potential'</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'k'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="fl">1.5</span>, <span class="dv">3</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+<section id="brownian-motion---object-oriented-implementation" class="level2">
+<h2 class="anchored" data-anchor-id="brownian-motion---object-oriented-implementation">Brownian Motion - Object-Oriented Implementation</h2>
+<section id="why-use-a-class" class="level3">
+<h3 class="anchored" data-anchor-id="why-use-a-class">Why Use a Class?</h3>
+<p>A class is perfect for this physics simulation because each colloidal particle:</p>
+<ol type="1">
+<li>Has specific properties
+<ul>
+<li>Size (radius)</li>
+<li>Current position</li>
+<li>Movement history</li>
+<li>Diffusion coefficient</li>
+</ul></li>
+<li>Follows certain behaviors
+<ul>
+<li>Moves randomly (Brownian motion)</li>
+<li>Updates its position over time</li>
+<li>Keeps track of where it’s been</li>
+</ul></li>
+<li>Can exist alongside other particles
+<ul>
+<li>Many particles can move independently</li>
+<li>Each particle keeps track of its own properties</li>
+<li>Particles can have different sizes</li>
+</ul></li>
+<li>Needs to track its state over time
+<ul>
+<li>Remember previous positions</li>
+<li>Calculate distances moved</li>
+<li>Maintain its own trajectory</li>
+</ul></li>
+</ol>
+<p>This natural mapping between real particles and code objects makes classes an ideal choice for our simulation.</p>
+</section>
+<section id="class-design" class="level3">
+<h3 class="anchored" data-anchor-id="class-design">Class Design</h3>
+<p>We design a <code>Colloid</code> class to simulate particles undergoing Brownian motion. Using object-oriented programming makes physical sense here - in the real world, each colloidal particle is an independent object with its own properties that follows the same physical laws as other particles.</p>
+<section id="class-level-properties-shared-by-all-particles" class="level4">
+<h4 class="anchored" data-anchor-id="class-level-properties-shared-by-all-particles">Class-Level Properties (Shared by All Particles)</h4>
+<p>Our <code>Colloid</code> class will store information common to all particles:</p>
+<ol type="1">
+<li><code>number</code>: A counter tracking how many particles we’ve created</li>
+<li><code>f = 2.2×10^{-19}</code>: The physical constant <span class="math inline">\(k_B T/(6\pi\eta)\)</span> in m³/s
+<ul>
+<li>This combines Boltzmann’s constant (<span class="math inline">\(k_B\)</span>), temperature (<span class="math inline">\(T\)</span>), and fluid viscosity (<span class="math inline">\(\eta\)</span>)</li>
+<li>Using this constant simplifies our diffusion calculations</li>
+</ul></li>
+</ol>
+</section>
+<section id="class-methods-functions-shared-by-all-particles" class="level4">
+<h4 class="anchored" data-anchor-id="class-methods-functions-shared-by-all-particles">Class Methods (Functions Shared by All Particles)</h4>
+<p>The class provides these shared behaviors:</p>
+<ol type="1">
+<li><code>how_many()</code>: Returns the total count of particles created
+<ul>
+<li>Useful for tracking how many particles exist in our simulation</li>
+</ul></li>
+<li><code>__str__()</code>: Returns a human-readable description when we print a particle
+<ul>
+<li>Shows the particle’s radius and current position</li>
+</ul></li>
+</ol>
+</section>
+<section id="instance-properties-unique-to-each-particle" class="level4">
+<h4 class="anchored" data-anchor-id="instance-properties-unique-to-each-particle">Instance Properties (Unique to Each Particle)</h4>
+<p>Each individual particle will have its own:</p>
+<ol type="1">
+<li><code>R</code>: Radius in meters</li>
+<li><code>x</code>, <code>y</code>: Lists storing position history (starting with initial position)</li>
+<li><code>index</code>: Unique ID number for each particle</li>
+<li><code>D</code>: Diffusion coefficient calculated as <span class="math inline">\(D = f/R\)</span>
+<ul>
+<li>From Einstein-Stokes relation: <span class="math inline">\(D = \frac{k_B T}{6\pi\eta R}\)</span></li>
+<li>Smaller particles diffuse faster (larger D)</li>
+</ul></li>
+</ol>
+</section>
+<section id="instance-methods-what-each-particle-can-do" class="level4">
+<h4 class="anchored" data-anchor-id="instance-methods-what-each-particle-can-do">Instance Methods (What Each Particle Can Do)</h4>
+<p>Each particle object will have these behaviors:</p>
+<ol type="1">
+<li><code>update(dt)</code>: Performs a single timestep of Brownian motion
+<ul>
+<li>Takes a timestep <code>dt</code> in seconds</li>
+<li>Adds random displacement based on diffusion coefficient</li>
+<li>Returns the new position</li>
+</ul></li>
+<li><code>sim_trajectory(N, dt)</code>: Simulates a complete trajectory
+<ul>
+<li>Generates N steps with timestep dt</li>
+<li>Calls <code>update()</code> repeatedly to build the trajectory</li>
+</ul></li>
+<li><code>get_trajectory()</code>: Returns the particle’s movement history as a DataFrame
+<ul>
+<li>Convenient for analysis and plotting</li>
+</ul></li>
+<li><code>get_D()</code>: Returns the particle’s diffusion coefficient
+<ul>
+<li>Useful for calculations and verification</li>
+</ul></li>
+</ol>
 <div>
-<figure class="figure">
-<p><img src="MDSimulation_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
-</figure>
+<div id="pyodide-1">
+
 </div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgQ2xhc3MgZGVmaW5pdGlvblxuY2xhc3MgQ29sbG9pZDpcblxuICAgICMgQSBjbGFzcyB2YXJpYWJsZSwgY291bnRpbmcgdGhlIG51bWJlciBvZiBDb2xsb2lkc1xuICAgIG51bWJlciA9IDBcbiAgICBmID0gMi4yZS0xOSAjIHRoaXMgaXMga19CIFQvKDYgcGkgZXRhKSBpbiBtXjMvc1xuXG4gICAgIyBjb25zdHJ1Y3RvclxuICAgIGRlZiBfX2luaXRfXyhzZWxmLFIsIHgwPTAsIHkwPTApOlxuICAgICAgICAjIGFkZCBpbml0aWFsaXNhdGlvbiBjb2RlIGhlcmVcbiAgICAgICAgc2VsZi5SPVJcbiAgICAgICAgc2VsZi54PVt4MF1cbiAgICAgICAgc2VsZi55PVt5MF1cbiAgICAgICAgQ29sbG9pZC5udW1iZXI9Q29sbG9pZC5udW1iZXIrMVxuICAgICAgICBzZWxmLmluZGV4PUNvbGxvaWQubnVtYmVyXG4gICAgICAgIHNlbGYuRD1Db2xsb2lkLmYvc2VsZi5SXG5cbiAgICBkZWYgZ2V0X0Qoc2VsZik6XG4gICAgICAgIHJldHVybihzZWxmLkQpXG5cbiAgICBkZWYgc2ltX3RyYWplY3Rvcnkoc2VsZixOLGR0KTpcbiAgICAgICAgZm9yIGkgaW4gcmFuZ2UoTik6XG4gICAgICAgICAgICBzZWxmLnVwZGF0ZShkdClcblxuICAgIGRlZiB1cGRhdGUoc2VsZixkdCk6XG4gICAgICAgIHNlbGYueC5hcHBlbmQoc2VsZi54Wy0xXStucC5yYW5kb20ubm9ybWFsKDAuMCwgbnAuc3FydCgyKnNlbGYuRCpkdCkpKVxuICAgICAgICBzZWxmLnkuYXBwZW5kKHNlbGYueVstMV0rbnAucmFuZG9tLm5vcm1hbCgwLjAsIG5wLnNxcnQoMipzZWxmLkQqZHQpKSlcbiAgICAgICAgcmV0dXJuKHNlbGYueFstMV0sc2VsZi55Wy0xXSlcblxuICAgIGRlZiBnZXRfdHJhamVjdG9yeShzZWxmKTpcbiAgICAgICAgcmV0dXJuKHBkLkRhdGFGcmFtZSh7J3gnOnNlbGYueCwneSc6c2VsZi55fSkpXG5cbiAgICAjIGNsYXNzIG1ldGhvZCBhY2Nlc3NpbmcgYSBjbGFzcyB2YXJpYWJsZVxuICAgIEBjbGFzc21ldGhvZFxuICAgIGRlZiBob3dfbWFueShjbHMpOlxuICAgICAgICByZXR1cm4oQ29sbG9pZC5udW1iZXIpXG5cbiAgICAjIGluc2VydCBzb21ldGhpbmcgdGhhdCBwcmludHMgdGhlIHBhcnRpY2xlIHBvc2l0aW9uIGluIGEgZm9ybWF0dGVkIHdheSB3aGVuIHByaW50aW5nXG4gICAgZGVmIF9fc3RyX18oc2VsZik6XG4gICAgICAgIHJldHVybihcIkknbSBhIHBhcnRpY2xlIHdpdGggcmFkaXVzIFI9ezA6MC4zZX0gYXQgeD17MTowLjNlfSx5PXsyOjAuM2V9LlwiLmZvcm1hdChzZWxmLlIsIHNlbGYueFstMV0sIHNlbGYueVstMV0pKSJ9
+</script>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Note that the function <code>sim_trajectory</code> is actually calling the function <code>update</code> of the same object to generate the whole trajectory at once.</p>
 </div>
 </div>
 </section>
-<section id="taylor-expansion" class="level2">
-<h2 class="anchored" data-anchor-id="taylor-expansion">Taylor Expansion</h2>
-<div id="cell-6" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">1000</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.sin(x)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>y_taylor <span class="op">=</span> x <span class="op">-</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span><span class="op">*</span>x<span class="op">**</span><span class="dv">3</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>y_taylor1 <span class="op">=</span> x <span class="op">-</span> <span class="dv">1</span><span class="op">/</span><span class="dv">6</span><span class="op">*</span>x<span class="op">**</span><span class="dv">3</span><span class="op">+</span>x<span class="op">**</span><span class="dv">5</span><span class="op">/</span><span class="dv">120</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>get_size(<span class="dv">8</span>, <span class="dv">6</span>),dpi<span class="op">=</span><span class="dv">150</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y, <span class="st">'b-'</span>, label<span class="op">=</span><span class="st">'sin(x)'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y_taylor, <span class="st">'r--'</span>, label<span class="op">=</span><span class="st">'O(5)'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.plot(x, y_taylor1, <span class="st">'g--'</span>, label<span class="op">=</span><span class="st">'O(7)'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'f(x)'</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="op">-</span><span class="fl">1.3</span>,<span class="fl">1.3</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Taylor Expansion of sin(x)'</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
+</section>
+</section>
+<section id="simulation-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="simulation-and-analysis">Simulation and Analysis</h2>
+<section id="simulating" class="level3">
+<h3 class="anchored" data-anchor-id="simulating">Simulating</h3>
+<p>With the help of this Colloid class, we would like to carry out simulations of Brownian motion of multiple particles. The simulations shall</p>
+<ul>
+<li>take n=200 particles</li>
+<li>have N=200 trajectory points each</li>
+<li>start all at 0,0</li>
+<li>particle objects should be stored in a list p_list</li>
+</ul>
 <div>
-<figure class="figure">
-<p><img src="MDSimulation_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
-</figure>
+<div id="pyodide-2">
+
 </div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6Ik49MjAwICMgdGhlIG51bWJlciBvZiB0cmFqZWN0b3J5IHBvaW50c1xubj0yMDAgIyB0aGUgbnVtYmVyIG9mIHBhcnRpY2xlc1xuXG5wX2xpc3Q9W11cbmR0PTAuMDVcblxuIyBjcmVhdGluZyBhbGwgb2JqZWN0c1xuZm9yIGkgaW4gcmFuZ2Uobik6XG4gICAgcF9saXN0LmFwcGVuZChDb2xsb2lkKDFlLTYpKVxuXG5cbmZvciAoaW5kZXgscCkgaW4gZW51bWVyYXRlKHBfbGlzdCk6XG4gICAgcC5zaW1fdHJhamVjdG9yeShOLGR0KSJ9
+</script>
+</div>
+<div>
+<div id="pyodide-3">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByaW50KHBfbGlzdFs0Ml0pIn0=
+</script>
+</div>
+</section>
+<section id="plotting-the-trajectories" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-the-trajectories">Plotting the trajectories</h3>
+<p>The next step is to plot all the trajectories.</p>
+<div>
+<div id="pyodide-4">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgd2UgdGFrZSByZWFsIHdvcmxkIGRpZmZ1c2lvbiBjb2VmZmljaWVudHMgc28gc2NhbGUgdXAgdGhlIGRhdGEgdG8gYXZvaWQgbmFzdHkgZXhwb25lbnRpYWxzXG5zY2FsZT0xZTZcblxucGx0LmZpZ3VyZShmaWdzaXplPSg0LDQpKVxuXG5bcGx0LnBsb3QobnAuYXJyYXkocC54WzpdKSpzY2FsZSxucC5hcnJheShwLnlbOl0pKnNjYWxlLCdrLScsYWxwaGE9MC4xLGx3PTEpIGZvciBwIGluIHBfbGlzdF1cbnBsdC54bGltKC0xMCwxMClcbnBsdC55bGltKC0xMCwxMClcbnBsdC54bGFiZWwoJ3ggW8K1bV0nKVxucGx0LnlsYWJlbCgneSBbwrVtXScpXG5wbHQudGlnaHRfbGF5b3V0KClcbnBsdC5zaG93KCkifQ==
+</script>
+</div>
+</section>
+<section id="characterizing-the-brownian-motion" class="level3">
+<h3 class="anchored" data-anchor-id="characterizing-the-brownian-motion">Characterizing the Brownian motion</h3>
+<p>Now that we have a number of trajectories, we can analyze the motion of our Brownian particles.</p>
+<section id="calculate-the-particle-speed" class="level4">
+<h4 class="anchored" data-anchor-id="calculate-the-particle-speed">Calculate the particle speed</h4>
+<p>One way is to calculate its speed by measuring how far it traveled within a certain time <span class="math inline">\(n\, dt\)</span>, where <span class="math inline">\(dt\)</span> is the timestep of out simulation. We can do that as</p>
+<p><span class="math display">\[\begin{equation}
+v(n dt) = \frac{&lt;\sqrt{(x_{i+n}-x_{i})^2+(y_{i+n}-y_{i})^2}&gt;}{n\,dt}
+\end{equation}\]</span></p>
+<p>The angular brackets on the top take care of the fact that we can measure the distance traveled within a certain time <span class="math inline">\(n\, dt\)</span> several times along a trajectory.</p>
+<p>These values can be used to calculate a mean speed. Note that there is not an equal amount of data pairs for all separations available. For <span class="math inline">\(n=1\)</span> there are 5 distances available. For <span class="math inline">\(n=5\)</span>, however, only 1. This changes the statistical accuracy of the mean.</p>
+<div>
+<div id="pyodide-5">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InRpbWU9bnAuYXJyYXkocmFuZ2UoMSxOKSkqZHRcblxucGx0LmZpZ3VyZShmaWdzaXplPSg0LDQpKVxuZm9yIGogaW4gcmFuZ2UoMTAwKTpcbiAgICB0PXBfbGlzdFtqXS5nZXRfdHJhamVjdG9yeSgpXG4gICAgbWQ9W25wLm1lYW4obnAuc3FydCh0LnguZGlmZihpKSoqMit0LnkuZGlmZihpKSoqMikpIGZvciBpIGluIHJhbmdlKDEsTildXG4gICAgbWQ9bWQvdGltZVxuICAgIHBsdC5wbG90KHRpbWUsbWQsYWxwaGE9MC40KVxuXG5wbHQueWxhYmVsKCdzcGVlZCBbbS9zXScpXG5wbHQueGxhYmVsKCd0aW1lIFtzXScpXG5wbHQudGlnaHRfbGF5b3V0KClcbnBsdC5zaG93KCkifQ==
+</script>
+</div>
+<p>The result of this analysis shows, that each particle has an apparent speed which seems to increase with decreasing time of observation or which decreases with increasing time. This would mean that there is some friction at work, which slows down the particle in time, but this is apparently not true. Also an infinite speed at zero time appears to be unphysical. The correct answer is just that the speed is no good measure to characterize the motion of a Brownian particle.</p>
+</section>
+<section id="calculate-the-particle-mean-squared-displacement" class="level4">
+<h4 class="anchored" data-anchor-id="calculate-the-particle-mean-squared-displacement">Calculate the particle mean squared displacement</h4>
+<p>A better way to characterize the motion of a Brownian particle is the mean squared displacement, as we have already mentioned it in previous lectures. We may compare our simulation now to the theoretical prediction, which is</p>
+<p><span class="math display">\[\begin{equation}
+\langle \Delta r^{2}(t)\rangle=2 d D t
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(d\)</span> is the dimension of the random walk, which is <span class="math inline">\(d=2\)</span> in our case.</p>
+<div>
+<div id="pyodide-6">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InRpbWU9bnAuYXJyYXkocmFuZ2UoMSxOKSkqZHRcblxucGx0LmZpZ3VyZShmaWdzaXplPSg0LDQpKVxuZm9yIGogaW4gcmFuZ2UoMTAwKTpcbiAgICB0PXBfbGlzdFtqXS5nZXRfdHJhamVjdG9yeSgpXG4gICAgbXNkPVtucC5tZWFuKHQueC5kaWZmKGkpLmRyb3BuYSgpKioyK3QueS5kaWZmKGkpLmRyb3BuYSgpKioyKSBmb3IgaSBpbiByYW5nZSgxLE4pXVxuICAgIHBsdC5wbG90KHRpbWUsbXNkLGFscGhhPTAuNClcblxuXG5wbHQubG9nbG9nKHRpbWUsIDQqcF9saXN0WzBdLkQqdGltZSwnay0tJyxsdz0yLGxhYmVsPSd0aGVvcnknKVxucGx0LmxlZ2VuZCgpXG5wbHQueGxhYmVsKCd0aW1lIFtzXScpXG5wbHQueWxhYmVsKCdtc2QgJFttXjIvc10kJylcbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LnNob3coKSJ9
+</script>
+</div>
+<p>The results show that the mean squared displacement of the individual particles follows <em>on average</em> the theoretical predictions of a linear growth in time. That means, we are able to read the diffusion coefficient from the slope of the MSD of the individual particles if recorded in a simulation or an experiment.</p>
+<p>Yet, each individual MSD is deviating strongly from the theoretical prediction especially at large times. This is due to the fact mentioned earlier that our simulation (or experimental) data only has a limited number of data points, while the theoretical prediction is made for the limit of infinite data points.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Analysis of MSD data
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Single particle tracking, either in the experiment or in numerical simulations can therefore only deliver an estimate of the diffusion coefficient and care should be taken when using the whole MSD to obtain the diffusion coefficient. One typically uses only a short fraction of the whole MSD data at short times.</p>
 </div>
 </div>
 </section>
-<section id="velocity-verlet" class="level2">
-<h2 class="anchored" data-anchor-id="velocity-verlet">Velocity Verlet</h2>
-<div id="cell-8" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> <span class="fl">9.81</span>  <span class="co"># m/s^2</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> <span class="fl">0.01</span>  <span class="co"># time step</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>t_max <span class="op">=</span> <span class="fl">2.0</span>  <span class="co"># total simulation time</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>steps <span class="op">=</span> <span class="bu">int</span>(t_max<span class="op">/</span>dt)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial conditions</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> <span class="fl">20.0</span>  <span class="co"># initial height</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>v0 <span class="op">=</span> <span class="fl">0.0</span>   <span class="co"># initial velocity</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Arrays to store results</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.zeros(steps)</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.zeros(steps)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> np.zeros(steps)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.zeros(steps)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial values</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">0</span>] <span class="op">=</span> y0</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>v[<span class="dv">0</span>] <span class="op">=</span> v0</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">0</span>] <span class="op">=</span> <span class="op">-</span>g</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Velocity Verlet integration</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, steps):</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    t[i] <span class="op">=</span> i <span class="op">*</span> dt</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    y[i] <span class="op">=</span> y[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> v[i<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> dt <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> a[i<span class="op">-</span><span class="dv">1</span>] <span class="op">*</span> dt<span class="op">**</span><span class="dv">2</span>  <span class="co"># update position</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    a_new <span class="op">=</span> <span class="op">-</span>g                                          <span class="co"># new acceleration (assuming constant gravity)</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    v[i] <span class="op">=</span> v[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> (a[i<span class="op">-</span><span class="dv">1</span>] <span class="op">+</span> a_new) <span class="op">*</span> dt  <span class="co"># update velocity</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    a[i] <span class="op">=</span> a_new  <span class="co"># store new acceleration</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>get_size(<span class="dv">8</span>, <span class="dv">6</span>), dpi<span class="op">=</span><span class="dv">150</span>)</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>plt.plot(t, y)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Time (s)'</span>)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Height (m)'</span>)</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Free Fall Motion'</span>)</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="MDSimulation_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
 </section>
-<section id="class-for-an-atom" class="level2">
-<h2 class="anchored" data-anchor-id="class-for-an-atom">Class for an Atom</h2>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this lecture, we have:</p>
+<ol type="1">
+<li>Explored the physical principles behind Brownian motion and its mathematical description</li>
+<li>Implemented a computational model using object-oriented programming principles</li>
+<li>Created a <code>Colloid</code> class with properties and methods that simulate realistic particle behavior</li>
+<li>Generated and visualized multiple particle trajectories</li>
+<li>Analyzed the simulation results using mean squared displacement calculations</li>
+<li>Compared our numerical results with theoretical predictions</li>
+</ol>
+<p>This exercise demonstrates how object-oriented programming provides an elegant framework for physics simulations, where the objects in our code naturally represent physical entities in the real world.</p>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
+<ul>
+<li>Einstein, A. (1905). “On the Movement of Small Particles Suspended in Stationary Liquids Required by the Molecular-Kinetic Theory of Heat”</li>
+<li>Berg, H.C. (1993). “Random Walks in Biology”</li>
+<li>Chandrasekhar, S. (1943). “Stochastic Problems in Physics and Astronomy”</li>
+<li>Nelson, E. (2001). “Dynamical Theories of Brownian Motion”</li>
+</ul>
 
 
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImluZGV4VVJMIjoiaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L3B5b2RpZGUvdjAuMjYuMS9mdWxsLyJ9LCJwYWNrYWdlcyI6eyJwa2dzIjpbInB5b2RpZGVfaHR0cCIsIm1pY3JvcGlwIiwiaXB5dGhvbiIsIm51bXB5IiwibWF0cGxvdGxpYiJdfX0=
+</script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W119
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIFB5b2RpZGUgc3VwcGxlbWVudGFsIGRhdGEgYW5kIG9wdGlvbnNcbiAgY29uc3QgZGF0YUNvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS1kYXRhXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZGF0YSA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGRhdGFDb250ZW50KSk7XG5cbiAgLy8gR3JhYiBsaXN0IG9mIHJlc291cmNlcyB0byBiZSBkb3dubG9hZGVkXG4gIGNvbnN0IGZpbGVzQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJ2ZnMtZmlsZVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGZpbGVzID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZmlsZXNDb250ZW50KSk7XG5cbiAgbGV0IHB5b2RpZGVQcm9taXNlID0gKGFzeW5jICgpID0+IHtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIFB5b2RpZGVgO1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBzdGFydFB5b2RpZGVXb3JrZXIoZGF0YS5vcHRpb25zKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogbWljcm9waXBgO1xuICAgIGF3YWl0IHB5b2RpZGUubG9hZFBhY2thZ2UoXCJtaWNyb3BpcFwiKTtcbiAgICBjb25zdCBtaWNyb3BpcCA9IGF3YWl0IHB5b2RpZGUucHlpbXBvcnQoXCJtaWNyb3BpcFwiKTtcbiAgICBhd2FpdCBkYXRhLnBhY2thZ2VzLnBrZ3MubWFwKChwa2cpID0+ICgpID0+IHtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcGFja2FnZTogJHtwa2d9YDtcbiAgICAgIHJldHVybiBtaWNyb3BpcC5pbnN0YWxsKHBrZyk7XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG4gICAgYXdhaXQgbWljcm9waXAuZGVzdHJveSgpO1xuXG4gICAgLy8gRG93bmxvYWQgYW5kIGluc3RhbGwgcmVzb3VyY2VzXG4gICAgYXdhaXQgZmlsZXMubWFwKChmaWxlKSA9PiBhc3luYyAoKSA9PiB7XG4gICAgICBjb25zdCBuYW1lID0gZmlsZS5zdWJzdHJpbmcoZmlsZS5sYXN0SW5kZXhPZignLycpICsgMSk7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHJlc291cmNlOiAke25hbWV9YDtcbiAgICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgZmV0Y2goZmlsZSk7XG4gICAgICBpZiAoIXJlc3BvbnNlLm9rKSB7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgQ2FuJ3QgZG93bmxvYWQgXFxgJHtmaWxlfVxcYC4gRXJyb3IgJHtyZXNwb25zZS5zdGF0dXN9OiBcIiR7cmVzcG9uc2Uuc3RhdHVzVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByZXNwb25zZS5hcnJheUJ1ZmZlcigpO1xuXG4gICAgICAvLyBTdG9yZSBVUkxzIGluIHRoZSBjd2Qgd2l0aG91dCBhbnkgc3ViZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgaWYgKGZpbGUuaW5jbHVkZXMoXCI6Ly9cIikpIHtcbiAgICAgICAgZmlsZSA9IG5hbWU7XG4gICAgICB9XG5cbiAgICAgIC8vIENvbGxhcHNlIGhpZ2hlciBkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBmaWxlID0gY29sbGFwc2VQYXRoKGZpbGUpO1xuXG4gICAgICAvLyBDcmVhdGUgZGlyZWN0b3J5IHRyZWUsIGlnbm9yaW5nIFwiZGlyZWN0b3J5IGV4aXN0c1wiIFZGUyBlcnJvcnNcbiAgICAgIGNvbnN0IHBhcnRzID0gZmlsZS5zcGxpdCgnLycpLnNsaWNlKDAsIC0xKTtcbiAgICAgIGxldCBwYXRoID0gJyc7XG4gICAgICB3aGlsZSAocGFydHMubGVuZ3RoID4gMCkge1xuICAgICAgICBwYXRoICs9IHBhcnRzLnNoaWZ0KCkgKyAnLyc7XG4gICAgICAgIHRyeSB7XG4gICAgICAgICAgYXdhaXQgcHlvZGlkZS5GUy5ta2RpcihwYXRoKTtcbiAgICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICAgIGlmIChlLmVycm5vICE9PSAyMCkge1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIC8vIFdyaXRlIHRoaXMgZmlsZSB0byB0aGUgVkZTXG4gICAgICB0cnkge1xuICAgICAgICByZXR1cm4gYXdhaXQgcHlvZGlkZS5GUy53cml0ZUZpbGUoZmlsZSwgbmV3IFVpbnQ4QXJyYXkoZGF0YSkpO1xuICAgICAgfSBjYXRjaCAoZSkge1xuICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0UHRyID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLl9zdHJlcnJvcihlLmVycm5vKTtcbiAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgfVxuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBQeW9kaWRlIGVudmlyb25tZW50IHNldHVwYDtcbiAgICBhd2FpdCBzZXR1cFB5dGhvbihweW9kaWRlKTtcblxuICAgIHN0YXR1c1RleHQucmVtb3ZlKCk7XG4gICAgaWYgKHN0YXR1c0NvbnRhaW5lci5jaGlsZHJlbi5sZW5ndGggPT0gMCkge1xuICAgICAgc3RhdHVzQ29udGFpbmVyLnBhcmVudE5vZGUucmVtb3ZlKCk7XG4gICAgfVxuICAgIHJldHVybiBweW9kaWRlO1xuICB9KSgpLmNhdGNoKChlcnIpID0+IHtcbiAgICBzdGF0dXNUZXh0LnN0eWxlLmNvbG9yID0gXCJ2YXIoLS1leGVyY2lzZS1lZGl0b3ItaGwtZXIsICNBRDAwMDApXCI7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGVyci5tZXNzYWdlO1xuICAgIC8vaW5kaWNhdG9yQ29udGFpbmVyLnF1ZXJ5U2VsZWN0b3IoXCIuc3Bpbm5lci1ncm93XCIpLmNsYXNzTGlzdC5hZGQoXCJkLW5vbmVcIik7XG4gICAgdGhyb3cgZXJyO1xuICB9KTtcblxuICAvLyBLZWVwIHRyYWNrIG9mIGluaXRpYWwgT0pTIGJsb2NrIHJlbmRlclxuICBjb25zdCByZW5kZXJlZE9qcyA9IHt9O1xuXG4gIGNvbnN0IHByb2Nlc3MgPSBhc3luYyAoY29udGV4dCwgaW5wdXRzKSA9PiB7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHB5b2RpZGVQcm9taXNlO1xuICAgIGNvbnN0IGV2YWx1YXRvciA9IG5ldyBQeW9kaWRlRXZhbHVhdG9yKHB5b2RpZGUsIGNvbnRleHQpO1xuICAgIGF3YWl0IGV2YWx1YXRvci5wcm9jZXNzKGlucHV0cyk7XG4gICAgcmV0dXJuIGV2YWx1YXRvci5jb250YWluZXI7XG4gIH1cblxuICByZXR1cm4ge1xuICAgIHB5b2RpZGVQcm9taXNlLFxuICAgIHJlbmRlcmVkT2pzLFxuICAgIHByb2Nlc3MsXG4gIH07XG59XG4ifV19
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -646,7 +767,7 @@ eyJjb250ZW50cyI6W119
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../seminars/seminar01";
+window._ojs.paths.runtimeToDoc = "../../lectures/lecture05";
 window._ojs.paths.runtimeToRoot = "../..";
 window._ojs.paths.docToRoot = "../..";
 window._ojs.selfContained = false;
