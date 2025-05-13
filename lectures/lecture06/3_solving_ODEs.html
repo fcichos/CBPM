@@ -352,13 +352,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../lectures/lecture06/2-integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture05/2-integration.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical Integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../lectures/lecture06/2-integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture05/2-integration.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Solving Differential Equations</span></a>
   </div>
 </li>
@@ -461,8 +461,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../seminars/seminar05/seminar05.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Free Coding Seminar</span></a>
+  <a href="../../seminars/seminar05/md4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MD Simulation 4</span></a>
   </div>
 </li>
       </ul>
@@ -1188,7 +1188,7 @@ window._ojs.runtime.interpretFromScriptTags();
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/fcichos\.github\.io\/CBPM\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

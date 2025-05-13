@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>solving_odes – Computer-Based Physical Modelling</title>
+<title>solving_odes_improved – Computer-Based Physical Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -352,13 +352,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../lectures/lecture06/2-integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture05/2-integration.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical Integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../lectures/lecture06/2-integration.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture05/2-integration.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Solving Differential Equations</span></a>
   </div>
 </li>
@@ -461,8 +461,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../seminars/seminar05/seminar05.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Free Coding Seminar</span></a>
+  <a href="../../seminars/seminar05/md4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MD Simulation 4</span></a>
   </div>
 </li>
       </ul>
@@ -942,7 +942,14 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6Ilxu
 </section>
 <section id="exercises" class="level2">
 <h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<p>Here are two simple exercises with solutions where you can train your programming skills. In these examples you should use the <code>odeint</code> method from SciPy’s <code>integrate</code> module.</p>
+<ol type="1">
+<li><p><strong>Damped Harmonic Oscillator</strong>: Modify the harmonic oscillator to include damping term <span class="math inline">\(b\frac{dx}{dt}\)</span> and solve using both implicit and explicit methods. Compare the rate of energy dissipation between different methods.</p></li>
+<li><p><strong>Advanced Methods</strong>: Implement the 4th order Runge-Kutta method (RK4) and compare its accuracy with the other methods. For the harmonic oscillator, calculate how the energy error grows with time for each method.</p></li>
+<li><p><strong>Chaotic Dynamics</strong>: Explore the chaotic behavior of the damped driven pendulum by creating a bifurcation diagram. Plot the Poincaré section (sampling the phase space at intervals of the driving period) as a function of the driving amplitude F₀.</p></li>
+<li><p><strong>Coupled Systems</strong>: Solve a coupled oscillator system (two masses connected by springs). This system models coupled LC circuits, molecular vibrations, and phonons in solid-state physics.</p></li>
+<li><p><strong>Physical Application</strong>: Choose a physical system from your current physics courses (e.g., an electric circuit, a mechanical system, or an electromagnetic wave) and model it using the numerical methods learned in this lecture.</p></li>
+<li><p><strong>Lyapunov Exponents</strong>: For advanced students, calculate the Lyapunov exponent for the damped driven pendulum to quantify the rate of divergence of nearby trajectories, a key measure of chaos.</p></li>
+</ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -961,7 +968,7 @@ Self-Exercise 1: Simple Harmonic Oscillator
 
 </div>
 <script type="pyodide-15-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMSJ9LCJjb2RlIjoiXG5pbXBvcnQgbnVtcHkgYXMgbnBcbmZyb20gc2NpcHkuaW50ZWdyYXRlIGltcG9ydCBvZGVpbnRcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcblxuZGVmIG9zY2lsbGF0b3Ioc3RhdGUsIHQsIG9tZWdhKTpcbiAgICAjIHlvdXIgY29kZSBoZXJlXG4gICAgIyB5cGlyIGNvZGUgaGVyZVxuXG4jIFNldCBwYXJhbWV0ZXJzXG5cbiMgU29sdmUgT0RFIGFuZCBwbG90IHNvbHV0aW9uXG5fX19fIn0=
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMSJ9LCJjb2RlIjoiXG5pbXBvcnQgbnVtcHkgYXMgbnBcbmZyb20gc2NpcHkuaW50ZWdyYXRlIGltcG9ydCBvZGVpbnRcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcblxuZGVmIG9zY2lsbGF0b3Ioc3RhdGUsIHQsIG9tZWdhKTpcbiAgICB4LCB2ID0gc3RhdGVcbiAgICByZXR1cm4gW3YsIC1vbWVnYSoqMiAqIHhdXG5cbiMgU2V0IHBhcmFtZXRlcnNcbm9tZWdhID0gMi4wXG50ID0gbnAubGluc3BhY2UoMCwgMTAsIDEwMDApXG5pbml0aWFsX3N0YXRlID0gWzEsIDBdXG5cbiMgU29sdmUgT0RFIGFuZCBwbG90IHNvbHV0aW9uXG5fX19fIn0=
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_1">
@@ -1000,27 +1007,23 @@ eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IG51bXB5IGFzIG5w
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Self-Exercise 2: Damped Driven Harmonic Oscillator using Matrix Method
+Self-Exercise 2: Radioactive Decay
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Model a damped harmonic oscillator with an external driving force using the implicit matrix method. This exercise demonstrates how to solve a second-order differential equation by constructing and solving a matrix system that represents the entire time evolution.</p>
-<p>The equation of motion is: <span class="math inline">\(m\frac{d^2x}{dt^2} + b\frac{dx}{dt} + kx = F_0 \cos(\omega t)\)</span></p>
-<p>Where <span class="math inline">\(m\)</span> is mass, <span class="math inline">\(b\)</span> is damping coefficient, <span class="math inline">\(k\)</span> is spring constant, <span class="math inline">\(F_0\)</span> is driving amplitude, and <span class="math inline">\(\omega\)</span> is driving frequency.</p>
+<p>Model the process of radioactive decay, a fundamental concept in nuclear physics. This exercise shows how to solve a first-order differential equation that describes exponential decay.</p>
+<p>The decay equation is: <span class="math inline">\(\frac{dN}{dt} = -\lambda N\)</span></p>
+<p>Where <span class="math inline">\(N\)</span> is the number of atoms and <span class="math inline">\(\lambda\)</span> is the decay constant.</p>
 <div>
 <div id="pyodide-17">
 
 </div>
 <script type="pyodide-17-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMiJ9LCJjb2RlIjoiXG5pbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmZyb20gc2NpcHkuc3BhcnNlIGltcG9ydCBkaWFnc1xuXG4jIERlZmluZSBzeXN0ZW0gcGFyYW1ldGVyc1xubSA9IDEuMCAgICAgICMgbWFzcyAoa2cpXG5rID0gMTYuMCAgICAgIyBzcHJpbmcgY29uc3RhbnQgKE4vbSlcbmIgPSAwLjUgICAgICAjIGRhbXBpbmcgY29lZmZpY2llbnQgKGtnL3MpXG5GMCA9IDEuMCAgICAgIyBkcml2aW5nIGZvcmNlIGFtcGxpdHVkZSAoTilcbm9tZWdhX2QgPSA0LjAgICMgZHJpdmluZyBmcmVxdWVuY3kgKHJhZC9zKVxub21lZ2EwID0gbnAuc3FydChrL20pICAjIG5hdHVyYWwgZnJlcXVlbmN5XG5cbiMgU2V0dXAgdGltZSBkb21haW5cblQgPSAyKm5wLnBpL29tZWdhMCAgIyBuYXR1cmFsIHBlcmlvZFxuTCA9IDEwKlQgICAgICAgICAgICMgc29sdmUgZm9yIDEwIGNvbXBsZXRlIHBlcmlvZHNcbk4gPSAxMDAwICAgICAgICAgICAjIG51bWJlciBvZiBkYXRhIHBvaW50c1xudCA9IG5wLmxpbnNwYWNlKDAsIEwsIE4pICAjIHRpbWUgYXhpc1xuZHQgPSB0WzFdIC0gdFswXSAgICMgdGltZSBzdGVwXG5cbiMgU2V0IGluaXRpYWwgY29uZGl0aW9uc1xueDAgPSAxLjAgICAgIyBpbml0aWFsIHBvc2l0aW9uXG52MCA9IDAuMCAgICAjIGluaXRpYWwgdmVsb2NpdHlcblxuIyBTdGVwIDE6IENvbnN0cnVjdCB0aGUgbWF0cml4IHJlcHJlc2VudGluZyB0aGUgbGVmdCBzaWRlIG9mIHRoZSBlcXVhdGlvblxuIyBUaGlzIG5lZWRzIHRvIGluY2x1ZGU6XG4jIC0gU2Vjb25kIGRlcml2YXRpdmUgb3BlcmF0b3IgKEQyKVxuIyAtIEZpcnN0IGRlcml2YXRpdmUgb3BlcmF0b3IgZm9yIGRhbXBpbmcgKEQxKVxuIyAtIFBvdGVudGlhbCB0ZXJtIChkaWFnb25hbCB3aXRoIGsvbSlcbiMgLSBJbml0aWFsIGNvbmRpdGlvbnNcblxuIyBZb3VyIGNvZGUgaGVyZVxuXG4jIFN0ZXAgMjogRGVmaW5lIHRoZSByaWdodCBzaWRlIG9mIHRoZSBlcXVhdGlvbiB3aXRoIHRoZSBkcml2aW5nIGZvcmNlXG4jIFlvdXIgY29kZSBoZXJlXG5cbiMgU3RlcCAzOiBTb2x2ZSB0aGUgc3lzdGVtXG4jIFlvdXIgY29kZSBoZXJlXG5cbiMgU3RlcCA0OiBQbG90IHRoZSBzb2x1dGlvblxuIyBZb3VyIGNvZGUgaGVyZSJ9
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWUsImV4ZXJjaXNlIjoiZXhfMiJ9LCJjb2RlIjoiXG5pbXBvcnQgbnVtcHkgYXMgbnBcbmZyb20gc2NpcHkuaW50ZWdyYXRlIGltcG9ydCBvZGVpbnRcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcblxuZGVmIGRlY2F5KE4sIHQsIGxhbWJkYV8pOlxuICAgIHJldHVybiAtbGFtYmRhXyAqIE5cblxuIyBTZXQgcGFyYW1ldGVyc1xubGFtYmRhXyA9IDAuNVxudCA9IG5wLmxpbnNwYWNlKDAsIDEwLCAxMDApXG5OMCA9IDEwMDBcblxuIyBTb2x2ZSBPREUgYW5kIHBsb3Qgc29sdXRpb25cbl9fX18ifQ==
 </script>
 </div>
 <div class="hint webr-ojs-exercise exercise-hint d-none" data-exercise="ex_2">
-<p>First, construct a tridiagonal matrix for the second derivative operator <span class="math inline">\(D_2\)</span> with elements <span class="math inline">\(\frac{1}{\Delta t^2}[1, -2, 1]\)</span> along the diagonals.</p>
-<p>For the first derivative (needed for damping), use a central difference approximation: <span class="math inline">\(\frac{d x}{dt} \approx \frac{x_{i+1} - x_{i-1}}{2\Delta t}\)</span>, which gives a matrix <span class="math inline">\(D_1\)</span> with elements <span class="math inline">\(\frac{1}{2\Delta t}[-1, 0, 1]\)</span> along the diagonals.</p>
-<p>The full matrix equation is <span class="math inline">\((D_2 + \frac{b}{m}D_1 + \frac{k}{m}I)x = \frac{F_0}{m}\cos(\omega t)\)</span></p>
-<p>To incorporate initial conditions, modify the first two rows of your matrix and the corresponding entries in your right-hand side vector: - First row: <span class="math inline">\(x_0 = x(0)\)</span> (initial position) - Second row: Approximation for initial velocity using forward difference</p>
-<p>After solving, compare your solution with the analytical solution for the steady-state response of a driven harmonic oscillator.</p>
+<p>Use <code>odeint(decay, N0, t, args=(lambda_,))</code> to solve the equation. The solution will be a 1D array of N values. Plot N vs t to visualize the exponential decay. Consider adding a horizontal line at N0/2 to show the half-life. Use <code>plt.grid(True)</code> to make the plot easier to read.</p>
 </div>
 <div class="webr-ojs-exercise exercise-solution d-none" data-exercise="ex_2">
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1040,7 +1043,7 @@ Solution
 
 </div>
 <script type="pyodide-18-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IG51bXB5IGFzIG5wXG5pbXBvcnQgbWF0cGxvdGxpYi5weXBsb3QgYXMgcGx0XG5mcm9tIHNjaXB5LnNwYXJzZSBpbXBvcnQgZGlhZ3NcblxuIyBEZWZpbmUgc3lzdGVtIHBhcmFtZXRlcnNcbm0gPSAxLjAgICAgICAjIG1hc3MgKGtnKVxuayA9IDE2LjAgICAgICMgc3ByaW5nIGNvbnN0YW50IChOL20pXG5iID0gMC41ICAgICAgIyBkYW1waW5nIGNvZWZmaWNpZW50IChrZy9zKVxuRjAgPSAxLjAgICAgICMgZHJpdmluZyBmb3JjZSBhbXBsaXR1ZGUgKE4pXG5vbWVnYV9kID0gNC4wICAjIGRyaXZpbmcgZnJlcXVlbmN5IChyYWQvcylcbm9tZWdhMCA9IG5wLnNxcnQoay9tKSAgIyBuYXR1cmFsIGZyZXF1ZW5jeVxuXG4jIFNldHVwIHRpbWUgZG9tYWluXG5UID0gMipucC5waS9vbWVnYTAgICMgbmF0dXJhbCBwZXJpb2RcbkwgPSAxMCpUICAgICAgICAgICAjIHNvbHZlIGZvciAxMCBjb21wbGV0ZSBwZXJpb2RzXG5OID0gMTAwMCAgICAgICAgICAgIyBudW1iZXIgb2YgZGF0YSBwb2ludHNcbnQgPSBucC5saW5zcGFjZSgwLCBMLCBOKSAgIyB0aW1lIGF4aXNcbmR0ID0gdFsxXSAtIHRbMF0gICAjIHRpbWUgc3RlcFxuXG4jIFNldCBpbml0aWFsIGNvbmRpdGlvbnNcbngwID0gMS4wICAgICMgaW5pdGlhbCBwb3NpdGlvblxudjAgPSAwLjAgICAgIyBpbml0aWFsIHZlbG9jaXR5XG5cbiMgU3RlcCAxOiBDb25zdHJ1Y3QgdGhlIG1hdHJpeCBmb3IgdGhlIGxlZnQgc2lkZSBvZiB0aGUgZXF1YXRpb25cbiMgU2Vjb25kIGRlcml2YXRpdmUgb3BlcmF0b3IgRDIgKHRyaWRpYWdvbmFsIHdpdGggWzEsIC0yLCAxXS9kdMKyKVxuZGlhZ192YWxzID0gbnAub25lcyhOKSAqICgtMi4wLyhkdCoqMikpXG51cHBlcl9kaWFnID0gbnAub25lcyhOLTEpICogKDEuMC8oZHQqKjIpKVxubG93ZXJfZGlhZyA9IG5wLm9uZXMoTi0xKSAqICgxLjAvKGR0KioyKSlcbkQyID0gZGlhZ3MoW2RpYWdfdmFscywgdXBwZXJfZGlhZywgbG93ZXJfZGlhZ10sIFswLCAxLCAtMV0sIHNoYXBlPShOLCBOKSkudG9hcnJheSgpXG5cbiMgRmlyc3QgZGVyaXZhdGl2ZSBvcGVyYXRvciBEMSBmb3IgZGFtcGluZyAodHJpZGlhZ29uYWwgd2l0aCBbLTEsIDAsIDFdLygyZHQpKVxuZGlhZ192YWxzX2QxID0gbnAuemVyb3MoTilcbnVwcGVyX2RpYWdfZDEgPSBucC5vbmVzKE4tMSkgKiAoMS4wLygyKmR0KSlcbmxvd2VyX2RpYWdfZDEgPSBucC5vbmVzKE4tMSkgKiAoLTEuMC8oMipkdCkpXG5EMSA9IGRpYWdzKFtkaWFnX3ZhbHNfZDEsIHVwcGVyX2RpYWdfZDEsIGxvd2VyX2RpYWdfZDFdLCBbMCwgMSwgLTFdLCBzaGFwZT0oTiwgTikpLnRvYXJyYXkoKVxuXG4jIENyZWF0ZSB0aGUgY29lZmZpY2llbnQgbWF0cml4OiBNID0gbSpEMiArIGIqRDEgKyBrKklcbkkgPSBucC5leWUoTikgICMgSWRlbnRpdHkgbWF0cml4XG5NID0gbSpEMiArIGIqRDEgKyBrKklcblxuIyBJbmNvcnBvcmF0ZSBpbml0aWFsIGNvbmRpdGlvbnMgKG1vZGlmeSB0aGUgZmlyc3QgdHdvIHJvd3MpXG5NWzAsIDpdID0gMCAgIyBDbGVhciBmaXJzdCByb3cgZm9yIGluaXRpYWwgcG9zaXRpb25cbk1bMCwgMF0gPSAxICAjIFNldCB4XzAgPSB4MFxuXG5NWzEsIDpdID0gMCAgIyBDbGVhciBzZWNvbmQgcm93IGZvciBpbml0aWFsIHZlbG9jaXR5XG5NWzEsIDBdID0gLTEgICMgU2ltcGxlIGZvcndhcmQgZGlmZmVyZW5jZSB0byBlbmNvZGUgaW5pdGlhbCB2ZWxvY2l0eVxuTVsxLCAxXSA9IDFcbk1bMSwgMl0gPSAwXG5cbiMgU3RlcCAyOiBEZWZpbmUgdGhlIHJpZ2h0IHNpZGUgb2YgdGhlIGVxdWF0aW9uIHdpdGggdGhlIGRyaXZpbmcgZm9yY2VcbmJfdmVjdG9yID0gbnAuemVyb3MoTilcbmJfdmVjdG9yWzI6XSA9IEYwICogbnAuY29zKG9tZWdhX2QgKiB0WzI6XSkgICMgRHJpdmluZyBmb3JjZSAoc2tpcCBmaXJzdCB0d28gcG9pbnRzIGZvciBpbml0aWFsIGNvbmRpdGlvbnMpXG5cbiMgU2V0IGluaXRpYWwgY29uZGl0aW9ucyBpbiB0aGUgcmlnaHQtaGFuZCBzaWRlIHZlY3RvclxuYl92ZWN0b3JbMF0gPSB4MCAgIyBJbml0aWFsIHBvc2l0aW9uXG5iX3ZlY3RvclsxXSA9IHYwICogZHQgICMgSW5pdGlhbCB2ZWxvY2l0eSAoc2NhbGVkIGJ5IGR0IGZvciB0aGUgZGlmZmVyZW5jZSBhcHByb3hpbWF0aW9uKVxuXG4jIFN0ZXAgMzogU29sdmUgdGhlIHN5c3RlbVxueCA9IG5wLmxpbmFsZy5zb2x2ZShNLCBiX3ZlY3RvcilcblxuIyBBbmFseXRpY2FsIHN0ZWFkeS1zdGF0ZSBzb2x1dGlvbiBmb3IgY29tcGFyaXNvblxucGhhc2VfYW5nbGUgPSBucC5hcmN0YW4yKGIqb21lZ2FfZCwgKGstbSpvbWVnYV9kKioyKSlcbmFtcGxpdHVkZSA9IEYwIC8gbnAuc3FydCgoay1tKm9tZWdhX2QqKjIpKioyICsgKGIqb21lZ2FfZCkqKjIpXG54X2FuYWx5dGljYWwgPSBhbXBsaXR1ZGUgKiBucC5jb3Mob21lZ2FfZCp0IC0gcGhhc2VfYW5nbGUpICsgeDAqbnAuZXhwKC1iKnQvKDIqbSkpKm5wLmNvcyhucC5zcXJ0KGsvbS0oYi8oMiptKSkqKjIpKnQpXG5cbiMgU3RlcCA0OiBQbG90IHRoZSBzb2x1dGlvblxucGx0LmZpZ3VyZShmaWdzaXplPWdldF9zaXplKDgsIDEyKSlcblxuIyBQbG90IG51bWVyaWNhbCB2cyBhbmFseXRpY2FsIHNvbHV0aW9uXG5wbHQuc3VicGxvdCgyLCAxLCAxKVxucGx0LnBsb3QodCwgeCwgJ2ItJywgbGFiZWw9J01hdHJpeCBTb2x1dGlvbicpXG5wbHQucGxvdCh0LCB4X2FuYWx5dGljYWwsICdyLS0nLCBsYWJlbD0nQW5hbHl0aWNhbCBTb2x1dGlvbicpXG5wbHQueGxhYmVsKCdUaW1lIChzKScpXG5wbHQueWxhYmVsKCdQb3NpdGlvbiAobSknKVxuXG5cblxuIyBQbG90IHBoYXNlIHNwYWNlIHRyYWplY3RvcnlcbnBsdC5zdWJwbG90KDIsIDEsIDIpXG4jIENhbGN1bGF0ZSB2ZWxvY2l0eSB1c2luZyBjZW50cmFsIGRpZmZlcmVuY2UgYXBwcm94aW1hdGlvblxudiA9IG5wLnplcm9zX2xpa2UoeClcbnZbMTotMV0gPSAoeFsyOl0gLSB4WzotMl0pIC8gKDIqZHQpICAjIENlbnRyYWwgZGlmZmVyZW5jZSBmb3IgaW50ZXJuYWwgcG9pbnRzXG52WzBdID0gdjAgICMgVXNlIGluaXRpYWwgdmVsb2NpdHlcbnZbLTFdID0gKHhbLTFdIC0geFstMl0pIC8gZHQgICMgRm9yd2FyZCBkaWZmZXJlbmNlIGZvciBsYXN0IHBvaW50XG5cbnBsdC5wbG90KHgsIHYsICdnLScpXG5wbHQueGxhYmVsKCdQb3NpdGlvbiAobSknKVxucGx0LnlsYWJlbCgnVmVsb2NpdHkgKG0vcyknKVxuXG5wbHQudGlnaHRfbGF5b3V0KClcbnBsdC5zaG93KCkifQ==
+eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1wb3J0IG51bXB5IGFzIG5wXG5mcm9tIHNjaXB5LmludGVncmF0ZSBpbXBvcnQgb2RlaW50XG5pbXBvcnQgbWF0cGxvdGxpYi5weXBsb3QgYXMgcGx0XG5cbmRlZiBkZWNheShOLCB0LCBsYW1iZGFfKTpcbiAgICByZXR1cm4gLWxhbWJkYV8gKiBOXG5cbmxhbWJkYV8gPSAwLjVcbnQgPSBucC5saW5zcGFjZSgwLCAxMCwgMTAwKVxuTjAgPSAxMDAwXG5cbnNvbHV0aW9uID0gb2RlaW50KGRlY2F5LCBOMCwgdCwgYXJncz0obGFtYmRhXywpKVxuXG5wbHQuZmlndXJlKGZpZ3NpemU9KDgsIDUpKVxucGx0LnBsb3QodCwgc29sdXRpb24pXG5wbHQuYXhobGluZSh5PU4wLzIsIGNvbG9yPSdyJywgbGluZXN0eWxlPSctLScsIGxhYmVsPSdIYWxmLWxpZmUnKVxucGx0LnhsYWJlbCgnVGltZSAocyknKVxucGx0LnlsYWJlbCgnTnVtYmVyIG9mIEF0b21zJylcbnBsdC50aXRsZSgnUmFkaW9hY3RpdmUgRGVjYXknKVxucGx0LmdyaWQoVHJ1ZSlcbnBsdC5sZWdlbmQoKVxucGx0LnNob3coKSJ9
 </script>
 </div>
 </div>
@@ -1188,7 +1191,7 @@ window._ojs.runtime.interpretFromScriptTags();
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/fcichos\.github\.io\/CBPM\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
