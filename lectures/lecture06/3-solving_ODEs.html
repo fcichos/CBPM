@@ -674,8 +674,20 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6Ilxu
 eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IlxuIyBQbG90IHRoZSBzb2x1dGlvblxucGx0LmZpZ3VyZShmaWdzaXplPWdldF9zaXplKDEyLCAxMCkpXG5wbHQucGxvdCh0LCB4LCBsYWJlbD0nTnVtZXJpY2FsIFNvbHV0aW9uJylcbnBsdC5wbG90KHQsIHgwKm5wLmNvcyhvbWVnYSp0KSArIHYwL29tZWdhKm5wLnNpbihvbWVnYSp0KSwgJy0tJywgbGFiZWw9J0FuYWx5dGljYWwgU29sdXRpb24nKVxucGx0LnhsYWJlbCgnVGltZSAocyknKVxucGx0LnlsYWJlbCgnUG9zaXRpb24geCh0KScpXG5wbHQubGVnZW5kKClcbnBsdC5zaG93KCkifQ==
 </script>
 </div>
-<p>This matrix-based approach has several advantages: - It solves for all time points simultaneously, giving the entire trajectory in one operation - It can be very stable for certain types of problems, particularly “stiff” equations - It handles boundary conditions naturally by incorporating them into the matrix structure - It often provides good energy conservation for oscillatory systems</p>
-<p>However, it also has limitations: - It requires solving a large linear system, which becomes computationally intensive for long simulations - It’s not suitable for nonlinear problems without modification (e.g., a pendulum with large angles where <span class="math inline">\(\sin\theta \neq \theta\)</span>) - Memory requirements grow with the time span (an N×N matrix for N time steps) - Implementing time-dependent forces is more complex than with explicit methods</p>
+<p>This matrix-based approach has several advantages:</p>
+<ul>
+<li>It solves for all time points simultaneously, giving the entire trajectory in one operation</li>
+<li>It can be very stable for certain types of problems, particularly “stiff” equations</li>
+<li>It handles boundary conditions naturally by incorporating them into the matrix structure</li>
+<li>It often provides good energy conservation for oscillatory systems</li>
+</ul>
+<p>However, it also has limitations:</p>
+<ul>
+<li>It requires solving a large linear system, which becomes computationally intensive for long simulations</li>
+<li>It’s not suitable for nonlinear problems without modification (e.g., a pendulum with large angles where <span class="math inline">\(\sin\theta \neq \theta\)</span>)</li>
+<li>Memory requirements grow with the time span (an N×N matrix for N time steps)</li>
+<li>Implementing time-dependent forces is more complex than with explicit methods</li>
+</ul>
 <p>From a physics perspective, this approach is similar to finding stationary states in quantum mechanics or solving boundary value problems in electrostatics—we’re solving the entire system at once rather than stepping through time.</p>
 </section>
 </section>
@@ -709,7 +721,11 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6Ilxu
 x_{n+1} &amp;= x_n + v_n \Delta t \\
 v_{n+1} &amp;= v_n - \omega^2 x_n \Delta t
 \end{align}\]</span></p>
-<p>The physical interpretation is straightforward: 1. The new position equals the old position plus the displacement (velocity × time) 2. The new velocity equals the old velocity plus the acceleration (-ω²x) multiplied by the time step</p>
+<p>The physical interpretation is straightforward:</p>
+<ol type="1">
+<li>The new position equals the old position plus the displacement (velocity × time)</li>
+<li>The new velocity equals the old velocity plus the acceleration (-ω²x) multiplied by the time step</li>
+</ol>
 <p>In practice, the Euler method will cause the total energy of a harmonic oscillator to increase over time, which is physically incorrect. This is because the method doesn’t account for the continuous change in acceleration during the time step.</p>
 <div>
 <div id="pyodide-4">
@@ -728,7 +744,13 @@ x_{n+1} &amp;= x_n + v_{n+1} \Delta t
 \end{align}\]</span></p>
 <p>Notice the subtle but crucial difference: we use <span class="math inline">\(v_{n+1}\)</span> (the newly calculated velocity) to update the position, rather than <span class="math inline">\(v_n\)</span>.</p>
 <p>This small change dramatically improves energy conservation for oscillatory systems. From a physics perspective, this method better preserves the structure of Hamiltonian systems, which include the harmonic oscillator, planetary motion, and many other important physical systems.</p>
-<p>The Euler-Cromer method is especially valuable in physics simulations where long-term energy conservation is important, such as: - Orbital mechanics - Molecular dynamics - Plasma physics - N-body simulations</p>
+<p>The Euler-Cromer method is especially valuable in physics simulations where long-term energy conservation is important, such as:</p>
+<ul>
+<li>Orbital mechanics</li>
+<li>Molecular dynamics</li>
+<li>Plasma physics</li>
+<li>N-body simulations</li>
+</ul>
 <p>While not perfect, this simple modification makes the method much more useful for real physical systems with oscillatory behavior.</p>
 <div>
 <div id="pyodide-5">
@@ -746,7 +768,13 @@ k_1 &amp;= f(t_n, y_n) \\
 k_2 &amp;= f(t_n + \frac{\Delta t}{2}, y_n + \frac{\Delta t}{2}k_1) \\
 y_{n+1} &amp;= y_n + \Delta t \cdot k_2
 \end{align}\]</span></p>
-<p>The physical intuition behind this method is: 1. First, calculate the initial derivative <span class="math inline">\(k_1\)</span> (representing the initial rates of change) 2. Use this derivative to estimate the state at the middle of the time step 3. Calculate a new derivative <span class="math inline">\(k_2\)</span> at this midpoint 4. Use the midpoint derivative to advance the full step</p>
+<p>The physical intuition behind this method is:</p>
+<ol type="1">
+<li>First, calculate the initial derivative <span class="math inline">\(k_1\)</span> (representing the initial rates of change)</li>
+<li>Use this derivative to estimate the state at the middle of the time step</li>
+<li>Calculate a new derivative <span class="math inline">\(k_2\)</span> at this midpoint</li>
+<li>Use the midpoint derivative to advance the full step</li>
+</ol>
 <p>This is analogous to finding the average velocity by looking at the velocity in the middle of a time interval, rather than just at the beginning. In physical problems with continuously varying forces, this provides a much better approximation than the Euler method.</p>
 <p>The midpoint method achieves <span class="math inline">\(O(\Delta t^2)\)</span> accuracy, meaning the error decreases with the square of the step size. This makes it much more accurate than Euler’s method for the same computational cost.</p>
 <div>
@@ -796,7 +824,12 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6Ilxu
 <li><strong>Euler-Cromer Method</strong>: Much better energy conservation for oscillatory systems with minimal additional computation.</li>
 <li><strong>Midpoint Method</strong>: Higher accuracy and better energy conservation.</li>
 </ul>
-<p>The choice of method depends on the specific requirements of your problem: - Use Euler for simplicity when accuracy is not critical - Use Euler-Cromer for oscillatory systems when computational efficiency is important - Use Midpoint or higher-order methods when accuracy is crucial</p>
+<p>The choice of method depends on the specific requirements of your problem:</p>
+<ul>
+<li>Use Euler for simplicity when accuracy is not critical</li>
+<li>Use Euler-Cromer for oscillatory systems when computational efficiency is important</li>
+<li>Use Midpoint or higher-order methods when accuracy is crucial</li>
+</ul>
 </section>
 </section>
 <section id="advanced-methods-with-scipy" class="level2">
@@ -912,7 +945,7 @@ Lyapunov Exponents: Quantifying Chaos
 <li>A <strong>zero</strong> Lyapunov exponent (<span class="math inline">\(\lambda = 0\)</span>) suggests a stable limit cycle or quasiperiodic behavior.</li>
 <li>A <strong>negative</strong> Lyapunov exponent (<span class="math inline">\(\lambda &lt; 0\)</span>) indicates a stable fixed point, where trajectories converge.</li>
 </ul>
-<p>For our damped driven pendulum, we can numerically estimate the Lyapunov exponent by comparing how two slightly different initial conditions evolve over time. For instance, we might begin with two pendulums at nearly the same angle—perhaps θ₁(0) = 0.1 and θ₂(0) = 0.1001—while keeping their initial angular velocities identical at ω₁(0) = ω₂(0) = 0. As we simulate both systems, we can track the separation between their trajectories in phase space. This separation represents the difference vector δx(t) = [θ₂(t) - θ₁(t), ω₂(t) - ω₁(t)]. Initially, this difference is very small, but in a chaotic system, it grows exponentially with time. By measuring this growth rate, we can compute the Lyapunov exponent as λ ≈ (1/t)ln(|δx(t)|/|δx(0)|). When examining our pendulum system, which has two dimensions (θ and ω), we actually have two Lyapunov exponents forming a spectrum. If either of these exponents is positive, we can conclusively determine that our system exhibits chaotic behavior, indicating fundamental unpredictability despite its deterministic nature.</p>
+<p>For our damped driven pendulum, we can numerically estimate the Lyapunov exponent by comparing how two slightly different initial conditions evolve over time. For instance, we might begin with two pendulums at nearly the same angle—perhaps <span class="math inline">\(\theta_1(0) = 0.1\)</span> and <span class="math inline">\(\theta_2(0) = 0.1001\)</span>—while keeping their initial angular velocities identical at <span class="math inline">\(\omega_1(0) = \omega_2(0) = 0\)</span>. As we simulate both systems, we can track the separation between their trajectories in phase space. This separation represents the difference vector <span class="math inline">\(\delta\vec{x}(t) = [\theta_2(t) - \theta_1(t), \omega_2(t) - \omega_1(t)]\)</span>. Initially, this difference is very small, but in a chaotic system, it grows exponentially with time. By measuring this growth rate, we can compute the Lyapunov exponent as <span class="math inline">\(\lambda \approx \frac{1}{t}\ln\left(\frac{|\delta\vec{x}(t)|}{|\delta\vec{x}(0)|}\right)\)</span>. When examining our pendulum system, which has two dimensions (<span class="math inline">\(\theta\)</span> and <span class="math inline">\(\omega\)</span>), we actually have two Lyapunov exponents forming a spectrum. If either of these exponents is positive, we can conclusively determine that our system exhibits chaotic behavior, indicating fundamental unpredictability despite its deterministic nature.</p>
 </div>
 </div>
 </div>
