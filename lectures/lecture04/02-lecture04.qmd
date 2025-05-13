@@ -1,0 +1,658 @@
+---
+title: Brownian Motion
+format:
+  live-html:
+    toc: true
+    toc-location: right
+pyodide:
+  packages:
+    - numpy
+    - matplotlib
+---
+
+## Introduction
+
+Brownian motion is a fundamental physical phenomenon that describes the random movement of particles suspended in a fluid. This lecture explores both the physical understanding and computational modeling of Brownian motion using object-oriented programming techniques.
+
+We will apply our newly acquired knowledge about classes to simulate Brownian motion. This task aligns perfectly with the principles of object-oriented programming, as each Brownian particle (or colloid) can be represented as an object instantiated from the same class, albeit with different properties. For instance, some particles might be larger while others are smaller. We have already touched on some aspects of this in previous lectures.
+
+
+```{pyodide}
+#| autorun: true
+#| edit: false
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+plt.rcParams.update({'font.size': 12,
+                     'lines.linewidth': 1,
+                     'lines.markersize': 10,
+                     'axes.labelsize': 11,
+                     'xtick.labelsize' : 10,
+                     'ytick.labelsize' : 10,
+                     'xtick.top' : True,
+                     'xtick.direction' : 'in',
+                     'ytick.right' : True,
+                     'ytick.direction' : 'in',})
+```
+
+
+## Brownian Motion
+
+### What is Brownian Motion?
+Imagine a dust particle floating in water. If you look at it under a microscope, you'll see it moving in a random, zigzag pattern. This is Brownian motion!
+
+
+### Why Does This Happen?
+When we observe Brownian motion, we're seeing the effects of countless molecular collisions. Water isn't just a smooth, continuous fluid - it's made up of countless tiny molecules that are in constant motion. These water molecules are continuously colliding with our particle from all directions. Each individual collision causes the particle to move just a tiny bit, barely noticeable on its own. However, when millions of these tiny collisions happen every second from random directions, they create the distinctive zigzag motion we observe.
+
+
+```{ojs}
+//| echo: false
+//| label: fig-BM
+//| fig-cap: Interactive simulation of Brownian motion. The blue circle represents a larger colloid, which moves randomly due to collisions with the smaller red particles. The fading blue trail shows the random path of the colloid.
+
+brownianMotion = {
+  const width = 400;
+  const height = 400;
+
+  // Create SVG container
+  const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [0, 0, width, height])
+    .attr("style", "max-width: 100%; height: auto;");
+
+  // Add a border for clarity
+  svg.append("rect")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("fill", "none")
+    .attr("stroke", "black");
+
+  // Parameters for our simulation - adjusted for better physical representation
+  const numSmallParticles = 400;
+  const largeParticleRadius = 10;
+  const smallParticleRadius = 5;  // Increased scale separation
+  const largeParticleColor = "blue";
+  const smallParticleColor = "red";
+  const trailLength = 300;
+
+  // Physical parameters
+  const temperature = 10.0;  // Normalized temperature
+  const gamma = 0.1;        // Drag coefficient for large particle
+
+  // Calculate masses based on radius^3 (proportional to volume)
+  const largeMass = Math.pow(largeParticleRadius, 3);
+  const smallMass = Math.pow(smallParticleRadius, 3);
+
+  // Maxwell-Boltzmann distribution helper
+  function maxwellBoltzmannVelocity() {
+    // Box-Muller transform for normal distribution
+    const u1 = Math.random();
+    const u2 = Math.random();
+    const mag = Math.sqrt(-2.0 * Math.log(u1)) * Math.sqrt(temperature / smallMass);
+    const theta = 2 * Math.PI * u2;
+    return {
+      vx: mag * Math.cos(theta),
+      vy: mag * Math.sin(theta)
+    };
+  }
+
+  // Initialize large particle in the center
+  let largeParticle = {
+    x: width / 2,
+    y: height / 2,
+    vx: 0,
+    vy: 0,
+    radius: largeParticleRadius,
+    mass: largeMass,
+    // Store previous positions for trail
+    trail: Array(trailLength).fill().map(() => ({
+      x: width / 2,
+      y: height / 2
+    }))
+  };
+
+  // Initialize small particles with random positions and thermal velocities
+  const smallParticles = Array(numSmallParticles).fill().map(() => {
+    const vel = maxwellBoltzmannVelocity();
+    return {
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: vel.vx * 8,  // Scale for visibility
+      vy: vel.vy * 8,  // Scale for visibility
+      radius: smallParticleRadius,
+      mass: smallMass
+    };
+  });
+
+  // Create the large particle
+  const largeParticleElement = svg.append("circle")
+    .attr("cx", largeParticle.x)
+    .attr("cy", largeParticle.y)
+    .attr("r", largeParticle.radius)
+    .attr("fill", largeParticleColor);
+
+  // Create the trail for the large particle
+  const trailElements = svg.append("g")
+    .selectAll("circle")
+    .data(largeParticle.trail)
+    .join("circle")
+    .attr("cx", d => d.x)
+    .attr("cy", d => d.y)
+    .attr("r", (_, i) => 1)
+    .attr("fill", "rgba(0, 0, 255, 0.2)");
+
+  // Create the small particles
+  const smallParticleElements = svg.append("g")
+    .selectAll("circle")
+    .data(smallParticles)
+    .join("circle")
+    .attr("cx", d => d.x)
+    .attr("cy", d => d.y)
+    .attr("r", d => d.radius)
+    .attr("fill", smallParticleColor);
+
+  // Function to update particle positions
+  function updateParticles() {
+    // Apply drag to large particle (Stokes' law)
+    largeParticle.vx *= (1 - gamma);
+    largeParticle.vy *= (1 - gamma);
+
+    // Update small particles
+    smallParticles.forEach((particle, i) => {
+      // Move according to velocity
+      particle.x += particle.vx;
+      particle.y += particle.vy;
+
+      // Bounce off walls
+      if (particle.x < particle.radius || particle.x > width - particle.radius) {
+        particle.vx *= -1;
+        particle.x = Math.max(particle.radius, Math.min(width - particle.radius, particle.x));
+      }
+      if (particle.y < particle.radius || particle.y > height - particle.radius) {
+        particle.vy *= -1;
+        particle.y = Math.max(particle.radius, Math.min(height - particle.radius, particle.y));
+      }
+
+      // Check for collision with large particle
+      const dx = largeParticle.x - particle.x;
+      const dy = largeParticle.y - particle.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < largeParticle.radius + particle.radius) {
+        // Physically correct elastic collision
+
+        // Calculate unit normal vector (collision axis)
+        const nx = dx / distance;
+        const ny = dy / distance;
+
+        // Calculate unit tangent vector (perpendicular to collision)
+        const tx = -ny;
+        const ty = nx;
+
+        // Project velocities onto normal and tangential axes
+        const v1n = largeParticle.vx * nx + largeParticle.vy * ny;
+        const v1t = largeParticle.vx * tx + largeParticle.vy * ty;
+        const v2n = particle.vx * nx + particle.vy * ny;
+        const v2t = particle.vx * tx + particle.vy * ty;
+
+        // Calculate new normal velocities using conservation of momentum and energy
+        // Tangential velocities remain unchanged in elastic collision
+        const m1 = largeParticle.mass;
+        const m2 = particle.mass;
+
+        // One-dimensional elastic collision formula
+        const v1nAfter = (v1n * (m1 - m2) + 2 * m2 * v2n) / (m1 + m2);
+        const v2nAfter = (v2n * (m2 - m1) + 2 * m1 * v1n) / (m1 + m2);
+
+        // Convert back to x,y velocities
+        largeParticle.vx = v1nAfter * nx + v1t * tx;
+        largeParticle.vy = v1nAfter * ny + v1t * ty;
+        particle.vx = v2nAfter * nx + v2t * tx;
+        particle.vy = v2nAfter * ny + v2t * ty;
+
+        // Move particles apart to prevent overlap
+        const overlap = largeParticle.radius + particle.radius - distance;
+        const massRatio = m2 / (m1 + m2);
+        const largeMoveRatio = massRatio;
+        const smallMoveRatio = 1 - massRatio;
+
+        // Move particles apart proportional to their masses
+        largeParticle.x += overlap * nx * largeMoveRatio;
+        largeParticle.y += overlap * ny * largeMoveRatio;
+        particle.x -= overlap * nx * smallMoveRatio;
+        particle.y -= overlap * ny * smallMoveRatio;
+      }
+
+      // Occasionally thermostat small particles to maintain temperature
+      if (Math.random() < 0.01) {
+        const vel = maxwellBoltzmannVelocity();
+        particle.vx = vel.vx * 8;  // Scale for visibility
+        particle.vy = vel.vy * 8;  // Scale for visibility
+      }
+
+      // Update small particle display
+      smallParticleElements.filter((_, j) => i === j)
+        .attr("cx", particle.x)
+        .attr("cy", particle.y);
+    });
+
+    // Update large particle position
+    largeParticle.x += largeParticle.vx;
+    largeParticle.y += largeParticle.vy;
+
+    // Bounce large particle off walls
+    if (largeParticle.x < largeParticle.radius || largeParticle.x > width - largeParticle.radius) {
+      largeParticle.vx *= -1;
+      largeParticle.x = Math.max(largeParticle.radius, Math.min(width - largeParticle.radius, largeParticle.x));
+    }
+    if (largeParticle.y < largeParticle.radius || largeParticle.y > height - largeParticle.radius) {
+      largeParticle.vy *= -1;
+      largeParticle.y = Math.max(largeParticle.radius, Math.min(height - largeParticle.radius, largeParticle.y));
+    }
+
+    // Update trail
+    largeParticle.trail.pop();
+    largeParticle.trail.unshift({x: largeParticle.x, y: largeParticle.y});
+
+    // Update large particle display
+    largeParticleElement
+      .attr("cx", largeParticle.x)
+      .attr("cy", largeParticle.y);
+
+    // Update trail display
+    trailElements.data(largeParticle.trail)
+      .attr("cx", d => d.x)
+      .attr("cy", d => d.y);
+  }
+
+  // Start animation
+  const interval = d3.interval(() => {
+    updateParticles();
+  }, 30);
+
+  // Clean up on invalidation
+  invalidation.then(() => interval.stop());
+
+  return svg.node();
+}
+```
+
+### The Mathematical Model of Brownian Motion
+
+Mathematically, Brownian motion is governed by the Langevin equation, which describes the basic equation of motion:
+
+$$m\frac{d^2\mathbf{r}}{dt^2} = -\gamma\frac{d\mathbf{r}}{dt} + \mathbf{F}_\text{random}(t)$$
+
+where:
+
+- $m$ is the particle mass
+- $\mathbf{r}$ is the position vector
+- $\gamma$ is the drag coefficient
+- $\mathbf{F}_\text{random}(t)$ represents random forces from molecular collisions
+
+In the overdamped limit ($m=0$ which applies to colloidal particles), inertia becomes negligible and the equation simplifies to:
+
+$$\frac{d\mathbf{r}}{dt} = \sqrt{2D}\,\boldsymbol{\xi}(t)$$
+
+Where $\boldsymbol{\xi}(t)$ is Gaussian white noise with a unit variance and $D$ is the diffusion coefficient, the transport coefficient characterizing diffusive transport.
+
+A key observable in Brownian motion is the mean squared displacement (MSD):
+
+$$\langle (\Delta r)^2 \rangle = 2dDt$$
+
+with:
+
+- $\langle (\Delta r)^2 \rangle$ is the mean squared displacement
+- $d$ is the number of dimensions (2 in our simulation)
+- $D$ is the diffusion coefficient
+- $t$ is the time elapsed
+
+The diffusion coefficient $D$ depends on physical properties according to the Einstein-Stokes relation:
+
+$$D = \frac{k_B T}{6\pi\eta R}$$
+
+Where $k_B$ is Boltzmann's constant, $T$ is temperature, $\eta$ is fluid viscosity, and $R$ is the particle radius.
+
+### Numerical Implementation
+
+In our `Colloid` class simulation, we implement the discretized version of the overdamped Langevin equation. For each time step $\Delta t$, the position update is:
+
+$$\Delta x = \sqrt{2D\Delta t} \times \xi$$
+
+Where $\Delta x$ is the displacement in one direction, and $\xi$ is a random number drawn from a normal distribution with mean 0 and variance 1.
+
+This is implemented directly in the `update()` method of our `Colloid` class:
+
+```python
+def update(self, dt):
+    self.x.append(self.x[-1] + np.random.normal(0.0, np.sqrt(2*self.D*dt)))
+    self.y.append(self.y[-1] + np.random.normal(0.0, np.sqrt(2*self.D*dt)))
+    return(self.x[-1], self.y[-1])
+```
+
+In this implementation:
+- `D` is the diffusion coefficient stored as an instance variable
+- `dt` is the time step parameter
+- `np.random.normal` generates the Gaussian random numbers required for the stochastic process
+
+::: {.callout-tip}
+The choice of time step `dt` is important in our simulation. If too large, it fails to capture the fine details of the motion. If too small, the simulation becomes computationally expensive. The class design allows us to adjust this parameter easily when calling `sim_trajectory()` or `update()`.
+:::
+
+
+```{pyodide}
+#| autorun: false
+
+# some space to test out some of the random numbers
+
+
+
+```
+::: {.callout-note collapse="true"}
+### Advanced Mathematical Details
+The Brownian motion of a colloidal particle results from collisions with surrounding solvent molecules. These collisions lead to a probability distribution described by:
+
+$$
+p(x,\Delta t)=\frac{1}{\sqrt{4\pi D \Delta t}}e^{-\frac{x^2}{4D \Delta t}}
+$$
+
+with:
+
+- $D$ is the diffusion coefficient
+- $\Delta t$ is the time step
+- The variance is $\sigma^2=2D \Delta t$
+
+This distribution emerges from the **central limit theorem**, as shown by Lindenberg and Lévy, when considering many infinitesimally small random steps.
+
+The evolution of the probability density function $p(x,t)$ is governed by the diffusion equation:
+
+$$
+\frac{\partial p}{\partial t}=D\frac{\partial^2 p}{\partial x^2}
+$$
+
+This partial differential equation, also known as Fick's second law, describes how the concentration of particles evolves over time due to diffusive processes. The Gaussian distribution above is the fundamental solution (Green's function) of this diffusion equation, representing how an initially localized distribution spreads out over time.
+
+The connection between the microscopic random motion and the macroscopic diffusion equation was first established by Einstein in his 1905 paper on Brownian motion, providing one of the earliest quantitative links between statistical mechanics and thermodynamics.
+:::
+
+
+## Object-Oriented Implementation
+
+### Why Use a Class?
+
+A class is perfect for this physics simulation because each colloidal particle:
+
+1. Has specific properties
+   - Size (radius)
+   - Current position
+   - Movement history
+   - Diffusion coefficient
+
+2. Follows certain behaviors
+   - Moves randomly (Brownian motion)
+   - Updates its position over time
+   - Keeps track of where it's been
+
+3. Can exist alongside other particles
+   - Many particles can move independently
+   - Each particle keeps track of its own properties
+   - Particles can have different sizes
+
+4. Needs to track its state over time
+   - Remember previous positions
+   - Calculate distances moved
+   - Maintain its own trajectory
+
+This natural mapping between real particles and code objects makes classes an ideal choice for our simulation.
+
+### Class Design
+
+We design a `Colloid` class to simulate particles undergoing Brownian motion. Using object-oriented programming makes physical sense here - in the real world, each colloidal particle is an independent object with its own properties that follows the same physical laws as other particles.
+
+#### Class-Level Properties (Shared by All Particles)
+Our `Colloid` class will store information common to all particles:
+
+1. `number`: A counter tracking how many particles we've created
+2. `f = 2.2×10^{-19}`: The physical constant $k_B T/(6\pi\eta)$ in m³/s
+   - This combines Boltzmann's constant ($k_B$), temperature ($T$), and fluid viscosity ($\eta$)
+   - Using this constant simplifies our diffusion calculations
+
+#### Class Methods (Functions Shared by All Particles)
+The class provides these shared behaviors:
+
+1. `how_many()`: Returns the total count of particles created
+   - Useful for tracking how many particles exist in our simulation
+2. `__str__()`: Returns a human-readable description when we print a particle
+   - Shows the particle's radius and current position
+
+#### Instance Properties (Unique to Each Particle)
+Each individual particle will have its own:
+
+1. `R`: Radius in meters
+2. `x`, `y`: Lists storing position history (starting with initial position)
+3. `index`: Unique ID number for each particle
+4. `D`: Diffusion coefficient calculated as $D = f/R$
+   - From Einstein-Stokes relation: $D = \frac{k_B T}{6\pi\eta R}$
+   - Smaller particles diffuse faster (larger D)
+
+#### Instance Methods (What Each Particle Can Do)
+Each particle object will have these behaviors:
+
+1. `update(dt)`: Performs a single timestep of Brownian motion
+   - Takes a timestep `dt` in seconds
+   - Adds random displacement based on diffusion coefficient
+   - Returns the new position
+
+2. `sim_trajectory(N, dt)`: Simulates a complete trajectory
+   - Generates N steps with timestep dt
+   - Calls `update()` repeatedly to build the trajectory
+
+3. `get_trajectory()`: Returns the particle's movement history as a DataFrame
+   - Convenient for analysis and plotting
+
+4. `get_D()`: Returns the particle's diffusion coefficient
+   - Useful for calculations and verification
+
+
+```{pyodide}
+#| autorun: false
+# Class definition
+class Colloid:
+
+    # A class variable, counting the number of Colloids
+    number = 0
+    f = 2.2e-19 # this is k_B T/(6 pi eta) in m^3/s
+
+    # constructor
+    def __init__(self,R, x0=0, y0=0):
+        # add initialisation code here
+        self.R=R
+        self.x=[x0]
+        self.y=[y0]
+        Colloid.number=Colloid.number+1
+        self.index=Colloid.number
+        self.D=Colloid.f/self.R
+
+    def get_D(self):
+        return(self.D)
+
+    def sim_trajectory(self,N,dt):
+        for i in range(N):
+            self.update(dt)
+
+    def update(self,dt):
+        self.x.append(self.x[-1]+np.random.normal(0.0, np.sqrt(2*self.D*dt)))
+        self.y.append(self.y[-1]+np.random.normal(0.0, np.sqrt(2*self.D*dt)))
+        return(self.x[-1],self.y[-1])
+
+    def get_trajectory(self):
+        return(pd.DataFrame({'x':self.x,'y':self.y}))
+
+    # class method accessing a class variable
+    @classmethod
+    def how_many(cls):
+        return(Colloid.number)
+
+    # insert something that prints the particle position in a formatted way when printing
+    def __str__(self):
+        return("I'm a particle with radius R={0:0.3e} at x={1:0.3e},y={2:0.3e}.".format(self.R, self.x[-1], self.y[-1]))
+```
+
+::: {.callout-note}
+### Note
+
+Note that the function `sim_trajectory` is actually calling the function `update` of the same object to generate the whole trajectory at once.
+:::
+
+## Simulation and Analysis
+
+### Simulating
+
+With the help of this Colloid class, we would like to carry out simulations of Brownian motion of multiple particles. The simulations shall
+
+* take n=200 particles
+* have N=200 trajectory points each
+* start all at 0,0
+* particle objects should be stored in a list p_list
+
+```{pyodide}
+#| autorun: false
+N=200 # the number of trajectory points
+n=200 # the number of particles
+
+p_list=[]
+dt=0.05
+
+# creating all objects
+for i in range(n):
+    p_list.append(Colloid(1e-6))
+
+
+for (index,p) in enumerate(p_list):
+    p.sim_trajectory(N,dt)
+```
+
+```{pyodide}
+#| autorun: false
+print(p_list[42])
+```
+
+### Plotting the trajectories
+
+The next step is to plot all the trajectories.
+
+```{pyodide}
+#| autorun: false
+# we take real world diffusion coefficients so scale up the data to avoid nasty exponentials
+scale=1e6
+
+plt.figure(figsize=(4,4))
+
+[plt.plot(np.array(p.x[:])*scale,np.array(p.y[:])*scale,'k-',alpha=0.1,lw=1) for p in p_list]
+plt.xlim(-10,10)
+plt.ylim(-10,10)
+plt.xlabel('x [µm]')
+plt.ylabel('y [µm]')
+plt.tight_layout()
+plt.show()
+```
+
+### Characterizing the Brownian motion
+
+Now that we have a number of trajectories, we can analyze the motion of our Brownian particles.
+
+#### Calculate the particle speed
+
+One way is to calculate its speed by measuring how far it traveled within a certain time $n\, dt$, where $dt$ is the timestep of out simulation. We can do that as
+
+\begin{equation}
+v(n dt) = \frac{<\sqrt{(x_{i+n}-x_{i})^2+(y_{i+n}-y_{i})^2}>}{n\,dt}
+\end{equation}
+
+The angular brackets on the top take care of the fact that we can measure the distance traveled within a certain time $n\, dt$ several times along a trajectory.
+
+These values can be used to calculate a mean speed. Note that there is not an equal amount of data pairs for all separations available. For $n=1$ there are 5 distances available. For $n=5$, however, only 1. This changes the statistical accuracy of the mean.
+
+```{pyodide}
+#| autorun: false
+time=np.array(range(1,N))*dt
+
+plt.figure(figsize=(4,4))
+for j in range(100):
+    t=p_list[j].get_trajectory()
+    md=[np.mean(np.sqrt(t.x.diff(i)**2+t.y.diff(i)**2)) for i in range(1,N)]
+    md=md/time
+    plt.plot(time,md,alpha=0.4)
+
+plt.ylabel('speed [m/s]')
+plt.xlabel('time [s]')
+plt.tight_layout()
+plt.show()
+```
+
+The result of this analysis shows, that each particle has an apparent speed which seems to increase with decreasing time of observation or which decreases with increasing time. This would mean that there is some friction at work, which slows down the particle in time, but this is apparently not true. Also an infinite speed at zero time appears to be unphysical.
+The correct answer is just that the speed is no good measure to characterize the motion of a Brownian particle.
+
+#### Calculate the particle mean squared displacement
+
+A better way to characterize the motion of a Brownian particle is the mean squared displacement, as we have already mentioned it in previous lectures. We may compare our simulation now to the theoretical prediction, which is
+
+\begin{equation}
+\langle \Delta r^{2}(t)\rangle=2 d D t
+\end{equation}
+
+where $d$ is the dimension of the random walk, which is $d=2$ in our case.
+
+```{pyodide}
+#| autorun: false
+time=np.array(range(1,N))*dt
+
+plt.figure(figsize=(4,4))
+for j in range(100):
+    t=p_list[j].get_trajectory()
+    msd=[np.mean(t.x.diff(i).dropna()**2+t.y.diff(i).dropna()**2) for i in range(1,N)]
+    plt.plot(time,msd,alpha=0.4)
+
+
+plt.loglog(time, 4*p_list[0].D*time,'k--',lw=2,label='theory')
+plt.legend()
+plt.xlabel('time [s]')
+plt.ylabel('msd $[m^2/s]$')
+plt.tight_layout()
+plt.show()
+```
+
+The results show that the mean squared displacement of the individual particles follows *on average* the theoretical predictions of a linear growth in time. That means, we are able to read the diffusion coefficient from the slope of the MSD of the individual particles if recorded in a simulation or an experiment.
+
+Yet, each individual MSD is deviating strongly from the theoretical prediction especially at large times. This is due to the fact mentioned earlier that our simulation (or experimental) data only has a limited number of data points, while the theoretical prediction is made for the limit of infinite data points.
+
+
+::: {.callout-warning}
+### Analysis of MSD data
+
+Single particle tracking, either in the experiment or in numerical simulations can therefore only deliver an estimate of the diffusion coefficient and care should be taken when using the whole MSD to obtain the diffusion coefficient. One typically uses only a short fraction of the whole MSD data at short times.
+:::
+
+## Summary
+
+In this lecture, we have:
+
+1. Explored the physical principles behind Brownian motion and its mathematical description
+2. Implemented a computational model using object-oriented programming principles
+3. Created a `Colloid` class with properties and methods that simulate realistic particle behavior
+4. Generated and visualized multiple particle trajectories
+5. Analyzed the simulation results using mean squared displacement calculations
+6. Compared our numerical results with theoretical predictions
+
+This exercise demonstrates how object-oriented programming provides an elegant framework for physics simulations, where the objects in our code naturally represent physical entities in the real world.
+
+## Further Reading
+
+- Einstein, A. (1905). "On the Movement of Small Particles Suspended in Stationary Liquids Required by the Molecular-Kinetic Theory of Heat"
+- Berg, H.C. (1993). "Random Walks in Biology"
+- Chandrasekhar, S. (1943). "Stochastic Problems in Physics and Astronomy"
+- Nelson, E. (2001). "Dynamical Theories of Brownian Motion"

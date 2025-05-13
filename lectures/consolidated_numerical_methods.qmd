@@ -1,0 +1,760 @@
+---
+format:
+  live-html:
+    toc: true
+    toc-location: right
+pyodide:
+  autorun: false
+  packages:
+    - matplotlib
+    - numpy
+    - scipy
+---
+
+# Numerical Methods for Differential Equations in Physics
+
+## Introduction
+
+Differential equations form the mathematical backbone of physics, describing how physical quantities change in relation to one another. Whether we're calculating velocity from position, acceleration from velocity, electric fields, wave propagation, or quantum systems, we're working with derivatives and their associated differential equations. This document provides a comprehensive approach to numerical solutions for differential equations, starting with numerical differentiation methods and advancing to solving ordinary differential equations (ODEs).
+
+```{pyodide}
+#| edit: false
+#| echo: false
+#| execute: true
+
+import numpy as np
+import io
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.sparse import diags
+from scipy.integrate import solve_ivp
+
+# default values for plotting
+plt.rcParams.update({
+                     'font.size': 12,
+                     'text.usetex': False,
+                     'font.family': 'serif',
+                     'axes.labelsize': 12,
+                     'axes.titlesize': 12,
+                     'xtick.labelsize': 10,
+                     'ytick.labelsize': 10,
+                     'legend.fontsize': 10,
+                     'figure.titlesize': 12,
+                     'xtick.major.size': 3,
+                     'ytick.major.size': 3,
+                     'xtick.major.width': 0.5,
+                     'ytick.major.width': 0.5,
+                     'axes.linewidth': 0.5,
+                     'grid.linewidth': 0.5,
+                     'lines.linewidth': 1.5,
+                     'xtick.direction' : 'in',
+                     'ytick.direction' : 'in',})
+
+def get_size(w,h):
+      return((w/2.54,h/2.54))
+      
+def set_plot_style():
+    plt.style.use('seaborn-v0_8-whitegrid')
+    plt.rcParams.update({
+        'figure.figsize': (10, 6),
+        'axes.grid': True,
+        'grid.linestyle': '--',
+        'grid.alpha': 0.7,
+        'lines.linewidth': 2,
+        'font.size': 12,
+        'axes.labelsize': 14,
+        'axes.titlesize': p16,
+        'xtick.labelsize': 12,
+        'ytick.labelsize': 12
+    })
+```
+
+## Part 1: Numerical Differentiation
+
+### The Calculus Foundations
+
+Before diving into numerical methods, let's revisit the calculus definition of a derivative. The derivative of a function $f(x)$ at a point $x$ is defined as the limit of the difference quotient as the interval $\Delta x$ approaches zero:
+
+$$
+f^{\prime}(x) = \lim_{\Delta x \rightarrow 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}
+$$
+
+This definition captures the instantaneous rate of change of $f$ with respect to $x$. In physics, derivatives represent essential physical quantities:
+
+- The derivative of position with respect to time is velocity
+- The derivative of velocity with respect to time is acceleration
+- The derivative of potential energy with respect to position gives force
+
+However, in computational physics, we cannot take the limit to zero as computers work with discrete values. Instead, we approximate the derivative using finite differences. This is also possible for higher order derivatives, which can be approximated using more complex finite difference formulas such as
+
+$$
+f^{(n)}(x)=\lim _{\Delta x  \rightarrow 0} \frac{1}{\Delta x ^n} \sum_{k=0}^n(-1)^{k+n}\binom{n}{k} f(x+k \Delta x )
+$$
+
+### Finite Difference Approximations
+
+Numerical differentiation methods primarily rely on finite difference approximations derived from Taylor series expansions. Let's explore these systematically.
+
+#### Forward Difference
+
+The simplest approximation is the forward difference method. It approximates the derivative using the current point and the next point:
+
+$$
+f'(x) \approx \frac{f(x + \Delta x) - f(x)}{\Delta x} + O(\Delta x)
+$$
+
+Where $O(\Delta x)$ represents the error term, indicating that the error decreases linearly with the step size.
+
+#### Central Difference
+
+The central difference method uses points on both sides of the current point to approximate the derivative:
+
+$$
+f'(x) \approx \frac{f(x + \Delta x) - f(x - \Delta x)}{2\Delta x} + O(\Delta x^2)
+$$
+
+This method has a higher order of accuracy – the error decreases quadratically with the step size.
+
+#### Higher-Order Approximations
+
+For applications requiring higher accuracy, we can derive higher-order approximations:
+
+$$
+f'(x) \approx \frac{-f(x + 2\Delta x) + 8f(x + \Delta x) - 8f(x - \Delta x) + f(x - 2\Delta x)}{12\Delta x} + O(\Delta x^4)
+$$
+
+### Implementation in Python
+
+Let's implement these methods and compare their accuracies using a known function:
+
+```{pyodide}
+#| autorun: false
+
+def f(x):
+    return np.sin(x)
+
+def f_prime_exact(x):
+    return np.cos(x)
+
+def forward_diff(f, x, h):
+    return (f(x + h) - f(x)) / h
+
+def central_diff(f, x, h):
+    return (f(x + h) - f(x - h)) / (2 * h)
+
+def higher_order_diff(f, x, h):
+    return (-f(x + 2*h) + 8*f(x + h) - 8*f(x - h) + f(x - 2*h)) / (12 * h)
+
+# Test point
+x0 = np.pi/4
+exact_derivative = f_prime_exact(x0)
+
+# Test different step sizes
+h_values = np.logspace(-1, -10, 10)
+forward_errors = []
+central_errors = []
+higher_errors = []
+
+for h in h_values:
+    forward_errors.append(abs(forward_diff(f, x0, h) - exact_derivative))
+    central_errors.append(abs(central_diff(f, x0, h) - exact_derivative))
+    higher_errors.append(abs(higher_order_diff(f, x0, h) - exact_derivative))
+
+plt.figure(figsize=get_size(10, 8))
+plt.loglog(h_values, forward_errors, 'o-', label='Forward Difference')
+plt.loglog(h_values, central_errors, 's-', label='Central Difference')
+plt.loglog(h_values, higher_errors, '^-', label='Higher-Order')
+plt.loglog(h_values, h_values, '--', label='O(h)')
+plt.loglog(h_values, np.power(h_values, 2), ':', label='O(h²)')
+plt.loglog(h_values, np.power(h_values, 4), '-.', label='O(h⁴)')
+plt.xlabel('Step Size (h)')
+plt.ylabel('Absolute Error')
+plt.title('Error in Derivative Approximations')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+#### Error Analysis
+
+The plot demonstrates how each method's error behaves as the step size decreases. Initially, the error decreases at the expected rate based on the order of the method. However, for very small step sizes, roundoff errors begin to dominate due to the limitations of floating-point arithmetic.
+
+### Matrix Representation of Derivatives
+
+For many physical problems, we need to compute derivatives over an entire spatial or temporal domain. In these cases, we can represent differentiation operations as matrix operations.
+
+#### First Derivative Matrix
+
+For a first derivative on a uniform grid with $n$ points, the central difference approximation can be represented as:
+
+$$
+D_1 = \frac{1}{2\Delta x}
+\begin{pmatrix}
+0 & 1 & 0 & \cdots & 0 \\
+-1 & 0 & 1 & \cdots & 0 \\
+0 & -1 & 0 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & 0
+\end{pmatrix}
+$$
+
+#### Second Derivative Matrix
+
+Similarly, the second derivative can be represented as:
+
+$$
+D_2 = \frac{1}{\Delta x^2}
+\begin{pmatrix}
+-2 & 1 & 0 & \cdots & 0 \\
+1 & -2 & 1 & \cdots & 0 \\
+0 & 1 & -2 & \cdots & 0 \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & -2
+\end{pmatrix}
+$$
+
+```{pyodide}
+#| autorun: false
+
+def create_derivative_matrix(n, dx, order=1):
+    """
+    Create a finite difference matrix for derivatives.
+    
+    Parameters:
+    n (int): Number of grid points
+    dx (float): Grid spacing
+    order (int): Order of derivative (1 or 2)
+    
+    Returns:
+    scipy.sparse.dia_matrix: Sparse matrix for the derivative
+    """
+    if order == 1:
+        # First derivative (central difference)
+        diagonals = [np.ones(n-1), np.zeros(n), -np.ones(n-1)]
+        offsets = [1, 0, -1]
+        D = diags(diagonals, offsets, shape=(n, n)) / (2*dx)
+    elif order == 2:
+        # Second derivative
+        diagonals = [np.ones(n-1), -2*np.ones(n), np.ones(n-1)]
+        offsets = [1, 0, -1]
+        D = diags(diagonals, offsets, shape=(n, n)) / (dx**2)
+    else:
+        raise ValueError("Only first and second order derivatives are supported")
+    
+    return D
+
+# Example usage
+x = np.linspace(0, 2*np.pi, 100)
+dx = x[1] - x[0]
+y = np.sin(x)
+
+# Create derivative matrices
+D1 = create_derivative_matrix(len(x), dx, order=1)
+D2 = create_derivative_matrix(len(x), dx, order=2)
+
+# Compute derivatives
+y_prime = D1.dot(y)
+y_double_prime = D2.dot(y)
+
+# Plot results
+plt.figure(figsize=get_size(12, 8))
+
+plt.subplot(311)
+plt.plot(x, y, label='sin(x)')
+plt.title('Function')
+plt.legend()
+
+plt.subplot(312)
+plt.plot(x, y_prime, label='Numerical')
+plt.plot(x, np.cos(x), '--', label='Analytical')
+plt.title('First Derivative')
+plt.legend()
+
+plt.subplot(313)
+plt.plot(x, y_double_prime, label='Numerical')
+plt.plot(x, -np.sin(x), '--', label='Analytical')
+plt.title('Second Derivative')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+### Boundary Conditions
+
+In physical problems, we often need to specify boundary conditions for our derivatives. Common types include:
+
+- **Dirichlet conditions**: Specify the function values at boundaries
+- **Neumann conditions**: Specify the derivative values at boundaries
+- **Periodic conditions**: The function values and derivatives match at opposite boundaries
+
+The choice of boundary conditions affects how we construct our derivative matrices, especially at the edges of the domain.
+
+## Part 2: Solving Ordinary Differential Equations
+
+Now that we understand numerical differentiation, we can apply these techniques to solve ordinary differential equations (ODEs), which are ubiquitous in physics.
+
+### The Harmonic Oscillator
+
+Let's start with a classic physical system: the harmonic oscillator. The equation of motion is:
+
+$$
+\frac{d^2x}{dt^2} + \omega^2 x = 0
+$$
+
+where $\omega$ is the angular frequency of the oscillator. 
+
+::: {.callout-note}
+This is a second order differential equation which requires two initial conditions for its solution: the initial elongation $x(t=0)=x_{0}$ and the initial velocity $\dot{x}(t=0)=v_{0}$.
+:::
+
+### Implicit Matrix Solution
+
+Using the matrix representation of the second derivative that we developed earlier, we can transform the ODE into a system of linear equations that can be solved implicitly.
+
+#### Define Matrices
+
+Our matrix will consist of two parts. The first containing the second derivative and the second just the elongation. Suppose we want to calculate the position $x(t)$ at 6 instances in time $t_{i}$, then the matrix version of the second derivative reads as:
+
+$T=\frac{d^2x}{dt^2}=\frac{1}{\delta t^2}
+\begin{bmatrix}
+-2 & 1  & 0 & 0 & 0 & 0\\
+ 1 & -2 & 1 & 0 & 0 & 0\\
+ 0 & 1  & -2 & 1 & 0 & 0\\
+ 0 & 0  & 1  & -2 & 1 & 0\\
+ 0 & 0  & 0  &  1 & -2 & 1\\
+ 0 & 0  & 0  &  0 &  1 & -2\\
+\end{bmatrix}
+\begin{bmatrix}
+x_{1}\\
+x_{2}\\
+x_{3}\\
+x_{4}\\
+x_{5}\\
+x_{6}
+\end{bmatrix}$
+
+The second term in the equation of motion can be represented as:
+
+$V=\omega^2 x=\begin{bmatrix}
+\omega^2  & 0  & 0 & 0 & 0 & 0\\
+ 0 & \omega^2  & 0 & 0 & 0 & 0\\
+ 0 & 0  & \omega^2  & 0 & 0 & 0\\
+ 0 & 0  & 0  & \omega^2  & 0 & 0\\
+ 0 & 0  & 0  &  0 & \omega^2  & 0\\
+ 0 & 0  & 0  &  0 &  0 & \omega^2
+\end{bmatrix}
+\begin{bmatrix}
+x_{1}\\
+x_{2}\\
+x_{3}\\
+x_{4}\\
+x_{5}\\
+x_{6}
+\end{bmatrix}$
+
+The equation of motion can then be written as $T \cdot x + V \cdot x = 0$, or $(T + V) \cdot x = 0$.
+
+#### Implementation
+
+```{pyodide}
+#| autorun: false
+
+# Define parameters
+n_points = 100  # Number of time points
+t_max = 10.0     # Maximum time
+dt = t_max / (n_points - 1)  # Time step
+omega = 2.0      # Angular frequency
+x0 = 1.0         # Initial position
+v0 = 0.0         # Initial velocity
+
+# Create time array
+t = np.linspace(0, t_max, n_points)
+
+# Create the second derivative matrix
+diagonals = [np.ones(n_points-1), -2*np.ones(n_points), np.ones(n_points-1)]
+offsets = [1, 0, -1]
+D2 = diags(diagonals, offsets, shape=(n_points, n_points)) / (dt**2)
+
+# Create the potential matrix (just omega^2 on the diagonal)
+V = diags([omega**2 * np.ones(n_points)], [0])
+
+# Combine matrices
+M = D2 + V
+
+# Incorporate boundary conditions
+# We know x(0) = x0 and (dx/dt)(0) = v0
+# For first-order boundary condition (velocity), we use the forward difference
+M[0, :] = 0
+M[0, 0] = 1  # x(0) = x0
+
+# For second-order boundary condition (acceleration), we use the numerical second derivative
+M[1, 0:3] = np.array([1, -2, 1]) / (dt**2)
+
+# Create the right-hand side vector
+b = np.zeros(n_points)
+b[0] = x0  # Initial position
+b[1] = -omega**2 * x0  # Initial acceleration from the ODE
+
+# Solve the system
+x = np.linalg.solve(M, b)
+
+# Plot the solution
+plt.figure(figsize=get_size(10, 7))
+plt.plot(t, x, label='Numerical Solution')
+plt.plot(t, x0*np.cos(omega*t), '--', label='Analytical Solution')
+plt.xlabel('Time (s)')
+plt.ylabel('Position x(t)')
+plt.title('Harmonic Oscillator Solution')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+### Explicit Solution Methods
+
+Instead of solving the entire system implicitly, we can use step-by-step numerical integration methods. These methods are particularly useful for non-linear ODEs.
+
+#### Converting to First-Order System
+
+We can convert any second-order ODE to a system of first-order ODEs by introducing additional variables. For the harmonic oscillator:
+
+$$
+\frac{d^2x}{dt^2} + \omega^2 x = 0
+$$
+
+We introduce $v = \frac{dx}{dt}$ and rewrite as:
+
+$$
+\begin{align}
+\frac{dx}{dt} &= v \\
+\frac{dv}{dt} &= -\omega^2 x
+\end{align}
+$$
+
+#### Euler Method
+
+The simplest numerical integration method is the Euler method:
+
+$$
+\begin{align}
+x_{n+1} &= x_n + v_n \Delta t \\
+v_{n+1} &= v_n - \omega^2 x_n \Delta t
+\end{align}
+$$
+
+```{pyodide}
+#| autorun: false
+
+def euler_method(f, y0, t_span, dt):
+    """
+    Implements the Euler method for solving ODEs.
+    
+    Parameters:
+    f: Function that returns the derivative dy/dt = f(t, y)
+    y0: Initial condition
+    t_span: (t_start, t_end)
+    dt: Time step
+    
+    Returns:
+    t: Array of time points
+    y: Array of solution values
+    """
+    t_start, t_end = t_span
+    n_steps = int((t_end - t_start) / dt) + 1
+    t = np.linspace(t_start, t_end, n_steps)
+    y = np.zeros((n_steps, len(y0)))
+    y[0] = y0
+    
+    for i in range(1, n_steps):
+        y[i] = y[i-1] + dt * f(t[i-1], y[i-1])
+    
+    return t, y
+```
+
+#### Euler-Cromer Method
+
+The Euler-Cromer method is more stable for oscillatory systems:
+
+$$
+\begin{align}
+v_{n+1} &= v_n - \omega^2 x_n \Delta t \\
+x_{n+1} &= x_n + v_{n+1} \Delta t
+\end{align}
+$$
+
+```{pyodide}
+#| autorun: false
+
+def euler_cromer_method(f, y0, t_span, dt):
+    """
+    Implements the Euler-Cromer method for solving oscillatory ODEs.
+    
+    Parameters:
+    f: Function that returns the derivative dy/dt = f(t, y)
+    y0: Initial condition [position, velocity]
+    t_span: (t_start, t_end)
+    dt: Time step
+    
+    Returns:
+    t: Array of time points
+    y: Array of solution values [position, velocity]
+    """
+    t_start, t_end = t_span
+    n_steps = int((t_end - t_start) / dt) + 1
+    t = np.linspace(t_start, t_end, n_steps)
+    y = np.zeros((n_steps, len(y0)))
+    y[0] = y0
+    
+    for i in range(1, n_steps):
+        # Update velocity first
+        derivatives = f(t[i-1], y[i-1])
+        y[i, 1] = y[i-1, 1] + dt * derivatives[1]
+        # Then update position using new velocity
+        y[i, 0] = y[i-1, 0] + dt * y[i, 1]
+    
+    return t, y
+```
+
+#### Midpoint Method
+
+The midpoint method has better accuracy:
+
+$$
+\begin{align}
+k_1 &= f(t_n, y_n) \\
+k_2 &= f(t_n + \frac{\Delta t}{2}, y_n + \frac{\Delta t}{2}k_1) \\
+y_{n+1} &= y_n + \Delta t \cdot k_2
+\end{align}
+$$
+
+```{pyodide}
+#| autorun: false
+
+def midpoint_method(f, y0, t_span, dt):
+    """
+    Implements the midpoint method for solving ODEs.
+    
+    Parameters:
+    f: Function that returns the derivative dy/dt = f(t, y)
+    y0: Initial condition
+    t_span: (t_start, t_end)
+    dt: Time step
+    
+    Returns:
+    t: Array of time points
+    y: Array of solution values
+    """
+    t_start, t_end = t_span
+    n_steps = int((t_end - t_start) / dt) + 1
+    t = np.linspace(t_start, t_end, n_steps)
+    y = np.zeros((n_steps, len(y0)))
+    y[0] = y0
+    
+    for i in range(1, n_steps):
+        k1 = f(t[i-1], y[i-1])
+        k2 = f(t[i-1] + dt/2, y[i-1] + dt/2 * k1)
+        y[i] = y[i-1] + dt * k2
+    
+    return t, y
+```
+
+#### Comparison of Methods
+
+Let's compare these methods for the harmonic oscillator:
+
+```{pyodide}
+#| autorun: false
+
+# Define the harmonic oscillator system
+def harmonic_oscillator(t, y, omega=2.0):
+    """
+    Harmonic oscillator as a system of first-order ODEs.
+    y[0] is position, y[1] is velocity.
+    """
+    dydt = np.zeros_like(y)
+    dydt[0] = y[1]
+    dydt[1] = -omega**2 * y[0]
+    return dydt
+
+# Initial conditions
+y0 = np.array([1.0, 0.0])  # [position, velocity]
+t_span = (0, 20)
+dt = 0.1
+omega = 2.0
+
+# Analytical solution
+def analytical_solution(t, x0=1.0, v0=0.0, omega=2.0):
+    return x0 * np.cos(omega * t) + v0/omega * np.sin(omega * t)
+
+# Solve using different methods
+t_euler, y_euler = euler_method(lambda t, y: harmonic_oscillator(t, y, omega), y0, t_span, dt)
+t_cromer, y_cromer = euler_cromer_method(lambda t, y: harmonic_oscillator(t, y, omega), y0, t_span, dt)
+t_midpoint, y_midpoint = midpoint_method(lambda t, y: harmonic_oscillator(t, y, omega), y0, t_span, dt)
+
+# Compute analytical solution
+y_analytical = analytical_solution(t_euler, y0[0], y0[1], omega)
+
+# Plot comparison
+plt.figure(figsize=get_size(12, 10))
+
+plt.subplot(2, 1, 1)
+plt.plot(t_euler, y_euler[:, 0], label='Euler')
+plt.plot(t_cromer, y_cromer[:, 0], label='Euler-Cromer')
+plt.plot(t_midpoint, y_midpoint[:, 0], label='Midpoint')
+plt.plot(t_euler, y_analytical, '--', label='Analytical')
+plt.xlabel('Time (s)')
+plt.ylabel('Position x(t)')
+plt.title('Comparison of Numerical Methods for Harmonic Oscillator')
+plt.legend()
+
+plt.subplot(2, 1, 2)
+plt.plot(t_euler, np.abs(y_euler[:, 0] - y_analytical), label='Euler Error')
+plt.plot(t_cromer, np.abs(y_cromer[:, 0] - y_analytical), label='Euler-Cromer Error')
+plt.plot(t_midpoint, np.abs(y_midpoint[:, 0] - y_analytical), label='Midpoint Error')
+plt.yscale('log')
+plt.xlabel('Time (s)')
+plt.ylabel('Absolute Error')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+### Solving ODEs with SciPy
+
+For practical applications, the SciPy library provides sophisticated ODE solvers:
+
+```{pyodide}
+#| autorun: false
+
+# Define the ODE system
+def SHO(t, y, omega=2.0):
+    """Simple Harmonic Oscillator"""
+    x, v = y
+    dxdt = v
+    dvdt = -omega**2 * x
+    return [dxdt, dvdt]
+
+# Parameters
+t_span = (0, 20)
+y0 = [1.0, 0.0]  # Initial [position, velocity]
+omega = 2.0
+
+# Solve using scipy.integrate.solve_ivp
+solution = solve_ivp(
+    lambda t, y: SHO(t, y, omega),
+    t_span,
+    y0,
+    method='RK45',
+    t_eval=np.linspace(t_span[0], t_span[1], 500)
+)
+
+# Plot solution
+plt.figure(figsize=get_size(12, 8))
+
+plt.subplot(2, 1, 1)
+plt.plot(solution.t, solution.y[0], label='Position')
+plt.plot(solution.t, solution.y[1], label='Velocity')
+plt.plot(solution.t, analytical_solution(solution.t, y0[0], y0[1], omega), '--', label='Analytical')
+plt.xlabel('Time (s)')
+plt.ylabel('Value')
+plt.title('Simple Harmonic Oscillator using SciPy')
+plt.legend()
+
+plt.subplot(2, 1, 2)
+plt.plot(solution.y[0], solution.y[1])
+plt.xlabel('Position')
+plt.ylabel('Velocity')
+plt.title('Phase Space Trajectory')
+plt.axis('equal')
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Advanced Example: Damped Driven Pendulum
+
+Let's apply our knowledge to a more complex system: a damped driven pendulum. The equation of motion is:
+
+$$
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \omega_0^2\sin\theta = F_0\cos(\omega_d t)
+$$
+
+where $\theta$ is the angle, $b$ is the damping coefficient, $\omega_0$ is the natural frequency, $F_0$ is the driving amplitude, and $\omega_d$ is the driving frequency.
+
+```{pyodide}
+#| autorun: false
+
+def damped_driven_pendulum(t, y, b=0.1, omega0=1.0, F0=0.5, omega_d=0.7):
+    """
+    Damped driven pendulum ODE system.
+    y[0] is theta (angle), y[1] is omega (angular velocity).
+    """
+    theta, omega = y
+    dtheta_dt = omega
+    domega_dt = -b*omega - omega0**2 * np.sin(theta) + F0 * np.cos(omega_d * t)
+    return [dtheta_dt, domega_dt]
+
+# Parameters
+t_span = (0, 50)
+y0 = [0.1, 0.0]  # Initial [angle, angular velocity]
+b = 0.1          # Damping coefficient
+omega0 = 1.0     # Natural frequency
+F0 = 0.5         # Driving amplitude
+omega_d = 0.7    # Driving frequency
+
+# Solve using scipy.integrate.solve_ivp
+solution = solve_ivp(
+    lambda t, y: damped_driven_pendulum(t, y, b, omega0, F0, omega_d),
+    t_span,
+    y0,
+    method='RK45',
+    t_eval=np.linspace(t_span[0], t_span[1], 1000)
+)
+
+# Plot solution
+plt.figure(figsize=get_size(12, 10))
+
+plt.subplot(2, 1, 1)
+plt.plot(solution.t, solution.y[0], label='Angle')
+plt.plot(solution.t, solution.y[1], label='Angular Velocity')
+plt.xlabel('Time (s)')
+plt.ylabel('Value')
+plt.title('Damped Driven Pendulum')
+plt.legend()
+
+plt.subplot(2, 1, 2)
+plt.plot(solution.y[0], solution.y[1])
+plt.xlabel('Angle')
+plt.ylabel('Angular Velocity')
+plt.title('Phase Space Trajectory')
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Conclusion
+
+In this comprehensive exploration, we've covered numerical methods for differentiation and integration, and applied them to solve ordinary differential equations. We've progressed from basic concepts to advanced applications, providing a solid foundation for numerical methods in physics.
+
+The matrix-based approach is particularly powerful for linear problems, while explicit integration methods are versatile for a wide range of ODEs. For complex problems, SciPy's ODE solvers provide robust and efficient solutions.
+
+## What to Try Yourself
+
+1. Implement higher-order Runge-Kutta methods and compare their accuracy
+2. Solve a coupled oscillator system (two or more oscillators connected by springs)
+3. Explore chaotic behavior in the damped driven pendulum by varying parameters
+4. Implement adaptive step size methods for improved efficiency
+5. Apply these methods to specific physics problems in your area of interest
+
+## Further Reading
+
+- Press, W. H., Teukolsky, S. A., Vetterling, W. T., & Flannery, B. P. (2007). Numerical Recipes: The Art of Scientific Computing (3rd ed.). Cambridge University Press.
+- Burden, R. L., & Faires, J. D. (2015). Numerical Analysis (10th ed.). Cengage Learning.
+- Hairer, E., Nørsett, S. P., & Wanner, G. (2008). Solving Ordinary Differential Equations I: Nonstiff Problems. Springer.
+- LeVeque, R. J. (2007). Finite Difference Methods for Ordinary and Partial Differential Equations: Steady-State and Time-Dependent Problems. SIAM.
+- Landau, R. H., Páez, M. J., & Bordeianu, C. C. (2015). Computational Physics: Problem Solving with Python (3rd ed.). Wiley-VCH.
+- Newman, M. (2012). Computational Physics. CreateSpace Independent Publishing Platform.

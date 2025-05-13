@@ -1,0 +1,531 @@
+---
+format:
+  live-html:
+    toc: true
+    toc-location: right
+pyodide:
+  autorun: false
+  packages:
+    - matplotlib
+    - numpy
+    - scipy
+---
+
+## Numerical Differentiation for Physics
+
+Derivatives form the mathematical backbone of physics. Whether we're calculating velocity from position, acceleration from velocity, or electric field from potential, we're computing derivatives. While calculus provides us with analytical tools to compute derivatives, many real-world physics problems involve functions that are either too complex for analytical solutions or are only known at discrete points (experimental data). This is where numerical differentiation becomes essential for physicists.
+
+```{pyodide}
+#| edit: false
+#| echo: false
+#| execute: true
+
+import numpy as np
+import io
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+plt.rcParams.update({'font.size': 18})
+
+# default values for plotting
+plt.rcParams.update({'font.size': 10,
+                     'lines.linewidth': 1,
+                     'lines.markersize': 5,
+                     'axes.labelsize': 10,
+                     'xtick.labelsize' : 10,
+                     'ytick.labelsize' : 10,
+                     'xtick.top' : True,
+                     'xtick.direction' : 'in',
+                     'ytick.right' : True,
+                     'ytick.direction' : 'in',})
+
+def get_size(w,h):
+      return((w/2.54,h/2.54))
+```
+
+### The Calculus Foundations
+
+Before diving into numerical methods, let's revisit the calculus definition of a derivative. The derivative of a function $f(x)$ at a point $x$ is defined as the limit of the difference quotient as the interval $\Delta x$ approaches zero:
+
+$$
+f^{\prime}(x) = \lim_{\Delta x \rightarrow 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}
+$$
+
+This definition captures the instantaneous rate of change of $f$ with respect to $x$. In physics, derivatives represent essential physical quantities:
+
+- The derivative of position with respect to time is velocity
+- The derivative of velocity with respect to time is acceleration
+- The derivative of potential energy with respect to position gives force
+
+However, in computational physics, we cannot take the limit to zero as computers work with discrete values. Instead, we approximate the derivative using finite differences. This is also possible for higher order derivatives, which can be approximated using more complex finite difference formulas such as
+
+$$
+f^{(n)}(x)=\lim _{\Delta x  \rightarrow 0} \frac{1}{\Delta x ^n} \sum_{k=0}^n(-1)^{k+n}\binom{n}{k} f(x+k \Delta x )
+$$
+
+
+
+### Finite Difference Approximations
+
+Numerical differentiation methods primarily rely on finite difference approximations derived from Taylor series expansions. Let's explore these systematically.
+
+#### Forward Difference
+
+The simplest approximation comes directly from the definition, where we look at the change in function value as we move forward from the current point:
+
+$$
+f^{\prime}_{i} \approx \frac{f_{i+1} - f_{i}}{\Delta x}
+$$
+
+This is called the *forward difference* method. To understand its accuracy, we can analyze the error using Taylor expansion. The resulting local error $\delta$ at each calculation is:
+
+$$
+\delta = f_{i+1} - f_{i} - \Delta x f^{\prime}(x_i) = \frac{1}{2} \Delta x^2 f^{\prime \prime}(x_i) + O(\Delta x^3)
+$$
+
+We observe that while the local truncation error is proportional to $\Delta x^2$, the accumulated global error is proportional to $\Delta x$, making this a first-order accurate method. This means that halving the step size will approximately halve the error in our final derivative approximation.
+
+::: {.callout-note}
+## Local vs. Global Error
+**Local truncation error** refers to the error introduced in a single step of the numerical method due to truncating the Taylor series. For the forward difference method, this error is $O(\Delta x^2)$.
+
+**Global accumulated error** is the total error that accumulates as we apply the method repeatedly across the domain. For the forward difference method, this accumulated error is $O(\Delta x)$. Global error is generally one order less accurate than the local error due to error propagation through multiple steps.
+:::
+
+#### Central Difference
+
+We can derive a more accurate approximation by using function values on both sides of the point of interest. Using Taylor expansions for $f(x+\Delta x)$ and $f(x-\Delta x)$:
+
+$$
+f_{i+1} = f_{i} + \Delta x f_{i}^{\prime} + \frac{\Delta x^2}{2!} f_{i}^{\prime\prime} + \frac{\Delta x^3}{3!} f_{i}^{(3)} + \ldots
+$$
+
+$$
+f_{i-1} = f_{i} - \Delta x f_{i}^{\prime} + \frac{\Delta x^2}{2!} f_{i}^{\prime\prime} - \frac{\Delta x^3}{3!} f_{i}^{(3)} + \ldots
+$$
+
+Subtracting these equations cancels out the even-powered terms in $\Delta x$:
+
+$$
+f_{i+1} - f_{i-1} = 2 \Delta x f_{i}^{\prime} + O(\Delta x^3)
+$$
+
+Solving for $f^{\prime}_{i}$:
+
+$$
+f^{\prime}_{i} \approx \frac{f_{i+1} - f_{i-1}}{2 \Delta x}
+$$
+
+This *central difference* formula has an error proportional to $\Delta x^2$, making it second-order accurate—significantly more precise than the forward difference method.
+
+#### Higher-Order Approximations
+
+We can extend this approach to derive higher-order approximations by including more points in our calculation. A common fourth-order accurate formula for the first derivative is:
+
+$$
+f_{i}^{\prime}=\frac{1}{12 \Delta x}(-f_{i-2}+8f_{i-1}-8f_{i+1}+f_{i+2})
+$$
+
+This formula provides even better accuracy but requires function values at four points.
+
+#### Comparison of Methods
+
+The following table summarizes the key finite difference methods for first derivatives:
+
+| Method | Formula | Order of Accuracy | Points Required |
+|--------|---------|-------------------|----------------|
+| Forward Difference | $\frac{f_{i+1} - f_{i}}{\Delta x}$ | $O(\Delta x)$ | 2 |
+| Backward Difference | $\frac{f_{i} - f_{i-1}}{\Delta x}$ | $O(\Delta x)$ | 2 |
+| Central Difference | $\frac{f_{i+1} - f_{i-1}}{2\Delta x}$ | $O(\Delta x^2)$ | 3 |
+| Fourth-Order Central | $\frac{-f_{i+2}+8f_{i+1}-8f_{i-1}+f_{i-2}}{12\Delta x}$ | $O(\Delta x^4)$ | 5 |
+
+Higher-order methods generally provide more accurate results but require more computational resources and handle boundaries less efficiently.
+
+### Implementation in Python
+
+Let's implement these numerical differentiation methods in Python, starting with a central difference function:
+
+```{pyodide}
+#| autorun: false
+def central_difference(f, x, h=1.e-5, *params):
+    """Compute the first derivative using central difference"""
+    return (f(x+h, *params)-f(x-h, *params))/(2*h)
+
+def fourth_order_central(f, x, h=1.e-3, *params):
+    """Compute the first derivative using fourth-order central difference"""
+    return (-f(x+2*h, *params) + 8*f(x+h, *params) - 8*f(x-h, *params) + f(x-2*h, *params))/(12*h)
+```
+
+We can test these functions with $\sin(x)$, whose derivative is $\cos(x)$:
+
+```{pyodide}
+#| autorun: false
+def f(x):
+    return np.sin(x)
+
+def analytical_derivative(x):
+    return np.cos(x)
+
+x_values = np.linspace(0, 2*np.pi, 100)
+
+# Calculate derivatives using different methods
+h_value = 0.01
+forward_diff = [(f(x+h_value) - f(x))/h_value for x in x_values]
+central_diff = [central_difference(f, x, h_value) for x in x_values]
+fourth_order = [fourth_order_central(f, x, h_value) for x in x_values]
+analytical = analytical_derivative(x_values)
+
+# Plotting
+plt.figure(figsize=get_size(12,8))
+plt.plot(x_values, analytical, 'k-', label=r'$\cos(x)$')
+plt.plot(x_values, forward_diff, 'r--', label='forward difference')
+plt.plot(x_values, central_diff, 'g-.', label='central difference')
+plt.plot(x_values, fourth_order, 'b:', label='4th-order central')
+plt.xlabel('x')
+plt.ylabel(r'derivative of $\sin(x)$')
+plt.legend()
+plt.show()
+```
+
+#### Error Analysis
+
+Let's examine how the error in our numerical derivative varies with the step size $\Delta x$:
+
+```{pyodide}
+#| autorun: false
+delta_x_values = np.logspace(-10, 0, 20)  # Step sizes from 10^-10 to 10^0
+x0 = np.pi/4  # Test point
+
+# Calculate errors for different methods
+forward_errors = [abs((f(x0+dx) - f(x0))/dx - analytical_derivative(x0)) for dx in delta_x_values]
+central_errors = [abs((f(x0+dx) - f(x0-dx))/(2*dx) - analytical_derivative(x0)) for dx in delta_x_values]
+fourth_order_errors = [abs((-f(x0+2*dx) + 8*f(x0+dx) - 8*f(x0-dx) + f(x0-2*dx))/(12*dx) - analytical_derivative(x0)) for dx in delta_x_values]
+
+# Plotting errors
+plt.figure(figsize=get_size(12,8))
+plt.loglog(delta_x_values, forward_errors, 'ro-', label='Forward difference')
+plt.loglog(delta_x_values, central_errors, 'go-', label='Central difference')
+plt.loglog(delta_x_values, fourth_order_errors, 'bo-', label='4th-order central')
+plt.loglog(delta_x_values, delta_x_values, 'k--', label=r'$O(\Delta x)$')
+plt.loglog(delta_x_values, [dx**2 for dx in delta_x_values], 'k-.', label=r'$O(\Delta x^2)$')
+plt.loglog(delta_x_values, [dx**4 for dx in delta_x_values], 'k:', label=r'$O(\Delta x^4)$')
+plt.xlabel(r'step size ($\Delta x$)')
+plt.ylabel('absolute error')
+plt.legend()
+
+plt.show()
+```
+
+This visualization demonstrates how error behaves with step size for different methods. For very small step sizes, roundoff errors become significant (observe the upturn in error for tiny $\Delta x$ values), while for larger steps, truncation error dominates.
+
+### Matrix Representation of Derivatives
+
+An elegant approach to numerical differentiation involves representing the differentiation operation as a matrix multiplication. This representation is particularly valuable when solving differential equations numerically.
+
+### First Derivative Matrix
+
+For a uniformly spaced grid of points $x_i$, we can represent the first derivative operation as a matrix:
+
+$$
+f^{\prime} = \frac{1}{\Delta x}
+\begin{bmatrix}
+-1 & 1  & 0 & 0 & \cdots & 0\\
+0 & -1 & 1 & 0 & \cdots & 0\\
+0 & 0  & -1 & 1 & \cdots & 0\\
+\vdots & \vdots & \vdots & \ddots & \ddots & \vdots\\
+0 & 0  & 0  & \cdots & -1 & 1\\
+0 & 0  & 0  & \cdots &  0 & -1\\
+\end{bmatrix}
+\begin{bmatrix}
+f_{1}\\
+f_{2}\\
+f_{3}\\
+\vdots\\
+f_{N-1}\\
+f_{N}\\
+\end{bmatrix}
+$$
+
+This matrix implements the forward difference scheme. For a central difference scheme, the matrix would have entries on both sides of the diagonal.
+
+#### Second Derivative Matrix
+
+Similarly, the second derivative can be represented as a tridiagonal matrix:
+
+$$
+f^{\prime\prime} = \frac{1}{\Delta x^2}
+\begin{bmatrix}
+1 & -2 & 1 & 0 & \cdots & 0\\
+0 & 1 & -2 & 1 & \cdots & 0\\
+0 & 0 & 1 & -2 & \cdots & 0\\
+\vdots & \vdots & \vdots & \ddots & \ddots & \vdots\\
+0 & 0 & 0 & \cdots & 1 & -2 & 1\\
+0 & 0 & 0 & \cdots & 0 & 1 & -2\\
+\end{bmatrix}
+\begin{bmatrix}
+f_{1}\\
+f_{2}\\
+f_{3}\\
+\vdots\\
+f_{N-1}\\
+f_{N}\\
+\end{bmatrix}
+$$
+
+The boundary conditions affect the structure of these matrices, especially the first and last rows.
+
+#### Implementation with SciPy
+
+SciPy provides tools to efficiently construct and work with these differentiation matrices:
+
+```{pyodide}
+#| autorun: false
+from scipy.sparse import diags
+
+# Define a grid and a function to differentiate
+N = 100
+x = np.linspace(-5, 5, N)
+dx = x[1] - x[0]
+y = np.sin(x)
+
+# First derivative matrix (forward difference)
+D1_forward = diags([-1, 1], [0, 1], shape=(N, N)) / dx
+
+# First derivative matrix (central difference)
+# Corrected central difference implementation
+D1_central = diags([-1, 0, 1], [-1, 0, 1], shape=(N, N))
+# The central difference formula is (f(x+h) - f(x-h))/(2h)
+# So we need -1 at offset -1, 0 at offset 0, and 1 at offset 1
+D1_central.setdiag(0, 0)  # Center diagonal should be 0 for central difference
+D1_central = D1_central / (2 * dx)
+
+# Second derivative matrix
+D2 = diags([1, -2, 1], [-1, 0, 1], shape=(N, N)) / dx**2
+
+# Compute derivatives
+dy_forward = D1_forward @ y
+dy_central = D1_central @ y
+d2y = D2 @ y
+
+# Plot the results
+plt.figure(figsize=get_size(16,12))
+
+plt.subplot(3, 1, 1)
+plt.plot(x, y, 'k-', label=r'$f(x) = \sin(x)$')
+plt.legend()
+
+
+plt.subplot(3, 1, 2)
+plt.plot(x[:-1], dy_forward[:-1], 'r--', label='forward difference')
+plt.plot(x, dy_central, 'g-', label='central difference')
+plt.plot(x, np.cos(x), 'k:', label=r'$\cos(x)$')
+plt.ylim(-1.05,1.05)
+plt.legend()
+
+plt.subplot(3, 1, 3)
+plt.plot(x[1:-1], d2y[1:-1], 'b-', label='num. 2nd derivative')
+plt.plot(x, -np.sin(x), 'k:', label=r'$-\sin(x)$')
+plt.legend()
+
+
+plt.tight_layout()
+plt.show()
+```
+
+### Boundary Conditions
+
+A critical consideration in numerical differentiation is how to handle the boundaries of the domain. Different approaches include:
+
+1. **One-sided differences**: Using forward differences at the left boundary and backward differences at the right boundary.
+
+2. **Extrapolation**: Extending the domain by extrapolating function values beyond the boundaries.
+
+3. **Periodic boundaries**: For periodic functions, using values from the opposite end of the domain.
+
+4. **Ghost points**: Introducing additional points outside the domain whose values are determined by the boundary conditions.
+
+The choice of boundary treatment depends on the physical problem and can significantly impact the accuracy of the solution.
+
+### Applications in Physics
+
+Numerical differentiation is foundational to computational physics. Let's explore some specific applications:
+
+#### 1. Solving Differential Equations
+
+Many physics problems are formulated as differential equations. For example, the one-dimensional time-dependent Schrödinger equation:
+
+$$
+i\hbar\frac{\partial}{\partial t}\Psi(x,t) = -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2}\Psi(x,t) + V(x)\Psi(x,t)
+$$
+
+Numerical differentiation allows us to approximate the spatial derivatives, reducing this to a system of ordinary differential equations in time.
+
+#### 2. Analysis of Experimental Data
+
+When working with experimental measurements, we often need to calculate derivatives from discrete data points. For instance, determining the velocity and acceleration of an object from position measurements.
+
+```{pyodide}
+#| autorun: false
+# Simulated noisy position data (as might come from an experiment)
+time = np.linspace(0, 10, 100)
+position = 5*time**2 + np.random.normal(0, 5, len(time))  # x = 5t² + noise
+
+# Calculate velocity using central differences
+dt = time[1] - time[0]
+velocity = np.zeros_like(position)
+for i in range(1, len(time)-1):
+    velocity[i] = (position[i+1] - position[i-1]) / (2*dt)
+
+# Theoretical velocity: v = 10t
+theoretical_velocity = 10 * time
+
+# Plot
+plt.figure(figsize=get_size(16,12))
+
+plt.subplot(2, 1, 1)
+plt.plot(time, position, 'ko',alpha=0.2, label='experiment')
+plt.plot(time, 5*time**2, 'r-', label=r'$x = 5t^2$')
+plt.xlabel('time [s]')
+plt.ylabel('position [m]')
+plt.legend()
+
+plt.subplot(2, 1, 2)
+plt.plot(time[1:-1], velocity[1:-1], 'bo', label='calculated velocity')
+plt.plot(time, theoretical_velocity, 'r-', label=r'theoretical velocity: $v = 10t$')
+plt.xlabel('time [s]')
+plt.ylabel('velocity [m/s]')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+Notice how noise in the position measurements gets amplified in the velocity calculations. This highlights a key challenge in numerical differentiation: sensitivity to noise.
+
+#### 3. Electric Field Calculation
+
+In electrostatics, the electric field $\vec{E}$ is related to the electric potential $\phi$ by $\vec{E} = -\nabla \phi$. Numerical differentiation allows us to calculate the electric field from a known potential distribution.
+
+```{pyodide}
+#| autorun: false
+# Create a 2D grid
+x = np.linspace(-3, 3, 400)
+y = np.linspace(-3, 3, 400)
+X, Y = np.meshgrid(x, y)
+
+# Electric potential due to a point charge at origin
+potential = 1 / np.sqrt(X**2 + Y**2 + 0.001)  # Adding 0.01 to avoid division by zero
+
+# Calculate electric field components
+dx = x[1] - x[0]
+dy = y[1] - y[0]
+Ex = np.zeros_like(potential)
+Ey = np.zeros_like(potential)
+
+# Use central differences for interior points
+for i in range(1, len(x)-1):
+    for j in range(1, len(y)-1):
+        Ex[j, i] = -(potential[j, i+1] - potential[j, i-1]) / (2*dx)
+        Ey[j, i] = -(potential[j+1, i] - potential[j-1, i]) / (2*dy)
+
+# Plot potential and electric field
+plt.figure(figsize=get_size(16,6.5))
+
+plt.subplot(1, 2, 1)
+contour = plt.contourf(X, Y, potential, 20, cmap='viridis')
+plt.colorbar(contour, label='electric potential')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.xlim(-2,2)
+plt.ylim(-2,2)
+
+
+plt.subplot(1, 2, 2)
+# Skip some points for clearer visualization
+skip = 5
+plt.streamplot(X[::skip, ::skip], Y[::skip, ::skip],
+               Ex[::skip, ::skip], Ey[::skip, ::skip],
+               color='w', density=1.5)
+plt.contourf(X, Y, np.sqrt(Ex**2 + Ey**2), 20, cmap='plasma', alpha=0.5)
+plt.colorbar(label='electric field magnitude')
+
+plt.xlabel('x')
+plt.ylabel('y')
+plt.xlim(-2,2)
+plt.ylim(-2,2)
+
+
+plt.tight_layout()
+plt.show()
+```
+
+### Practical Considerations and Challenges
+
+#### 1. Step Size Selection
+
+Choosing an appropriate step size is crucial for numerical differentiation. If $\Delta x$ is too large, the truncation error becomes significant. If $\Delta x$ is too small, roundoff errors dominate. A general approach is to use:
+
+$$ \Delta x \approx \sqrt{\epsilon_\text{machine}} \times x $$
+
+where $\epsilon_\text{machine}$ is the machine epsilon (approximately $10^{-16}$ for double precision).
+
+#### 2. Dealing with Noise
+
+Numerical differentiation amplifies noise in the data. Several techniques can help:
+
+- **Smoothing**: Apply a filter to the data before differentiation.
+- **Regularization**: Use methods that inherently provide some smoothing.
+- **Savitzky-Golay filters**: Combine local polynomial fitting with differentiation.
+
+#### 3. Conservation Properties
+
+In physical simulations, preserving conservation laws (energy, momentum, etc.) is often crucial. Some numerical differentiation schemes conserve these properties better than others.
+
+### Using SciPy for Numerical Differentiation
+
+The SciPy library provides convenient functions for numerical differentiation:
+
+```{pyodide}
+#| autorun: false
+from scipy.misc import derivative
+
+# Calculate the derivative of sin(x) at x = π/4
+x0 = np.pi/4
+
+# First derivative with different accuracies
+first_deriv = derivative(np.sin, x0, dx=1e-6, n=1, order=3)
+print(f"First derivative of sin(x) at x = π/4: {first_deriv}")
+print(f"Actual value (cos(π/4)): {np.cos(x0)}")
+
+# Second derivative
+second_deriv = derivative(np.sin, x0, dx=1e-6, n=2, order=5)
+print(f"Second derivative of sin(x) at x = π/4: {second_deriv}")
+print(f"Actual value (-sin(π/4)): {-np.sin(x0)}")
+```
+
+The `order` parameter controls the accuracy of the approximation by using more points in the calculation.
+
+### Conclusion
+
+Numerical differentiation is a fundamental technique in computational physics, bridging the gap between theoretical models and practical computations. By understanding the principles, methods, and challenges of numerical differentiation, physicists can effectively analyze data, solve differential equations, and simulate physical systems.
+
+The methods we've explored—from simple finite differences to matrix representations—provide a comprehensive toolkit for tackling a wide range of physics problems. As you apply these techniques, remember that the choice of method should be guided by the specific requirements of your problem: accuracy needs, computational constraints, and the nature of your data.
+
+### What to try yourself
+
+1. Implement and compare the accuracy of different numerical differentiation schemes for the function $f(x) = e^{-x^2}$.
+
+2. Investigate how noise in the input data affects the accuracy of numerical derivatives and explore techniques to mitigate this effect.
+
+3. Calculate the electric field around two point charges using numerical differentiation of the electric potential.
+
+5. Analyze experimental data from a falling object to determine its acceleration, and compare with the expected value of gravitational acceleration.
+
+::: {.callout-note}
+### Further Reading
+
+- Numerical Recipes: The Art of Scientific Computing by Press, Teukolsky, Vetterling, and Flannery
+- Numerical Methods for Physics by Alejandro Garcia
+- Computational Physics by Mark Newman
+- Applied Numerical Analysis by Curtis F. Gerald and Patrick O. Wheatley
+:::

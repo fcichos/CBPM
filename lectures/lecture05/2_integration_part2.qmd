@@ -1,0 +1,257 @@
+## Advanced Topics in Numerical Integration
+
+### Adaptive Integration Methods
+
+The methods we've discussed so far use equal spacing between sampling points. However, most real-world physics problems involve functions that vary dramatically across the integration range. Adaptive methods adjust the point distribution to concentrate more points where the function changes rapidly.
+
+```{pyodide}
+# Simple demonstration of adaptive integration concept
+def adaptive_demo(f, a, b, tol=1e-5, max_depth=10):
+    """Simple demonstration of adaptive integration concept"""
+    def recursive_integrate(a, b, depth=0):
+        # Compute midpoint
+        c = (a + b) / 2
+        
+        # Estimate integral using Simpson's rule on entire interval
+        I_whole = (b-a)/6 * (f(a) + 4*f(c) + f(b))
+        
+        # Estimate integral using Simpson's rule on each half
+        mid1 = (a + c) / 2
+        mid2 = (c + b) / 2
+        I_left = (c-a)/6 * (f(a) + 4*f(mid1) + f(c))
+        I_right = (b-c)/6 * (f(c) + 4*f(mid2) + f(b))
+        I_parts = I_left + I_right
+        
+        # Check error
+        error = abs(I_whole - I_parts)
+        
+        # If error is small enough or max depth reached, return result
+        if error < tol*(b-a) or depth >= max_depth:
+            return I_parts, [(a, c, b, error)]
+        
+        # Otherwise, recursively integrate each half
+        I_left_result, left_regions = recursive_integrate(a, c, depth+1)
+        I_right_result, right_regions = recursive_integrate(c, b, depth+1)
+        
+        return I_left_result + I_right_result, left_regions + right_regions
+    
+    integral, regions = recursive_integrate(a, b)
+    return integral, regions
+
+# Define a challenging function with a sharp peak
+def challenging_func(x):
+    """Function with a sharp peak at x=0.7"""
+    return 1 / (0.01 + (x - 0.7)**2)
+
+# Calculate integral using adaptive and non-adaptive methods
+a, b = 0, 1
+n_points = 101  # Use a fixed number of points for non-adaptive methods
+
+# Calculate using non-adaptive methods
+box_result = int_box(challenging_func, a, b, n_points)
+trap_result = int_trap(challenging_func, a, b, n_points)
+simp_result = int_simp(challenging_func, a, b, n_points)
+
+# Calculate using adaptive method
+adaptive_result, regions = adaptive_demo(challenging_func, a, b)
+
+# Calculate a reference solution using a very high number of points
+reference = int_simp(challenging_func, a, b, 10001)
+
+# Visualize the function and integration points
+x_fine = np.linspace(a, b, 1000)
+y_fine = [challenging_func(x) for x in x_fine]
+
+plt.figure(figsize=get_size(15, 10))
+
+# Plot the function
+plt.plot(x_fine, y_fine, 'k-', label='f(x)')
+
+# Plot the adaptive integration regions
+for region in regions:
+    a_r, m_r, b_r, error = region
+    plt.plot([a_r, m_r, b_r], [challenging_func(a_r), challenging_func(m_r), challenging_func(b_r)], 
+             'ro-', alpha=0.5)
+
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title('Adaptive Integration Demonstration')
+plt.grid(True)
+
+# Adjust y-axis to show the function's behavior more clearly
+plt.ylim(0, 40)
+
+plt.legend()
+plt.show()
+
+# Show results
+print("Results for integrating a function with a sharp peak:")
+print(f"Box Method (n={n_points}): {box_result:.8f}, Error: {abs(box_result-reference):.8f}")
+print(f"Trapezoid Method (n={n_points}): {trap_result:.8f}, Error: {abs(trap_result-reference):.8f}")
+print(f"Simpson's Method (n={n_points}): {simp_result:.8f}, Error: {abs(simp_result-reference):.8f}")
+print(f"Adaptive Method: {adaptive_result:.8f}, Error: {abs(adaptive_result-reference):.8f}")
+print(f"Reference value: {reference:.8f}")
+print(f"Number of adaptive regions: {len(regions)}")
+```
+
+### Multi-dimensional Integration
+
+Many physics problems require integration over multiple dimensions, such as calculating mass moments of inertia, electric fields from volume charge distributions, or statistical mechanics partition functions.
+
+For 2D integration, we can extend our 1D methods using the concept of iterated integrals:
+
+\begin{equation}
+\int_{a}^{b}\int_{c}^{d} f(x,y) dy dx \approx \sum_{i=1}^{N_x} \sum_{j=1}^{N_y} w_i w_j f(x_i, y_j)
+\end{equation}
+
+Where $w_i$ and $w_j$ are the weights for the respective 1D methods.
+
+```{pyodide}
+def int_2d_trap(f, x_range, y_range, nx, ny):
+    """2D integration using the Trapezoid method"""
+    x = np.linspace(x_range[0], x_range[1], nx)
+    y = np.linspace(y_range[0], y_range[1], ny)
+    dx = (x_range[1] - x_range[0]) / (nx - 1)
+    dy = (y_range[1] - y_range[0]) / (ny - 1)
+    
+    result = 0
+    for i in range(nx-1):
+        for j in range(ny-1):
+            # Average of function values at the four corners of each cell
+            f_values = [
+                f(x[i], y[j]),
+                f(x[i+1], y[j]),
+                f(x[i], y[j+1]),
+                f(x[i+1], y[j+1])
+            ]
+            result += sum(f_values) / 4 * dx * dy
+    
+    return result
+
+# Example: Electric potential from a square charge distribution
+def potential_2d(x, y, z=1):
+    """Electric potential at (x,y,z) from a square charge distribution in the x-y plane"""
+    # Avoid division by zero
+    denominator = (x**2 + y**2 + z**2)**0.5
+    if denominator < 1e-10:
+        return 0
+    return 1 / denominator
+
+# Calculate the electric potential at a point above a charged square
+z = 1.0  # height above the plane
+potential = int_2d_trap(lambda x, y: potential_2d(x, y, z), [-1, 1], [-1, 1], 51, 51)
+
+# Visualize the potential in the plane above the charge
+x_vals = np.linspace(-2, 2, 50)
+y_vals = np.linspace(-2, 2, 50)
+X, Y = np.meshgrid(x_vals, y_vals)
+Z = np.zeros_like(X)
+
+for i in range(len(x_vals)):
+    for j in range(len(y_vals)):
+        Z[j, i] = potential_2d(X[j, i], Y[j, i], z)
+
+plt.figure(figsize=get_size(15, 10))
+
+# Plot the potential as a contour
+contour = plt.contourf(X, Y, Z, 50, cmap='viridis')
+plt.colorbar(label='Electric Potential')
+
+# Mark the square charge distribution
+plt.plot([-1, 1, 1, -1, -1], [-1, -1, 1, 1, -1], 'r-', linewidth=2)
+
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title(f'Electric Potential at z={z} from a Square Charge Distribution')
+plt.axis('equal')
+plt.grid(True)
+plt.show()
+
+print(f"Electric potential at point (0,0,{z}): {potential:.6f}")
+print(f"Analytical value at center: {np.log(1 + np.sqrt(2)):.6f}")
+```
+
+### Monte Carlo Integration
+
+For higher-dimensional integrals and complex domains, Monte Carlo methods become increasingly efficient. These methods use random sampling to approximate integrals and are particularly valuable in quantum and statistical physics.
+
+```{pyodide}
+def monte_carlo_integrate(f, ranges, n_samples):
+    """Monte Carlo integration in arbitrary dimensions"""
+    # Generate random samples within the integration domain
+    dim = len(ranges)
+    samples = np.random.uniform(
+        low=[r[0] for r in ranges],
+        high=[r[1] for r in ranges],
+        size=(n_samples, dim)
+    )
+    
+    # Evaluate function at sample points
+    f_values = np.array([f(*sample) for sample in samples])
+    
+    # Calculate volume of integration domain
+    volume = np.prod([r[1] - r[0] for r in ranges])
+    
+    # Estimate integral and error
+    integral = volume * np.mean(f_values)
+    error = volume * np.std(f_values) / np.sqrt(n_samples)
+    
+    return integral, error
+
+# Example: Calculate the volume of a n-dimensional hypersphere
+def sphere_indicator(x, y, z):
+    """Return 1 if point is inside unit sphere, 0 otherwise"""
+    return 1 if x**2 + y**2 + z**2 <= 1 else 0
+
+# Calculate the volume of a 3D sphere using Monte Carlo
+n_samples = 100000
+ranges = [[-1, 1], [-1, 1], [-1, 1]]  # Cube containing the sphere
+volume, error = monte_carlo_integrate(sphere_indicator, ranges, n_samples)
+
+# The exact volume of a unit sphere in 3D is (4/3)π
+exact_volume = 4/3 * np.pi
+
+# Visualize the convergence
+sample_sizes = np.logspace(2, 5, 20, dtype=int)
+volumes = []
+errors = []
+
+for n in sample_sizes:
+    v, e = monte_carlo_integrate(sphere_indicator, ranges, n)
+    volumes.append(v)
+    errors.append(e)
+
+plt.figure(figsize=get_size(15, 10))
+plt.semilogx(sample_sizes, volumes, 'o-', label='Monte Carlo estimate')
+plt.fill_between(
+    sample_sizes, 
+    [v - e for v, e in zip(volumes, errors)], 
+    [v + e for v, e in zip(volumes, errors)],
+    alpha=0.3
+)
+plt.axhline(exact_volume, color='r', linestyle='--', label='Exact value')
+plt.xlabel('Number of samples')
+plt.ylabel('Volume of unit sphere')
+plt.title('Monte Carlo Integration Convergence')
+plt.grid(True)
+plt.legend()
+plt.show()
+
+print(f"Volume of unit sphere (Monte Carlo with {n_samples} samples): {volume:.6f} ± {error:.6f}")
+print(f"Exact volume of unit sphere: {exact_volume:.6f}")
+print(f"Relative error: {abs(volume - exact_volume)/exact_volume*100:.4f}%")
+```
+
+### Application to Real Physics Problems
+
+Let's examine two common scenarios in physics that benefit from numerical integration:
+
+1. **Non-uniform Magnetic Field**: When a charged particle moves through a non-uniform magnetic field, the work done can be calculated as:
+
+   $$W = q\int_{\vec{r}_1}^{\vec{r}_2} \vec{v} \times \vec{B}(\vec{r}) \cdot d\vec{r}$$
+
+2. **Quantum Tunneling**: The tunneling probability through a potential barrier is given by:
+
+   $$T \approx \exp\left(-\frac{2}{\hbar}\int_{x_1}^{x_2} \sqrt{2m(V(x) - E)}\, dx\right)$$
+
+In both cases, the integrals frequently cannot be solved analytically due to the complex spatial dependence of the fields or potentials, making numerical integration indispensable for modern physics.

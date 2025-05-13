@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.29">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>14&nbsp; Numerical Differentiation for Physics – Introduction to Computer-based Physical Modeling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../lectures/lecture06/2-integration.html" rel="next">
+<link href="../../lectures/lecture05/0_input_output.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-485d01fc63b59abcd3ee1bf1e8e2748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../lectures/lecture05/0_input_output.html">Lecture 5</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture05/1-differentiation.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Numerical Differentiation for Physics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Introduction to Computer-based Physical Modeling</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CBPM 2025</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/00-lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Programming Background Questionnaire</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/01-lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Jupyter Notebooks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/python_lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Python &amp; Anatomy of a Python Program</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/02-lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Variables &amp; Numbers</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture02/01-lecture02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Types</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture02/02-lecture02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Python Overview</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture03/01-lecture03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Modules</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture03/02-lecture03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">NumPy Module</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture03/03-lecture03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Basic Plotting with Matplotlib</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture04/01-lecture04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Classes and Objects</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture04/02-lecture04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Brownian Motion</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture05/0_input_output.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Dealing with text files containing data</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture05/1-differentiation.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Numerical Differentiation for Physics</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 6</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture06/2-integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction to Numerical Integration in Physics</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture06/3-solving_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Solving Ordinary Differential Equations</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar02/md1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Step-by-Step Development of a Molecular Dynamics Simulation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar03/md2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Step-by-Step Development of a Molecular Dynamics Simulation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar04/md3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Step-by-Step Development of a Molecular Dynamics Simulation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar05/md4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Step-by-Step Development of a Molecular Dynamics Simulation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-calculus-foundations" id="toc-the-calculus-foundations" class="nav-link active" data-scroll-target="#the-calculus-foundations"><span class="header-section-number">14.0.1</span> The Calculus Foundations</a></li>
+  <li><a href="#finite-difference-approximations" id="toc-finite-difference-approximations" class="nav-link" data-scroll-target="#finite-difference-approximations"><span class="header-section-number">14.0.2</span> Finite Difference Approximations</a></li>
+  <li><a href="#implementation-in-python" id="toc-implementation-in-python" class="nav-link" data-scroll-target="#implementation-in-python"><span class="header-section-number">14.0.3</span> Implementation in Python</a></li>
+  <li><a href="#matrix-representation-of-derivatives" id="toc-matrix-representation-of-derivatives" class="nav-link" data-scroll-target="#matrix-representation-of-derivatives"><span class="header-section-number">14.0.4</span> Matrix Representation of Derivatives</a></li>
+  <li><a href="#first-derivative-matrix" id="toc-first-derivative-matrix" class="nav-link" data-scroll-target="#first-derivative-matrix"><span class="header-section-number">14.0.5</span> First Derivative Matrix</a></li>
+  <li><a href="#boundary-conditions" id="toc-boundary-conditions" class="nav-link" data-scroll-target="#boundary-conditions"><span class="header-section-number">14.0.6</span> Boundary Conditions</a></li>
+  <li><a href="#applications-in-physics" id="toc-applications-in-physics" class="nav-link" data-scroll-target="#applications-in-physics"><span class="header-section-number">14.0.7</span> Applications in Physics</a></li>
+  <li><a href="#practical-considerations-and-challenges" id="toc-practical-considerations-and-challenges" class="nav-link" data-scroll-target="#practical-considerations-and-challenges"><span class="header-section-number">14.0.8</span> Practical Considerations and Challenges</a></li>
+  <li><a href="#using-scipy-for-numerical-differentiation" id="toc-using-scipy-for-numerical-differentiation" class="nav-link" data-scroll-target="#using-scipy-for-numerical-differentiation"><span class="header-section-number">14.0.9</span> Using SciPy for Numerical Differentiation</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">14.0.10</span> Conclusion</a></li>
+  <li><a href="#what-to-try-yourself" id="toc-what-to-try-yourself" class="nav-link" data-scroll-target="#what-to-try-yourself"><span class="header-section-number">14.0.11</span> What to try yourself</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../lectures/lecture05/0_input_output.html">Lecture 5</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture05/1-differentiation.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Numerical Differentiation for Physics</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Numerical Differentiation for Physics</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Derivatives form the mathematical backbone of physics. Whether we’re calculating velocity from position, acceleration from velocity, or electric field from potential, we’re computing derivatives. While calculus provides us with analytical tools to compute derivatives, many real-world physics problems involve functions that are either too complex for analytical solutions or are only known at discrete points (experimental data). This is where numerical differentiation becomes essential for physicists.</p>
+<div>
+<div id="pyodide-1">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiZXhlY3V0ZSI6dHJ1ZX0sImNvZGUiOiJcbmltcG9ydCBudW1weSBhcyBucFxuaW1wb3J0IGlvXG5pbXBvcnQgcGFuZGFzIGFzIHBkXG5pbXBvcnQgbWF0cGxvdGxpYi5weXBsb3QgYXMgcGx0XG5mcm9tIHNjaXB5Lm9wdGltaXplIGltcG9ydCBjdXJ2ZV9maXRcbnBsdC5yY1BhcmFtcy51cGRhdGUoeydmb250LnNpemUnOiAxOH0pXG5cbiMgZGVmYXVsdCB2YWx1ZXMgZm9yIHBsb3R0aW5nXG5wbHQucmNQYXJhbXMudXBkYXRlKHsnZm9udC5zaXplJzogMTAsXG4gICAgICAgICAgICAgICAgICAgICAnbGluZXMubGluZXdpZHRoJzogMSxcbiAgICAgICAgICAgICAgICAgICAgICdsaW5lcy5tYXJrZXJzaXplJzogNSxcbiAgICAgICAgICAgICAgICAgICAgICdheGVzLmxhYmVsc2l6ZSc6IDEwLFxuICAgICAgICAgICAgICAgICAgICAgJ3h0aWNrLmxhYmVsc2l6ZScgOiAxMCxcbiAgICAgICAgICAgICAgICAgICAgICd5dGljay5sYWJlbHNpemUnIDogMTAsXG4gICAgICAgICAgICAgICAgICAgICAneHRpY2sudG9wJyA6IFRydWUsXG4gICAgICAgICAgICAgICAgICAgICAneHRpY2suZGlyZWN0aW9uJyA6ICdpbicsXG4gICAgICAgICAgICAgICAgICAgICAneXRpY2sucmlnaHQnIDogVHJ1ZSxcbiAgICAgICAgICAgICAgICAgICAgICd5dGljay5kaXJlY3Rpb24nIDogJ2luJyx9KVxuXG5kZWYgZ2V0X3NpemUodyxoKTpcbiAgICAgIHJldHVybigody8yLjU0LGgvMi41NCkpIn0=
+</script>
+</div>
+<section id="the-calculus-foundations" class="level3" data-number="14.0.1">
+<h3 data-number="14.0.1" class="anchored" data-anchor-id="the-calculus-foundations"><span class="header-section-number">14.0.1</span> The Calculus Foundations</h3>
+<p>Before diving into numerical methods, let’s revisit the calculus definition of a derivative. The derivative of a function <span class="math inline">\(f(x)\)</span> at a point <span class="math inline">\(x\)</span> is defined as the limit of the difference quotient as the interval <span class="math inline">\(\Delta x\)</span> approaches zero:</p>
+<p><span class="math display">\[
+f^{\prime}(x) = \lim_{\Delta x \rightarrow 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}
+\]</span></p>
+<p>This definition captures the instantaneous rate of change of <span class="math inline">\(f\)</span> with respect to <span class="math inline">\(x\)</span>. In physics, derivatives represent essential physical quantities:</p>
+<ul>
+<li>The derivative of position with respect to time is velocity</li>
+<li>The derivative of velocity with respect to time is acceleration</li>
+<li>The derivative of potential energy with respect to position gives force</li>
+</ul>
+<p>However, in computational physics, we cannot take the limit to zero as computers work with discrete values. Instead, we approximate the derivative using finite differences. This is also possible for higher order derivatives, which can be approximated using more complex finite difference formulas such as</p>
+<p><span class="math display">\[
+f^{(n)}(x)=\lim _{\Delta x  \rightarrow 0} \frac{1}{\Delta x ^n} \sum_{k=0}^n(-1)^{k+n}\binom{n}{k} f(x+k \Delta x )
+\]</span></p>
+</section>
+<section id="finite-difference-approximations" class="level3" data-number="14.0.2">
+<h3 data-number="14.0.2" class="anchored" data-anchor-id="finite-difference-approximations"><span class="header-section-number">14.0.2</span> Finite Difference Approximations</h3>
+<p>Numerical differentiation methods primarily rely on finite difference approximations derived from Taylor series expansions. Let’s explore these systematically.</p>
+<section id="forward-difference" class="level4" data-number="14.0.2.1">
+<h4 data-number="14.0.2.1" class="anchored" data-anchor-id="forward-difference"><span class="header-section-number">14.0.2.1</span> Forward Difference</h4>
+<p>The simplest approximation comes directly from the definition, where we look at the change in function value as we move forward from the current point:</p>
+<p><span class="math display">\[
+f^{\prime}_{i} \approx \frac{f_{i+1} - f_{i}}{\Delta x}
+\]</span></p>
+<p>This is called the <em>forward difference</em> method. To understand its accuracy, we can analyze the error using Taylor expansion. The resulting local error <span class="math inline">\(\delta\)</span> at each calculation is:</p>
+<p><span class="math display">\[
+\delta = f_{i+1} - f_{i} - \Delta x f^{\prime}(x_i) = \frac{1}{2} \Delta x^2 f^{\prime \prime}(x_i) + O(\Delta x^3)
+\]</span></p>
+<p>We observe that while the local truncation error is proportional to <span class="math inline">\(\Delta x^2\)</span>, the accumulated global error is proportional to <span class="math inline">\(\Delta x\)</span>, making this a first-order accurate method. This means that halving the step size will approximately halve the error in our final derivative approximation.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Local vs.&nbsp;Global Error
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Local truncation error</strong> refers to the error introduced in a single step of the numerical method due to truncating the Taylor series. For the forward difference method, this error is <span class="math inline">\(O(\Delta x^2)\)</span>.</p>
+<p><strong>Global accumulated error</strong> is the total error that accumulates as we apply the method repeatedly across the domain. For the forward difference method, this accumulated error is <span class="math inline">\(O(\Delta x)\)</span>. Global error is generally one order less accurate than the local error due to error propagation through multiple steps.</p>
+</div>
+</div>
+</section>
+<section id="central-difference" class="level4" data-number="14.0.2.2">
+<h4 data-number="14.0.2.2" class="anchored" data-anchor-id="central-difference"><span class="header-section-number">14.0.2.2</span> Central Difference</h4>
+<p>We can derive a more accurate approximation by using function values on both sides of the point of interest. Using Taylor expansions for <span class="math inline">\(f(x+\Delta x)\)</span> and <span class="math inline">\(f(x-\Delta x)\)</span>:</p>
+<p><span class="math display">\[
+f_{i+1} = f_{i} + \Delta x f_{i}^{\prime} + \frac{\Delta x^2}{2!} f_{i}^{\prime\prime} + \frac{\Delta x^3}{3!} f_{i}^{(3)} + \ldots
+\]</span></p>
+<p><span class="math display">\[
+f_{i-1} = f_{i} - \Delta x f_{i}^{\prime} + \frac{\Delta x^2}{2!} f_{i}^{\prime\prime} - \frac{\Delta x^3}{3!} f_{i}^{(3)} + \ldots
+\]</span></p>
+<p>Subtracting these equations cancels out the even-powered terms in <span class="math inline">\(\Delta x\)</span>:</p>
+<p><span class="math display">\[
+f_{i+1} - f_{i-1} = 2 \Delta x f_{i}^{\prime} + O(\Delta x^3)
+\]</span></p>
+<p>Solving for <span class="math inline">\(f^{\prime}_{i}\)</span>:</p>
+<p><span class="math display">\[
+f^{\prime}_{i} \approx \frac{f_{i+1} - f_{i-1}}{2 \Delta x}
+\]</span></p>
+<p>This <em>central difference</em> formula has an error proportional to <span class="math inline">\(\Delta x^2\)</span>, making it second-order accurate—significantly more precise than the forward difference method.</p>
+</section>
+<section id="higher-order-approximations" class="level4" data-number="14.0.2.3">
+<h4 data-number="14.0.2.3" class="anchored" data-anchor-id="higher-order-approximations"><span class="header-section-number">14.0.2.3</span> Higher-Order Approximations</h4>
+<p>We can extend this approach to derive higher-order approximations by including more points in our calculation. A common fourth-order accurate formula for the first derivative is:</p>
+<p><span class="math display">\[
+f_{i}^{\prime}=\frac{1}{12 \Delta x}(-f_{i-2}+8f_{i-1}-8f_{i+1}+f_{i+2})
+\]</span></p>
+<p>This formula provides even better accuracy but requires function values at four points.</p>
+</section>
+<section id="comparison-of-methods" class="level4" data-number="14.0.2.4">
+<h4 data-number="14.0.2.4" class="anchored" data-anchor-id="comparison-of-methods"><span class="header-section-number">14.0.2.4</span> Comparison of Methods</h4>
+<p>The following table summarizes the key finite difference methods for first derivatives:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 17%">
+<col style="width: 36%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Method</th>
+<th>Formula</th>
+<th>Order of Accuracy</th>
+<th>Points Required</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Forward Difference</td>
+<td><span class="math inline">\(\frac{f_{i+1} - f_{i}}{\Delta x}\)</span></td>
+<td><span class="math inline">\(O(\Delta x)\)</span></td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Backward Difference</td>
+<td><span class="math inline">\(\frac{f_{i} - f_{i-1}}{\Delta x}\)</span></td>
+<td><span class="math inline">\(O(\Delta x)\)</span></td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Central Difference</td>
+<td><span class="math inline">\(\frac{f_{i+1} - f_{i-1}}{2\Delta x}\)</span></td>
+<td><span class="math inline">\(O(\Delta x^2)\)</span></td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>Fourth-Order Central</td>
+<td><span class="math inline">\(\frac{-f_{i+2}+8f_{i+1}-8f_{i-1}+f_{i-2}}{12\Delta x}\)</span></td>
+<td><span class="math inline">\(O(\Delta x^4)\)</span></td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<p>Higher-order methods generally provide more accurate results but require more computational resources and handle boundaries less efficiently.</p>
+</section>
+</section>
+<section id="implementation-in-python" class="level3" data-number="14.0.3">
+<h3 data-number="14.0.3" class="anchored" data-anchor-id="implementation-in-python"><span class="header-section-number">14.0.3</span> Implementation in Python</h3>
+<p>Let’s implement these numerical differentiation methods in Python, starting with a central difference function:</p>
+<div>
+<div id="pyodide-2">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImRlZiBjZW50cmFsX2RpZmZlcmVuY2UoZiwgeCwgaD0xLmUtNSwgKnBhcmFtcyk6XG4gICAgXCJcIlwiQ29tcHV0ZSB0aGUgZmlyc3QgZGVyaXZhdGl2ZSB1c2luZyBjZW50cmFsIGRpZmZlcmVuY2VcIlwiXCJcbiAgICByZXR1cm4gKGYoeCtoLCAqcGFyYW1zKS1mKHgtaCwgKnBhcmFtcykpLygyKmgpXG5cbmRlZiBmb3VydGhfb3JkZXJfY2VudHJhbChmLCB4LCBoPTEuZS0zLCAqcGFyYW1zKTpcbiAgICBcIlwiXCJDb21wdXRlIHRoZSBmaXJzdCBkZXJpdmF0aXZlIHVzaW5nIGZvdXJ0aC1vcmRlciBjZW50cmFsIGRpZmZlcmVuY2VcIlwiXCJcbiAgICByZXR1cm4gKC1mKHgrMipoLCAqcGFyYW1zKSArIDgqZih4K2gsICpwYXJhbXMpIC0gOCpmKHgtaCwgKnBhcmFtcykgKyBmKHgtMipoLCAqcGFyYW1zKSkvKDEyKmgpIn0=
+</script>
+</div>
+<p>We can test these functions with <span class="math inline">\(\sin(x)\)</span>, whose derivative is <span class="math inline">\(\cos(x)\)</span>:</p>
+<div>
+<div id="pyodide-3">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImRlZiBmKHgpOlxuICAgIHJldHVybiBucC5zaW4oeClcblxuZGVmIGFuYWx5dGljYWxfZGVyaXZhdGl2ZSh4KTpcbiAgICByZXR1cm4gbnAuY29zKHgpXG5cbnhfdmFsdWVzID0gbnAubGluc3BhY2UoMCwgMipucC5waSwgMTAwKVxuXG4jIENhbGN1bGF0ZSBkZXJpdmF0aXZlcyB1c2luZyBkaWZmZXJlbnQgbWV0aG9kc1xuaF92YWx1ZSA9IDAuMDFcbmZvcndhcmRfZGlmZiA9IFsoZih4K2hfdmFsdWUpIC0gZih4KSkvaF92YWx1ZSBmb3IgeCBpbiB4X3ZhbHVlc11cbmNlbnRyYWxfZGlmZiA9IFtjZW50cmFsX2RpZmZlcmVuY2UoZiwgeCwgaF92YWx1ZSkgZm9yIHggaW4geF92YWx1ZXNdXG5mb3VydGhfb3JkZXIgPSBbZm91cnRoX29yZGVyX2NlbnRyYWwoZiwgeCwgaF92YWx1ZSkgZm9yIHggaW4geF92YWx1ZXNdXG5hbmFseXRpY2FsID0gYW5hbHl0aWNhbF9kZXJpdmF0aXZlKHhfdmFsdWVzKVxuXG4jIFBsb3R0aW5nXG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTIsOCkpXG5wbHQucGxvdCh4X3ZhbHVlcywgYW5hbHl0aWNhbCwgJ2stJywgbGFiZWw9cickXFxjb3MoeCkkJylcbnBsdC5wbG90KHhfdmFsdWVzLCBmb3J3YXJkX2RpZmYsICdyLS0nLCBsYWJlbD0nZm9yd2FyZCBkaWZmZXJlbmNlJylcbnBsdC5wbG90KHhfdmFsdWVzLCBjZW50cmFsX2RpZmYsICdnLS4nLCBsYWJlbD0nY2VudHJhbCBkaWZmZXJlbmNlJylcbnBsdC5wbG90KHhfdmFsdWVzLCBmb3VydGhfb3JkZXIsICdiOicsIGxhYmVsPSc0dGgtb3JkZXIgY2VudHJhbCcpXG5wbHQueGxhYmVsKCd4JylcbnBsdC55bGFiZWwocidkZXJpdmF0aXZlIG9mICRcXHNpbih4KSQnKVxucGx0LmxlZ2VuZCgpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<section id="error-analysis" class="level4" data-number="14.0.3.1">
+<h4 data-number="14.0.3.1" class="anchored" data-anchor-id="error-analysis"><span class="header-section-number">14.0.3.1</span> Error Analysis</h4>
+<p>Let’s examine how the error in our numerical derivative varies with the step size <span class="math inline">\(\Delta x\)</span>:</p>
+<div>
+<div id="pyodide-4">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImRlbHRhX3hfdmFsdWVzID0gbnAubG9nc3BhY2UoLTEwLCAwLCAyMCkgICMgU3RlcCBzaXplcyBmcm9tIDEwXi0xMCB0byAxMF4wXG54MCA9IG5wLnBpLzQgICMgVGVzdCBwb2ludFxuXG4jIENhbGN1bGF0ZSBlcnJvcnMgZm9yIGRpZmZlcmVudCBtZXRob2RzXG5mb3J3YXJkX2Vycm9ycyA9IFthYnMoKGYoeDArZHgpIC0gZih4MCkpL2R4IC0gYW5hbHl0aWNhbF9kZXJpdmF0aXZlKHgwKSkgZm9yIGR4IGluIGRlbHRhX3hfdmFsdWVzXVxuY2VudHJhbF9lcnJvcnMgPSBbYWJzKChmKHgwK2R4KSAtIGYoeDAtZHgpKS8oMipkeCkgLSBhbmFseXRpY2FsX2Rlcml2YXRpdmUoeDApKSBmb3IgZHggaW4gZGVsdGFfeF92YWx1ZXNdXG5mb3VydGhfb3JkZXJfZXJyb3JzID0gW2FicygoLWYoeDArMipkeCkgKyA4KmYoeDArZHgpIC0gOCpmKHgwLWR4KSArIGYoeDAtMipkeCkpLygxMipkeCkgLSBhbmFseXRpY2FsX2Rlcml2YXRpdmUoeDApKSBmb3IgZHggaW4gZGVsdGFfeF92YWx1ZXNdXG5cbiMgUGxvdHRpbmcgZXJyb3JzXG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTIsOCkpXG5wbHQubG9nbG9nKGRlbHRhX3hfdmFsdWVzLCBmb3J3YXJkX2Vycm9ycywgJ3JvLScsIGxhYmVsPSdGb3J3YXJkIGRpZmZlcmVuY2UnKVxucGx0LmxvZ2xvZyhkZWx0YV94X3ZhbHVlcywgY2VudHJhbF9lcnJvcnMsICdnby0nLCBsYWJlbD0nQ2VudHJhbCBkaWZmZXJlbmNlJylcbnBsdC5sb2dsb2coZGVsdGFfeF92YWx1ZXMsIGZvdXJ0aF9vcmRlcl9lcnJvcnMsICdiby0nLCBsYWJlbD0nNHRoLW9yZGVyIGNlbnRyYWwnKVxucGx0LmxvZ2xvZyhkZWx0YV94X3ZhbHVlcywgZGVsdGFfeF92YWx1ZXMsICdrLS0nLCBsYWJlbD1yJyRPKFxcRGVsdGEgeCkkJylcbnBsdC5sb2dsb2coZGVsdGFfeF92YWx1ZXMsIFtkeCoqMiBmb3IgZHggaW4gZGVsdGFfeF92YWx1ZXNdLCAnay0uJywgbGFiZWw9cickTyhcXERlbHRhIHheMikkJylcbnBsdC5sb2dsb2coZGVsdGFfeF92YWx1ZXMsIFtkeCoqNCBmb3IgZHggaW4gZGVsdGFfeF92YWx1ZXNdLCAnazonLCBsYWJlbD1yJyRPKFxcRGVsdGEgeF40KSQnKVxucGx0LnhsYWJlbChyJ3N0ZXAgc2l6ZSAoJFxcRGVsdGEgeCQpJylcbnBsdC55bGFiZWwoJ2Fic29sdXRlIGVycm9yJylcbnBsdC5sZWdlbmQoKVxuXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<p>This visualization demonstrates how error behaves with step size for different methods. For very small step sizes, roundoff errors become significant (observe the upturn in error for tiny <span class="math inline">\(\Delta x\)</span> values), while for larger steps, truncation error dominates.</p>
+</section>
+</section>
+<section id="matrix-representation-of-derivatives" class="level3" data-number="14.0.4">
+<h3 data-number="14.0.4" class="anchored" data-anchor-id="matrix-representation-of-derivatives"><span class="header-section-number">14.0.4</span> Matrix Representation of Derivatives</h3>
+<p>An elegant approach to numerical differentiation involves representing the differentiation operation as a matrix multiplication. This representation is particularly valuable when solving differential equations numerically.</p>
+</section>
+<section id="first-derivative-matrix" class="level3" data-number="14.0.5">
+<h3 data-number="14.0.5" class="anchored" data-anchor-id="first-derivative-matrix"><span class="header-section-number">14.0.5</span> First Derivative Matrix</h3>
+<p>For a uniformly spaced grid of points <span class="math inline">\(x_i\)</span>, we can represent the first derivative operation as a matrix:</p>
+<p><span class="math display">\[
+f^{\prime} = \frac{1}{\Delta x}
+\begin{bmatrix}
+-1 &amp; 1  &amp; 0 &amp; 0 &amp; \cdots &amp; 0\\
+0 &amp; -1 &amp; 1 &amp; 0 &amp; \cdots &amp; 0\\
+0 &amp; 0  &amp; -1 &amp; 1 &amp; \cdots &amp; 0\\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp; \vdots\\
+0 &amp; 0  &amp; 0  &amp; \cdots &amp; -1 &amp; 1\\
+0 &amp; 0  &amp; 0  &amp; \cdots &amp;  0 &amp; -1\\
+\end{bmatrix}
+\begin{bmatrix}
+f_{1}\\
+f_{2}\\
+f_{3}\\
+\vdots\\
+f_{N-1}\\
+f_{N}\\
+\end{bmatrix}
+\]</span></p>
+<p>This matrix implements the forward difference scheme. For a central difference scheme, the matrix would have entries on both sides of the diagonal.</p>
+<section id="second-derivative-matrix" class="level4" data-number="14.0.5.1">
+<h4 data-number="14.0.5.1" class="anchored" data-anchor-id="second-derivative-matrix"><span class="header-section-number">14.0.5.1</span> Second Derivative Matrix</h4>
+<p>Similarly, the second derivative can be represented as a tridiagonal matrix:</p>
+<p><span class="math display">\[
+f^{\prime\prime} = \frac{1}{\Delta x^2}
+\begin{bmatrix}
+1 &amp; -2 &amp; 1 &amp; 0 &amp; \cdots &amp; 0\\
+0 &amp; 1 &amp; -2 &amp; 1 &amp; \cdots &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; -2 &amp; \cdots &amp; 0\\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \ddots &amp; \vdots\\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; 1 &amp; -2 &amp; 1\\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1 &amp; -2\\
+\end{bmatrix}
+\begin{bmatrix}
+f_{1}\\
+f_{2}\\
+f_{3}\\
+\vdots\\
+f_{N-1}\\
+f_{N}\\
+\end{bmatrix}
+\]</span></p>
+<p>The boundary conditions affect the structure of these matrices, especially the first and last rows.</p>
+</section>
+<section id="implementation-with-scipy" class="level4" data-number="14.0.5.2">
+<h4 data-number="14.0.5.2" class="anchored" data-anchor-id="implementation-with-scipy"><span class="header-section-number">14.0.5.2</span> Implementation with SciPy</h4>
+<p>SciPy provides tools to efficiently construct and work with these differentiation matrices:</p>
+<div>
+<div id="pyodide-5">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gc2NpcHkuc3BhcnNlIGltcG9ydCBkaWFnc1xuXG4jIERlZmluZSBhIGdyaWQgYW5kIGEgZnVuY3Rpb24gdG8gZGlmZmVyZW50aWF0ZVxuTiA9IDEwMFxueCA9IG5wLmxpbnNwYWNlKC01LCA1LCBOKVxuZHggPSB4WzFdIC0geFswXVxueSA9IG5wLnNpbih4KVxuXG4jIEZpcnN0IGRlcml2YXRpdmUgbWF0cml4IChmb3J3YXJkIGRpZmZlcmVuY2UpXG5EMV9mb3J3YXJkID0gZGlhZ3MoWy0xLCAxXSwgWzAsIDFdLCBzaGFwZT0oTiwgTikpIC8gZHhcblxuIyBGaXJzdCBkZXJpdmF0aXZlIG1hdHJpeCAoY2VudHJhbCBkaWZmZXJlbmNlKVxuIyBDb3JyZWN0ZWQgY2VudHJhbCBkaWZmZXJlbmNlIGltcGxlbWVudGF0aW9uXG5EMV9jZW50cmFsID0gZGlhZ3MoWy0xLCAwLCAxXSwgWy0xLCAwLCAxXSwgc2hhcGU9KE4sIE4pKVxuIyBUaGUgY2VudHJhbCBkaWZmZXJlbmNlIGZvcm11bGEgaXMgKGYoeCtoKSAtIGYoeC1oKSkvKDJoKVxuIyBTbyB3ZSBuZWVkIC0xIGF0IG9mZnNldCAtMSwgMCBhdCBvZmZzZXQgMCwgYW5kIDEgYXQgb2Zmc2V0IDFcbkQxX2NlbnRyYWwuc2V0ZGlhZygwLCAwKSAgIyBDZW50ZXIgZGlhZ29uYWwgc2hvdWxkIGJlIDAgZm9yIGNlbnRyYWwgZGlmZmVyZW5jZVxuRDFfY2VudHJhbCA9IEQxX2NlbnRyYWwgLyAoMiAqIGR4KVxuXG4jIFNlY29uZCBkZXJpdmF0aXZlIG1hdHJpeFxuRDIgPSBkaWFncyhbMSwgLTIsIDFdLCBbLTEsIDAsIDFdLCBzaGFwZT0oTiwgTikpIC8gZHgqKjJcblxuIyBDb21wdXRlIGRlcml2YXRpdmVzXG5keV9mb3J3YXJkID0gRDFfZm9yd2FyZCBAIHlcbmR5X2NlbnRyYWwgPSBEMV9jZW50cmFsIEAgeVxuZDJ5ID0gRDIgQCB5XG5cbiMgUGxvdCB0aGUgcmVzdWx0c1xucGx0LmZpZ3VyZShmaWdzaXplPWdldF9zaXplKDE2LDEyKSlcblxucGx0LnN1YnBsb3QoMywgMSwgMSlcbnBsdC5wbG90KHgsIHksICdrLScsIGxhYmVsPXInJGYoeCkgPSBcXHNpbih4KSQnKVxucGx0LmxlZ2VuZCgpXG5cblxucGx0LnN1YnBsb3QoMywgMSwgMilcbnBsdC5wbG90KHhbOi0xXSwgZHlfZm9yd2FyZFs6LTFdLCAnci0tJywgbGFiZWw9J2ZvcndhcmQgZGlmZmVyZW5jZScpXG5wbHQucGxvdCh4LCBkeV9jZW50cmFsLCAnZy0nLCBsYWJlbD0nY2VudHJhbCBkaWZmZXJlbmNlJylcbnBsdC5wbG90KHgsIG5wLmNvcyh4KSwgJ2s6JywgbGFiZWw9cickXFxjb3MoeCkkJylcbnBsdC55bGltKC0xLjA1LDEuMDUpXG5wbHQubGVnZW5kKClcblxucGx0LnN1YnBsb3QoMywgMSwgMylcbnBsdC5wbG90KHhbMTotMV0sIGQyeVsxOi0xXSwgJ2ItJywgbGFiZWw9J251bS4gMm5kIGRlcml2YXRpdmUnKVxucGx0LnBsb3QoeCwgLW5wLnNpbih4KSwgJ2s6JywgbGFiZWw9cickLVxcc2luKHgpJCcpXG5wbHQubGVnZW5kKClcblxuXG5wbHQudGlnaHRfbGF5b3V0KClcbnBsdC5zaG93KCkifQ==
+</script>
+</div>
+</section>
+</section>
+<section id="boundary-conditions" class="level3" data-number="14.0.6">
+<h3 data-number="14.0.6" class="anchored" data-anchor-id="boundary-conditions"><span class="header-section-number">14.0.6</span> Boundary Conditions</h3>
+<p>A critical consideration in numerical differentiation is how to handle the boundaries of the domain. Different approaches include:</p>
+<ol type="1">
+<li><p><strong>One-sided differences</strong>: Using forward differences at the left boundary and backward differences at the right boundary.</p></li>
+<li><p><strong>Extrapolation</strong>: Extending the domain by extrapolating function values beyond the boundaries.</p></li>
+<li><p><strong>Periodic boundaries</strong>: For periodic functions, using values from the opposite end of the domain.</p></li>
+<li><p><strong>Ghost points</strong>: Introducing additional points outside the domain whose values are determined by the boundary conditions.</p></li>
+</ol>
+<p>The choice of boundary treatment depends on the physical problem and can significantly impact the accuracy of the solution.</p>
+</section>
+<section id="applications-in-physics" class="level3" data-number="14.0.7">
+<h3 data-number="14.0.7" class="anchored" data-anchor-id="applications-in-physics"><span class="header-section-number">14.0.7</span> Applications in Physics</h3>
+<p>Numerical differentiation is foundational to computational physics. Let’s explore some specific applications:</p>
+<section id="solving-differential-equations" class="level4" data-number="14.0.7.1">
+<h4 data-number="14.0.7.1" class="anchored" data-anchor-id="solving-differential-equations"><span class="header-section-number">14.0.7.1</span> 1. Solving Differential Equations</h4>
+<p>Many physics problems are formulated as differential equations. For example, the one-dimensional time-dependent Schrödinger equation:</p>
+<p><span class="math display">\[
+i\hbar\frac{\partial}{\partial t}\Psi(x,t) = -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2}\Psi(x,t) + V(x)\Psi(x,t)
+\]</span></p>
+<p>Numerical differentiation allows us to approximate the spatial derivatives, reducing this to a system of ordinary differential equations in time.</p>
+</section>
+<section id="analysis-of-experimental-data" class="level4" data-number="14.0.7.2">
+<h4 data-number="14.0.7.2" class="anchored" data-anchor-id="analysis-of-experimental-data"><span class="header-section-number">14.0.7.2</span> 2. Analysis of Experimental Data</h4>
+<p>When working with experimental measurements, we often need to calculate derivatives from discrete data points. For instance, determining the velocity and acceleration of an object from position measurements.</p>
+<div>
+<div id="pyodide-6">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgU2ltdWxhdGVkIG5vaXN5IHBvc2l0aW9uIGRhdGEgKGFzIG1pZ2h0IGNvbWUgZnJvbSBhbiBleHBlcmltZW50KVxudGltZSA9IG5wLmxpbnNwYWNlKDAsIDEwLCAxMDApXG5wb3NpdGlvbiA9IDUqdGltZSoqMiArIG5wLnJhbmRvbS5ub3JtYWwoMCwgNSwgbGVuKHRpbWUpKSAgIyB4ID0gNXTCsiArIG5vaXNlXG5cbiMgQ2FsY3VsYXRlIHZlbG9jaXR5IHVzaW5nIGNlbnRyYWwgZGlmZmVyZW5jZXNcbmR0ID0gdGltZVsxXSAtIHRpbWVbMF1cbnZlbG9jaXR5ID0gbnAuemVyb3NfbGlrZShwb3NpdGlvbilcbmZvciBpIGluIHJhbmdlKDEsIGxlbih0aW1lKS0xKTpcbiAgICB2ZWxvY2l0eVtpXSA9IChwb3NpdGlvbltpKzFdIC0gcG9zaXRpb25baS0xXSkgLyAoMipkdClcblxuIyBUaGVvcmV0aWNhbCB2ZWxvY2l0eTogdiA9IDEwdFxudGhlb3JldGljYWxfdmVsb2NpdHkgPSAxMCAqIHRpbWVcblxuIyBQbG90XG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTYsMTIpKVxuXG5wbHQuc3VicGxvdCgyLCAxLCAxKVxucGx0LnBsb3QodGltZSwgcG9zaXRpb24sICdrbycsYWxwaGE9MC4yLCBsYWJlbD0nZXhwZXJpbWVudCcpXG5wbHQucGxvdCh0aW1lLCA1KnRpbWUqKjIsICdyLScsIGxhYmVsPXInJHggPSA1dF4yJCcpXG5wbHQueGxhYmVsKCd0aW1lIFtzXScpXG5wbHQueWxhYmVsKCdwb3NpdGlvbiBbbV0nKVxucGx0LmxlZ2VuZCgpXG5cbnBsdC5zdWJwbG90KDIsIDEsIDIpXG5wbHQucGxvdCh0aW1lWzE6LTFdLCB2ZWxvY2l0eVsxOi0xXSwgJ2JvJywgbGFiZWw9J2NhbGN1bGF0ZWQgdmVsb2NpdHknKVxucGx0LnBsb3QodGltZSwgdGhlb3JldGljYWxfdmVsb2NpdHksICdyLScsIGxhYmVsPXIndGhlb3JldGljYWwgdmVsb2NpdHk6ICR2ID0gMTB0JCcpXG5wbHQueGxhYmVsKCd0aW1lIFtzXScpXG5wbHQueWxhYmVsKCd2ZWxvY2l0eSBbbS9zXScpXG5wbHQubGVnZW5kKClcblxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+<p>Notice how noise in the position measurements gets amplified in the velocity calculations. This highlights a key challenge in numerical differentiation: sensitivity to noise.</p>
+</section>
+<section id="electric-field-calculation" class="level4" data-number="14.0.7.3">
+<h4 data-number="14.0.7.3" class="anchored" data-anchor-id="electric-field-calculation"><span class="header-section-number">14.0.7.3</span> 3. Electric Field Calculation</h4>
+<p>In electrostatics, the electric field <span class="math inline">\(\vec{E}\)</span> is related to the electric potential <span class="math inline">\(\phi\)</span> by <span class="math inline">\(\vec{E} = -\nabla \phi\)</span>. Numerical differentiation allows us to calculate the electric field from a known potential distribution.</p>
+<div>
+<div id="pyodide-7">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgQ3JlYXRlIGEgMkQgZ3JpZFxueCA9IG5wLmxpbnNwYWNlKC0zLCAzLCA0MDApXG55ID0gbnAubGluc3BhY2UoLTMsIDMsIDQwMClcblgsIFkgPSBucC5tZXNoZ3JpZCh4LCB5KVxuXG4jIEVsZWN0cmljIHBvdGVudGlhbCBkdWUgdG8gYSBwb2ludCBjaGFyZ2UgYXQgb3JpZ2luXG5wb3RlbnRpYWwgPSAxIC8gbnAuc3FydChYKioyICsgWSoqMiArIDAuMDAxKSAgIyBBZGRpbmcgMC4wMSB0byBhdm9pZCBkaXZpc2lvbiBieSB6ZXJvXG5cbiMgQ2FsY3VsYXRlIGVsZWN0cmljIGZpZWxkIGNvbXBvbmVudHNcbmR4ID0geFsxXSAtIHhbMF1cbmR5ID0geVsxXSAtIHlbMF1cbkV4ID0gbnAuemVyb3NfbGlrZShwb3RlbnRpYWwpXG5FeSA9IG5wLnplcm9zX2xpa2UocG90ZW50aWFsKVxuXG4jIFVzZSBjZW50cmFsIGRpZmZlcmVuY2VzIGZvciBpbnRlcmlvciBwb2ludHNcbmZvciBpIGluIHJhbmdlKDEsIGxlbih4KS0xKTpcbiAgICBmb3IgaiBpbiByYW5nZSgxLCBsZW4oeSktMSk6XG4gICAgICAgIEV4W2osIGldID0gLShwb3RlbnRpYWxbaiwgaSsxXSAtIHBvdGVudGlhbFtqLCBpLTFdKSAvICgyKmR4KVxuICAgICAgICBFeVtqLCBpXSA9IC0ocG90ZW50aWFsW2orMSwgaV0gLSBwb3RlbnRpYWxbai0xLCBpXSkgLyAoMipkeSlcblxuIyBQbG90IHBvdGVudGlhbCBhbmQgZWxlY3RyaWMgZmllbGRcbnBsdC5maWd1cmUoZmlnc2l6ZT1nZXRfc2l6ZSgxNiw2LjUpKVxuXG5wbHQuc3VicGxvdCgxLCAyLCAxKVxuY29udG91ciA9IHBsdC5jb250b3VyZihYLCBZLCBwb3RlbnRpYWwsIDIwLCBjbWFwPSd2aXJpZGlzJylcbnBsdC5jb2xvcmJhcihjb250b3VyLCBsYWJlbD0nZWxlY3RyaWMgcG90ZW50aWFsJylcbnBsdC54bGFiZWwoJ3gnKVxucGx0LnlsYWJlbCgneScpXG5wbHQueGxpbSgtMiwyKVxucGx0LnlsaW0oLTIsMilcblxuXG5wbHQuc3VicGxvdCgxLCAyLCAyKVxuIyBTa2lwIHNvbWUgcG9pbnRzIGZvciBjbGVhcmVyIHZpc3VhbGl6YXRpb25cbnNraXAgPSA1XG5wbHQuc3RyZWFtcGxvdChYWzo6c2tpcCwgOjpza2lwXSwgWVs6OnNraXAsIDo6c2tpcF0sXG4gICAgICAgICAgICAgICBFeFs6OnNraXAsIDo6c2tpcF0sIEV5Wzo6c2tpcCwgOjpza2lwXSxcbiAgICAgICAgICAgICAgIGNvbG9yPSd3JywgZGVuc2l0eT0xLjUpXG5wbHQuY29udG91cmYoWCwgWSwgbnAuc3FydChFeCoqMiArIEV5KioyKSwgMjAsIGNtYXA9J3BsYXNtYScsIGFscGhhPTAuNSlcbnBsdC5jb2xvcmJhcihsYWJlbD0nZWxlY3RyaWMgZmllbGQgbWFnbml0dWRlJylcblxucGx0LnhsYWJlbCgneCcpXG5wbHQueWxhYmVsKCd5JylcbnBsdC54bGltKC0yLDIpXG5wbHQueWxpbSgtMiwyKVxuXG5cbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LnNob3coKSJ9
+</script>
+</div>
+</section>
+</section>
+<section id="practical-considerations-and-challenges" class="level3" data-number="14.0.8">
+<h3 data-number="14.0.8" class="anchored" data-anchor-id="practical-considerations-and-challenges"><span class="header-section-number">14.0.8</span> Practical Considerations and Challenges</h3>
+<section id="step-size-selection" class="level4" data-number="14.0.8.1">
+<h4 data-number="14.0.8.1" class="anchored" data-anchor-id="step-size-selection"><span class="header-section-number">14.0.8.1</span> 1. Step Size Selection</h4>
+<p>Choosing an appropriate step size is crucial for numerical differentiation. If <span class="math inline">\(\Delta x\)</span> is too large, the truncation error becomes significant. If <span class="math inline">\(\Delta x\)</span> is too small, roundoff errors dominate. A general approach is to use:</p>
+<p><span class="math display">\[ \Delta x \approx \sqrt{\epsilon_\text{machine}} \times x \]</span></p>
+<p>where <span class="math inline">\(\epsilon_\text{machine}\)</span> is the machine epsilon (approximately <span class="math inline">\(10^{-16}\)</span> for double precision).</p>
+</section>
+<section id="dealing-with-noise" class="level4" data-number="14.0.8.2">
+<h4 data-number="14.0.8.2" class="anchored" data-anchor-id="dealing-with-noise"><span class="header-section-number">14.0.8.2</span> 2. Dealing with Noise</h4>
+<p>Numerical differentiation amplifies noise in the data. Several techniques can help:</p>
+<ul>
+<li><strong>Smoothing</strong>: Apply a filter to the data before differentiation.</li>
+<li><strong>Regularization</strong>: Use methods that inherently provide some smoothing.</li>
+<li><strong>Savitzky-Golay filters</strong>: Combine local polynomial fitting with differentiation.</li>
+</ul>
+</section>
+<section id="conservation-properties" class="level4" data-number="14.0.8.3">
+<h4 data-number="14.0.8.3" class="anchored" data-anchor-id="conservation-properties"><span class="header-section-number">14.0.8.3</span> 3. Conservation Properties</h4>
+<p>In physical simulations, preserving conservation laws (energy, momentum, etc.) is often crucial. Some numerical differentiation schemes conserve these properties better than others.</p>
+</section>
+</section>
+<section id="using-scipy-for-numerical-differentiation" class="level3" data-number="14.0.9">
+<h3 data-number="14.0.9" class="anchored" data-anchor-id="using-scipy-for-numerical-differentiation"><span class="header-section-number">14.0.9</span> Using SciPy for Numerical Differentiation</h3>
+<p>The SciPy library provides convenient functions for numerical differentiation:</p>
+<div>
+<div id="pyodide-8">
+
+</div>
+<script type="pyodide-8-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gc2NpcHkubWlzYyBpbXBvcnQgZGVyaXZhdGl2ZVxuXG4jIENhbGN1bGF0ZSB0aGUgZGVyaXZhdGl2ZSBvZiBzaW4oeCkgYXQgeCA9IM+ALzRcbngwID0gbnAucGkvNFxuXG4jIEZpcnN0IGRlcml2YXRpdmUgd2l0aCBkaWZmZXJlbnQgYWNjdXJhY2llc1xuZmlyc3RfZGVyaXYgPSBkZXJpdmF0aXZlKG5wLnNpbiwgeDAsIGR4PTFlLTYsIG49MSwgb3JkZXI9MylcbnByaW50KGZcIkZpcnN0IGRlcml2YXRpdmUgb2Ygc2luKHgpIGF0IHggPSDPgC80OiB7Zmlyc3RfZGVyaXZ9XCIpXG5wcmludChmXCJBY3R1YWwgdmFsdWUgKGNvcyjPgC80KSk6IHtucC5jb3MoeDApfVwiKVxuXG4jIFNlY29uZCBkZXJpdmF0aXZlXG5zZWNvbmRfZGVyaXYgPSBkZXJpdmF0aXZlKG5wLnNpbiwgeDAsIGR4PTFlLTYsIG49Miwgb3JkZXI9NSlcbnByaW50KGZcIlNlY29uZCBkZXJpdmF0aXZlIG9mIHNpbih4KSBhdCB4ID0gz4AvNDoge3NlY29uZF9kZXJpdn1cIilcbnByaW50KGZcIkFjdHVhbCB2YWx1ZSAoLXNpbijPgC80KSk6IHstbnAuc2luKHgwKX1cIikifQ==
+</script>
+</div>
+<p>The <code>order</code> parameter controls the accuracy of the approximation by using more points in the calculation.</p>
+</section>
+<section id="conclusion" class="level3" data-number="14.0.10">
+<h3 data-number="14.0.10" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">14.0.10</span> Conclusion</h3>
+<p>Numerical differentiation is a fundamental technique in computational physics, bridging the gap between theoretical models and practical computations. By understanding the principles, methods, and challenges of numerical differentiation, physicists can effectively analyze data, solve differential equations, and simulate physical systems.</p>
+<p>The methods we’ve explored—from simple finite differences to matrix representations—provide a comprehensive toolkit for tackling a wide range of physics problems. As you apply these techniques, remember that the choice of method should be guided by the specific requirements of your problem: accuracy needs, computational constraints, and the nature of your data.</p>
+</section>
+<section id="what-to-try-yourself" class="level3" data-number="14.0.11">
+<h3 data-number="14.0.11" class="anchored" data-anchor-id="what-to-try-yourself"><span class="header-section-number">14.0.11</span> What to try yourself</h3>
+<ol type="1">
+<li><p>Implement and compare the accuracy of different numerical differentiation schemes for the function <span class="math inline">\(f(x) = e^{-x^2}\)</span>.</p></li>
+<li><p>Investigate how noise in the input data affects the accuracy of numerical derivatives and explore techniques to mitigate this effect.</p></li>
+<li><p>Calculate the electric field around two point charges using numerical differentiation of the electric potential.</p></li>
+<li><p>Analyze experimental data from a falling object to determine its acceleration, and compare with the expected value of gravitational acceleration.</p></li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Further Reading
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Numerical Recipes: The Art of Scientific Computing by Press, Teukolsky, Vetterling, and Flannery</li>
+<li>Numerical Methods for Physics by Alejandro Garcia</li>
+<li>Computational Physics by Mark Newman</li>
+<li>Applied Numerical Analysis by Curtis F. Gerald and Patrick O. Wheatley</li>
+</ul>
+</div>
+</div>
+
+
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImluZGV4VVJMIjoiaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L3B5b2RpZGUvdjAuMjYuMS9mdWxsLyJ9LCJwYWNrYWdlcyI6eyJwa2dzIjpbInB5b2RpZGVfaHR0cCIsIm1pY3JvcGlwIiwiaXB5dGhvbiIsIm1hdHBsb3RsaWIiLCJudW1weSIsInNjaXB5Il19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS04LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzggPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl83ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS03LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoiX3B5b2RpZGVfdmFsdWVfMSA9IHtcbiAgY29uc3QgeyBoaWdobGlnaHRQeXRob24sIGI2NERlY29kZX0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBldmFsdWF0aW9uIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oe1xuICAgIGlkOiBcInB5b2RpZGUtMS1jb250ZW50c1wiLFxuICAgIGVjaG86IHRydWUsXG4gICAgb3V0cHV0OiB0cnVlXG4gIH0sIGJsb2NrLmF0dHIpO1xuXG4gIC8vIEV2YWx1YXRlIHRoZSBwcm92aWRlZCBQeXRob24gY29kZVxuICBjb25zdCByZXN1bHQgPSBweW9kaWRlT2pzLnByb2Nlc3Moe2NvZGU6IGJsb2NrLmNvZGUsIG9wdGlvbnN9LCB7fSk7XG5cbiAgLy8gRWFybHkgeWllbGQgd2hpbGUgd2Ugd2FpdCBmb3IgdGhlIGZpcnN0IGV2YWx1YXRpb24gYW5kIHJlbmRlclxuICBpZiAob3B0aW9ucy5vdXRwdXQgJiYgIShcIjFcIiBpbiBweW9kaWRlT2pzLnJlbmRlcmVkT2pzKSkge1xuICAgIGNvbnN0IGNvbnRhaW5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG4gICAgY29uc3Qgc3Bpbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG5cbiAgICBpZiAob3B0aW9ucy5lY2hvKSB7XG4gICAgICAvLyBTaG93IG91dHB1dCBhcyBoaWdobGlnaHRlZCBzb3VyY2VcbiAgICAgIGNvbnN0IHByZUVsZW0gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwicHJlXCIpO1xuICAgICAgY29udGFpbmVyLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZVwiO1xuICAgICAgcHJlRWxlbS5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGUgcHl0aG9uXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKGhpZ2hsaWdodFB5dGhvbihibG9jay5jb2RlKSk7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ncm93IHNwaW5uZXItZ3Jvdy1zbSBtLTIgcG9zaXRpb24tYWJzb2x1dGUgdG9wLTAgZW5kLTBcIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQocHJlRWxlbSk7XG4gICAgfSBlbHNlIHtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWJvcmRlciBzcGlubmVyLWJvcmRlci1zbVwiO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgIH1cblxuICAgIHlpZWxkIGNvbnRhaW5lcjtcbiAgfVxuXG4gIHB5b2RpZGVPanMucmVuZGVyZWRPanNbXCIxXCJdID0gdHJ1ZTtcbiAgeWllbGQgYXdhaXQgcmVzdWx0O1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtcHJlbHVkZSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InB5b2RpZGVPanMgPSB7XG4gIGNvbnN0IHtcbiAgICBQeW9kaWRlRXZhbHVhdG9yLFxuICAgIFB5b2RpZGVFbnZpcm9ubWVudE1hbmFnZXIsXG4gICAgc2V0dXBQeXRob24sXG4gICAgc3RhcnRQeW9kaWRlV29ya2VyLFxuICAgIGI2NERlY29kZSxcbiAgICBjb2xsYXBzZVBhdGgsXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../lectures/lecture05";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "../..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../lectures/lecture05/0_input_output.html" class="pagination-link" aria-label="Dealing with text files containing data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Dealing with text files containing data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../lectures/lecture06/2-integration.html" class="pagination-link" aria-label="Introduction to Numerical Integration in Physics">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Introduction to Numerical Integration in Physics</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,290 @@
+---
+title: Brownian Motion
+format:
+  live-html:
+    toc: true
+    toc-location: right
+pyodide:
+  packages:
+    - numpy
+    - matplotlib
+---
+
+
+
+## Brownian Motion - Object-Oriented Implementation
+
+### Why Use a Class?
+
+A class is perfect for this physics simulation because each colloidal particle:
+
+1. Has specific properties
+   - Size (radius)
+   - Current position
+   - Movement history
+   - Diffusion coefficient
+
+2. Follows certain behaviors
+   - Moves randomly (Brownian motion)
+   - Updates its position over time
+   - Keeps track of where it's been
+
+3. Can exist alongside other particles
+   - Many particles can move independently
+   - Each particle keeps track of its own properties
+   - Particles can have different sizes
+
+4. Needs to track its state over time
+   - Remember previous positions
+   - Calculate distances moved
+   - Maintain its own trajectory
+
+This natural mapping between real particles and code objects makes classes an ideal choice for our simulation.
+
+### Class Design
+
+We design a `Colloid` class to simulate particles undergoing Brownian motion. Using object-oriented programming makes physical sense here - in the real world, each colloidal particle is an independent object with its own properties that follows the same physical laws as other particles.
+
+#### Class-Level Properties (Shared by All Particles)
+Our `Colloid` class will store information common to all particles:
+
+1. `number`: A counter tracking how many particles we've created
+2. `f = 2.2×10^{-19}`: The physical constant $k_B T/(6\pi\eta)$ in m³/s
+   - This combines Boltzmann's constant ($k_B$), temperature ($T$), and fluid viscosity ($\eta$)
+   - Using this constant simplifies our diffusion calculations
+
+#### Class Methods (Functions Shared by All Particles)
+The class provides these shared behaviors:
+
+1. `how_many()`: Returns the total count of particles created
+   - Useful for tracking how many particles exist in our simulation
+2. `__str__()`: Returns a human-readable description when we print a particle
+   - Shows the particle's radius and current position
+
+#### Instance Properties (Unique to Each Particle)
+Each individual particle will have its own:
+
+1. `R`: Radius in meters
+2. `x`, `y`: Lists storing position history (starting with initial position)
+3. `index`: Unique ID number for each particle
+4. `D`: Diffusion coefficient calculated as $D = f/R$
+   - From Einstein-Stokes relation: $D = \frac{k_B T}{6\pi\eta R}$
+   - Smaller particles diffuse faster (larger D)
+
+#### Instance Methods (What Each Particle Can Do)
+Each particle object will have these behaviors:
+
+1. `update(dt)`: Performs a single timestep of Brownian motion
+   - Takes a timestep `dt` in seconds
+   - Adds random displacement based on diffusion coefficient
+   - Returns the new position
+
+2. `sim_trajectory(N, dt)`: Simulates a complete trajectory
+   - Generates N steps with timestep dt
+   - Calls `update()` repeatedly to build the trajectory
+
+3. `get_trajectory()`: Returns the particle's movement history as a DataFrame
+   - Convenient for analysis and plotting
+
+4. `get_D()`: Returns the particle's diffusion coefficient
+   - Useful for calculations and verification
+
+
+```{pyodide}
+#| autorun: false
+# Class definition
+class Colloid:
+
+    # A class variable, counting the number of Colloids
+    number = 0
+    f = 2.2e-19 # this is k_B T/(6 pi eta) in m^3/s
+
+    # constructor
+    def __init__(self,R, x0=0, y0=0):
+        # add initialisation code here
+        self.R=R
+        self.x=[x0]
+        self.y=[y0]
+        Colloid.number=Colloid.number+1
+        self.index=Colloid.number
+        self.D=Colloid.f/self.R
+
+    def get_D(self):
+        return(self.D)
+
+    def sim_trajectory(self,N,dt):
+        for i in range(N):
+            self.update(dt)
+
+    def update(self,dt):
+        self.x.append(self.x[-1]+np.random.normal(0.0, np.sqrt(2*self.D*dt)))
+        self.y.append(self.y[-1]+np.random.normal(0.0, np.sqrt(2*self.D*dt)))
+        return(self.x[-1],self.y[-1])
+
+    def get_trajectory(self):
+        return(pd.DataFrame({'x':self.x,'y':self.y}))
+
+    # class method accessing a class variable
+    @classmethod
+    def how_many(cls):
+        return(Colloid.number)
+
+    # insert something that prints the particle position in a formatted way when printing
+    def __str__(self):
+        return("I'm a particle with radius R={0:0.3e} at x={1:0.3e},y={2:0.3e}.".format(self.R, self.x[-1], self.y[-1]))
+```
+
+::: {.callout-note}
+### Note
+
+Note that the function `sim_trajectory` is actually calling the function `update` of the same object to generate the whole trajectory at once.
+:::
+
+## Simulation and Analysis
+
+### Simulating
+
+With the help of this Colloid class, we would like to carry out simulations of Brownian motion of multiple particles. The simulations shall
+
+* take n=200 particles
+* have N=200 trajectory points each
+* start all at 0,0
+* particle objects should be stored in a list p_list
+
+```{pyodide}
+#| autorun: false
+N=200 # the number of trajectory points
+n=200 # the number of particles
+
+p_list=[]
+dt=0.05
+
+# creating all objects
+for i in range(n):
+    p_list.append(Colloid(1e-6))
+
+
+for (index,p) in enumerate(p_list):
+    p.sim_trajectory(N,dt)
+```
+
+```{pyodide}
+#| autorun: false
+print(p_list[42])
+```
+
+### Plotting the trajectories
+
+The next step is to plot all the trajectories.
+
+```{pyodide}
+#| autorun: false
+# we take real world diffusion coefficients so scale up the data to avoid nasty exponentials
+scale=1e6
+
+plt.figure(figsize=(4,4))
+
+[plt.plot(np.array(p.x[:])*scale,np.array(p.y[:])*scale,'k-',alpha=0.1,lw=1) for p in p_list]
+plt.xlim(-10,10)
+plt.ylim(-10,10)
+plt.xlabel('x [µm]')
+plt.ylabel('y [µm]')
+plt.tight_layout()
+plt.show()
+```
+
+### Characterizing the Brownian motion
+
+Now that we have a number of trajectories, we can analyze the motion of our Brownian particles.
+
+#### Calculate the particle speed
+
+One way is to calculate its speed by measuring how far it traveled within a certain time $n\, dt$, where $dt$ is the timestep of out simulation. We can do that as
+
+\begin{equation}
+v(n dt) = \frac{<\sqrt{(x_{i+n}-x_{i})^2+(y_{i+n}-y_{i})^2}>}{n\,dt}
+\end{equation}
+
+The angular brackets on the top take care of the fact that we can measure the distance traveled within a certain time $n\, dt$ several times along a trajectory.
+
+These values can be used to calculate a mean speed. Note that there is not an equal amount of data pairs for all separations available. For $n=1$ there are 5 distances available. For $n=5$, however, only 1. This changes the statistical accuracy of the mean.
+
+```{pyodide}
+#| autorun: false
+time=np.array(range(1,N))*dt
+
+plt.figure(figsize=(4,4))
+for j in range(100):
+    t=p_list[j].get_trajectory()
+    md=[np.mean(np.sqrt(t.x.diff(i)**2+t.y.diff(i)**2)) for i in range(1,N)]
+    md=md/time
+    plt.plot(time,md,alpha=0.4)
+
+plt.ylabel('speed [m/s]')
+plt.xlabel('time [s]')
+plt.tight_layout()
+plt.show()
+```
+
+The result of this analysis shows, that each particle has an apparent speed which seems to increase with decreasing time of observation or which decreases with increasing time. This would mean that there is some friction at work, which slows down the particle in time, but this is apparently not true. Also an infinite speed at zero time appears to be unphysical.
+The correct answer is just that the speed is no good measure to characterize the motion of a Brownian particle.
+
+#### Calculate the particle mean squared displacement
+
+A better way to characterize the motion of a Brownian particle is the mean squared displacement, as we have already mentioned it in previous lectures. We may compare our simulation now to the theoretical prediction, which is
+
+\begin{equation}
+\langle \Delta r^{2}(t)\rangle=2 d D t
+\end{equation}
+
+where $d$ is the dimension of the random walk, which is $d=2$ in our case.
+
+```{pyodide}
+#| autorun: false
+time=np.array(range(1,N))*dt
+
+plt.figure(figsize=(4,4))
+for j in range(100):
+    t=p_list[j].get_trajectory()
+    msd=[np.mean(t.x.diff(i).dropna()**2+t.y.diff(i).dropna()**2) for i in range(1,N)]
+    plt.plot(time,msd,alpha=0.4)
+
+
+plt.loglog(time, 4*p_list[0].D*time,'k--',lw=2,label='theory')
+plt.legend()
+plt.xlabel('time [s]')
+plt.ylabel('msd $[m^2/s]$')
+plt.tight_layout()
+plt.show()
+```
+
+The results show that the mean squared displacement of the individual particles follows *on average* the theoretical predictions of a linear growth in time. That means, we are able to read the diffusion coefficient from the slope of the MSD of the individual particles if recorded in a simulation or an experiment.
+
+Yet, each individual MSD is deviating strongly from the theoretical prediction especially at large times. This is due to the fact mentioned earlier that our simulation (or experimental) data only has a limited number of data points, while the theoretical prediction is made for the limit of infinite data points.
+
+
+::: {.callout-warning}
+### Analysis of MSD data
+
+Single particle tracking, either in the experiment or in numerical simulations can therefore only deliver an estimate of the diffusion coefficient and care should be taken when using the whole MSD to obtain the diffusion coefficient. One typically uses only a short fraction of the whole MSD data at short times.
+:::
+
+## Summary
+
+In this lecture, we have:
+
+1. Explored the physical principles behind Brownian motion and its mathematical description
+2. Implemented a computational model using object-oriented programming principles
+3. Created a `Colloid` class with properties and methods that simulate realistic particle behavior
+4. Generated and visualized multiple particle trajectories
+5. Analyzed the simulation results using mean squared displacement calculations
+6. Compared our numerical results with theoretical predictions
+
+This exercise demonstrates how object-oriented programming provides an elegant framework for physics simulations, where the objects in our code naturally represent physical entities in the real world.
+
+## Further Reading
+
+- Einstein, A. (1905). "On the Movement of Small Particles Suspended in Stationary Liquids Required by the Molecular-Kinetic Theory of Heat"
+- Berg, H.C. (1993). "Random Walks in Biology"
+- Chandrasekhar, S. (1943). "Stochastic Problems in Physics and Astronomy"
+- Nelson, E. (2001). "Dynamical Theories of Brownian Motion"

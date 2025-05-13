@@ -71,9 +71,20 @@ website:
             contents:
               - text: Classes & Objects
                 href: lectures/lecture04/01-lecture04.qmd
-              - text: Brownian Motion
+              - text: Brownian Motion Part I
                 href: lectures/lecture04/02-lecture04.qmd
-
+          - section: "Lecture 5"
+            contents:
+              - text: Input & Output
+                href: lectures/lecture05/0_input_output.qmd
+              - text: Numerical Differentiation
+                href: lectures/lecture05/1-differentiation.qmd
+          - section: "Lecture 6"
+            contents:
+              - text: Numerical Integration
+                href: lectures/lecture05/2-integration.qmd
+              - text: Solving Differential Equations
+                href: lectures/lecture05/2-integration.qmd
       - text: "---" # This creates a divider
       - section: "Seminars"
         contents:
@@ -91,10 +102,14 @@ website:
             contents:
               - text: MD Simulation 2
                 href: seminars/seminar03/md2.qmd
-          #- section: "Seminar04"
-          #  contents:
-          #    - text: MD Simulation 3
-          #      href: seminars/seminar04/md3.qmd
+          - section: "Seminar04"
+            contents:
+              - text: MD Simulation 3
+                href: seminars/seminar04/md3.qmd
+          - section: "Seminar05"
+            contents:
+              - text: Free Coding Seminar
+                href: seminars/seminar05/seminar05.qmd
           #     - text: Jupyter Notebook
           #     - text: Jupyter Notebook
           #       href: https://github.com/fcichos/EMPP24/blob/0a72930701cb672ff404d6b93048c898a132bcbe/docs/seminars/seminar01/MDSimulation.ipynb

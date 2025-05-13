@@ -36,6 +36,14 @@ book:
       chapters:
         - lectures/lecture04/01-lecture04.qmd
         - lectures/lecture04/02-lecture04.qmd
+    - part: "Lecture 5"
+      chapters:
+        - lectures/lecture05/0_input_output.qmd
+        - lectures/lecture05/1-differentiation.qmd
+    - part: "Lecture 6"
+      chapters:
+        - lectures/lecture06/2-integration.qmd
+        - lectures/lecture06/3-solving_ODEs.qmd
     - part: "Seminar 2"
       chapters:
         - seminars/seminar02/md1.qmd

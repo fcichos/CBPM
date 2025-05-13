@@ -1,0 +1,97 @@
+## Simpson's Method
+
+### Theory and Implementation
+
+![Simpson's Method Illustration](img/simpson.png)
+
+Simpson's method provides higher accuracy by approximating the function with parabolic segments rather than straight lines. This approach is particularly effective for functions with curvature, which are ubiquitous in physics problems.
+
+The mathematical formulation of Simpson's rule is:
+
+\begin{equation}
+\int_{a}^{b} f(x) dx \approx \frac{\Delta x}{3} \sum_{i=0}^{(N-1)/2} \left(f(x_{2i}) + 4f(x_{2i+1}) + f(x_{2i+2})\right)
+\end{equation}
+
+Where:
+- $N$ is the number of intervals (must be even)
+- $\Delta x = \frac{b-a}{N}$ is the width of each interval
+
+Simpson's rule is derived from fitting a quadratic polynomial through every three consecutive points and then integrating these polynomials.
+
+```{pyodide}
+def int_simp(f, a, b, N):
+    """Simpson's method integration"""
+    if N % 2 == 0:
+        N = N + 1  # Ensure N is odd for Simpson's rule
+    
+    if N < 3:
+        raise ValueError("N must be at least 3 for Simpson's method")
+
+    x = np.linspace(a, b, N)
+    y = f(x)
+    dx = (b-a)/(N-1)
+    
+    # Apply Simpson's formula: (f(xu2080) + 4f(xu2081) + f(xu2082))*dx/3 for each segment
+    return dx/3 * np.sum(y[0:-2:2] + 4*y[1:-1:2] + y[2::2])
+
+# Demonstrate Simpson's method with a simple example
+def f_demo(x):
+    """Example function: sin(x)"""
+    return np.sin(x)
+
+# Visualize Simpson's method with a few segments
+x_demo = np.linspace(0, np.pi, 7)  # 6 intervals
+y_demo = f_demo(x_demo)
+
+plt.figure(figsize=get_size(15, 8))
+
+# Plot the actual function
+x_fine = np.linspace(0, np.pi, 1000)
+y_fine = f_demo(x_fine)
+plt.plot(x_fine, y_fine, 'b-', label='f(x) = sin(x)')
+
+# Plot the parabolic segments
+for i in range(0, len(x_demo)-2, 2):
+    x_segment = np.linspace(x_demo[i], x_demo[i+2], 50)
+    
+    # Fit a quadratic polynomial through three points
+    x_points = x_demo[i:i+3]
+    y_points = y_demo[i:i+3]
+    coeffs = np.polyfit(x_points, y_points, 2)
+    y_fit = np.polyval(coeffs, x_segment)
+    
+    plt.plot(x_segment, y_fit, 'r-', alpha=0.7)
+    plt.fill_between(x_segment, 0, y_fit, alpha=0.2, color='purple')
+
+plt.plot(x_demo, y_demo, 'go', label='Sample points')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title("Simpson's Method Visualization")
+plt.grid(True)
+plt.legend()
+plt.show()
+
+# Convergence demonstration with a simple test function
+f_test = lambda x: x**4  # We can integrate x⁴ exactly
+exact_value = 1/5  # Exact integral of x⁴ from 0 to 1
+
+# Compare accuracy with different numbers of points
+N_test = [3, 5, 9, 17]  # Odd numbers for Simpson's rule
+errors = [abs(int_simp(f_test, 0, 1, n) - exact_value) for n in N_test]
+
+print("Simpson's Method Error Convergence:")
+print(f"{'N':<8} {'Error':<15}")
+print("-" * 24)
+for n, err in zip(N_test, errors):
+    print(f"{n:<8} {err:.12f}")
+```
+
+### Physics Application: Quantum Mechanics
+
+A critical application of Simpson's method in physics is calculating probabilities in quantum mechanics. For a wavefunction $\psi(x)$, the probability of finding a particle in a region $[a,b]$ is:
+
+\begin{equation}
+P(a \leq x \leq b) = \int_{a}^{b} |\psi(x)|^2 dx
+\end{equation}
+
+Simpson's method provides the accuracy needed for these calculations, particularly for oscillatory wavefunctions where simpler methods would require many more points to achieve the same precision.

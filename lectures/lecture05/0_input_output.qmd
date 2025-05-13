@@ -1,0 +1,169 @@
+---
+format:
+  live-html:
+    toc: true
+    toc-location: right
+pyodide:
+  autorun: false
+  packages:
+    - matplotlib
+    - numpy
+    - scipy
+---
+
+## Dealing with text files containing data
+
+In physics laboratory experiments, you'll frequently encounter the need to handle data stored in text files. Whether you're collecting measurements from a pendulum experiment, analyzing spectrometer readings, or processing particle collision data, efficiently importing, manipulating, and exporting this data is essential for your analysis. As second-semester physics students, mastering these file handling techniques will save you significant time when processing experimental results and allow you to focus on the physical interpretation rather than data management. This section covers the fundamental approaches to working with data files in Python, from basic file operations to specialized tools in NumPy that are particularly useful for the large datasets common in physics applications.
+
+### Input using Python's File Handling
+
+To input or output data to a file you can use Python's built-in file handling, e.g. to write data:
+
+```{pyodide}
+import numpy as np
+
+# Create sample data
+x = np.array([1, 2, 3, 4, 5])
+y = np.array([10, 20, 30, 40, 50])
+
+# Write data to file using Python's file handling
+with open('data.txt', 'w') as file:
+    for x_val, y_val in zip(x, y):
+        file.write(f"{x_val}, {y_val}\n")
+
+print("Data written to file using Python's file handling")
+```
+
+This approach gives you more control over formatting and is useful when dealing with complex data structures or when you need custom formatting. Python's built-in file handling allows you to precisely control how each line is formatted, which is particularly valuable when working with heterogeneous data or when you need to create files that conform to specific format requirements.
+
+
+:::{.callout-note collapse=true}
+The Python `with` statement is a context manager that provides a clean and efficient way to handle resources that need setup and teardown operations, such as file handling, database connections, or network connections.
+
+The basic syntax looks like this:
+
+```python
+with expression as variable:
+    # code block
+```
+
+The `with` statement ensures that resources are properly managed by automatically handling the setup before entering the code block and the cleanup after exiting it, even if exceptions occur within the block.
+
+Here's a common example with file operations:
+
+```python
+with open('file.txt', 'r') as file:
+    data = file.read()
+    # Process data
+# File is automatically closed when exiting the with block
+```
+
+The key benefits of using the `with` statement include:
+
+1. Automatic resource management - no need to explicitly call methods like `close()`
+2. Exception safety - resources are properly cleaned up even if exceptions occur
+3. Cleaner, more readable code compared to try-finally blocks
+
+In physics and electrical engineering contexts, you might use the `with` statement when working with measurement equipment, data acquisition, or when processing large datasets that require temporary file handling.
+:::
+
+### Text Data Input and Output with NumPy
+
+NumPy provides several functions for reading and writing text data, which can be particularly useful for handling numeric data stored in text files.
+
+#### Loading Text Data with NumPy
+
+##### Using `np.loadtxt`
+
+The most common method for loading text data is `np.loadtxt`. This function reads data from a text file and creates a NumPy array with the values:
+
+```{pyodide}
+import numpy as np
+
+# Load data from a text file
+data = np.loadtxt('data.txt', delimiter=',')  # Add delimiter to parse the comma-separated values
+print(f"Loaded data shape: {data.shape}")
+print(data)  # Display the loaded data to confirm it matches what was written
+```
+
+You can customize how `loadtxt` interprets the file using various parameters. For instance, you can specify a delimiter to handle CSV files, skip header rows that contain metadata, and select only specific columns to read:
+
+```python
+# Load with specific delimiter, skipping rows, and selecting columns
+data = np.loadtxt('data.txt',
+                  delimiter=',',   # CSV file
+                  skiprows=1,      # Skip header row
+                  usecols=(0, 1, 2))  # Use only first three columns
+```
+
+##### Using `np.genfromtxt`
+
+For more flexible loading, especially with missing values, NumPy provides the `genfromtxt` function. This function is particularly useful when dealing with real-world data that may have inconsistencies or missing entries:
+
+```python
+# Handle missing values with genfromtxt
+data = np.genfromtxt('data_with_missing.txt',
+                     delimiter=',',
+                     filling_values=-999,  # Replace missing values
+                     skip_header=1)        # Skip header row
+```
+
+The `genfromtxt` function allows you to specify how missing values should be handled, making it more robust for imperfect datasets where some entries might be missing or corrupted.
+
+#### Saving Text Data with NumPy
+
+##### Using `np.savetxt`
+
+You can save NumPy arrays to text files using the `savetxt` function. This function allows you to convert your array data into a human-readable text format that can be easily shared or used by other programs:
+
+```{pyodide}
+# Create some data
+x = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+# Save to CSV file
+np.savetxt('output.csv', x, delimiter=',', fmt='%d')
+```
+
+The `savetxt` function offers numerous formatting options to control exactly how your data is written. You can add headers and footers to provide context, specify the numeric format of your data, and control other aspects of the output file:
+
+```{pyodide}
+# Save with header and footer
+np.savetxt('output_formatted.csv', x,
+           delimiter=',',
+           header='col1,col2,col3',  # Column header
+           footer='End of data',
+           fmt='%.2f',               # Format as float with 2 decimal places
+           comments='# ')            # Change comment character
+```
+
+These formatting options give you considerable control over how your numerical data is presented in the output file, which can be important for compatibility with other software or for human readability.
+
+#### Example Workflow
+
+Here's a complete example of reading, processing, and writing text data that demonstrates a typical data analysis workflow using NumPy's I/O capabilities:
+
+```{pyodide}
+import numpy as np
+
+# Read data
+data = np.loadtxt('input.csv', delimiter=',', skiprows=1)
+
+# Process data (calculate statistics)
+row_means = np.mean(data, axis=1)
+row_maxes = np.max(data, axis=1)
+row_mins = np.min(data, axis=1)
+
+# Combine original data with calculated statistics
+result = np.column_stack((data, row_means, row_maxes, row_mins))
+
+# Save processed data
+header = "val1,val2,val3,mean,max,min"
+np.savetxt('processed_data.csv', result,
+           delimiter=',',
+           header=header,
+           fmt='%.3f')
+
+print("Data processing complete!")
+```
+
+This workflow demonstrates how NumPy can efficiently handle text-based data input and output for numerical analysis. The example reads data from a CSV file, performs statistical calculations on each row, combines the original data with the calculated statistics, and then saves the processed results to a new CSV file with appropriate headers. This type of pipeline is common in data analysis and scientific computing, where raw data is imported, transformed, and then exported in a more useful format.

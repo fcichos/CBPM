@@ -1,0 +1,335 @@
+---
+title: Classes and Objects
+format:
+  live-html:
+    toc: true
+    toc-location: right
+pyodide:
+  packages:
+    - numpy
+    - matplotlib
+---
+
+
+```{pyodide}
+#| edit: false
+#| echo: false
+# include the required modules
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Circle, Rectangle
+import matplotlib.patches as mpatches
+
+plt.rcParams.update({'font.size': 12,
+                     'lines.linewidth': 1,
+                     'lines.markersize': 10,
+                     'axes.labelsize': 11,
+                     'xtick.labelsize' : 10,
+                     'ytick.labelsize' : 10,
+                     'xtick.top' : True,
+                     'xtick.direction' : 'in',
+                     'ytick.right' : True,
+                     'ytick.direction' : 'in',})
+```
+
+## Introduction to Object Oriented Programming
+
+Imagine you're simulating a complex physical system—perhaps a collection of interacting particles or cells. Each entity in your simulation has both properties (position, velocity, size) and behaviors (move, interact, divide). How do you organize this complexity in your code?
+
+### From Procedural to Object-Oriented Thinking
+
+In previous lectures, we've designed programs using a **procedural approach**—organizing code around functions that operate on separate data structures. While this works for simpler problems, it can become unwieldy as systems grow more complex.
+
+**Object-oriented programming (OOP)** offers a more intuitive paradigm: it combines data and functionality together into self-contained units called **objects**. Instead of having separate variables and functions, each object maintains its own state and defines its own behaviors.
+
+For computational modeling, this is particularly powerful because:
+
+- Objects can directly represent the entities you're modeling (particles, cells, molecules)
+- Code organization mirrors the structure of the real-world system
+- Complex systems become easier to build incrementally and modify later
+
+## The Building Blocks: Classes and Objects
+
+Object-oriented programming is built upon two fundamental concepts: classes and objects.
+
+
+::: {#fig-classes-objects}
+![](/lectures/lecture04/img/classes-objects.png)
+
+Sketch of the relation of classes and objects
+:::
+
+
+::: {.panel-tabset}
+### Classes: Creating Blueprints
+
+A **class** serves as a blueprint or template that defines a new type of object. Think of it as a mold that creates objects with specific characteristics and behaviors. It specifies:
+
+* What data the object will store (properties)
+* What operations the object can perform (methods)
+
+### Objects: Creating Instances
+
+An **object** is a specific instance of a class—a concrete realization of that blueprint. When you create an object, you're essentially saying "make me a new thing based on this class design."
+
+Objects have two main components:
+
+* **Properties** (also called attributes or fields): Variables that store data within the object
+* **Methods**: Functions that define what the object can do and how it manipulates its data
+
+### Properties: Storing Data
+
+Properties come in two varieties:
+
+* **Instance variables**: Unique to each object instance (each object has its own copy)
+* **Class variables**: Shared among all instances of the class (one copy for the entire class)
+
+For example, if you had a `Colloid` class for a particle simulation:
+
+- Instance variables might include `radius` and `position` (unique to each particle)
+- Class variables might include `material_density` (same for all colloids of that type)
+- Methods might include `move()` or `calculate_volume()`
+:::
+
+## Working with Classes in Python
+
+### Creating a Class
+
+To define a class in Python, we use this basic syntax:
+
+```python
+class ClassName:
+    # Class content goes here
+```
+
+The definition starts with the `class` keyword, followed by the class name, and a colon. The class content is indented and contains all properties and methods of the class.
+
+Let's start with a minimal example that represents a colloidal particle:
+
+```{pyodide}
+#| autorun: false
+# Define a minimal empty class for a colloidal particle
+class Colloid:
+    pass  # 'pass' creates an empty class with no properties or methods
+
+# Create an instance of the Colloid class
+particle = Colloid()
+
+# Display the particle object (shows its memory location)
+print(particle)
+```
+
+Even this empty class is a valid class definition, though it doesn't do anything useful yet. Let's start adding functionality to make it more practical.
+
+### Creating Methods
+
+Methods are functions that belong to a class. They define the behaviors and capabilities of your objects.
+
+```{pyodide}
+#| autorun: false
+# Define a Colloid class with a method
+class Colloid:
+    # Define a method that identifies the type of colloid
+    def type(self):
+        print('I am a plastic colloid')
+
+# Create two separate colloid objects
+p = Colloid()  # First colloid instance
+b = Colloid()  # Second colloid instance
+
+# Call the type method on each object
+print("Particle p says:")
+p.type()
+
+print("\nParticle b says:")
+b.type()
+```
+
+::: {.callout-tip}
+## Understanding `self` in Python Classes
+
+Every method in a Python class automatically receives a special first parameter, conventionally named `self`. This parameter represents the specific instance of the class that calls the method.
+
+Key points about `self`:
+- It's automatically passed by Python when you call a method
+- It gives the method access to the instance's properties and other methods
+- By convention, we name it `self` (though technically you could use any valid name)
+- You don't include it when calling the method
+
+Example:
+```python
+class Colloid:
+    def type(self):  # self is automatically provided
+        print('I am a plastic colloid')
+
+# Usage:
+particle = Colloid()
+particle.type()  # Notice: no argument needed for self
+```
+
+In this example, even though `type()` appears to take no arguments when called, Python automatically passes `particle` as the `self` parameter.
+:::
+
+### The Constructor Method: `__init__`
+
+The `__init__` method is a special method called when a new object is created. It lets you initialize the object's properties with specific values.
+
+```{pyodide}
+#| autorun: false
+# Define a Colloid class with constructor and a method
+class Colloid:
+    # Constructor: Initialize a new colloid with a specific radius
+    def __init__(self, R):
+        # Store the radius as an instance variable (unique to each colloid)
+        self.R = R
+
+    # Method to retrieve the radius
+    def get_size(self):
+        return self.R
+
+# Create two colloids with different radii
+particle1 = Colloid(5)  # Creates a colloid with radius 5 µm
+particle2 = Colloid(2)  # Creates a colloid with radius 2 µm
+
+# Get and display the size of each particle
+print(f'Particle 1 radius: {particle1.get_size()} µm')
+print(f'Particle 2 radius: {particle2.get_size()} µm')
+
+# We can also directly access the R property
+print(f'Accessing radius directly: {particle1.R} µm')
+```
+
+::: {.callout-note}
+Python also provides a `__del__` method (destructor) that's called when an object is deleted. This can be useful for cleanup operations or tracking object lifecycles.
+:::
+
+### String Representation: The `__str__` Method
+
+The `__str__` method defines how an object should be represented as a string. It's automatically called when:
+- You use `print(object)`
+- You convert the object to a string using `str(object)`
+
+This method helps make your objects more readable and informative:
+
+```{pyodide}
+#| autorun: false
+# Define a Colloid class with string representation
+class Colloid:
+    def __init__(self, R):
+        self.R = R  # Initialize radius
+
+    def get_size(self):
+        return self.R
+
+    # Define how the object should be displayed as text
+    def __str__(self):
+        return f'Colloid particle with radius {self.R:.1f} µm'
+
+# Create colloids with different radii
+particle1 = Colloid(15)
+particle2 = Colloid(3.567)
+
+# Print the objects - this automatically calls __str__
+print("Particle 1:", particle1)
+print("Particle 2:", particle2)
+```
+
+::: {.callout-tip}
+The `.1f` format specification means the radius will be displayed with one decimal place. This helps make your output more readable. You can customize this string representation to show whatever information about your object is most relevant.
+:::
+
+
+## Managing Data in Classes
+
+### Class Variables vs. Instance Variables
+
+One of the core features of OOP is how it manages data. Python classes offer two distinct types of variables:
+
+#### Class Variables: Shared Among All Objects
+
+* **Definition**: Variables defined directly inside the class but outside any method
+* **Behavior**: All instances of the class share the **same copy** of these variables
+* **Usage**: For properties that should be the same across all instances
+* **Access pattern**: Typically accessed as `ClassName.variable_name`
+
+#### Instance Variables: Unique to Each Object
+
+* **Definition**: Variables defined within methods, typically in `__init__`
+* **Behavior**: Each object has its **own separate copy** of these variables
+* **Usage**: For properties that can vary between different instances
+* **Access pattern**: Typically accessed as `self.variable_name` within methods
+
+Here's a practical example showing both types of variables in action:
+
+```{pyodide}
+#| autorun: false
+class Colloid:
+    # Class variable: shared by all colloids
+    material = "polystyrene"  # All colloids made of the same material
+    total_particles = 0       # Counter to track total number of particles
+
+    def __init__(self, R, position=(0,0)):
+        # Instance variables: each particle has its own
+        self.R = R                # Radius - unique to each particle
+        self.position = position  # Position - unique to each particle
+
+        # Update the class variable when a new particle is created
+        Colloid.total_particles += 1
+
+    def __del__(self):
+        # Update the class variable when a particle is deleted
+        Colloid.total_particles -= 1
+        print(f"Particle deleted, {Colloid.total_particles} remaining")
+
+    def __str__(self):
+        return f"Colloid(R={self.R}, pos={self.position})"
+
+    def change_material(new_material):
+        # This changes the material for ALL colloids
+        Colloid.material = new_material
+
+# Create some particles with different radii and positions
+print("Creating particles...")
+p1 = Colloid(3, (0, 0))      # Radius 3, at origin
+p2 = Colloid(5, (10, 5))     # Radius 5, at position (10,5)
+p3 = Colloid(7, (-5, -5))    # Radius 7, at position (-5,-5)
+
+# Each particle has its own radius and position (instance variables)
+print(f"\nInstance variables (unique to each object):")
+print(f"p1: radius={p1.R}, position={p1.position}")
+print(f"p2: radius={p2.R}, position={p2.position}")
+print(f"p3: radius={p3.R}, position={p3.position}")
+
+# All particles share the same material and total_particles count (class variables)
+print(f"\nClass variables (shared by all objects):")
+print(f"Material for all particles: {Colloid.material}")
+print(f"Total particles: {Colloid.total_particles}")
+
+# Change the material - affects all particles
+Colloid.material = "silica"
+print(f"\nAfter changing material to {Colloid.material}:")
+print(f"p1 material: {Colloid.material}")
+print(f"p2 material: {Colloid.material}")
+
+# Delete one particle to see the counter decrease
+print("\nDeleting p3...")
+del p3
+print(f"Total particles remaining: {Colloid.total_particles}")
+```
+
+### When to Use Each Type of Variable
+
+#### Use Class Variables When:
+- A property should be the same for all instances (like physical constants)
+- You need to track information about the class as a whole (like counters)
+- You want to save memory by not duplicating unchanging values
+
+#### Use Instance Variables When:
+- Objects need their own independent state
+- Properties vary between instances (position, size, etc.)
+- You're representing unique characteristics of individual objects
+
+::: {.callout-warning}
+Be careful when modifying class variables! Since they're shared, changes will affect all instances of the class. This can lead to unexpected behavior if not managed carefully.
+:::

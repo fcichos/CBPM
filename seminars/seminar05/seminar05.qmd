@@ -1,0 +1,61 @@
+---
+title: "Free coding Seminar"
+author: "Frank Cichos"
+format:
+  live-html:
+    toc: true
+    toc-location: right
+pyodide:
+  autorun: true
+  packages:
+    - matplotlib
+    - numpy
+---
+
+
+## Free Coding Seminar - Physics Problems
+
+Today's seminar will be a free coding session. You'll have 30 minutes to work on one of the following physics problems. After the coding time, we'll discuss your approaches, solutions, and any challenges you encountered.
+
+
+```{=html}
+<button onclick="openInNewWindow()" style="background-color: #4CAF50; color: white; padding: 5px 15px; border: none; border-radius: 8px; cursor: pointer; box-shadow: none;">Open in New Window</button>
+<iframe id="myIframe" src="https://jupyterlite.github.io/demo/" width="100%" height="600px" allowfullscreen></iframe>
+
+<script>
+function openInNewWindow() {
+  window.open('https://jupyterlite.github.io/demo/', '_blank', 'width=1024,height=768');
+}
+</script>
+```
+
+Choose one of the following problems:
+
+### Problem 1: Projectile Motion with Air Resistance
+
+**Physics Background:** In real-world scenarios, projectile motion is affected by air resistance. This resistance force is often modeled as proportional to the velocity (for low speeds) or to the square of the velocity (for higher speeds).
+
+**Programming Task:**
+1. Write a program to simulate the trajectory of a projectile with air resistance.
+2. The equation of motion is:
+   $$m\vec{a} = m\vec{g} - b\vec{v}$$ (linear drag)
+   or
+   $$m\vec{a} = m\vec{g} - b|\vec{v}|\vec{v}$$ (quadratic drag)
+3. Compare trajectories with different drag coefficients.
+4. Visualize the trajectory and calculate the range for different initial angles.
+5. Advanced: Find the optimal launch angle for maximum range when air resistance is present.
+
+### Problem 2: Quantum Wave Packet Evolution
+
+**Physics Background:** In quantum mechanics, particles are described by wave functions. A wave packet is a localized superposition of plane waves that can represent a particle with a reasonably well-defined position and momentum.
+
+**Programming Task:**
+1. Simulate the time evolution of a 1D Gaussian wave packet in free space:
+   $$\psi(x,0) = A e^{-(x-x_0)^2/(4\sigma^2)} e^{ik_0x}$$
+2. The time evolution is given by the time-dependent Schrödinger equation.
+3. Calculate and plot the probability density $|\psi(x,t)|^2$ at different times.
+4. Observe and explain the spreading of the wave packet.
+5. Calculate the expectation values of position and momentum over time.
+6. Advanced: Add a potential barrier and observe reflection/transmission.
+
+Choose the problem that interests you most or matches your skill level. You'll have 30 minutes to work on your solution. Focus on getting a working implementation first, then refine and add features if time permits.
