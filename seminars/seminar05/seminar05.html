@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Frank Cichos">
 
-<title>Assignments – Computer-Based Physical Modelling</title>
+<title>Free coding Seminar – Computer-Based Physical Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,27 +24,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../course-info/exam.html" rel="next">
-<link href="../course-info/resources.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9344fb9851b4da3cab95007ef9d770dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
-<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../seminars/seminar04/md3.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-9344fb9851b4da3cab95007ef9d770dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,11 +71,40 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
-<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../assets/css/styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light">
@@ -85,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Computer-Based Physical Modelling</span>
     </a>
   </div>
@@ -106,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../course-info/intructors.html">Course Info</a></li><li class="breadcrumb-item"><a href="../course-info/assignments.html">Assignments</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Seminars</li><li class="breadcrumb-item"><a href="../../seminars/seminar05/seminar05.html">Seminar05</a></li><li class="breadcrumb-item"><a href="../../seminars/seminar05/seminar05.html">Free Coding Seminar</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -117,15 +146,15 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
-      <a href="../index.html" class="sidebar-logo-link">
-      <img src="../assets/images/mona_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../assets/images/mona_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -141,31 +170,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../course-info/intructors.html" class="sidebar-item-text sidebar-link">
+  <a href="../../course-info/intructors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Instructor</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../course-info/schedule.html" class="sidebar-item-text sidebar-link">
+  <a href="../../course-info/schedule.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Schedule</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../course-info/resources.html" class="sidebar-item-text sidebar-link">
+  <a href="../../course-info/resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ressources</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../course-info/assignments.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../course-info/assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../course-info/exam.html" class="sidebar-item-text sidebar-link">
+  <a href="../../course-info/exam.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exams</span></a>
   </div>
 </li>
@@ -192,25 +221,25 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture01/00-lecture01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture01/00-lecture01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Initial Questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture01/01-lecture01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture01/01-lecture01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Jupyter Notebooks</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture01/python_lecture01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture01/python_lecture01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Python &amp; Anatomy of a Program</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture01/02-lecture01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture01/02-lecture01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Variables &amp; Numbers</span></a>
   </div>
 </li>
@@ -227,13 +256,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture02/01-lecture02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture02/01-lecture02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data Types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture02/02-lecture02.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture02/02-lecture02.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Control Structures &amp; Functions</span></a>
   </div>
 </li>
@@ -250,19 +279,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture03/01-lecture03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture03/01-lecture03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Modules</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture03/02-lecture03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture03/02-lecture03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numpy Module</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture03/03-lecture03.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture03/03-lecture03.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Basic Plotting</span></a>
   </div>
 </li>
@@ -279,13 +308,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture04/01-lecture04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture04/01-lecture04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Classes &amp; Objects</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture04/02-lecture04.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture04/02-lecture04.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Brownian Motion Part I</span></a>
   </div>
 </li>
@@ -302,13 +331,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture05/0_input_output.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture05/0_input_output.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Input &amp; Output</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture05/1-differentiation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture05/1-differentiation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical Differentiation</span></a>
   </div>
 </li>
@@ -325,13 +354,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture05/2-integration.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture05/2-integration.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical Integration</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../lectures/lecture05/2-integration.qmd" class="sidebar-item-text sidebar-link">
+  <a href="../../lectures/lecture05/2-integration.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Solving Differential Equations</span></a>
   </div>
 </li>
@@ -360,13 +389,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../seminars/seminar01/00-seminar01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../seminars/seminar01/00-seminar01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Seminar Questions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../seminars/seminar01/01-seminar01.html" class="sidebar-item-text sidebar-link">
+  <a href="../../seminars/seminar01/01-seminar01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Seminar Quizz</span></a>
   </div>
 </li>
@@ -383,7 +412,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../seminars/seminar02/md1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../seminars/seminar02/md1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">MD Simulation 1</span></a>
   </div>
 </li>
@@ -400,7 +429,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../seminars/seminar03/md2.html" class="sidebar-item-text sidebar-link">
+  <a href="../../seminars/seminar03/md2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">MD Simulation 2</span></a>
   </div>
 </li>
@@ -417,7 +446,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../seminars/seminar04/md3.html" class="sidebar-item-text sidebar-link">
+  <a href="../../seminars/seminar04/md3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">MD Simulation 3</span></a>
   </div>
 </li>
@@ -434,7 +463,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../seminars/seminar05/seminar05.html" class="sidebar-item-text sidebar-link">
+  <a href="../../seminars/seminar05/seminar05.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Free Coding Seminar</span></a>
   </div>
 </li>
@@ -452,23 +481,32 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#provision-and-submission-of-exercises" id="toc-provision-and-submission-of-exercises" class="nav-link active" data-scroll-target="#provision-and-submission-of-exercises">Provision and Submission of Exercises</a></li>
-  <li><a href="#moodle-page-with-assignments" id="toc-moodle-page-with-assignments" class="nav-link" data-scroll-target="#moodle-page-with-assignments">Moodle page with Assignments</a></li>
+  <li><a href="#free-coding-seminar---physics-problems" id="toc-free-coding-seminar---physics-problems" class="nav-link active" data-scroll-target="#free-coding-seminar---physics-problems">Free Coding Seminar - Physics Problems</a>
+  <ul class="collapse">
+  <li><a href="#problem-1-projectile-motion-with-air-resistance" id="toc-problem-1-projectile-motion-with-air-resistance" class="nav-link" data-scroll-target="#problem-1-projectile-motion-with-air-resistance">Problem 1: Projectile Motion with Air Resistance</a></li>
+  <li><a href="#problem-2-quantum-wave-packet-evolution" id="toc-problem-2-quantum-wave-packet-evolution" class="nav-link" data-scroll-target="#problem-2-quantum-wave-packet-evolution">Problem 2: Quantum Wave Packet Evolution</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../course-info/intructors.html">Course Info</a></li><li class="breadcrumb-item"><a href="../course-info/assignments.html">Assignments</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Seminars</li><li class="breadcrumb-item"><a href="../../seminars/seminar05/seminar05.html">Seminar05</a></li><li class="breadcrumb-item"><a href="../../seminars/seminar05/seminar05.html">Free Coding Seminar</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Assignments</h1>
+<h1 class="title">Free coding Seminar</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Frank Cichos </p>
+          </div>
+  </div>
     
   
     
@@ -479,33 +517,28 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>A total of 6 exercise sheets will be provided. <em>The exercise sheets are part of the examination!</em> The exercise sheets are not graded, but completing them is required for the successful completion of the module. More detailed information on the evaluation of the exercise sheets can be found on the <a href="https://fcichos.github.io/CBPM25/course-info/exam.html">Exam</a> page.</p>
-<section id="provision-and-submission-of-exercises" class="level3">
-<h3 class="anchored" data-anchor-id="provision-and-submission-of-exercises">Provision and Submission of Exercises</h3>
-<ul>
-<li><strong>Publication</strong>: Every Tuesday at 1:00 PM (starting second week)</li>
-<li><strong>Submission deadline</strong>: By the following Tuesday at 12:00 PM</li>
-<li><strong>Processing period</strong>: One week (minus one hour)</li>
-<li><strong>Platform</strong>: University Moodle
-<ul>
-<li>Both for working on and submitting assignments</li>
-</ul>
-<strong>Important</strong>:
-<ul>
-<li>Make sure to submit on time within the specified deadline.</li>
-<li>After the deadline expires, the assignment is no longer available and cannot be submitted.</li>
-<li>Please note that submitting the same assignment multiple times reduces the score by 10% with each submission</li>
-</ul></li>
-</ul>
+<section id="free-coding-seminar---physics-problems" class="level2">
+<h2 class="anchored" data-anchor-id="free-coding-seminar---physics-problems">Free Coding Seminar - Physics Problems</h2>
+<p>Today’s seminar will be a free coding session. You’ll have 30 minutes to work on one of the following physics problems. After the coding time, we’ll discuss your approaches, solutions, and any challenges you encountered.</p>
+<button onclick="openInNewWindow()" style="background-color: #4CAF50; color: white; padding: 5px 15px; border: none; border-radius: 8px; cursor: pointer; box-shadow: none;">Open in New Window</button>
+<iframe id="myIframe" src="https://jupyterlite.github.io/demo/" width="100%" height="600px" allowfullscreen=""></iframe>
+
+<script>
+function openInNewWindow() {
+  window.open('https://jupyterlite.github.io/demo/', '_blank', 'width=1024,height=768');
+}
+</script>
+<p>Choose one of the following problems:</p>
+<section id="problem-1-projectile-motion-with-air-resistance" class="level3">
+<h3 class="anchored" data-anchor-id="problem-1-projectile-motion-with-air-resistance">Problem 1: Projectile Motion with Air Resistance</h3>
+<p><strong>Physics Background:</strong> In real-world scenarios, projectile motion is affected by air resistance. This resistance force is often modeled as proportional to the velocity (for low speeds) or to the square of the velocity (for higher speeds).</p>
+<p><strong>Programming Task:</strong> 1. Write a program to simulate the trajectory of a projectile with air resistance. 2. The equation of motion is: <span class="math display">\[m\vec{a} = m\vec{g} - b\vec{v}\]</span> (linear drag) or <span class="math display">\[m\vec{a} = m\vec{g} - b|\vec{v}|\vec{v}\]</span> (quadratic drag) 3. Compare trajectories with different drag coefficients. 4. Visualize the trajectory and calculate the range for different initial angles. 5. Advanced: Find the optimal launch angle for maximum range when air resistance is present.</p>
 </section>
-<section id="moodle-page-with-assignments" class="level3">
-<h3 class="anchored" data-anchor-id="moodle-page-with-assignments">Moodle page with Assignments</h3>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../assets/images/QR_frame.png" class="img-fluid figure-img"></p>
-<figcaption>Moodle Link</figcaption>
-</figure>
-</div>
+<section id="problem-2-quantum-wave-packet-evolution" class="level3">
+<h3 class="anchored" data-anchor-id="problem-2-quantum-wave-packet-evolution">Problem 2: Quantum Wave Packet Evolution</h3>
+<p><strong>Physics Background:</strong> In quantum mechanics, particles are described by wave functions. A wave packet is a localized superposition of plane waves that can represent a particle with a reasonably well-defined position and momentum.</p>
+<p><strong>Programming Task:</strong> 1. Simulate the time evolution of a 1D Gaussian wave packet in free space: <span class="math display">\[\psi(x,0) = A e^{-(x-x_0)^2/(4\sigma^2)} e^{ik_0x}\]</span> 2. The time evolution is given by the time-dependent Schrödinger equation. 3. Calculate and plot the probability density <span class="math inline">\(|\psi(x,t)|^2\)</span> at different times. 4. Observe and explain the spreading of the wave packet. 5. Calculate the expectation values of position and momentum over time. 6. Advanced: Add a potential barrier and observe reflection/transmission.</p>
+<p>Choose the problem that interests you most or matches your skill level. You’ll have 30 minutes to work on your solution. Focus on getting a working implementation first, then refine and add features if time permits.</p>
 
 
 <script type="ojs-module-contents">
@@ -523,6 +556,7 @@ eyJjb250ZW50cyI6W119
 W10=
 </script>
 </section>
+</section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
@@ -530,9 +564,9 @@ eyJjb250ZW50cyI6W119
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../course-info";
+window._ojs.paths.runtimeToDoc = "../../seminars/seminar05";
 window._ojs.paths.runtimeToRoot = "../..";
-window._ojs.paths.docToRoot = "..";
+window._ojs.paths.docToRoot = "../..";
 window._ojs.selfContained = false;
 window._ojs.runtime.interpretFromScriptTags();
 </script>
@@ -937,14 +971,11 @@ window._ojs.runtime.interpretFromScriptTags();
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../course-info/resources.html" class="pagination-link" aria-label="Ressources">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Ressources</span>
+      <a href="../../seminars/seminar04/md3.html" class="pagination-link" aria-label="MD Simulation 3">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">MD Simulation 3</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../course-info/exam.html" class="pagination-link" aria-label="Exams">
-        <span class="nav-page-text">Exams</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
