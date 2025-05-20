@@ -50,3 +50,11 @@ h6 {
     background-color: white;
 }
 */
+
+.pyodide pre.sourceCode {
+    font-size: 1rem; /* Adjust size as needed */
+    font-weight: normal;
+    background-color: #f8f8f8; /* Light gray background */
+    padding: 0.8rem; /* Add more padding */
+    border-left: 3px solid #0072b2; /* Add a colored border */
+}
