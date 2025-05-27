@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>integration – Computer-Based Physical Modelling</title>
+<title>Spring Pendulum – Computer-Based Physical Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../lectures/lecture05/1-differentiation.html" rel="prev">
+<link href="../../lectures/lecture08/2_planetary_motion.html" rel="next">
+<link href="../../lectures/lecture08/3_fourier_analysis.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -70,6 +71,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
 
@@ -134,14 +141,14 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Python Basics</li><li class="breadcrumb-item"><a href="../../lectures/lecture05/0_input_output.html">Lecture 5</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture05/2-integration.html">Numerical Integration</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Python Basics</li><li class="breadcrumb-item"><a href="../../lectures/lecture08/3_fourier_analysis.html">Lecture 8</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture08/1_spring_pendulum.html">Spring Pendulum</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
@@ -340,10 +347,73 @@ window.Quarto = {
  <span class="menu-text">Numerical Differentiation</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 6</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../lectures/lecture05/2-integration.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../lectures/lecture06/2-integration.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numerical Integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture06/3-solving_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solving Differential Equations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 7</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture07/2_coupled_pendula.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Coupled Pendula</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 8</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture08/3_fourier_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fourier Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture08/1_spring_pendulum.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Spring Pendulum</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture08/2_planetary_motion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Planetary Motion</span></a>
   </div>
 </li>
       </ul>
@@ -353,22 +423,22 @@ window.Quarto = {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminars</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar01</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar01/00-seminar01.html" class="sidebar-item-text sidebar-link">
@@ -385,13 +455,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar02</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar02/md1.html" class="sidebar-item-text sidebar-link">
@@ -402,13 +472,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar03</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar03/md2.html" class="sidebar-item-text sidebar-link">
@@ -419,13 +489,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar04</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar04/md3.html" class="sidebar-item-text sidebar-link">
@@ -436,17 +506,51 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar05</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../seminars/seminar05/md4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">MD Simulation 4</span></a>
+  <a href="../../seminars/seminar05/seminar05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Free Coding Seminar</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar06</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar06/seminar06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Free Coding Seminar</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar07</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar07/seminar07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating Proper Figures Seminar</span></a>
   </div>
 </li>
       </ul>
@@ -463,441 +567,225 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-to-numerical-integration-in-physics" id="toc-introduction-to-numerical-integration-in-physics" class="nav-link active" data-scroll-target="#introduction-to-numerical-integration-in-physics">Introduction to Numerical Integration in Physics</a>
+  <li><a href="#physical-model" id="toc-physical-model" class="nav-link active" data-scroll-target="#physical-model">Physical Model</a>
   <ul class="collapse">
-  <li><a href="#box-method-rectangle-method" id="toc-box-method-rectangle-method" class="nav-link" data-scroll-target="#box-method-rectangle-method">Box Method (Rectangle Method)</a></li>
-  <li><a href="#trapezoid-method" id="toc-trapezoid-method" class="nav-link" data-scroll-target="#trapezoid-method">Trapezoid Method</a></li>
-  <li><a href="#simpsons-method" id="toc-simpsons-method" class="nav-link" data-scroll-target="#simpsons-method">Simpson’s Method</a></li>
-  <li><a href="#when-to-use-each-method" id="toc-when-to-use-each-method" class="nav-link" data-scroll-target="#when-to-use-each-method">When to Use Each Method</a></li>
+  <li><a href="#equations-of-motion" id="toc-equations-of-motion" class="nav-link" data-scroll-target="#equations-of-motion">Equations of motion</a></li>
   </ul></li>
-  <li><a href="#error-analysis" id="toc-error-analysis" class="nav-link" data-scroll-target="#error-analysis">Error Analysis</a>
+  <li><a href="#numerical-solution" id="toc-numerical-solution" class="nav-link" data-scroll-target="#numerical-solution">Numerical Solution</a>
   <ul class="collapse">
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#initial-parameters" id="toc-initial-parameters" class="nav-link" data-scroll-target="#initial-parameters">Initial parameters</a></li>
+  <li><a href="#solution" id="toc-solution" class="nav-link" data-scroll-target="#solution">Solution</a></li>
+  <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting">Plotting</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Python Basics</li><li class="breadcrumb-item"><a href="../../lectures/lecture05/0_input_output.html">Lecture 5</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture05/2-integration.html">Numerical Integration</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Python Basics</li><li class="breadcrumb-item"><a href="../../lectures/lecture08/3_fourier_analysis.html">Lecture 8</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture08/1_spring_pendulum.html">Spring Pendulum</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Spring Pendulum</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="introduction-to-numerical-integration-in-physics" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-to-numerical-integration-in-physics">Introduction to Numerical Integration in Physics</h2>
-<p>Numerical integration stands as one of the fundamental computational tools in physics, enabling us to solve problems where analytical solutions are either impossible or impractical. In physics, we frequently encounter integrals when calculating quantities such as:</p>
-<ul>
-<li>Work done by a variable force</li>
-<li>Electric and magnetic fields from complex charge distributions</li>
-<li>Center of mass of irregularly shaped objects</li>
-<li>Probability distributions in quantum mechanics</li>
-<li>Energy levels in quantum wells with arbitrary potentials</li>
-<li>Heat flow in non-uniform materials</li>
-</ul>
-<p>The need for numerical integration arises because many physical systems are described by functions that cannot be integrated analytically. For example, the potential energy of a complex molecular system, the trajectory of a spacecraft under multiple gravitational influences, or the behavior of quantum particles in complex potentials.</p>
-<p>In this lecture, we’ll explore three progressively more accurate numerical integration methods: the Box method, Trapezoid method, and Simpson’s method. We’ll analyze their accuracy, efficiency, and appropriate applications in physical problems.</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In the last lectures, we have explored the use of the <strong>scipy</strong> module <strong>solve_ivp</strong> to do the work of solving differential equations for us. We have studied coupled pendula and explored the details of the solutions. This time we have two more projects ahead of us. We first want to consider the motion of a spring pendulum and then come from that to the motion of planets. Both are examples where we have not only a tangential acceleration but also a radial component. Otherwise, these problems do look similar to the ones we considered before.</p>
 <div>
 <div id="pyodide-1">
 
 </div>
 <script type="pyodide-1-contents">
-eyJhdHRyIjp7ImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiZXhlY3V0ZSI6dHJ1ZX0sImNvZGUiOiJcbmltcG9ydCBudW1weSBhcyBucFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuZnJvbSBzY2lweS5vcHRpbWl6ZSBpbXBvcnQgY3VydmVfZml0XG5cbiMgU2V0IGRlZmF1bHQgcGxvdHRpbmcgcGFyYW1ldGVyc1xucGx0LnJjUGFyYW1zLnVwZGF0ZSh7XG4gICAgJ2ZvbnQuc2l6ZSc6IDEyLFxuICAgICdsaW5lcy5saW5ld2lkdGgnOiAxLFxuICAgICdsaW5lcy5tYXJrZXJzaXplJzogNSxcbiAgICAnYXhlcy5sYWJlbHNpemUnOiAxMSxcbiAgICAneHRpY2subGFiZWxzaXplJzogMTAsXG4gICAgJ3l0aWNrLmxhYmVsc2l6ZSc6IDEwLFxuICAgICd4dGljay50b3AnOiBUcnVlLFxuICAgICd4dGljay5kaXJlY3Rpb24nOiAnaW4nLFxuICAgICd5dGljay5yaWdodCc6IFRydWUsXG4gICAgJ3l0aWNrLmRpcmVjdGlvbic6ICdpbicsXG59KVxuXG5kZWYgZ2V0X3NpemUodywgaCk6XG4gICAgcmV0dXJuICh3LzIuNTQsIGgvMi41NCkifQ==
+eyJhdHRyIjp7ImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiZXhlY3V0ZSI6dHJ1ZX0sImNvZGUiOiJcbmltcG9ydCBudW1weSBhcyBucFxuaW1wb3J0IG1hdHBsb3RsaWIucHlwbG90IGFzIHBsdFxuZnJvbSBzY2lweS5pbnRlZ3JhdGUgaW1wb3J0IHNvbHZlX2l2cFxuXG4jIFNldCBkZWZhdWx0IHBsb3R0aW5nIHBhcmFtZXRlcnNcbnBsdC5yY1BhcmFtcy51cGRhdGUoe1xuICAgICdmb250LnNpemUnOiAxMixcbiAgICAnbGluZXMubGluZXdpZHRoJzogMSxcbiAgICAnbGluZXMubWFya2Vyc2l6ZSc6IDUsXG4gICAgJ2F4ZXMubGFiZWxzaXplJzogMTEsXG4gICAgJ3h0aWNrLmxhYmVsc2l6ZSc6IDEwLFxuICAgICd5dGljay5sYWJlbHNpemUnOiAxMCxcbiAgICAneHRpY2sudG9wJzogVHJ1ZSxcbiAgICAneHRpY2suZGlyZWN0aW9uJzogJ2luJyxcbiAgICAneXRpY2sucmlnaHQnOiBUcnVlLFxuICAgICd5dGljay5kaXJlY3Rpb24nOiAnaW4nLFxufSlcblxuZGVmIGdldF9zaXplKHcsIGgpOlxuICAgIHJldHVybiAody8yLjU0LCBoLzIuNTQpIn0=
 </script>
 </div>
-<section id="box-method-rectangle-method" class="level3">
-<h3 class="anchored" data-anchor-id="box-method-rectangle-method">Box Method (Rectangle Method)</h3>
-<section id="theory-and-implementation" class="level4">
-<h4 class="anchored" data-anchor-id="theory-and-implementation">Theory and Implementation</h4>
-<div id="fig-box" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="img/box.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-box-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Box Method Illustration
-</figcaption>
+<section id="physical-model" class="level2">
+<h2 class="anchored" data-anchor-id="physical-model">Physical Model</h2>
+<p>The image below shows the situation we would like to cover in our second project. This is also a kind of coupled pendula, however, the situation is more subtle.</p>
+<p>We have a single spring which is mounted to a support and a mass. The spring can be elongated in length but also in angle so that you finally have a pendulum and a spring. Both motions are coupled now in a similar way as for the coupled pendula we treated. This time, however, the length change of the spring modulates the frequency of the pendulum.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/SpringPendulum.png" class="img-fluid figure-img"></p>
+<figcaption>SpringPendulum.png</figcaption>
 </figure>
 </div>
-<p>The Box method (also known as the Rectangle method) represents the simplest approach for numerical integration. It approximates the function in each interval <span class="math inline">\(\Delta x\)</span> with a constant value taken at a specific point of the interval—typically the left endpoint, although midpoint or right endpoint variants exist.</p>
-<p>Mathematically, the definite integral is approximated as:</p>
-<p><span class="math display">\[\begin{equation}
-\int_{a}^{b} f(x) dx \approx \sum_{i=1}^{N} f(x_{i}) \Delta x
-\end{equation}\]</span></p>
-<p>Where:</p>
+<section id="equations-of-motion" class="level3">
+<h3 class="anchored" data-anchor-id="equations-of-motion">Equations of motion</h3>
+<p>A mass <span class="math inline">\(m\)</span> is attached to a spring with spring constant <span class="math inline">\(k\)</span>, which is attached to a support point as shown in the figure. The length of the resulting pendulum at any given time is the spring rest length <span class="math inline">\(L_0\)</span> plus the stretch (or compression) <span class="math inline">\(L\)</span>, and the angle of the pendulum with respect to the vertical is <span class="math inline">\(\theta\)</span>.</p>
+<p>The differential equations for this system are given by</p>
+<p><span class="math display">\[\begin{eqnarray}
+\ddot{L}&amp;=&amp;(L_0+L)\dot{\theta}^2-\frac{k}{m}L+g\cos(\theta)\\
+\ddot{\theta}&amp;=&amp;-\frac{1}{L_0+L}[g\sin(\theta)+2\dot{L}\dot{\theta}]
+\end{eqnarray}\]</span></p>
+<p>Let’s break down the terms in these equations:</p>
+<p>For the radial motion (L):</p>
 <ul>
-<li><span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are the integration limits</li>
-<li><span class="math inline">\(N\)</span> is the number of intervals</li>
-<li><span class="math inline">\(\Delta x = \frac{b-a}{N}\)</span> is the width of each interval</li>
-<li><span class="math inline">\(x_i\)</span> represents the left endpoint of each interval</li>
+<li><span class="math inline">\((L_0+L)\dot{\theta}^2\)</span> represents the centrifugal force term</li>
+<li><span class="math inline">\(-\frac{k}{m}L\)</span> is the restoring force of the spring (Hooke’s law)</li>
+<li><span class="math inline">\(g\cos(\theta)\)</span> is the component of gravity along the radial direction</li>
 </ul>
-<p>The method gets its name from the visual representation of the approximation as a series of rectangular boxes.</p>
-</section>
-<section id="box-method-applications" class="level4">
-<h4 class="anchored" data-anchor-id="box-method-applications">Box Method Applications</h4>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Physics Application: Work Calculation</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Convergence Analysis</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>Consider a particle moving along a straight line under a variable force <span class="math inline">\(F(x) = kx^2\)</span> where <span class="math inline">\(k\)</span> is some constant. The work done by this force when moving the particle from position <span class="math inline">\(x=0\)</span> to <span class="math inline">\(x=L\)</span> is given by:</p>
+<p>For the angular motion (θ):</p>
+<ul>
+<li><span class="math inline">\(g\sin(\theta)\)</span> represents the gravitational torque</li>
+<li><span class="math inline">\(2\dot{L}\dot{\theta}\)</span> is the Coriolis force term</li>
+<li>The factor <span class="math inline">\(\frac{1}{L_0+L}\)</span> comes from the moment of inertia</li>
+</ul>
+<p>The equations are coupled - the radial and angular motions affect each other. The system shows interesting behavior like:</p>
+<ul>
+<li>Energy exchange between radial and angular modes</li>
+<li>Non-linear oscillations</li>
+<li>Potential for chaotic motion under certain conditions</li>
+</ul>
+<p>The key players in this equation are the centrifugal and Coriolis forces. These forces are fictitious forces that arise when we consider the motion of an object in a rotating frame of reference. The centrifugal force is the force that pushes an object away from the center of rotation, while the Coriolis force is the force that acts perpendicular to the direction of motion of an object in a rotating frame.</p>
+<p>Centrifugal Force:</p>
 <p><span class="math display">\[\begin{equation}
-W = \int_{0}^{L} F(x) dx = \int_{0}^{L} kx^2 dx
+\vec{F}_{\text{centrifugal}} = m(\vec{\omega} \times (\vec{\omega} \times \vec{r}))
 \end{equation}\]</span></p>
-<p>We can approximate this integral using the Box method, particularly useful when the force follows a complex pattern measured at discrete points.</p>
+<p>Coriolis Force: <span class="math display">\[\begin{equation}
+\vec{F}_{\text{Coriolis}} = 2m(\vec{\omega} \times \vec{v}_{\text{rel}})
+\end{equation}\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(m\)</span> is the mass</li>
+<li><span class="math inline">\(\vec{\omega}\)</span> is the angular velocity vector</li>
+<li><span class="math inline">\(\vec{r}\)</span> is the position vector</li>
+<li><span class="math inline">\(\vec{v}_{\text{rel}}\)</span> is the velocity relative to the rotating frame</li>
+<li><span class="math inline">\(\times\)</span> denotes the cross product</li>
+</ul>
+<p>In component form, if we consider rotation about the z-axis with <span class="math inline">\(\vec{\omega} = \omega\hat{k}\)</span>, these become:</p>
+<p>Centrifugal Force: <span class="math display">\[\begin{equation}
+\vec{F}_{\text{centrifugal}} = m\omega^2(x\hat{i} + y\hat{j})
+\end{equation}\]</span></p>
+<p>Coriolis Force: <span class="math display">\[\begin{equation}
+\vec{F}_{\text{Coriolis}} = 2m\omega(-v_y\hat{i} + v_x\hat{j})
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\hat{i}\)</span>, <span class="math inline">\(\hat{j}\)</span>, and <span class="math inline">\(\hat{k}\)</span> are unit vectors in the x, y, and z directions respectively.</p>
+<p>Below we write a program that plots the motion of the mass for some initial <span class="math inline">\(\theta\neq0\)</span>. Explore different solutions. We should get that when the spring is very stiff (large k), it reduces approximately to a simple pendulum. When <span class="math inline">\(\theta\)</span> is small, it can show beats between the spring and pendulum modes.</p>
 <div>
 <div id="pyodide-2">
 
 </div>
 <script type="pyodide-2-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGYoeCk6XG4gICAgXCJcIlwiRXhhbXBsZSBmdW5jdGlvbiB0byBpbnRlZ3JhdGU6IGYoeCkgPSB4XCJcIlwiXG4gICAgcmV0dXJuIHhcblxuZGVmIGZvcmNlKHgsIGs9MS4wKTpcbiAgICBcIlwiXCJGb3JjZSBmdW5jdGlvbiBGKHgpID0ga3heMiBmb3Igd29yayBjYWxjdWxhdGlvblwiXCJcIlxuICAgIHJldHVybiBrICogeCoqMlxuXG5kZWYgaW50X2JveChmLCBhLCBiLCBOKTpcbiAgICBcIlwiXCJCb3ggbWV0aG9kIGludGVncmF0aW9uXCJcIlwiXG4gICAgaWYgTiA8IDI6XG4gICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoXCJOIG11c3QgYmUgYXQgbGVhc3QgMlwiKVxuICAgIHggPSBucC5saW5zcGFjZShhLCBiLCBOKVxuICAgIHkgPSBmKHgpXG4gICAgZHggPSAoYi1hKS8oTi0xKVxuICAgIHJldHVybiBucC5zdW0oeVs6LTFdICogZHgpICAjIFN1bSB1c2luZyBsZWZ0IGVuZHBvaW50c1xuXG4jIEV4YW1wbGU6IENhbGN1bGF0ZSB3b3JrIGRvbmUgYnkgYSBub25saW5lYXIgZm9yY2VcbkwgPSAyLjAgICMgbWV0ZXJzXG5rID0gMC41ICAjIE4vbV4zXG5OX3BvaW50cyA9IDEwMFxuXG53b3JrID0gaW50X2JveChsYW1iZGEgeDogZm9yY2UoeCwgayksIDAsIEwsIE5fcG9pbnRzKVxucHJpbnQoZlwiV29yayBkb25lIGJ5IGZvcmNlIEYoeCkgPSB7a314wrIgZnJvbSB4PTAgdG8geD17TH0gbTpcIilcbnByaW50KGZcIk51bWVyaWNhbCByZXN1bHQgKEJveCBtZXRob2QpOiB7d29yazouNmZ9IEpcIilcbnByaW50KGZcIkFuYWx5dGljYWwgcmVzdWx0OiB7aypMKiozLzM6LjZmfSBKXCIpXG5cbiMgRGVtb25zdHJhdGUgdGhlIG1ldGhvZCBncmFwaGljYWxseVxueF9kZW1vID0gbnAubGluc3BhY2UoMCwgMSwgNilcbnlfZGVtbyA9IHhfZGVtbyAgIyBVc2luZyBmKHgpID0geCBmb3IgZGVtb25zdHJhdGlvblxuZHhfZGVtbyA9IHhfZGVtb1sxXSAtIHhfZGVtb1swXVxuXG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTUsIDEwKSlcblxuIyBQbG90IHRoZSBhY3R1YWwgZnVuY3Rpb25cbnhfZmluZSA9IG5wLmxpbnNwYWNlKDAsIDEsIDEwMDApXG55X2ZpbmUgPSB4X2ZpbmVcbnBsdC5wbG90KHhfZmluZSwgeV9maW5lLCAnYi0nLCBsYWJlbD0nYWN0dWFsIGZ1bmN0aW9uIGYoeCkgPSB4JylcblxuIyBQbG90IHRoZSBib3hlc1xuZm9yIGkgaW4gcmFuZ2UobGVuKHhfZGVtbyktMSk6XG4gICAgcGx0LmZpbGxfYmV0d2VlbihbeF9kZW1vW2ldLCB4X2RlbW9baSsxXV0sIFt5X2RlbW9baV0sIHlfZGVtb1tpXV0sIGFscGhhPTAuMywgY29sb3I9J3JlZCcpXG4gICAgcGx0LnBsb3QoW3hfZGVtb1tpXSwgeF9kZW1vW2ldXSwgWzAsIHlfZGVtb1tpXV0sICdyLS0nLCBhbHBoYT0wLjUpXG5cbnBsdC5wbG90KHhfZGVtb1s6LTFdLCB5X2RlbW9bOi0xXSwgJ3JvJywgbGFiZWw9J1NhbXBsZSBwb2ludHMnKVxucGx0LnhsYWJlbCgneCcpXG5wbHQueWxhYmVsKCdmKHgpJylcbnBsdC5sZWdlbmQoKVxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpIn0=
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IlxuZGVmIHNwcmluZ19wZW5kdWx1bSh0aW1lLCBzdGF0ZSk6XG4gICAgZzAgPSBzdGF0ZVsxXVxuICAgIGcxID0gKExfbytzdGF0ZVswXSkqc3RhdGVbM10qc3RhdGVbM10gLSBrL20qc3RhdGVbMF0gKyBncmF2aXR5Km5wLmNvcyhzdGF0ZVsyXSlcbiAgICBnMiA9IHN0YXRlWzNdXG4gICAgZzMgPSAtKGdyYXZpdHkqbnAuc2luKHN0YXRlWzJdKSArIDIuMCpzdGF0ZVsxXSpzdGF0ZVszXSkvKExfbyArIHN0YXRlWzBdKVxuICAgIHJldHVybiBucC5hcnJheShbZzAsIGcxLCBnMiwgZzNdKSJ9
 </script>
 </div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+</section>
+</section>
+<section id="numerical-solution" class="level2">
+<h2 class="anchored" data-anchor-id="numerical-solution">Numerical Solution</h2>
+<p>For the numerical solution of the differential equations, we will use the <strong>solve_ivp</strong> function from the <strong>scipy.integrate</strong> module. This function provides a more modern and flexible approach to solving initial value problems compared to the older odeint function.</p>
+<section id="initial-parameters" class="level3">
+<h3 class="anchored" data-anchor-id="initial-parameters">Initial parameters</h3>
+<p>We will have to think about the initial conditions. We will later modify them to see how the system behaves in different regimes.</p>
 <div>
 <div id="pyodide-3">
 
 </div>
 <script type="pyodide-3-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBDb252ZXJnZW5jZSBkZW1vbnN0cmF0aW9uXG5OX3ZhbHVlcyA9IG5wLmFyYW5nZSgxMCwgMTAwMDAsIDEwMClcbmJveF9yZXN1bHRzID0gW2ludF9ib3goZiwgMCwgMSwgTikgZm9yIE4gaW4gTl92YWx1ZXNdXG5leGFjdF92YWx1ZSA9IDAuNSAgIyBFeGFjdCBpbnRlZ3JhbCBvZiBmKHgpID0geCBmcm9tIDAgdG8gMVxuXG4jIENhbGN1bGF0ZSBhYnNvbHV0ZSBlcnJvcnNcbmJveF9lcnJvcnMgPSBucC5hYnMobnAuYXJyYXkoYm94X3Jlc3VsdHMpIC0gZXhhY3RfdmFsdWUpXG5cbiMgRml0IGEgcG93ZXIgbGF3IHRvIGVycm9yIHZzIE5cbmRlZiBwb3dlcl9sYXcoeCwgYSwgYik6XG4gICAgcmV0dXJuIGEgKiB4KipiXG5cbnBvcHQsIF8gPSBjdXJ2ZV9maXQocG93ZXJfbGF3LCBOX3ZhbHVlcywgYm94X2Vycm9ycylcblxucGx0LmZpZ3VyZShmaWdzaXplPWdldF9zaXplKDE1LCAxMCkpXG5wbHQubG9nbG9nKE5fdmFsdWVzLCBib3hfZXJyb3JzLCAnbycsIGxhYmVsPSdCb3ggTWV0aG9kIEVycm9yJylcbnBsdC5sb2dsb2coTl92YWx1ZXMsIHBvd2VyX2xhdyhOX3ZhbHVlcywgKnBvcHQpLCAnLS0nLFxuICAgICAgICAgbGFiZWw9ZidQb3dlciBMYXcgRml0OiBlcnJvciDiiJ0gTl57cG9wdFsxXTouMmZ9JylcbnBsdC54bGFiZWwoJ251bWJlciBvZiBwb2ludHMgW05dJylcbnBsdC55bGFiZWwoJ2Fic29sdXRlIEVycm9yJylcbnBsdC5sZWdlbmQoKVxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpXG5cbnByaW50KGZcIkJveCBNZXRob2QgY29udmVyZ2VuY2UgcmF0ZTogYXBwcm94aW1hdGVseSBPKE5ee3BvcHRbMV06LjJmfSlcIikifQ==
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgbWFzcyBtMSwgbTIsIGxlbmd0aCBvZiBwZW5kdWxhIEwxLCBMMiwgcG9zaXRpb24gb2YgdGhlIGNvdXBsaW5nLCBzcHJpbmcgY29uc3RhbnQgaywgZ3Jhdml0YXRpb25hbCBhY2NlbGVyYXRpb25cblxuIyBDaGFvdGljIHJlZ2ltZSBwYXJhbWV0ZXJzXG4jIGsgPSA1LjAgICMgbG93ZXIgc3ByaW5nIGNvbnN0YW50XG4jIExfbyA9IDIuMCAgIyBzaG9ydGVyIGVxdWlsaWJyaXVtIGxlbmd0aFxuIyB0aGV0YV9vID0gMS4wICAjIGxhcmdlciBpbml0aWFsIGFuZ2xlXG4jIHZfbyA9IDEuMCAgIyBub24temVybyBpbml0aWFsIHZlbG9jaXR5XG5cbk4gPSAxMDAwMFxuc3RhdGUgPSBucC56ZXJvcyg0KVxuTF9vID0gNVxuTCA9IDAuMVxudl9vID0gMC4wXG50aGV0YV9vID0gMC4xXG5vbWVnYV9vID0gMC4wXG5cblxuc3RhdGVbMF09TFxuc3RhdGVbMV09dl9vXG5zdGF0ZVsyXSA9IHRoZXRhX29cbnN0YXRlWzNdID0gb21lZ2Ffb1xuXG50aW1lID0gbnAubGluc3BhY2UoMCwgNTAwLCBOKVxuXG5rID0gMTAgIyBzcHJpbmcgY29uc3RhbnRcbm0gPSAxICMgbWFzc1xuZ3Jhdml0eSA9OS44MSJ9
 </script>
 </div>
-</div>
-</div>
-</div>
 </section>
-</section>
-<section id="trapezoid-method" class="level3">
-<h3 class="anchored" data-anchor-id="trapezoid-method">Trapezoid Method</h3>
-<section id="theory-and-implementation-1" class="level4">
-<h4 class="anchored" data-anchor-id="theory-and-implementation-1">Theory and Implementation</h4>
-<div id="fig-trap" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-trap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="img/trapez.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-trap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Trapezoid Method Illustration
-</figcaption>
-</figure>
-</div>
-<p>The Trapezoid method improves upon the Box method by approximating the function with linear segments between consecutive points. Instead of using constant values within each interval, it connects adjacent points with straight lines, forming trapezoids.</p>
-<p>The mathematical formula for the Trapezoid method is:</p>
-<p><span class="math display">\[\begin{equation}
-\int_{a}^{b} f(x) dx \approx \sum_{i=1}^{N-1} \frac{f(x_i) + f(x_{i+1})}{2} \Delta x
-\end{equation}\]</span></p>
-<p>Where: - <span class="math inline">\(\Delta x = \frac{b-a}{N-1}\)</span> is the width of each interval - <span class="math inline">\(x_i\)</span> are the sample points</p>
-<p>This method is particularly effective for smoothly varying functions, which are common in physical systems.</p>
-</section>
-<section id="trapezoid-application" class="level4">
-<h4 class="anchored" data-anchor-id="trapezoid-application">Trapezoid Application</h4>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Physics Application: Electric Potential from Charge Distribution</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Convergence Analysis</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<p>A practical application in electromagnetism involves calculating the electric potential at a point due to a non-uniform charge distribution along a line. For a linear charge density <span class="math inline">\(\lambda(x)\)</span> along the x-axis, the potential at point <span class="math inline">\((0,d)\)</span> is given by:</p>
-<p><span class="math display">\[\begin{equation}
-V(0,d) = \frac{1}{4\pi\epsilon_0} \int_{a}^{b} \frac{\lambda(x)}{\sqrt{x^2 + d^2}} dx
-\end{equation}\]</span></p>
-<p>The Trapezoid method is well-suited for this calculation, especially when <span class="math inline">\(\lambda(x)\)</span> is provided as experimental data points.</p>
+<section id="solution" class="level3">
+<h3 class="anchored" data-anchor-id="solution">Solution</h3>
+<p>The solution of the differential equations is done by the <strong>solve_ivp</strong> function.</p>
 <div>
 <div id="pyodide-4">
 
 </div>
 <script type="pyodide-4-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGludF90cmFwKGYsIGEsIGIsIE4pOlxuICAgIFwiXCJcIlRyYXBlem9pZCBtZXRob2QgaW50ZWdyYXRpb25cIlwiXCJcbiAgICBpZiBOIDwgMjpcbiAgICAgICAgcmFpc2UgVmFsdWVFcnJvcihcIk4gbXVzdCBiZSBhdCBsZWFzdCAyXCIpXG4gICAgeCA9IG5wLmxpbnNwYWNlKGEsIGIsIE4pXG4gICAgeSA9IGYoeClcbiAgICBkeCA9IChiLWEpLyhOLTEpXG4gICAgcmV0dXJuIG5wLnN1bSgoeVsxOl0gKyB5WzotMV0pICogZHgvMilcblxuIyBTaW1wbGUgZGVtb25zdHJhdGlvblxuZGVmIGZfZGVtbyh4KTpcbiAgICByZXR1cm4geCoqMiAgIyBVc2luZyBmKHgpID0geMKyIGZvciBkZW1vbnN0cmF0aW9uXG5cbiMgRGVtb25zdHJhdGUgdGhlIHRyYXBlem9pZCBtZXRob2QgdmlzdWFsbHlcbnhfZGVtbyA9IG5wLmxpbnNwYWNlKDAsIDEsIDYpXG55X2RlbW8gPSBmX2RlbW8oeF9kZW1vKVxuXG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTUsIDgpKVxuIyBQbG90IHRoZSBhY3R1YWwgZnVuY3Rpb25cbnhfZmluZSA9IG5wLmxpbnNwYWNlKDAsIDEsIDEwMDApXG55X2ZpbmUgPSBmX2RlbW8oeF9maW5lKVxucGx0LnBsb3QoeF9maW5lLCB5X2ZpbmUsICdiLScsIGxhYmVsPSdhY3R1YWwgZnVuY3Rpb24gZih4KSA9IHjCsicpXG5cbiMgUGxvdCB0aGUgdHJhcGV6b2lkc1xuZm9yIGkgaW4gcmFuZ2UobGVuKHhfZGVtbyktMSk6XG4gICAgcGx0LmZpbGxfYmV0d2VlbihbeF9kZW1vW2ldLCB4X2RlbW9baSsxXV0sXG4gICAgICAgICAgICAgICAgICAgIFt5X2RlbW9baV0sIHlfZGVtb1tpKzFdXSxcbiAgICAgICAgICAgICAgICAgICAgYWxwaGE9MC4zLCBjb2xvcj0nZ3JlZW4nKVxuICAgIHBsdC5wbG90KFt4X2RlbW9baV0sIHhfZGVtb1tpKzFdXSwgW3lfZGVtb1tpXSwgeV9kZW1vW2krMV1dLCAnZy0nKVxuXG5wbHQucGxvdCh4X2RlbW8sIHlfZGVtbywgJ2dvJywgbGFiZWw9J3NhbXBsZSBwb2ludHMnKVxucGx0LnhsYWJlbCgneCcpXG5wbHQueWxhYmVsKCdmKHgpJylcbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LmxlZ2VuZCgpXG5wbHQuc2hvdygpIn0=
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InNvbCA9IHNvbHZlX2l2cChzcHJpbmdfcGVuZHVsdW0sIFt0aW1lWzBdLCB0aW1lWy0xXV0sIHN0YXRlLCB0X2V2YWw9dGltZSwgbWV0aG9kPSdSSzQ1JykifQ==
 </script>
 </div>
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>The solution object contains several attributes. The most important for us is <code>sol.y</code>, which is a 2D array with shape (4, N) where the rows correspond to: 1. The length of the spring (L) 2. The velocity of the spring (dL/dt) 3. The angle of the pendulum (θ) 4. The angular velocity of the pendulum (dθ/dt)</p>
 <div>
 <div id="pyodide-5">
 
 </div>
 <script type="pyodide-5-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiXG4jIENvbnZlcmdlbmNlIGRlbW9uc3RyYXRpb25cbk5fdmFsdWVzID0gbnAuYXJhbmdlKDEwLCAxMDAwLCAxMClcbnRyYXBfcmVzdWx0cyA9IFtpbnRfdHJhcChmX2RlbW8sIDAsIDEsIE4pIGZvciBOIGluIE5fdmFsdWVzXVxuZXhhY3RfdmFsdWUgPSAxLzMgICMgRXhhY3QgaW50ZWdyYWwgb2YgeMKyIGZyb20gMCB0byAxXG5cbiMgQ2FsY3VsYXRlIGFic29sdXRlIGVycm9yc1xudHJhcF9lcnJvcnMgPSBucC5hYnMobnAuYXJyYXkodHJhcF9yZXN1bHRzKSAtIGV4YWN0X3ZhbHVlKVxuXG4jIEZpdCBhIHBvd2VyIGxhdyB0byBlcnJvciB2cyBOXG5kZWYgcG93ZXJfbGF3KHgsIGEsIGIpOlxuICAgIHJldHVybiBhICogeCoqYlxuXG5wb3B0LCBfID0gY3VydmVfZml0KHBvd2VyX2xhdywgTl92YWx1ZXMsIHRyYXBfZXJyb3JzKVxuXG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTIsIDEwKSlcbnBsdC5sb2dsb2coTl92YWx1ZXMsIHRyYXBfZXJyb3JzLCAnbycsIGxhYmVsPSd0cmFwZXpvaWQgbWV0aG9kIGVycm9yJylcbnBsdC5sb2dsb2coTl92YWx1ZXMsIHBvd2VyX2xhdyhOX3ZhbHVlcywgKnBvcHQpLCAnLS0nLFxuICAgICAgICAgbGFiZWw9Zidwb3dlciBsYXcgZml0OiBlcnJvciDiiJ0gTl57cG9wdFsxXTouMmZ9JylcbnBsdC54bGFiZWwoJ251bWJlciBvZiBwb2ludHMgW05dJylcbnBsdC55bGFiZWwoJ2Fic29sdXRlIGVycm9yJylcbnBsdC5sZWdlbmQoKVxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpXG5cbnByaW50KGZcIlRyYXBlem9pZCBNZXRob2QgY29udmVyZ2VuY2UgcmF0ZTogYXBwcm94aW1hdGVseSBPKE5ee3BvcHRbMV06LjJmfSlcIikifQ==
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InNvbC55LnNoYXBlIn0=
 </script>
 </div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="simpsons-method" class="level3">
-<h3 class="anchored" data-anchor-id="simpsons-method">Simpson’s Method</h3>
-<section id="theory-and-implementation-2" class="level4">
-<h4 class="anchored" data-anchor-id="theory-and-implementation-2">Theory and Implementation</h4>
-<div id="fig-simp" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-simp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="img/simpson.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-simp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Simpson’s Method Illustration
-</figcaption>
-</figure>
-</div>
-<p>Simpson’s method represents a significant improvement in accuracy over the previous methods by approximating the function with parabolic segments rather than straight lines. This approach is particularly effective for functions with curvature, which are ubiquitous in physics problems.</p>
-<p>The mathematical formulation of Simpson’s rule is:</p>
-<p><span class="math display">\[\begin{equation}
-\int_{a}^{b} f(x) dx \approx \frac{\Delta x}{3} \sum_{i=0}^{(N-1)/2} \left(f(x_{2i}) + 4f(x_{2i+1}) + f(x_{2i+2})\right)
-\end{equation}\]</span></p>
-<p>Where: - <span class="math inline">\(N\)</span> is the number of intervals (must be even) - <span class="math inline">\(\Delta x = \frac{b-a}{N}\)</span> is the width of each interval</p>
-<p>Simpson’s rule is derived from fitting a quadratic polynomial through every three consecutive points and then integrating these polynomials.</p>
-</section>
-<section id="simpsons-nethod-applications" class="level4">
-<h4 class="anchored">Simpson’s Nethod Applications</h4>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">Physics Application: Quantum Mechanical Probability</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">Convergence Analysis</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<p>A fundamental application in quantum mechanics involves calculating the probability of finding a particle in a region of space. For a wavefunction <span class="math inline">\(\psi(x)\)</span>, the probability of finding the particle between positions <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> is:</p>
-<p><span class="math display">\[\begin{equation}
-P(a \leq x \leq b) = \int_{a}^{b} |\psi(x)|^2 dx
-\end{equation}\]</span></p>
-<p>Simpson’s method provides high accuracy for these calculations, especially important when dealing with oscillatory wavefunctions.</p>
+<p>We can convert the solution to the x and y positions of the mass. This is done by the following code. As the length <span class="math inline">\(L\)</span> is only the elongation of the spring, we have to add the equilibrium length <span class="math inline">\(L_0\)</span> to get the total length of the spring. The x and y positions are then given by <span class="math inline">\(L\sin(\theta)\)</span> and <span class="math inline">\(L\cos(\theta)\)</span>.</p>
 <div>
 <div id="pyodide-6">
 
 </div>
 <script type="pyodide-6-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGludF9zaW1wKGYsIGEsIGIsIE4pOlxuICAgIFwiXCJcIlNpbXBzb24ncyBtZXRob2QgaW50ZWdyYXRpb25cIlwiXCJcbiAgICBpZiBOICUgMiA9PSAwOlxuICAgICAgICBOID0gTiArIDEgICMgRW5zdXJlIE4gaXMgb2RkIGZvciBTaW1wc29uJ3MgcnVsZVxuXG4gICAgaWYgTiA8IDM6XG4gICAgICAgIHJhaXNlIFZhbHVlRXJyb3IoXCJOIG11c3QgYmUgYXQgbGVhc3QgMyBmb3IgU2ltcHNvbidzIG1ldGhvZFwiKVxuXG4gICAgeCA9IG5wLmxpbnNwYWNlKGEsIGIsIE4pXG4gICAgeSA9IGYoeClcbiAgICBkeCA9IChiLWEpLyhOLTEpXG5cbiAgICAjIEFwcGx5IFNpbXBzb24ncyBmb3JtdWxhXG4gICAgcmV0dXJuIGR4LzMgKiBucC5zdW0oeVswOi0yOjJdICsgNCp5WzE6LTE6Ml0gKyB5WzI6OjJdKVxuXG4jIERlbW9uc3RyYXRlIFNpbXBzb24ncyBtZXRob2Qgd2l0aCBhIHNpbXBsZSBleGFtcGxlXG5kZWYgZl9kZW1vKHgpOlxuICAgIFwiXCJcIkV4YW1wbGUgZnVuY3Rpb246IHNpbih4KVwiXCJcIlxuICAgIHJldHVybiBucC5zaW4oeClcblxuIyBWaXN1YWxpemUgU2ltcHNvbidzIG1ldGhvZCB3aXRoIGEgZmV3IHNlZ21lbnRzXG54X2RlbW8gPSBucC5saW5zcGFjZSgwLCBucC5waSwgNykgICMgNiBpbnRlcnZhbHNcbnlfZGVtbyA9IGZfZGVtbyh4X2RlbW8pXG5cbnBsdC5maWd1cmUoZmlnc2l6ZT1nZXRfc2l6ZSgxNSwgOCkpXG4jIFBsb3QgdGhlIGFjdHVhbCBmdW5jdGlvblxueF9maW5lID0gbnAubGluc3BhY2UoMCwgbnAucGksIDEwMDApXG55X2ZpbmUgPSBmX2RlbW8oeF9maW5lKVxucGx0LnBsb3QoeF9maW5lLCB5X2ZpbmUsICdiLScsIGxhYmVsPSdmKHgpID0gc2luKHgpJylcblxuIyBQbG90IHRoZSBwYXJhYm9saWMgc2VnbWVudHNcbmZvciBpIGluIHJhbmdlKDAsIGxlbih4X2RlbW8pLTIsIDIpOlxuICAgIHhfc2VnbWVudCA9IG5wLmxpbnNwYWNlKHhfZGVtb1tpXSwgeF9kZW1vW2krMl0sIDUwKVxuXG4gICAgIyBGaXQgYSBxdWFkcmF0aWMgcG9seW5vbWlhbCB0aHJvdWdoIHRocmVlIHBvaW50c1xuICAgIHhfcG9pbnRzID0geF9kZW1vW2k6aSszXVxuICAgIHlfcG9pbnRzID0geV9kZW1vW2k6aSszXVxuICAgIGNvZWZmcyA9IG5wLnBvbHlmaXQoeF9wb2ludHMsIHlfcG9pbnRzLCAyKVxuICAgIHlfZml0ID0gbnAucG9seXZhbChjb2VmZnMsIHhfc2VnbWVudClcblxuICAgIHBsdC5wbG90KHhfc2VnbWVudCwgeV9maXQsICdyLScsIGFscGhhPTAuNylcbiAgICBwbHQuZmlsbF9iZXR3ZWVuKHhfc2VnbWVudCwgMCwgeV9maXQsIGFscGhhPTAuMiwgY29sb3I9J3B1cnBsZScpXG5cbnBsdC5wbG90KHhfZGVtbywgeV9kZW1vLCAnZ28nLCBsYWJlbD0nU2FtcGxlIHBvaW50cycpXG5wbHQueGxhYmVsKCd4JylcbnBsdC55bGFiZWwoJ2YoeCknKVxucGx0LnRpdGxlKFwiU2ltcHNvbidzIE1ldGhvZCBWaXN1YWxpemF0aW9uXCIpXG5wbHQuZ3JpZChUcnVlKVxucGx0LmxlZ2VuZCgpXG5wbHQuc2hvdygpIn0=
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IlxueGRhdGEgPSAoTF9vICsgc29sLnlbMCw6XSkqbnAuc2luKHNvbC55WzIsOl0pXG55ZGF0YSA9IC0oTF9vICsgc29sLnlbMCw6XSkqbnAuY29zKHNvbC55WzIsOl0pIn0=
 </script>
 </div>
-</div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+</section>
+<section id="plotting" class="level3">
+<h3 class="anchored" data-anchor-id="plotting">Plotting</h3>
+<p>Let’s visualize the motion of our spring pendulum system from several perspectives to gain deeper insights into its dynamics.</p>
+<section id="trajectory-in-real-space" class="level4">
+<h4 class="anchored" data-anchor-id="trajectory-in-real-space">Trajectory in Real Space</h4>
+<p>The first plot shows the physical trajectory of the mass in the x-y plane. This represents the actual path the mass would trace in space as viewed from the side.</p>
 <div>
 <div id="pyodide-7">
 
 </div>
 <script type="pyodide-7-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBDb252ZXJnZW5jZSBkZW1vbnN0cmF0aW9uIHdpdGggYSBzaW1wbGUgdGVzdCBmdW5jdGlvblxuZl90ZXN0ID0gbGFtYmRhIHg6IHgqKjQgICMgV2UgY2FuIGludGVncmF0ZSB44oG0IGV4YWN0bHlcbmV4YWN0X3ZhbHVlID0gMS81ICAjIEV4YWN0IGludGVncmFsIG9mIHjigbQgZnJvbSAwIHRvIDFcblxuIyBDb21wYXJlIGFjY3VyYWN5IHdpdGggZGlmZmVyZW50IG51bWJlcnMgb2YgcG9pbnRzXG5OX3ZhbHVlcyA9IG5wLmFyYW5nZSgzLCAxMDEsIDIpICAjIE9kZCBudW1iZXJzIGZvciBTaW1wc29uJ3MgcnVsZVxuc2ltcF9lcnJvcnMgPSBbYWJzKGludF9zaW1wKGZfdGVzdCwgMCwgMSwgbikgLSBleGFjdF92YWx1ZSkgZm9yIG4gaW4gTl92YWx1ZXNdXG5cbiMgRml0IGEgcG93ZXIgbGF3IHRvIGVycm9yIHZzIE5cbnBvcHQsIF8gPSBjdXJ2ZV9maXQocG93ZXJfbGF3LCBOX3ZhbHVlcywgc2ltcF9lcnJvcnMpXG5cbnBsdC5maWd1cmUoZmlnc2l6ZT1nZXRfc2l6ZSgxMiwgMTApKVxucGx0LmxvZ2xvZyhOX3ZhbHVlcywgc2ltcF9lcnJvcnMsICdvJywgbGFiZWw9XCJTaW1wc29uJ3MgbWV0aG9kIGVycm9yXCIpXG5wbHQubG9nbG9nKE5fdmFsdWVzLCBwb3dlcl9sYXcoTl92YWx1ZXMsICpwb3B0KSwgJy0tJyxcbiAgICAgICAgIGxhYmVsPWYnUG93ZXIgbGF3IGZpdDogZXJyb3Ig4oidIE5ee3BvcHRbMV06LjJmfScpXG5wbHQueGxhYmVsKCdudW1iZXIgb2YgcG9pbnRzIFtOXScpXG5wbHQueWxhYmVsKCdhYnNvbHV0ZSBlcnJvcicpXG5wbHQubGVnZW5kKClcbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LnNob3coKVxuXG5wcmludChmXCJTaW1wc29uJ3MgTWV0aG9kIGNvbnZlcmdlbmNlIHJhdGU6IGFwcHJveGltYXRlbHkgTyhOXntwb3B0WzFdOi4yZn0pXCIpIn0=
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJmaWctYWxpZ24iOiJjZW50ZXIifSwiY29kZSI6IlxuZmlnPXBsdC5maWd1cmUoMSwgZmlnc2l6ZSA9IGdldF9zaXplKDEwLDEwKSApXG5wbHQucGxvdCh4ZGF0YSx5ZGF0YSwgJ3ItJylcbnBsdC54bGFiZWwoJ0hvcml6b250YWwgcG9zaXRpb24nKVxucGx0LnlsYWJlbCgnVmVydGljYWwgcG9zaXRpb24nKVxucGx0LnlsaW0oeWRhdGEubWluKCksMClcbiNwbHQueGxpbSh5ZGF0YS5taW4oKSwteWRhdGEubWluKCkpXG5wbHQudGlnaHRfbGF5b3V0KClcbnBsdC5zaG93KCkifQ==
 </script>
 </div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Simpson’s Rule for Numerical Integration
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Simpson’s Rule is a method for numerical integration that approximates the definite integral of a function by using quadratic polynomials.</p>
-<ol type="1">
-<li><p>For an integral <span class="math inline">\(\int_a^b f(x)dx\)</span>, Simpson’s Rule fits a quadratic function through three points:</p>
-<ul>
-<li><span class="math inline">\(f(a)\)</span></li>
-<li><span class="math inline">\(f(\frac{a+b}{2})\)</span></li>
-<li><span class="math inline">\(f(b)\)</span></li>
-</ul></li>
-<li><p>Let’s define:</p>
-<ul>
-<li><span class="math inline">\(h = \frac{b-a}{2}\)</span></li>
-<li><span class="math inline">\(x_0 = a\)</span></li>
-<li><span class="math inline">\(x_1 = \frac{a+b}{2}\)</span></li>
-<li><span class="math inline">\(x_2 = b\)</span></li>
-</ul></li>
-<li><p>The quadratic approximation has the form: <span class="math display">\[P(x) = Ax^2 + Bx + C\]</span></p></li>
-<li><p>This polynomial must satisfy: <span class="math display">\[f(x_0) = Ax_0^2 + Bx_0 + C\]</span> <span class="math display">\[f(x_1) = Ax_1^2 + Bx_1 + C\]</span> <span class="math display">\[f(x_2) = Ax_2^2 + Bx_2 + C\]</span></p></li>
-<li><p>Using Lagrange interpolation: <span class="math display">\[P(x) = f(x_0)L_0(x) + f(x_1)L_1(x) + f(x_2)L_2(x)\]</span></p>
-<p>where <span class="math inline">\(L_0\)</span>, <span class="math inline">\(L_1\)</span>, <span class="math inline">\(L_2\)</span> are the Lagrange basis functions.</p></li>
-</ol>
-<section id="final-formula" class="level4">
-<h4 class="anchored" data-anchor-id="final-formula">Final Formula</h4>
-<p>The integration of this polynomial leads to Simpson’s Rule:</p>
-<p><span class="math display">\[\int_a^b f(x)dx \approx \frac{h}{3}[f(a) + 4f(\frac{a+b}{2}) + f(b)]\]</span></p>
 </section>
-<section id="error-term" class="level3">
-<h3 class="anchored" data-anchor-id="error-term">Error Term</h3>
-<p>The error in Simpson’s Rule is proportional to:</p>
-<p><span class="math display">\[-\frac{h^5}{90}f^{(4)}(\xi)\]</span></p>
-<p>for some <span class="math inline">\(\xi \in [a,b]\)</span></p>
-<section id="composite-simpsons-rule" class="level4">
-<h4 class="anchored" data-anchor-id="composite-simpsons-rule">Composite Simpson’s Rule</h4>
-<p>For better accuracy, we can divide the interval into <span class="math inline">\(n\)</span> subintervals (where <span class="math inline">\(n\)</span> is even):</p>
-<p><span class="math display">\[\int_a^b f(x)dx \approx \frac{h}{3}[f(x_0) + 4\sum_{i=1}^{n/2}f(x_{2i-1}) + 2\sum_{i=1}^{n/2-1}f(x_{2i}) + f(x_n)]\]</span></p>
-<p>where <span class="math inline">\(h = \frac{b-a}{n}\)</span></p>
-<p>The method is particularly effective for integrating functions that can be well-approximated by quadratic polynomials over small intervals.</p>
+<section id="understanding-phase-space" class="level4">
+<h4 class="anchored" data-anchor-id="understanding-phase-space">Understanding Phase Space</h4>
+<p>The next plots are what physicists call “phase space” representations. Phase space is a powerful concept in mechanics where we plot a position variable against its corresponding velocity variable. Unlike the real space trajectory, phase space reveals the system’s dynamics in a more fundamental way.</p>
+<p>In phase space: - Each point represents both the position and velocity of the system at a given time - Closed curves typically indicate periodic motion - The shape and size of the curves relate to the energy of the system - The conservation of energy often constrains the system to move along specific paths in phase space</p>
 </section>
-</section>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="when-to-use-each-method" class="level3">
-<h3 class="anchored" data-anchor-id="when-to-use-each-method">When to Use Each Method</h3>
-<p>Choosing the appropriate numerical integration method for a physics problem requires consideration of several factors:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 10%">
-<col style="width: 15%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 40%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Method</th>
-<th>Error Order</th>
-<th>Optimal For</th>
-<th>Limitations</th>
-<th>Example Physics Applications</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Box</strong></td>
-<td><span class="math inline">\(O(N^{-1})\)</span></td>
-<td>- Simple, rapid calculations<br>- Step functions<br>- Real-time processing<br>- Discontinuous functions</td>
-<td>- Low accuracy<br>- Requires many points for decent results</td>
-<td>- Basic data analysis<br>- Signals with sharp transitions<br>- First approximations in mechanics</td>
-</tr>
-<tr class="even">
-<td><strong>Trapezoid</strong></td>
-<td><span class="math inline">\(O(N^{-2})\)</span></td>
-<td>- Smooth, continuous functions<br>- Moderate accuracy requirements<br>- Periodic functions</td>
-<td>- Struggles with sharp peaks<br>- Not ideal for higher derivatives</td>
-<td>- Electric and magnetic fields<br>- Orbital mechanics<br>- Path integrals<br>- Work/energy calculations</td>
-</tr>
-<tr class="odd">
-<td><strong>Simpson</strong></td>
-<td><span class="math inline">\(O(N^{-4})\)</span></td>
-<td>- Functions with significant curvature<br>- High precision requirements<br>- Oscillatory integrands</td>
-<td>- More computationally intensive<br>- Requires evenly spaced points</td>
-<td>- Quantum mechanical probabilities<br>- Wave optics<br>- Statistical mechanics<br>- Thermal physics</td>
-</tr>
-</tbody>
-</table>
-<section id="additional-considerations" class="level4">
-<h4 class="anchored" data-anchor-id="additional-considerations">Additional Considerations</h4>
-<ul>
-<li><strong>Adaptive methods</strong> can be more efficient when dealing with functions that have varying behavior across the integration range</li>
-<li><strong>Improper integrals</strong> (with infinite limits or singularities) often require specialized techniques beyond these basic methods</li>
-<li><strong>Higher-dimensional</strong> integration problems (common in statistical and quantum mechanics) may benefit from Monte Carlo methods rather than these quadrature rules</li>
-</ul>
-</section>
-</section>
-</section>
-<section id="error-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="error-analysis">Error Analysis</h2>
-<p>The error behavior of numerical integration methods is crucial for understanding their applicability to physics problems:</p>
-<ul>
-<li><strong>Box Method</strong>: Error <span class="math inline">\(\propto\)</span> <span class="math inline">\(O(\Delta x)\)</span> = <span class="math inline">\(O(N^{-1})\)</span> (linear convergence)
-<ul>
-<li>The error is proportional to the step size</li>
-<li>The dominant error term comes from the first derivative of the function</li>
-</ul></li>
-<li><strong>Trapezoid Method</strong>: Error <span class="math inline">\(\propto\)</span> <span class="math inline">\(O(\Delta x^2)\)</span> = <span class="math inline">\(O(N^{-2})\)</span> (quadratic convergence)
-<ul>
-<li>The error is proportional to the square of the step size</li>
-<li>The dominant error term involves the second derivative of the function</li>
-</ul></li>
-<li><strong>Simpson’s Method</strong>: Error <span class="math inline">\(\propto\)</span> <span class="math inline">\(O(\Delta x^4)\)</span> = <span class="math inline">\(O(N^{-4})\)</span> (fourth-order convergence)
-<ul>
-<li>The error is proportional to the fourth power of the step size</li>
-<li>The dominant error term involves the fourth derivative of the function</li>
-</ul></li>
-</ul>
-<p>Consequently, if we double the number of points:</p>
-<ul>
-<li>Box method: error reduced by a factor of 2</li>
-<li>Trapezoid method: error reduced by a factor of 4</li>
-<li>Simpson’s method: error reduced by a factor of 16</li>
-</ul>
-<p>The practical impact of these convergence rates is substantial. For example, to achieve an error of <span class="math inline">\(10^{-6}\)</span> for a well-behaved function:</p>
-<ul>
-<li>Box method might require millions of points</li>
-<li>Trapezoid method might require thousands of points</li>
-<li>Simpson’s method might require only hundreds of points</li>
-</ul>
-<p>This explains why higher-order methods are generally preferred for physics applications requiring high precision, such as quantum mechanical calculations, gravitational wave analysis, or computational fluid dynamics.</p>
-<section id="conclusion" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>Numerical integration stands as a cornerstone of computational physics, bridging the gap between theoretical models and practical analysis of real-world systems. In this lecture, we’ve explored three fundamental methods—Box, Trapezoid, and Simpson’s method—that provide different balances of simplicity, accuracy, and computational efficiency.</p>
-<p>The key insights from our study include:</p>
-<ol type="1">
-<li><p><strong>Method selection matters</strong>: The choice of integration technique can dramatically impact both accuracy and computational efficiency. For typical physics applications requiring high precision, Simpson’s method often provides the optimal balance of accuracy and computation cost.</p></li>
-<li><p><strong>Error scaling</strong>: Understanding how errors scale with the number of sampling points is crucial for reliable scientific computation. The higher-order convergence of Simpson’s method (<span class="math inline">\(O(N^{-4})\)</span>) makes it particularly valuable for precision-critical applications in physics.</p></li>
-<li><p><strong>Physical context</strong>: The nature of the underlying physical system should guide your choice of numerical method. Smoothly varying functions benefit from higher-order methods, while functions with discontinuities may require adaptive or specialized approaches.</p></li>
-<li><p><strong>Verification</strong>: Always verify numerical results against analytical solutions when possible, or compare results from different numerical methods with increasing resolution to establish confidence in your calculations.</p></li>
-</ol>
-<p>As you progress in your physics education, these numerical integration techniques will become essential tools in your computational toolkit, enabling you to tackle increasingly complex physical systems from quantum mechanics to astrophysics, fluid dynamics, and beyond.</p>
-<p>In advanced courses, you’ll explore additional techniques such as Gaussian quadrature, Romberg integration, and specialized methods for oscillatory, singular, or multi-dimensional integrals—each designed to address specific challenges encountered in modern physics.</p>
-<p>Remember that numerical integration is not merely a computational technique but a powerful approach to understanding physical systems that resist analytical treatment, making it an indispensable skill for the modern physicist.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Advanced Topics in Numerical Integration
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<section id="adaptive-integration-methods" class="level3">
-<h3 class="anchored" data-anchor-id="adaptive-integration-methods">Adaptive Integration Methods</h3>
-<p>The methods we’ve discussed so far use equal spacing between sampling points. However, most real-world physics problems involve functions that vary dramatically across the integration range. Adaptive methods adjust the point distribution to concentrate more points where the function changes rapidly.</p>
+<section id="spring-phase-space" class="level4">
+<h4 class="anchored" data-anchor-id="spring-phase-space">Spring Phase Space</h4>
+<p>This plot shows the spring’s extension L versus its rate of change dL/dt (velocity).</p>
 <div>
 <div id="pyodide-8">
 
 </div>
 <script type="pyodide-8-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiIyBTaW1wbGUgZGVtb25zdHJhdGlvbiBvZiBhZGFwdGl2ZSBpbnRlZ3JhdGlvbiBjb25jZXB0XG5kZWYgYWRhcHRpdmVfZGVtbyhmLCBhLCBiLCB0b2w9MWUtNSwgbWF4X2RlcHRoPTEwKTpcbiAgICBcIlwiXCJTaW1wbGUgZGVtb25zdHJhdGlvbiBvZiBhZGFwdGl2ZSBpbnRlZ3JhdGlvbiBjb25jZXB0XCJcIlwiXG4gICAgZGVmIHJlY3Vyc2l2ZV9pbnRlZ3JhdGUoYSwgYiwgZGVwdGg9MCk6XG4gICAgICAgICMgQ29tcHV0ZSBtaWRwb2ludFxuICAgICAgICBjID0gKGEgKyBiKSAvIDJcblxuICAgICAgICAjIEVzdGltYXRlIGludGVncmFsIHVzaW5nIFNpbXBzb24ncyBydWxlIG9uIGVudGlyZSBpbnRlcnZhbFxuICAgICAgICBJX3dob2xlID0gKGItYSkvNiAqIChmKGEpICsgNCpmKGMpICsgZihiKSlcblxuICAgICAgICAjIEVzdGltYXRlIGludGVncmFsIHVzaW5nIFNpbXBzb24ncyBydWxlIG9uIGVhY2ggaGFsZlxuICAgICAgICBtaWQxID0gKGEgKyBjKSAvIDJcbiAgICAgICAgbWlkMiA9IChjICsgYikgLyAyXG4gICAgICAgIElfbGVmdCA9IChjLWEpLzYgKiAoZihhKSArIDQqZihtaWQxKSArIGYoYykpXG4gICAgICAgIElfcmlnaHQgPSAoYi1jKS82ICogKGYoYykgKyA0KmYobWlkMikgKyBmKGIpKVxuICAgICAgICBJX3BhcnRzID0gSV9sZWZ0ICsgSV9yaWdodFxuXG4gICAgICAgICMgQ2hlY2sgZXJyb3JcbiAgICAgICAgZXJyb3IgPSBhYnMoSV93aG9sZSAtIElfcGFydHMpXG5cbiAgICAgICAgIyBJZiBlcnJvciBpcyBzbWFsbCBlbm91Z2ggb3IgbWF4IGRlcHRoIHJlYWNoZWQsIHJldHVybiByZXN1bHRcbiAgICAgICAgaWYgZXJyb3IgPCB0b2wqKGItYSkgb3IgZGVwdGggPj0gbWF4X2RlcHRoOlxuICAgICAgICAgICAgcmV0dXJuIElfcGFydHMsIFsoYSwgYywgYiwgZXJyb3IpXVxuXG4gICAgICAgICMgT3RoZXJ3aXNlLCByZWN1cnNpdmVseSBpbnRlZ3JhdGUgZWFjaCBoYWxmXG4gICAgICAgIElfbGVmdF9yZXN1bHQsIGxlZnRfcmVnaW9ucyA9IHJlY3Vyc2l2ZV9pbnRlZ3JhdGUoYSwgYywgZGVwdGgrMSlcbiAgICAgICAgSV9yaWdodF9yZXN1bHQsIHJpZ2h0X3JlZ2lvbnMgPSByZWN1cnNpdmVfaW50ZWdyYXRlKGMsIGIsIGRlcHRoKzEpXG5cbiAgICAgICAgcmV0dXJuIElfbGVmdF9yZXN1bHQgKyBJX3JpZ2h0X3Jlc3VsdCwgbGVmdF9yZWdpb25zICsgcmlnaHRfcmVnaW9uc1xuXG4gICAgaW50ZWdyYWwsIHJlZ2lvbnMgPSByZWN1cnNpdmVfaW50ZWdyYXRlKGEsIGIpXG4gICAgcmV0dXJuIGludGVncmFsLCByZWdpb25zXG5cbiMgRGVmaW5lIGEgY2hhbGxlbmdpbmcgZnVuY3Rpb24gd2l0aCBhIHNoYXJwIHBlYWtcbmRlZiBjaGFsbGVuZ2luZ19mdW5jKHgpOlxuICAgIFwiXCJcIkZ1bmN0aW9uIHdpdGggYSBzaGFycCBwZWFrIGF0IHg9MC43XCJcIlwiXG4gICAgcmV0dXJuIDEgLyAoMC4wMSArICh4IC0gMC43KSoqMilcblxuIyBDYWxjdWxhdGUgaW50ZWdyYWwgdXNpbmcgYWRhcHRpdmUgYW5kIG5vbi1hZGFwdGl2ZSBtZXRob2RzXG5hLCBiID0gMCwgMVxubl9wb2ludHMgPSAxMDEgICMgVXNlIGEgZml4ZWQgbnVtYmVyIG9mIHBvaW50cyBmb3Igbm9uLWFkYXB0aXZlIG1ldGhvZHNcblxuIyBDYWxjdWxhdGUgdXNpbmcgbm9uLWFkYXB0aXZlIG1ldGhvZHNcbmJveF9yZXN1bHQgPSBpbnRfYm94KGNoYWxsZW5naW5nX2Z1bmMsIGEsIGIsIG5fcG9pbnRzKVxudHJhcF9yZXN1bHQgPSBpbnRfdHJhcChjaGFsbGVuZ2luZ19mdW5jLCBhLCBiLCBuX3BvaW50cylcbnNpbXBfcmVzdWx0ID0gaW50X3NpbXAoY2hhbGxlbmdpbmdfZnVuYywgYSwgYiwgbl9wb2ludHMpXG5cbiMgQ2FsY3VsYXRlIHVzaW5nIGFkYXB0aXZlIG1ldGhvZFxuYWRhcHRpdmVfcmVzdWx0LCByZWdpb25zID0gYWRhcHRpdmVfZGVtbyhjaGFsbGVuZ2luZ19mdW5jLCBhLCBiKVxuXG4jIENhbGN1bGF0ZSBhIHJlZmVyZW5jZSBzb2x1dGlvbiB1c2luZyBhIHZlcnkgaGlnaCBudW1iZXIgb2YgcG9pbnRzXG5yZWZlcmVuY2UgPSBpbnRfc2ltcChjaGFsbGVuZ2luZ19mdW5jLCBhLCBiLCAxMDAwMSlcblxuIyBWaXN1YWxpemUgdGhlIGZ1bmN0aW9uIGFuZCBpbnRlZ3JhdGlvbiBwb2ludHNcbnhfZmluZSA9IG5wLmxpbnNwYWNlKGEsIGIsIDEwMDApXG55X2ZpbmUgPSBbY2hhbGxlbmdpbmdfZnVuYyh4KSBmb3IgeCBpbiB4X2ZpbmVdXG5cbnBsdC5maWd1cmUoZmlnc2l6ZT1nZXRfc2l6ZSgxNSwgMTApKVxuXG4jIFBsb3QgdGhlIGZ1bmN0aW9uXG5wbHQucGxvdCh4X2ZpbmUsIHlfZmluZSwgJ2stJywgbGFiZWw9J2YoeCknKVxuXG4jIFBsb3QgdGhlIGFkYXB0aXZlIGludGVncmF0aW9uIHJlZ2lvbnNcbmZvciByZWdpb24gaW4gcmVnaW9uczpcbiAgICBhX3IsIG1fciwgYl9yLCBlcnJvciA9IHJlZ2lvblxuICAgIHBsdC5wbG90KFthX3IsIG1fciwgYl9yXSwgW2NoYWxsZW5naW5nX2Z1bmMoYV9yKSwgY2hhbGxlbmdpbmdfZnVuYyhtX3IpLCBjaGFsbGVuZ2luZ19mdW5jKGJfcildLFxuICAgICAgICAgICAgICdyby0nLCBhbHBoYT0wLjUpXG5cbnBsdC54bGFiZWwoJ3gnKVxucGx0LnlsYWJlbCgnZih4KScpXG5cblxuIyBBZGp1c3QgeS1heGlzIHRvIHNob3cgdGhlIGZ1bmN0aW9uJ3MgYmVoYXZpb3IgbW9yZSBjbGVhcmx5XG5wbHQueWxpbSgwLCA0MClcblxucGx0LmxlZ2VuZCgpXG5wbHQuc2hvdygpXG5cbiMgU2hvdyByZXN1bHRzXG5wcmludChcIlJlc3VsdHMgZm9yIGludGVncmF0aW5nIGEgZnVuY3Rpb24gd2l0aCBhIHNoYXJwIHBlYWs6XCIpXG5wcmludChmXCJCb3ggTWV0aG9kIChuPXtuX3BvaW50c30pOiB7Ym94X3Jlc3VsdDouOGZ9LCBFcnJvcjoge2Ficyhib3hfcmVzdWx0LXJlZmVyZW5jZSk6LjhmfVwiKVxucHJpbnQoZlwiVHJhcGV6b2lkIE1ldGhvZCAobj17bl9wb2ludHN9KToge3RyYXBfcmVzdWx0Oi44Zn0sIEVycm9yOiB7YWJzKHRyYXBfcmVzdWx0LXJlZmVyZW5jZSk6LjhmfVwiKVxucHJpbnQoZlwiU2ltcHNvbidzIE1ldGhvZCAobj17bl9wb2ludHN9KToge3NpbXBfcmVzdWx0Oi44Zn0sIEVycm9yOiB7YWJzKHNpbXBfcmVzdWx0LXJlZmVyZW5jZSk6LjhmfVwiKVxucHJpbnQoZlwiQWRhcHRpdmUgTWV0aG9kOiB7YWRhcHRpdmVfcmVzdWx0Oi44Zn0sIEVycm9yOiB7YWJzKGFkYXB0aXZlX3Jlc3VsdC1yZWZlcmVuY2UpOi44Zn1cIilcbnByaW50KGZcIlJlZmVyZW5jZSB2YWx1ZToge3JlZmVyZW5jZTouOGZ9XCIpXG5wcmludChmXCJOdW1iZXIgb2YgYWRhcHRpdmUgcmVnaW9uczoge2xlbihyZWdpb25zKX1cIikifQ==
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJmaWctYWxpZ24iOiJjZW50ZXIifSwiY29kZSI6IlxuZmlnPXBsdC5maWd1cmUoMSwgZmlnc2l6ZSA9IGdldF9zaXplKDEwLDEwKSApXG5wbHQucGxvdChzb2wueVswLDpdLCBzb2wueVsxLDpdKVxucGx0LnhsYWJlbCgnJEwkIChzcHJpbmcgZXh0ZW5zaW9uKScpXG5wbHQueWxhYmVsKCckXFxkb3R7TH0kIChleHRlbnNpb24gdmVsb2NpdHkpJylcbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LnNob3coKSJ9
 </script>
 </div>
+<p>For a simple harmonic oscillator (like a spring with no pendulum), this would produce a perfect ellipse. Deviations from an elliptical shape indicate coupling with the pendulum motion. The area enclosed by the curve is proportional to the energy stored in the spring motion.</p>
 </section>
-<section id="multi-dimensional-integration" class="level3">
-<h3 class="anchored" data-anchor-id="multi-dimensional-integration">Multi-dimensional Integration</h3>
-<p>Many physics problems require integration over multiple dimensions, such as calculating mass moments of inertia, electric fields from volume charge distributions, or statistical mechanics partition functions.</p>
-<p>For 2D integration, we can extend our 1D methods using the concept of iterated integrals:</p>
-<p><span class="math display">\[\begin{equation}
-\int_{a}^{b}\int_{c}^{d} f(x,y) dy dx \approx \sum_{i=1}^{N_x} \sum_{j=1}^{N_y} w_i w_j f(x_i, y_j)
-\end{equation}\]</span></p>
-<p>Where <span class="math inline">\(w_i\)</span> and <span class="math inline">\(w_j\)</span> are the weights for the respective 1D methods.</p>
+<section id="pendulum-phase-space" class="level4">
+<h4 class="anchored" data-anchor-id="pendulum-phase-space">Pendulum Phase Space</h4>
+<p>Similarly, this plot shows the angular position θ versus angular velocity dθ/dt for the pendulum component of the motion.</p>
 <div>
 <div id="pyodide-9">
 
 </div>
 <script type="pyodide-9-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIGludF8yZF90cmFwKGYsIHhfcmFuZ2UsIHlfcmFuZ2UsIG54LCBueSk6XG4gICAgXCJcIlwiMkQgaW50ZWdyYXRpb24gdXNpbmcgdGhlIFRyYXBlem9pZCBtZXRob2RcIlwiXCJcbiAgICB4ID0gbnAubGluc3BhY2UoeF9yYW5nZVswXSwgeF9yYW5nZVsxXSwgbngpXG4gICAgeSA9IG5wLmxpbnNwYWNlKHlfcmFuZ2VbMF0sIHlfcmFuZ2VbMV0sIG55KVxuICAgIGR4ID0gKHhfcmFuZ2VbMV0gLSB4X3JhbmdlWzBdKSAvIChueCAtIDEpXG4gICAgZHkgPSAoeV9yYW5nZVsxXSAtIHlfcmFuZ2VbMF0pIC8gKG55IC0gMSlcblxuICAgIHJlc3VsdCA9IDBcbiAgICBmb3IgaSBpbiByYW5nZShueC0xKTpcbiAgICAgICAgZm9yIGogaW4gcmFuZ2UobnktMSk6XG4gICAgICAgICAgICAjIEF2ZXJhZ2Ugb2YgZnVuY3Rpb24gdmFsdWVzIGF0IHRoZSBmb3VyIGNvcm5lcnMgb2YgZWFjaCBjZWxsXG4gICAgICAgICAgICBmX3ZhbHVlcyA9IFtcbiAgICAgICAgICAgICAgICBmKHhbaV0sIHlbal0pLFxuICAgICAgICAgICAgICAgIGYoeFtpKzFdLCB5W2pdKSxcbiAgICAgICAgICAgICAgICBmKHhbaV0sIHlbaisxXSksXG4gICAgICAgICAgICAgICAgZih4W2krMV0sIHlbaisxXSlcbiAgICAgICAgICAgIF1cbiAgICAgICAgICAgIHJlc3VsdCArPSBzdW0oZl92YWx1ZXMpIC8gNCAqIGR4ICogZHlcblxuICAgIHJldHVybiByZXN1bHRcblxuIyBFeGFtcGxlOiBFbGVjdHJpYyBwb3RlbnRpYWwgZnJvbSBhIHNxdWFyZSBjaGFyZ2UgZGlzdHJpYnV0aW9uXG5kZWYgcG90ZW50aWFsXzJkKHgsIHksIHo9MSk6XG4gICAgXCJcIlwiRWxlY3RyaWMgcG90ZW50aWFsIGF0ICh4LHkseikgZnJvbSBhIHNxdWFyZSBjaGFyZ2UgZGlzdHJpYnV0aW9uIGluIHRoZSB4LXkgcGxhbmVcIlwiXCJcbiAgICAjIEF2b2lkIGRpdmlzaW9uIGJ5IHplcm9cbiAgICBkZW5vbWluYXRvciA9ICh4KioyICsgeSoqMiArIHoqKjIpKiowLjVcbiAgICBpZiBkZW5vbWluYXRvciA8IDFlLTEwOlxuICAgICAgICByZXR1cm4gMFxuICAgIHJldHVybiAxIC8gZGVub21pbmF0b3JcblxuIyBDYWxjdWxhdGUgdGhlIGVsZWN0cmljIHBvdGVudGlhbCBhdCBhIHBvaW50IGFib3ZlIGEgY2hhcmdlZCBzcXVhcmVcbnogPSAxLjAgICMgaGVpZ2h0IGFib3ZlIHRoZSBwbGFuZVxucG90ZW50aWFsID0gaW50XzJkX3RyYXAobGFtYmRhIHgsIHk6IHBvdGVudGlhbF8yZCh4LCB5LCB6KSwgWy0xLCAxXSwgWy0xLCAxXSwgNTEsIDUxKVxuXG4jIFZpc3VhbGl6ZSB0aGUgcG90ZW50aWFsIGluIHRoZSBwbGFuZSBhYm92ZSB0aGUgY2hhcmdlXG54X3ZhbHMgPSBucC5saW5zcGFjZSgtMiwgMiwgNTApXG55X3ZhbHMgPSBucC5saW5zcGFjZSgtMiwgMiwgNTApXG5YLCBZID0gbnAubWVzaGdyaWQoeF92YWxzLCB5X3ZhbHMpXG5aID0gbnAuemVyb3NfbGlrZShYKVxuXG5mb3IgaSBpbiByYW5nZShsZW4oeF92YWxzKSk6XG4gICAgZm9yIGogaW4gcmFuZ2UobGVuKHlfdmFscykpOlxuICAgICAgICBaW2osIGldID0gcG90ZW50aWFsXzJkKFhbaiwgaV0sIFlbaiwgaV0sIHopXG5cbnBsdC5maWd1cmUoZmlnc2l6ZT1nZXRfc2l6ZSgxNSwgMTApKVxuXG4jIFBsb3QgdGhlIHBvdGVudGlhbCBhcyBhIGNvbnRvdXJcbmNvbnRvdXIgPSBwbHQuY29udG91cmYoWCwgWSwgWiwgNTAsIGNtYXA9J3ZpcmlkaXMnKVxucGx0LmNvbG9yYmFyKGxhYmVsPSdFbGVjdHJpYyBQb3RlbnRpYWwnKVxuXG4jIE1hcmsgdGhlIHNxdWFyZSBjaGFyZ2UgZGlzdHJpYnV0aW9uXG5wbHQucGxvdChbLTEsIDEsIDEsIC0xLCAtMV0sIFstMSwgLTEsIDEsIDEsIC0xXSwgJ3ItJywgbGluZXdpZHRoPTIpXG5cbnBsdC54bGFiZWwoJ3gnKVxucGx0LnlsYWJlbCgneScpXG5wbHQuYXhpcygnZXF1YWwnKVxuXG5wbHQuc2hvdygpXG5cbnByaW50KGZcIkVsZWN0cmljIHBvdGVudGlhbCBhdCBwb2ludCAoMCwwLHt6fSk6IHtwb3RlbnRpYWw6LjZmfVwiKVxucHJpbnQoZlwiQW5hbHl0aWNhbCB2YWx1ZSBhdCBjZW50ZXI6IHtucC5sb2coMSArIG5wLnNxcnQoMikpOi42Zn1cIikifQ==
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlLCJmaWctYWxpZ24iOiJjZW50ZXIifSwiY29kZSI6IlxuZmlnPXBsdC5maWd1cmUoMSwgZmlnc2l6ZSA9IGdldF9zaXplKDEwLDEwKSApXG5wbHQucGxvdChzb2wueVsyLDpdLCBzb2wueVszLDpdKVxucGx0LnhsYWJlbChyJyRcXHRoZXRhJCAoYW5nbGUpJylcbnBsdC55bGFiZWwocickXFxkb3R7XFx0aGV0YX0kIChhbmd1bGFyIHZlbG9jaXR5KScpXG5wbHQudGlnaHRfbGF5b3V0KClcbnBsdC5zaG93KCkifQ==
 </script>
 </div>
+<p>For a simple pendulum (with no spring), small oscillations would also produce an elliptical phase portrait. The complexity of the curve indicates energy transfer between the pendulum and spring modes. If the curve doesn’t close on itself, it suggests the motion may be quasi-periodic or potentially chaotic.</p>
 </section>
-<section id="monte-carlo-integration" class="level3">
-<h3 class="anchored" data-anchor-id="monte-carlo-integration">Monte Carlo Integration</h3>
-<p>For higher-dimensional integrals and complex domains, Monte Carlo methods become increasingly efficient. These methods use random sampling to approximate integrals and are particularly valuable in quantum and statistical physics.</p>
+<section id="energy-exchange-between-modes" class="level4">
+<h4 class="anchored" data-anchor-id="energy-exchange-between-modes">Energy Exchange Between Modes</h4>
+<p>The time evolution plot below helps us see how energy transfers between the spring and pendulum modes over time. When the spring amplitude decreases, the pendulum amplitude typically increases, and vice versa, demonstrating energy conservation in the coupled system.</p>
 <div>
 <div id="pyodide-10">
 
 </div>
 <script type="pyodide-10-contents">
-eyJhdHRyIjp7ImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiZGVmIG1vbnRlX2NhcmxvX2ludGVncmF0ZShmLCByYW5nZXMsIG5fc2FtcGxlcyk6XG4gICAgXCJcIlwiTW9udGUgQ2FybG8gaW50ZWdyYXRpb24gaW4gYXJiaXRyYXJ5IGRpbWVuc2lvbnNcIlwiXCJcbiAgICAjIEdlbmVyYXRlIHJhbmRvbSBzYW1wbGVzIHdpdGhpbiB0aGUgaW50ZWdyYXRpb24gZG9tYWluXG4gICAgZGltID0gbGVuKHJhbmdlcylcbiAgICBzYW1wbGVzID0gbnAucmFuZG9tLnVuaWZvcm0oXG4gICAgICAgIGxvdz1bclswXSBmb3IgciBpbiByYW5nZXNdLFxuICAgICAgICBoaWdoPVtyWzFdIGZvciByIGluIHJhbmdlc10sXG4gICAgICAgIHNpemU9KG5fc2FtcGxlcywgZGltKVxuICAgIClcblxuICAgICMgRXZhbHVhdGUgZnVuY3Rpb24gYXQgc2FtcGxlIHBvaW50c1xuICAgIGZfdmFsdWVzID0gbnAuYXJyYXkoW2YoKnNhbXBsZSkgZm9yIHNhbXBsZSBpbiBzYW1wbGVzXSlcblxuICAgICMgQ2FsY3VsYXRlIHZvbHVtZSBvZiBpbnRlZ3JhdGlvbiBkb21haW5cbiAgICB2b2x1bWUgPSBucC5wcm9kKFtyWzFdIC0gclswXSBmb3IgciBpbiByYW5nZXNdKVxuXG4gICAgIyBFc3RpbWF0ZSBpbnRlZ3JhbCBhbmQgZXJyb3JcbiAgICBpbnRlZ3JhbCA9IHZvbHVtZSAqIG5wLm1lYW4oZl92YWx1ZXMpXG4gICAgZXJyb3IgPSB2b2x1bWUgKiBucC5zdGQoZl92YWx1ZXMpIC8gbnAuc3FydChuX3NhbXBsZXMpXG5cbiAgICByZXR1cm4gaW50ZWdyYWwsIGVycm9yXG5cbiMgRXhhbXBsZTogQ2FsY3VsYXRlIHRoZSB2b2x1bWUgb2YgYSBuLWRpbWVuc2lvbmFsIGh5cGVyc3BoZXJlXG5kZWYgc3BoZXJlX2luZGljYXRvcih4LCB5LCB6KTpcbiAgICBcIlwiXCJSZXR1cm4gMSBpZiBwb2ludCBpcyBpbnNpZGUgdW5pdCBzcGhlcmUsIDAgb3RoZXJ3aXNlXCJcIlwiXG4gICAgcmV0dXJuIDEgaWYgeCoqMiArIHkqKjIgKyB6KioyIDw9IDEgZWxzZSAwXG5cbiMgQ2FsY3VsYXRlIHRoZSB2b2x1bWUgb2YgYSAzRCBzcGhlcmUgdXNpbmcgTW9udGUgQ2FybG9cbm5fc2FtcGxlcyA9IDEwMDAwMFxucmFuZ2VzID0gW1stMSwgMV0sIFstMSwgMV0sIFstMSwgMV1dICAjIEN1YmUgY29udGFpbmluZyB0aGUgc3BoZXJlXG52b2x1bWUsIGVycm9yID0gbW9udGVfY2FybG9faW50ZWdyYXRlKHNwaGVyZV9pbmRpY2F0b3IsIHJhbmdlcywgbl9zYW1wbGVzKVxuXG4jIFRoZSBleGFjdCB2b2x1bWUgb2YgYSB1bml0IHNwaGVyZSBpbiAzRCBpcyAoNC8zKc+AXG5leGFjdF92b2x1bWUgPSA0LzMgKiBucC5waVxuXG4jIFZpc3VhbGl6ZSB0aGUgY29udmVyZ2VuY2VcbnNhbXBsZV9zaXplcyA9IG5wLmxvZ3NwYWNlKDIsIDUsIDIwLCBkdHlwZT1pbnQpXG52b2x1bWVzID0gW11cbmVycm9ycyA9IFtdXG5cbmZvciBuIGluIHNhbXBsZV9zaXplczpcbiAgICB2LCBlID0gbW9udGVfY2FybG9faW50ZWdyYXRlKHNwaGVyZV9pbmRpY2F0b3IsIHJhbmdlcywgbilcbiAgICB2b2x1bWVzLmFwcGVuZCh2KVxuICAgIGVycm9ycy5hcHBlbmQoZSlcblxucGx0LmZpZ3VyZShmaWdzaXplPWdldF9zaXplKDE1LCAxMCkpXG5wbHQuc2VtaWxvZ3goc2FtcGxlX3NpemVzLCB2b2x1bWVzLCAnby0nLCBsYWJlbD0nTW9udGUgQ2FybG8gZXN0aW1hdGUnKVxucGx0LmZpbGxfYmV0d2VlbihcbiAgICBzYW1wbGVfc2l6ZXMsXG4gICAgW3YgLSBlIGZvciB2LCBlIGluIHppcCh2b2x1bWVzLCBlcnJvcnMpXSxcbiAgICBbdiArIGUgZm9yIHYsIGUgaW4gemlwKHZvbHVtZXMsIGVycm9ycyldLFxuICAgIGFscGhhPTAuM1xuKVxucGx0LmF4aGxpbmUoZXhhY3Rfdm9sdW1lLCBjb2xvcj0ncicsIGxpbmVzdHlsZT0nLS0nLCBsYWJlbD0nRXhhY3QgdmFsdWUnKVxucGx0LnhsYWJlbCgnTnVtYmVyIG9mIHNhbXBsZXMnKVxucGx0LnlsYWJlbCgnVm9sdW1lIG9mIHVuaXQgc3BoZXJlJylcbnBsdC5sZWdlbmQoKVxucGx0LnNob3coKVxuXG5wcmludChmXCJWb2x1bWUgb2YgdW5pdCBzcGhlcmUgKE1vbnRlIENhcmxvIHdpdGgge25fc2FtcGxlc30gc2FtcGxlcyk6IHt2b2x1bWU6LjZmfSDCsSB7ZXJyb3I6LjZmfVwiKVxucHJpbnQoZlwiRXhhY3Qgdm9sdW1lIG9mIHVuaXQgc3BoZXJlOiB7ZXhhY3Rfdm9sdW1lOi42Zn1cIilcbnByaW50KGZcIlJlbGF0aXZlIGVycm9yOiB7YWJzKHZvbHVtZSAtIGV4YWN0X3ZvbHVtZSkvZXhhY3Rfdm9sdW1lKjEwMDouNGZ9JVwiKSJ9
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IlxuIyBwbG90IHRoZSBhbmdsZSBvZiB0aGUgc3ByaW5nIGFzIGEgZnVuY3Rpb24gb2YgdGltZVxuXG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTIsMTApKVxucGx0LnhsYWJlbCgndGltZSBbc10nKVxucGx0LnlsYWJlbChyJ0FtcGxpdHVkZScpXG5cbnBsdC5wbG90KHNvbC50LCBzb2wueVswLDpdLCBsYWJlbD1yJ0wgKHNwcmluZyBleHRlbnNpb24pJylcbnBsdC5wbG90KHNvbC50LCBzb2wueVsyLDpdKjEwLCBsYWJlbD1yJyQxMFxcY2RvdCBcXHRoZXRhJCAoYW5nbGUsIHNjYWxlZCknKVxuXG5wbHQubGVnZW5kKClcbnBsdC54bGltKDAsMTUwKVxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpIn0=
 </script>
 </div>
-</section>
-<section id="application-to-real-physics-problems" class="level3">
-<h3 class="anchored" data-anchor-id="application-to-real-physics-problems">Application to Real Physics Problems</h3>
-<p>Let’s examine two common scenarios in physics that benefit from numerical integration:</p>
-<ol type="1">
-<li><p><strong>Non-uniform Magnetic Field</strong>: When a charged particle moves through a non-uniform magnetic field, the work done can be calculated as:</p>
-<p><span class="math display">\[W = q\int_{\vec{r}_1}^{\vec{r}_2} \vec{v} \times \vec{B}(\vec{r}) \cdot d\vec{r}\]</span></p></li>
-<li><p><strong>Quantum Tunneling</strong>: The tunneling probability through a potential barrier is given by:</p>
-<p><span class="math display">\[T \approx \exp\left(-\frac{2}{\hbar}\int_{x_1}^{x_2} \sqrt{2m(V(x) - E)}\, dx\right)\]</span></p></li>
-</ol>
-<p>In both cases, the integrals frequently cannot be solved analytically due to the complex spatial dependence of the fields or potentials, making numerical integration indispensable for modern physics.</p>
-</section>
-</div>
-</div>
-</div>
+<p>Note that we’ve scaled the angle by a factor of 10 to make the oscillations more visible alongside the spring extension. The beating patterns often visible in this plot are characteristic of coupled oscillators where energy flows back and forth between different modes of the system.</p>
 
 
 <script type="pyodide-data">
@@ -919,6 +807,7 @@ W10=
 </script>
 </section>
 </section>
+</section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
@@ -926,7 +815,7 @@ eyJjb250ZW50cyI6W119
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
-window._ojs.paths.runtimeToDoc = "../../lectures/lecture05";
+window._ojs.paths.runtimeToDoc = "../../lectures/lecture08";
 window._ojs.paths.runtimeToRoot = "../..";
 window._ojs.paths.docToRoot = "../..";
 window._ojs.selfContained = false;
@@ -1331,13 +1220,16 @@ window._ojs.runtime.interpretFromScriptTags();
     }
   });
   </script>
-<nav class="page-navigation column-body">
+<nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../lectures/lecture05/1-differentiation.html" class="pagination-link" aria-label="Numerical Differentiation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Numerical Differentiation</span>
+      <a href="../../lectures/lecture08/3_fourier_analysis.html" class="pagination-link" aria-label="Fourier Analysis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Fourier Analysis</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../lectures/lecture08/2_planetary_motion.html" class="pagination-link" aria-label="Planetary Motion">
+        <span class="nav-page-text">Planetary Motion</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
