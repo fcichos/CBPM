@@ -953,7 +953,7 @@ Dirichlet Boundary Conditions (Fixed Values)
 <div class="callout-body-container callout-body">
 <p>The matrix above assumes so-called <strong>Dirichlet boundary conditions</strong>, where the concentration is fixed at specific values at the boundaries (typically zero). This represents situations where particles are absorbed when they reach the boundaries.</p>
 <p><strong>Physical example</strong>: A pipe with absorbing walls where particles disappear upon contact.</p>
-<p><strong>Matrix structure</strong>: The first and last rows have the standard <code>-2, 1</code> pattern, enforcing <span class="math inline">\(c_0 = 0\)</span> and <span class="math inline">\(c_N = 0\)</span>.</p>
+<p><strong>Matrix structure</strong>: The first and last rows have the standard <code>-2, 1</code> pattern, enforcing <span class="math inline">\(c_{-1} = 0\)</span> and <span class="math inline">\(c_{N+1} = 0\)</span>.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
