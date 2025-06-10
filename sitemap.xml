@@ -33,44 +33,52 @@
     <lastmod>2025-05-26T20:06:41.720Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/consolidated_numerical_methods.html</loc>
-    <lastmod>2025-05-12T19:56:08.848Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture10/4_wave_equation.html</loc>
+    <lastmod>2025-06-10T10:05:09.831Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/2_integration_part2.html</loc>
-    <lastmod>2025-05-05T18:06:54.095Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture10/1_plane_waves.html</loc>
+    <lastmod>2025-06-10T10:47:28.271Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/trapezoid_short.html</loc>
-    <lastmod>2025-05-05T18:11:35.757Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture10/2_spherical_waves.html</loc>
+    <lastmod>2025-01-21T09:23:54.000Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/1-differentiation.html</loc>
-    <lastmod>2025-05-13T06:44:24.718Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/01-lecture05.html</loc>
+    <lastmod>2025-05-05T12:49:10.619Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture02/01-lecture02.html</loc>
-    <lastmod>2025-04-15T10:27:39.078Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/0_input_output.html</loc>
+    <lastmod>2025-05-06T12:56:13.142Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture03/02-lecture03.html</loc>
-    <lastmod>2025-04-23T09:42:00.858Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/simpson_short.html</loc>
+    <lastmod>2025-05-05T18:11:58.164Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture03/03-lecture03.html</loc>
-    <lastmod>2025-04-22T10:04:19.509Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture02/02-lecture02.html</loc>
+    <lastmod>2025-04-14T19:09:09.668Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture04/02-lecture04.html</loc>
-    <lastmod>2025-04-29T10:35:00.121Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/04-plotting.html</loc>
+    <lastmod>2025-04-28T08:22:09.365Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/seminars/seminar07/Example/data/Figure1/Figure1.html</loc>
-    <lastmod>2024-12-06T13:36:42.000Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture03/01-lecture03.html</loc>
+    <lastmod>2025-04-22T09:19:59.226Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/seminars/seminar07/old.html</loc>
-    <lastmod>2025-05-27T10:23:29.479Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture04/01-lecture04.html</loc>
+    <lastmod>2025-04-29T05:21:00.130Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fcichos.github.io/CBPM/seminars/seminar07/seminar07.html</loc>
+    <lastmod>2025-05-27T13:34:48.374Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fcichos.github.io/CBPM/seminars/seminar08/seminar08.html</loc>
+    <lastmod>2025-06-10T10:36:06.636Z</lastmod>
   </url>
   <url>
     <loc>https://fcichos.github.io/CBPM/seminars/seminar01/00-seminar01.html</loc>
@@ -157,36 +165,52 @@
     <lastmod>2025-05-19T20:15:32.555Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/seminars/seminar07/seminar07.html</loc>
-    <lastmod>2025-05-27T13:34:48.374Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/seminars/seminar07/old.html</loc>
+    <lastmod>2025-05-27T10:23:29.479Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture04/01-lecture04.html</loc>
-    <lastmod>2025-04-29T05:21:00.130Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/seminars/seminar07/Example/data/Figure1/Figure1.html</loc>
+    <lastmod>2024-12-06T13:36:42.000Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture03/01-lecture03.html</loc>
-    <lastmod>2025-04-22T09:19:59.226Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture04/02-lecture04.html</loc>
+    <lastmod>2025-04-29T10:35:00.121Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/04-plotting.html</loc>
-    <lastmod>2025-04-28T08:22:09.365Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture03/03-lecture03.html</loc>
+    <lastmod>2025-04-22T10:04:19.509Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture02/02-lecture02.html</loc>
-    <lastmod>2025-04-14T19:09:09.668Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture03/02-lecture03.html</loc>
+    <lastmod>2025-04-23T09:42:00.858Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/simpson_short.html</loc>
-    <lastmod>2025-05-05T18:11:58.164Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture02/01-lecture02.html</loc>
+    <lastmod>2025-04-15T10:27:39.078Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/0_input_output.html</loc>
-    <lastmod>2025-05-06T12:56:13.142Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/1-differentiation.html</loc>
+    <lastmod>2025-05-13T06:44:24.718Z</lastmod>
   </url>
   <url>
-    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/01-lecture05.html</loc>
-    <lastmod>2025-05-05T12:49:10.619Z</lastmod>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/trapezoid_short.html</loc>
+    <lastmod>2025-05-05T18:11:35.757Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture05/2_integration_part2.html</loc>
+    <lastmod>2025-05-05T18:06:54.095Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fcichos.github.io/CBPM/lectures/consolidated_numerical_methods.html</loc>
+    <lastmod>2025-05-12T19:56:08.848Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture10/3_diffusion_equation.html</loc>
+    <lastmod>2025-06-10T11:00:29.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fcichos.github.io/CBPM/lectures/lecture10/wave_equation.html</loc>
+    <lastmod>2025-01-20T19:50:31.000Z</lastmod>
   </url>
   <url>
     <loc>https://fcichos.github.io/CBPM/lectures/lecture07/2_coupled_pendula.html</loc>
