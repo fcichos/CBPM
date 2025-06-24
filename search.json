@@ -1002,14 +1002,24 @@
     "href": "seminars/seminar09/biot_savart.html",
     "title": "Biot Savart Law",
     "section": "",
-    "text": "The law of Biot Savart allows the calculation of the magnetic field around arbitrary currents. Each element of a conductor at a point \\(\\vec{r}^{\\prime}\\) will contribute to the magnetic field at a point \\(\\vec{r}\\) an amount \\(\\mathrm{d} \\vec{B}\\) according to\n\\[\n\\mathrm{d} \\vec{B}(\\vec{r})=\\frac{\\mu_0}{4 \\pi} I \\mathrm{~d} \\vec{l} \\times \\frac{\\vec{r}-\\vec{r}^{\\prime}}{\\left|\\vec{r}-\\vec{r}^{\\prime}\\right|^3}\n\\]\nwhich will then lead to the total magnetic field one integrated over the whole volume.\n\\[\n\\vec{B}(\\vec{r})=\\frac{\\mu_0}{4 \\pi} \\int_V \\vec{\\jmath}\\left(\\vec{r}^{\\prime}\\right) \\times \\frac{\\vec{r}-\\vec{r}^{\\prime}}{\\left|\\vec{r}-\\vec{r}^{\\prime}\\right|^3} \\mathrm{~d} V^{\\prime}\n\\]\nWe would like to explore this relation by calculating the magnetic field around a circular loop of radius \\(R\\) centered at the origin."
+    "text": "The law of Biot Savart allows the calculation of the magnetic field around arbitrary currents. Each element of a conductor at a point \\(\\vec{r}^{\\prime}\\) will contribute to the magnetic field at a point \\(\\vec{r}\\) an amount \\(\\mathrm{d} \\vec{B}\\) according to\n\\[\n\\mathrm{d} \\vec{B}(\\vec{r})=\\frac{\\mu_0}{4 \\pi} I \\mathrm{~d} \\vec{l} \\times \\frac{\\vec{r}-\\vec{r}^{\\prime}}{\\left|\\vec{r}-\\vec{r}^{\\prime}\\right|^3}\n\\]\nwhich will then lead to the total magnetic field one integrated over the whole volume.\n\\[\n\\vec{B}(\\vec{r})=\\frac{\\mu_0}{4 \\pi} \\int_V \\vec{\\jmath}\\left(\\vec{r}^{\\prime}\\right) \\times \\frac{\\vec{r}-\\vec{r}^{\\prime}}{\\left|\\vec{r}-\\vec{r}^{\\prime}\\right|^3} \\mathrm{~d} V^{\\prime}\n\\]\nWe would like to explore this relation by calculating the magnetic field around a circular loop of radius \\(R\\) centered at the origin.",
+    "crumbs": [
+      "Seminars",
+      "Seminar09",
+      "Magnetic Field According to Biot Savart"
+    ]
   },
   {
     "objectID": "seminars/seminar09/biot_savart.html#calculating-the-magnetic-field-of-a-circular-current-loop",
     "href": "seminars/seminar09/biot_savart.html#calculating-the-magnetic-field-of-a-circular-current-loop",
     "title": "Biot Savart Law",
     "section": "Calculating the Magnetic Field of a Circular Current Loop",
-    "text": "Calculating the Magnetic Field of a Circular Current Loop\nWe’ll use the Biot-Savart law to calculate the magnetic field of a circular current loop of radius R in the xy-plane, centered at the origin. We’ll divide the loop into small segments and sum their individual contributions to find the total magnetic field.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis simulation divides a circular current loop into small segments and applies the Biot-Savart law to each segment. The first plot shows the magnetic field vectors in the xz-plane, while the second plot shows how the z-component of the field varies along the z-axis.\nFor the field along the z-axis, the numerical results can be compared with the analytical formula:\n\\[B_z = \\frac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}}\\]\nThe characteristic “dipole” pattern is clearly visible in the vector plot, with field lines emerging from the center of the loop and curving around to form closed loops."
+    "text": "Calculating the Magnetic Field of a Circular Current Loop\nWe’ll use the Biot-Savart law to calculate the magnetic field of a circular current loop of radius R in the xy-plane, centered at the origin. We’ll divide the loop into small segments and sum their individual contributions to find the total magnetic field.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis simulation divides a circular current loop into small segments and applies the Biot-Savart law to each segment. The first plot shows the magnetic field vectors in the xz-plane, while the second plot shows how the z-component of the field varies along the z-axis.\nFor the field along the z-axis, the numerical results can be compared with the analytical formula:\n\\[B_z = \\frac{\\mu_0 I R^2}{2(R^2+z^2)^{3/2}}\\]\nThe characteristic “dipole” pattern is clearly visible in the vector plot, with field lines emerging from the center of the loop and curving around to form closed loops.",
+    "crumbs": [
+      "Seminars",
+      "Seminar09",
+      "Magnetic Field According to Biot Savart"
+    ]
   },
   {
     "objectID": "seminars/seminar06/seminar06.html",
