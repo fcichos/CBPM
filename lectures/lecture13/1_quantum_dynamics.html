@@ -770,7 +770,7 @@ window.Quarto = {
   <li><a href="#demonstration-of-superposition-of-plane-waves" id="toc-demonstration-of-superposition-of-plane-waves" class="nav-link" data-scroll-target="#demonstration-of-superposition-of-plane-waves">Demonstration of superposition of plane waves</a></li>
   <li><a href="#rectangular-wavepacket" id="toc-rectangular-wavepacket" class="nav-link" data-scroll-target="#rectangular-wavepacket">Rectangular Wavepacket</a></li>
   <li><a href="#wavepacket-with-rectangular-amplitude" id="toc-wavepacket-with-rectangular-amplitude" class="nav-link" data-scroll-target="#wavepacket-with-rectangular-amplitude">Wavepacket with rectangular amplitude</a></li>
-  <li><a href="#gaussian-wave-packet" id="toc-gaussian-wave-packet" class="nav-link" data-scroll-target="#gaussian-wave-packet">Gaussian Wave Packet</a></li>
+  <li><a href="#gaussian-wave-packet-gaussian-wave-packet" id="toc-gaussian-wave-packet-gaussian-wave-packet" class="nav-link" data-scroll-target="#gaussian-wave-packet-gaussian-wave-packet">Gaussian Wave Packet### Gaussian Wave Packet</a></li>
   <li><a href="#the-uncertainty-principle" id="toc-the-uncertainty-principle" class="nav-link" data-scroll-target="#the-uncertainty-principle">The Uncertainty Principle</a></li>
   </ul></li>
   <li><a href="#time-evolution-of-a-gaussian-wavepacket" id="toc-time-evolution-of-a-gaussian-wavepacket" class="nav-link" data-scroll-target="#time-evolution-of-a-gaussian-wavepacket">Time evolution of a Gaussian Wavepacket</a></li>
@@ -895,9 +895,22 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZp
 </script>
 </div>
 </section>
-<section id="gaussian-wave-packet" class="level3">
-<h3 class="anchored" data-anchor-id="gaussian-wave-packet">Gaussian Wave Packet</h3>
-<p>A more common and mathematically convenient wavepacket has a Gaussian distribution of amplitudes <span class="math inline">\(\phi(k)\)</span>. When the amplitudes of the interfering plane waves follow a Gaussian distribution in k-space, the resulting spatial distribution is also Gaussian. This type of wavepacket has the special property that it maintains its Gaussian shape as it evolves over time, though it may spread out.</p>
+<section id="gaussian-wave-packet-gaussian-wave-packet" class="level3">
+<h3 class="anchored" data-anchor-id="gaussian-wave-packet-gaussian-wave-packet">Gaussian Wave Packet### Gaussian Wave Packet</h3>
+<p>A more common and mathematically convenient wavepacket has a Gaussian distribution of amplitudes <span class="math inline">\(\phi(k)\)</span>. The mathematical form of this distribution in k-space is:</p>
+<p><span class="math display">\[\begin{equation}
+\phi(k) = \frac{1}{\sqrt{2\pi\sigma_k^2}}e^{-\frac{(k-k_0)^2}{2\sigma_k^2}}
+\end{equation}\]</span></p>
+<p>When the amplitudes of the interfering plane waves follow this Gaussian distribution in k-space, the resulting spatial distribution is also Gaussian:</p>
+<p><span class="math display">\[\begin{equation}
+\Psi(x,t=0) = \frac{1}{\sqrt{2\pi\sigma_x^2}}e^{-\frac{(x-x_0)^2}{2\sigma_x^2}}e^{ik_0x}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\sigma_x = \frac{1}{2\sigma_k}\)</span> due to the uncertainty principle.</p>
+<p>As the wavepacket evolves in time, it maintains its Gaussian shape but with a time-dependent width:</p>
+<p><span class="math display">\[\begin{equation}
+\Psi(x,t) = \frac{1}{\sqrt{2\pi\sigma_x^2(t)}}e^{-\frac{(x-x_0-v_gt)^2}{2\sigma_x^2(t)}}e^{i(k_0x-\omega_0t)}e^{i\phi(t)}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\sigma_x^2(t) = \sigma_x^2(0)(1+\frac{\hbar^2t^2}{4m^2\sigma_x^4(0)})\)</span> represents the spreading of the wavepacket over time. This type of wavepacket has the special property that it maintains its Gaussian shape as it evolves over time, though it may spread out due to quantum dispersion.</p>
 <div>
 <div id="pyodide-6">
 
@@ -933,7 +946,12 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZp
 <p>As a wavepacket evolves in time, two main effects occur: 1. The center of the wavepacket moves at the group velocity <span class="math inline">\(v_g\)</span> 2. The wavepacket spreads out due to dispersion (different frequency components moving at different velocities)</p>
 <p>This spreading is a purely quantum effect with no classical analog, and it’s why quantum particles can’t remain perfectly localized indefinitely.</p>
 <p>Here we show an animation of a wavepacket’s evolution over time:</p>
-<!-- ![Wavepacket time evolution](/lectures/lecture13/wavepacket.mov){fig-align="center"} -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><video src="../../lectures/lecture13/wavepacket.mov" class="img-fluid" controls=""><a href="../../lectures/lecture13/wavepacket.mov">Video</a></video></p>
+<figcaption>Wavepacket time evolution</figcaption>
+</figure>
+</div>
 <p>The next lines do the magic here. You see that there is essentially a normal <code>matplotlib</code> plotting in the first lines. The special lines are</p>
 <pre><code>plt.draw()
 background = fig.canvas.copy_from_bbox(ax.bbox)

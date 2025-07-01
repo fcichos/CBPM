@@ -800,7 +800,7 @@ window.Quarto = {
   <li><a href="#split-step-fourier-method" id="toc-split-step-fourier-method" class="nav-link" data-scroll-target="#split-step-fourier-method">Split-Step Fourier Method</a></li>
   </ul></li>
   <li><a href="#further-explorations" id="toc-further-explorations" class="nav-link" data-scroll-target="#further-explorations">Further Explorations</a></li>
-  <li><a href="#implementation-exercises" id="toc-implementation-exercises" class="nav-link" data-scroll-target="#implementation-exercises">Implementation Exercises</a></li>
+  <li><a href="#where-to-go-from-here" id="toc-where-to-go-from-here" class="nav-link" data-scroll-target="#where-to-go-from-here">Where to go from here</a></li>
   </ul>
 </nav>
     </div>
@@ -827,7 +827,13 @@ window.Quarto = {
 
 
 <p>Quantum tunneling is one of the most striking manifestations of quantum mechanics with no classical analog. In classical physics, a particle cannot pass through a potential barrier if its energy is less than the barrier height. However, in quantum mechanics, there is a non-zero probability for particles to “tunnel” through barriers that would be insurmountable according to classical physics.</p>
-<p>This phenomenon has numerous practical applications: - Scanning tunneling microscopy (STM) - Nuclear fusion in stars - Alpha decay in radioactive nuclei - Tunnel diodes and other quantum electronic devices</p>
+<p>This phenomenon has numerous practical applications:</p>
+<ul>
+<li>Scanning tunneling microscopy (STM)</li>
+<li>Nuclear fusion in stars</li>
+<li>Alpha decay in radioactive nuclei</li>
+<li>Tunnel diodes and other quantum electronic devices</li>
+</ul>
 <p>In this lecture, we’ll explore quantum tunneling by numerically solving the time-dependent Schrödinger equation for a wavepacket approaching a potential barrier. We’ll implement two different numerical methods:</p>
 <ol type="1">
 <li>The <strong>Crank-Nicolson method</strong>: A finite difference approach that is unconditionally stable</li>
@@ -847,7 +853,13 @@ eyJhdHRyIjp7ImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiZXhlY3V0ZSI6dHJ1
 <p><span class="math display">\[\begin{equation}
 i\hbar\frac{\partial \Psi(x,t)}{\partial t} = \left ( \frac{-\hbar^2}{2m}\frac{\partial^2}{\partial x^2}+V(x,t) \right ) \Psi(x,t)
 \end{equation}\]</span></p>
-<p>Where: - <span class="math inline">\(\Psi(x,t)\)</span> is the wavefunction - <span class="math inline">\(\hbar\)</span> is the reduced Planck constant - <span class="math inline">\(m\)</span> is the particle mass - <span class="math inline">\(V(x,t)\)</span> is the potential energy function</p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\Psi(x,t)\)</span> is the wavefunction</li>
+<li><span class="math inline">\(\hbar\)</span> is the reduced Planck constant</li>
+<li><span class="math inline">\(m\)</span> is the particle mass</li>
+<li><span class="math inline">\(V(x,t)\)</span> is the potential energy function</li>
+</ul>
 <p>This equation can be represented in both position space (as above) and momentum space. The transformation between these representations is accomplished using the Fourier transform.</p>
 <section id="position-and-momentum-space-representations" class="level3">
 <h3 class="anchored" data-anchor-id="position-and-momentum-space-representations">Position and Momentum Space Representations</h3>
@@ -1268,8 +1280,8 @@ T \approx \frac{16E(V_0-E)}{V_0^2} e^{-2\kappa a}
 <li><strong>Quantum Reflection</strong>: Study reflection from potential wells instead of barriers</li>
 </ol>
 </section>
-<section id="implementation-exercises" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-exercises">Implementation Exercises</h2>
+<section id="where-to-go-from-here" class="level2">
+<h2 class="anchored" data-anchor-id="where-to-go-from-here">Where to go from here</h2>
 <ol type="1">
 <li>Modify the code to calculate and plot the transmission and reflection coefficients as a function of incident momentum</li>
 <li>Implement a double-barrier potential and observe resonant tunneling</li>
