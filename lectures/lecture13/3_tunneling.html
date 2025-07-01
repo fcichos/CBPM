@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.29">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Quantum Tunneling Through a Potential Barrier – Computer-Based Physical Modelling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../lectures/lecture13/2_particle_in_a_box.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-9344fb9851b4da3cab95007ef9d770dc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+<script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../assets/css/styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Computer-Based Physical Modelling</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Python Basics</li><li class="breadcrumb-item"><a href="../../lectures/lecture13/1_quantum_dynamics.html">Lecture 13</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture13/3_tunneling.html">Tunneling</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      <img src="../../assets/images/mona_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course Info</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../course-info/intructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructor</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../course-info/schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../course-info/resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ressources</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../course-info/assignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../course-info/exam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exams</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Python Basics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 1</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/00-lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Initial Questions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/01-lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Jupyter Notebooks</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/python_lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python &amp; Anatomy of a Program</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture01/02-lecture01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Variables &amp; Numbers</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 2</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture02/01-lecture02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture02/02-lecture02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Control Structures &amp; Functions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 3</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture03/01-lecture03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modules</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture03/02-lecture03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numpy Module</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture03/03-lecture03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basic Plotting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 4</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture04/01-lecture04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Classes &amp; Objects</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture04/02-lecture04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Brownian Motion Part I</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 5</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture05/0_input_output.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Input &amp; Output</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture05/1-differentiation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical Differentiation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 6</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture06/2-integration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Numerical Integration</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture06/3-solving_ODEs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solving Differential Equations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 7</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture07/2_coupled_pendula.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Coupled Pendula</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 8</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture08/3_fourier_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Fourier Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture08/1_spring_pendulum.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Spring Pendulum</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture08/2_planetary_motion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Planetary Motion</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 9</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture09/1_curve_fitting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Curve Fitting</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 10</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture10/3_diffusion_equation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Diffusion Equation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture10/1_plane_waves.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electromagnetic Waves I</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 11</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture11/2_spherical_waves.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Electromagnetic Waves II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture11/3_huygens_principle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Scattering and Diffraction</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 12</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture12/1_quantum_mechanics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture12/2_particle_in_a_box.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Particle in Box</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture12/3_harmonic_oscillator.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Harmonic Oscillator</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture12/repetition.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Repetition</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 13</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture13/1_quantum_dynamics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Time-dependent Quantum Mechanics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture13/2_particle_in_a_box.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Wavepacket in Box</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../lectures/lecture13/3_tunneling.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Tunneling</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminars</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar01</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar01/00-seminar01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Seminar Questions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar01/01-seminar01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Seminar Quizz</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar02</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar02/md1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MD Simulation 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar03</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar03/md2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MD Simulation 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar04</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar04/md3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MD Simulation 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar05</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar05/seminar05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Free Coding Seminar</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar06</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar06/seminar06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Free Coding Seminar</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar07</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar07/seminar07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating Proper Figures Seminar</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar08</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar08/seminar08.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Free Coding Seminar</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar09</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-25" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../seminars/seminar09/biot_savart.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Magnetic Field According to Biot Savart</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-time-dependent-schrödinger-equation" id="toc-the-time-dependent-schrödinger-equation" class="nav-link active" data-scroll-target="#the-time-dependent-schrödinger-equation">The Time-Dependent Schrödinger Equation</a>
+  <ul class="collapse">
+  <li><a href="#position-and-momentum-space-representations" id="toc-position-and-momentum-space-representations" class="nav-link" data-scroll-target="#position-and-momentum-space-representations">Position and Momentum Space Representations</a></li>
+  </ul></li>
+  <li><a href="#method-1-crank-nicolson-scheme" id="toc-method-1-crank-nicolson-scheme" class="nav-link" data-scroll-target="#method-1-crank-nicolson-scheme">Method 1: Crank-Nicolson Scheme</a>
+  <ul class="collapse">
+  <li><a href="#discretization-of-the-schrödinger-equation" id="toc-discretization-of-the-schrödinger-equation" class="nav-link" data-scroll-target="#discretization-of-the-schrödinger-equation">Discretization of the Schrödinger Equation</a></li>
+  <li><a href="#setting-up-the-simulation-domain" id="toc-setting-up-the-simulation-domain" class="nav-link" data-scroll-target="#setting-up-the-simulation-domain">Setting Up the Simulation Domain</a></li>
+  <li><a href="#initial-wavepacket" id="toc-initial-wavepacket" class="nav-link" data-scroll-target="#initial-wavepacket">Initial Wavepacket</a></li>
+  <li><a href="#potential-barrier-setup" id="toc-potential-barrier-setup" class="nav-link" data-scroll-target="#potential-barrier-setup">Potential Barrier Setup</a></li>
+  <li><a href="#constructing-the-hamiltonian-matrix" id="toc-constructing-the-hamiltonian-matrix" class="nav-link" data-scroll-target="#constructing-the-hamiltonian-matrix">Constructing the Hamiltonian Matrix</a></li>
+  <li><a href="#time-evolution-matrices" id="toc-time-evolution-matrices" class="nav-link" data-scroll-target="#time-evolution-matrices">Time Evolution Matrices</a></li>
+  <li><a href="#animation-setup" id="toc-animation-setup" class="nav-link" data-scroll-target="#animation-setup">Animation Setup</a></li>
+  <li><a href="#animation-execution" id="toc-animation-execution" class="nav-link" data-scroll-target="#animation-execution">Animation Execution</a></li>
+  </ul></li>
+  <li><a href="#method-2-split-step-fourier-method" id="toc-method-2-split-step-fourier-method" class="nav-link" data-scroll-target="#method-2-split-step-fourier-method">Method 2: Split-Step Fourier Method</a>
+  <ul class="collapse">
+  <li><a href="#mathematical-foundation" id="toc-mathematical-foundation" class="nav-link" data-scroll-target="#mathematical-foundation">Mathematical Foundation</a></li>
+  <li><a href="#setting-up-the-simulation-domain-1" id="toc-setting-up-the-simulation-domain-1" class="nav-link" data-scroll-target="#setting-up-the-simulation-domain-1">Setting Up the Simulation Domain</a></li>
+  <li><a href="#potential-barrier-setup-1" id="toc-potential-barrier-setup-1" class="nav-link" data-scroll-target="#potential-barrier-setup-1">Potential Barrier Setup</a></li>
+  <li><a href="#initial-wavepacket-1" id="toc-initial-wavepacket-1" class="nav-link" data-scroll-target="#initial-wavepacket-1">Initial Wavepacket</a></li>
+  <li><a href="#setting-up-the-fourier-transform-space" id="toc-setting-up-the-fourier-transform-space" class="nav-link" data-scroll-target="#setting-up-the-fourier-transform-space">Setting Up the Fourier Transform Space</a></li>
+  <li><a href="#precomputing-phase-factors" id="toc-precomputing-phase-factors" class="nav-link" data-scroll-target="#precomputing-phase-factors">Precomputing Phase Factors</a></li>
+  <li><a href="#animation-setup-1" id="toc-animation-setup-1" class="nav-link" data-scroll-target="#animation-setup-1">Animation Setup</a></li>
+  <li><a href="#animation-execution-1" id="toc-animation-execution-1" class="nav-link" data-scroll-target="#animation-execution-1">Animation Execution</a></li>
+  </ul></li>
+  <li><a href="#physical-interpretation-and-analysis" id="toc-physical-interpretation-and-analysis" class="nav-link" data-scroll-target="#physical-interpretation-and-analysis">Physical Interpretation and Analysis</a>
+  <ul class="collapse">
+  <li><a href="#whats-happening-in-the-simulation" id="toc-whats-happening-in-the-simulation" class="nav-link" data-scroll-target="#whats-happening-in-the-simulation">What’s Happening in the Simulation?</a></li>
+  <li><a href="#factors-affecting-tunneling-probability" id="toc-factors-affecting-tunneling-probability" class="nav-link" data-scroll-target="#factors-affecting-tunneling-probability">Factors Affecting Tunneling Probability</a></li>
+  <li><a href="#connection-to-quantum-theory" id="toc-connection-to-quantum-theory" class="nav-link" data-scroll-target="#connection-to-quantum-theory">Connection to Quantum Theory</a></li>
+  </ul></li>
+  <li><a href="#comparison-of-numerical-methods" id="toc-comparison-of-numerical-methods" class="nav-link" data-scroll-target="#comparison-of-numerical-methods">Comparison of Numerical Methods</a>
+  <ul class="collapse">
+  <li><a href="#crank-nicolson-method" id="toc-crank-nicolson-method" class="nav-link" data-scroll-target="#crank-nicolson-method">Crank-Nicolson Method</a></li>
+  <li><a href="#split-step-fourier-method" id="toc-split-step-fourier-method" class="nav-link" data-scroll-target="#split-step-fourier-method">Split-Step Fourier Method</a></li>
+  </ul></li>
+  <li><a href="#further-explorations" id="toc-further-explorations" class="nav-link" data-scroll-target="#further-explorations">Further Explorations</a></li>
+  <li><a href="#implementation-exercises" id="toc-implementation-exercises" class="nav-link" data-scroll-target="#implementation-exercises">Implementation Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Python Basics</li><li class="breadcrumb-item"><a href="../../lectures/lecture13/1_quantum_dynamics.html">Lecture 13</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture13/3_tunneling.html">Tunneling</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Quantum Tunneling Through a Potential Barrier</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Quantum tunneling is one of the most striking manifestations of quantum mechanics with no classical analog. In classical physics, a particle cannot pass through a potential barrier if its energy is less than the barrier height. However, in quantum mechanics, there is a non-zero probability for particles to “tunnel” through barriers that would be insurmountable according to classical physics.</p>
+<p>This phenomenon has numerous practical applications: - Scanning tunneling microscopy (STM) - Nuclear fusion in stars - Alpha decay in radioactive nuclei - Tunnel diodes and other quantum electronic devices</p>
+<p>In this lecture, we’ll explore quantum tunneling by numerically solving the time-dependent Schrödinger equation for a wavepacket approaching a potential barrier. We’ll implement two different numerical methods:</p>
+<ol type="1">
+<li>The <strong>Crank-Nicolson method</strong>: A finite difference approach that is unconditionally stable</li>
+<li>The <strong>Split-Step Fourier method</strong>: An efficient approach that leverages fast Fourier transforms</li>
+</ol>
+<div>
+<div id="pyodide-1">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiZXhlY3V0ZSI6dHJ1ZX0sImNvZGUiOiJpbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmZyb20gc2NpcHkuY29uc3RhbnRzIGltcG9ydCAqXG5mcm9tIHNjaXB5LnNwYXJzZSBpbXBvcnQgZGlhZ3MsIGV5ZVxuZnJvbSBzY2lweS5zcGFyc2UubGluYWxnIGltcG9ydCBlaWdzaCwgaW52XG5mcm9tIHNjaXB5LmZmdHBhY2sgaW1wb3J0IGZmdCwgaWZmdFxuZnJvbSB0aW1lIGltcG9ydCBzbGVlcCwgdGltZVxuXG4jIFBoeXNpY2FsIGNvbnN0YW50cyAodXNpbmcgbmF0dXJhbCB1bml0cyBmb3Igc2ltcGxpY2l0eSlcbmhiYXIgPSAxLjAgICMgUmVkdWNlZCBQbGFuY2sgY29uc3RhbnQgaW4gbmF0dXJhbCB1bml0c1xubSA9IDEuMCAgICAgIyBQYXJ0aWNsZSBtYXNzIGluIG5hdHVyYWwgdW5pdHNcblxuIyBEZWZhdWx0IHBsb3R0aW5nIHBhcmFtZXRlcnNcbnBsdC5yY1BhcmFtcy51cGRhdGUoe1xuICAgICdmb250LnNpemUnOiAxMixcbiAgICAnbGluZXMubGluZXdpZHRoJzogMSxcbiAgICAnbGluZXMubWFya2Vyc2l6ZSc6IDUsXG4gICAgJ2F4ZXMubGFiZWxzaXplJzogMTEsXG4gICAgJ3h0aWNrLmxhYmVsc2l6ZSc6IDEwLFxuICAgICd5dGljay5sYWJlbHNpemUnOiAxMCxcbiAgICAneHRpY2sudG9wJzogVHJ1ZSxcbiAgICAneHRpY2suZGlyZWN0aW9uJzogJ2luJyxcbiAgICAneXRpY2sucmlnaHQnOiBUcnVlLFxuICAgICd5dGljay5kaXJlY3Rpb24nOiAnaW4nLFxufSlcblxuZGVmIGdldF9zaXplKHcsIGgpOlxuICAgIHJldHVybiAody8yLjU0LCBoLzIuNTQpIn0=
+</script>
+</div>
+<section id="the-time-dependent-schrödinger-equation" class="level2">
+<h2 class="anchored" data-anchor-id="the-time-dependent-schrödinger-equation">The Time-Dependent Schrödinger Equation</h2>
+<p>The time-dependent Schrödinger equation governs the evolution of quantum states:</p>
+<p><span class="math display">\[\begin{equation}
+i\hbar\frac{\partial \Psi(x,t)}{\partial t} = \left ( \frac{-\hbar^2}{2m}\frac{\partial^2}{\partial x^2}+V(x,t) \right ) \Psi(x,t)
+\end{equation}\]</span></p>
+<p>Where: - <span class="math inline">\(\Psi(x,t)\)</span> is the wavefunction - <span class="math inline">\(\hbar\)</span> is the reduced Planck constant - <span class="math inline">\(m\)</span> is the particle mass - <span class="math inline">\(V(x,t)\)</span> is the potential energy function</p>
+<p>This equation can be represented in both position space (as above) and momentum space. The transformation between these representations is accomplished using the Fourier transform.</p>
+<section id="position-and-momentum-space-representations" class="level3">
+<h3 class="anchored" data-anchor-id="position-and-momentum-space-representations">Position and Momentum Space Representations</h3>
+<p>The wavefunction in momentum space, <span class="math inline">\(\tilde{\Psi}(k,t)\)</span>, is related to the position-space wavefunction through the Fourier transform:</p>
+<p><span class="math display">\[\begin{equation}
+\tilde{\Psi}(k,t) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \Psi(x,t)e^{-ikx} dx
+\end{equation}\]</span></p>
+<p>And the inverse transformation:</p>
+<p><span class="math display">\[\begin{equation}
+\Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}\tilde{\Psi}(k,t)e^{ikx}dk
+\end{equation}\]</span></p>
+<p>The Schrödinger equation in momentum space becomes:</p>
+<p><span class="math display">\[\begin{equation}
+i\hbar \frac{\partial \tilde{\Psi}}{\partial t} = \frac{\hbar^{2}k^{2}}{2m}\tilde{\Psi} + V\left(i\frac{\partial}{\partial k}\right) \tilde{\Psi}
+\end{equation}\]</span></p>
+<p>This duality between position and momentum space will be particularly useful in our Split-Step method.</p>
+</section>
+</section>
+<section id="method-1-crank-nicolson-scheme" class="level2">
+<h2 class="anchored" data-anchor-id="method-1-crank-nicolson-scheme">Method 1: Crank-Nicolson Scheme</h2>
+<p>The Crank-Nicolson method is a finite difference approach that offers second-order accuracy in time and is unconditionally stable. It effectively balances the forward and backward Euler methods.</p>
+<section id="discretization-of-the-schrödinger-equation" class="level3">
+<h3 class="anchored" data-anchor-id="discretization-of-the-schrödinger-equation">Discretization of the Schrödinger Equation</h3>
+<p>Starting from the time-dependent Schrödinger equation, we can approximate the time derivative using centered differences:</p>
+<p><span class="math display">\[
+\frac{\Psi(x,t+\Delta t)-\Psi(x,t)}{\Delta t} \approx -\frac{i}{\hbar} \left[\frac{1}{2}H\Psi(x,t) + \frac{1}{2}H\Psi(x,t+\Delta t)\right]
+\]</span></p>
+<p>Where <span class="math inline">\(H = \frac{-\hbar^2}{2m}\frac{\partial^2}{\partial x^2} + V(x)\)</span> is the Hamiltonian operator.</p>
+<p>Rearranging this equation:</p>
+<p><span class="math display">\[
+\left(1-\frac{\Delta t}{2i\hbar} H\right)\Psi(x,t+\Delta t) = \left(1+\frac{\Delta t}{2i\hbar} H\right)\Psi(x,t)
+\]</span></p>
+<p>And solving for <span class="math inline">\(\Psi(x,t+\Delta t)\)</span>:</p>
+<p><span class="math display">\[
+\Psi(x,t+\Delta t) = \left(1-\frac{\Delta t}{2i\hbar} H\right)^{-1}\left(1+\frac{\Delta t}{2i\hbar} H\right)\Psi(x,t)
+\]</span></p>
+<p>This gives us a formula for propagating the wavefunction forward in time.</p>
+</section>
+<section id="setting-up-the-simulation-domain" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-the-simulation-domain">Setting Up the Simulation Domain</h3>
+<p>First, we define our spatial domain and time step:</p>
+<div>
+<div id="pyodide-2">
+
+</div>
+<script type="pyodide-2-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgU2V0IHVwIHRoZSBzcGF0aWFsIGdyaWRcbk4gPSA1MDAgICMgTnVtYmVyIG9mIGdyaWQgcG9pbnRzXG54LCBkeCA9IG5wLmxpbnNwYWNlKC0xMDAsIDEwMCwgTiwgcmV0c3RlcD1UcnVlKSAgIyBEb21haW4gZnJvbSAtMTAwIHRvIDEwMFxuXG4jIFNldCB1cCB0aGUgdGltZSBzdGVwXG5kdCA9IDAuNSAgIyBUaW1lIHN0ZXAifQ==
+</script>
+</div>
+</section>
+<section id="initial-wavepacket" class="level3">
+<h3 class="anchored" data-anchor-id="initial-wavepacket">Initial Wavepacket</h3>
+<p>We create a Gaussian wavepacket with an initial momentum (represented by <span class="math inline">\(k_0\)</span>) directed toward the barrier:</p>
+<div>
+<div id="pyodide-3">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImRlZiBnYXVzc194KHgsIHNpZ21hLCB4MCwgazApOlxuICAgIFwiXCJcIlxuICAgIEdlbmVyYXRlIGEgR2F1c3NpYW4gd2F2ZXBhY2tldC5cblxuICAgIFBhcmFtZXRlcnM6XG4gICAgICAgIHg6IFBvc2l0aW9uIGFycmF5XG4gICAgICAgIHNpZ21hOiBXaWR0aCBvZiB0aGUgR2F1c3NpYW5cbiAgICAgICAgeDA6IENlbnRlciBwb3NpdGlvblxuICAgICAgICBrMDogTW9tZW50dW0gKHdhdmVudW1iZXIpXG5cbiAgICBSZXR1cm5zOlxuICAgICAgICBHYXVzc2lhbiB3YXZlcGFja2V0XG4gICAgXCJcIlwiXG4gICAgcmV0dXJuIChucC5leHAoLTAuNSAqICgoeCAtIHgwKS9zaWdtYSkqKjIgKyAxaiAqIHggKiBrMCkvKHNpZ21hICogbnAuc3FydChucC5waSkpKVxuXG4jIENyZWF0ZSBpbml0aWFsIHdhdmVwYWNrZXRcbmswID0gMS4zICAgICAgIyBJbml0aWFsIG1vbWVudHVtXG54MCA9IC01MCAgICAgICMgSW5pdGlhbCBwb3NpdGlvblxuc2lnbWEwID0gNSAgICAjIFdpZHRoIG9mIHdhdmVwYWNrZXRcblxuIyBHZW5lcmF0ZSBhbmQgbm9ybWFsaXplIHdhdmVwYWNrZXRcbnBzaSA9IGdhdXNzX3goeCwgc2lnbWEwLCB4MCwgazApXG5wcm9iID0gbnAuYWJzKHBzaSkqKjJcbnBzaSA9IHBzaS9ucC5zcXJ0KG5wLnN1bShwcm9iKSpkeCkgICMgTm9ybWFsaXplXG5cbiMgVmlzdWFsaXplIGluaXRpYWwgd2F2ZXBhY2tldFxucGx0LmZpZ3VyZShmaWdzaXplPWdldF9zaXplKDEwLCA1KSlcbnBsdC5wbG90KHgsIG5wLmFicyhwc2kpKioyLCBsYWJlbD0nSW5pdGlhbCB3YXZlcGFja2V0JylcbnBsdC54bGFiZWwoJ1Bvc2l0aW9uICh4KScpXG5wbHQueWxhYmVsKCdQcm9iYWJpbGl0eSBkZW5zaXR5ICR8XFxcXFBzaSh4KXxeMiQnKVxuXG5cbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LnNob3coKSJ9
+</script>
+</div>
+</section>
+<section id="potential-barrier-setup" class="level3">
+<h3 class="anchored" data-anchor-id="potential-barrier-setup">Potential Barrier Setup</h3>
+<p>We create a potential barrier that the wavepacket will encounter:</p>
+<div>
+<div id="pyodide-4">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgRGVmaW5lIHRoZSBwb3RlbnRpYWwgYmFycmllclxuYmFycmllcl93aWR0aCA9IDVcbmJhcnJpZXJfaGVpZ2h0ID0gMS4wXG5cbiMgQ3JlYXRlIHBvdGVudGlhbCBlbmVyZ3kgbGFuZHNjYXBlXG5wb3RlbnRpYWwgPSBucC5hcnJheShbYmFycmllcl9oZWlnaHQgaWYgMC4wIDwgeCA8IGJhcnJpZXJfd2lkdGggZWxzZSAwLjAgZm9yIHggaW4geF0pXG5cbiMgVmlzdWFsaXplIHRoZSBwb3RlbnRpYWxcbnBsdC5maWd1cmUoZmlnc2l6ZT1nZXRfc2l6ZSgxMCwgNSkpXG5wbHQucGxvdCh4LCBwb3RlbnRpYWwsICdrJywgbGFiZWw9J1BvdGVudGlhbCBiYXJyaWVyJylcbnBsdC54bGFiZWwoJ1Bvc2l0aW9uICh4KScpXG5wbHQueWxhYmVsKCdQb3RlbnRpYWwgZW5lcmd5IFYoeCknKVxuXG5wbHQudGlnaHRfbGF5b3V0KClcbnBsdC5zaG93KCkifQ==
+</script>
+</div>
+</section>
+<section id="constructing-the-hamiltonian-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="constructing-the-hamiltonian-matrix">Constructing the Hamiltonian Matrix</h3>
+<p>We represent the Hamiltonian operator as a tridiagonal matrix:</p>
+<div>
+<div id="pyodide-5">
+
+</div>
+<script type="pyodide-5-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gc2NpcHkgaW1wb3J0IHNwYXJzZVxuXG4jIENyZWF0ZSB0aGUgSGFtaWx0b25pYW4gbWF0cml4XG5oX2RpYWcgPSBucC5vbmVzKE4pIC8gZHgqKjIgKyBwb3RlbnRpYWwgICMgRGlhZ29uYWwgZWxlbWVudHNcbmhfbm9uX2RpYWcgPSBucC5vbmVzKE4gLSAxKSAqICgtMC41IC8gZHgqKjIpICAjIE9mZi1kaWFnb25hbCBlbGVtZW50c1xuXG4jIENvbnN0cnVjdCB0cmlkaWFnb25hbCBtYXRyaXhcbmhhbWlsdG9uaWFuID0gc3BhcnNlLmRpYWdzKFtoX2RpYWcsIGhfbm9uX2RpYWcsIGhfbm9uX2RpYWddLCBbMCwgMSwgLTFdKSJ9
+</script>
+</div>
+</section>
+<section id="time-evolution-matrices" class="level3">
+<h3 class="anchored" data-anchor-id="time-evolution-matrices">Time Evolution Matrices</h3>
+<p>Following the Crank-Nicolson scheme, we create the matrices needed for time evolution:</p>
+<div>
+<div id="pyodide-6">
+
+</div>
+<script type="pyodide-6-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gc2NpcHkuc3BhcnNlIGltcG9ydCBsaW5hbGcgYXMgbG5cblxuIyBDb25zdHJ1Y3QgdGhlIGltcGxpY2l0IGFuZCBleHBsaWNpdCBvcGVyYXRvcnNcbmltcGxpY2l0ID0gKHNwYXJzZS5leWUoTikgLSBkdCAvIDIuMGogKiBoYW1pbHRvbmlhbikudG9jc2MoKVxuZXhwbGljaXQgPSAoc3BhcnNlLmV5ZShOKSArIGR0IC8gMi4waiAqIGhhbWlsdG9uaWFuKS50b2NzYygpXG5cbiMgQ3JlYXRlIHRoZSBldm9sdXRpb24gbWF0cml4XG5ldm9sdXRpb25fbWF0cml4ID0gbG4uaW52KGltcGxpY2l0KS5kb3QoZXhwbGljaXQpLnRvY3NyKCkifQ==
+</script>
+</div>
+</section>
+<section id="animation-setup" class="level3">
+<h3 class="anchored" data-anchor-id="animation-setup">Animation Setup</h3>
+<p>Now we’ll prepare for animating the wavepacket’s evolution:</p>
+<div>
+<div id="pyodide-7">
+
+</div>
+<script type="pyodide-7-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgU2V0dXAgZm9yIGFuaW1hdGlvblxucHJvYiA9IG5wLmFicyhwc2kpKioyXG5maWcsIGF4ID0gcGx0LnN1YnBsb3RzKDEsIDEsIGZpZ3NpemU9Z2V0X3NpemUoMTAsIDYpKVxucGx0LnhsaW0oLTEwMCwgMTAwKVxucGx0LnlsaW0oMCwgMC4xKVxucGx0LnhsYWJlbCgnUG9zaXRpb24gKHgpJylcbnBsdC55bGFiZWwoJ1Byb2JhYmlsaXR5IGRlbnNpdHkgJHxcXFxcUHNpKHgpfF4yJCcpXG5cbnBsdC5wbG90KHgsIHBvdGVudGlhbCwgJ2snLCBsYWJlbD0nUG90ZW50aWFsJylcblxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuZHJhdygpXG5cbmJhY2tncm91bmQgPSBmaWcuY2FudmFzLmNvcHlfZnJvbV9iYm94KGF4LmJib3gpXG5wb2ludHMgPSBheC5wbG90KHgsIHByb2IsICdnJywgbGFiZWw9J1dhdmVwYWNrZXQnKVswXVxucGx0LmNsb3NlKCkifQ==
+</script>
+</div>
+</section>
+<section id="animation-execution" class="level3">
+<h3 class="anchored" data-anchor-id="animation-execution">Animation Execution</h3>
+<p>The animation will show the wavepacket approaching, partially reflecting from, and partially tunneling through the barrier:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup the canvas for animation</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>canvas <span class="op">=</span> Canvas(width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">300</span>, sync_image_data<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>display(canvas)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the animation</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">200</span>):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Evolve the wavefunction</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    psi <span class="op">=</span> evolution_matrix.dot(psi)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> np.<span class="bu">abs</span>(psi)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Normalize</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    norm <span class="op">=</span> np.<span class="bu">sum</span>(prob)<span class="op">*</span>dx</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">/=</span> norm</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    psi <span class="op">/=</span> np.sqrt(norm)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update the plot</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    fig.canvas.restore_region(background)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    ax.draw_artist(points)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    points.set_data(x, prob)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    fig.canvas.blit(ax.bbox)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.array(fig.canvas.renderer.buffer_rgba())</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> hold_canvas(canvas):</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        canvas.clear()</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        canvas.put_image_data(X)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        sleep(<span class="fl">0.02</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><video src="../../lectures/lecture13/cranck_nicolson_animation.mov" class="content-visible img-fluid" data-when-format="html" controls=""><a href="../../lectures/lecture13/cranck_nicolson_animation.mov">Video</a></video></p>
+<figcaption>Quantum Tunneling Animation (Crank-Nicolson)</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="method-2-split-step-fourier-method" class="level2">
+<h2 class="anchored" data-anchor-id="method-2-split-step-fourier-method">Method 2: Split-Step Fourier Method</h2>
+<p>The Split-Step Fourier method leverages the efficiency of Fast Fourier Transforms (FFT) to solve the Schrödinger equation. It works by separately handling the kinetic and potential energy operators in their respective spaces where they are diagonal.</p>
+<section id="mathematical-foundation" class="level3">
+<h3 class="anchored" data-anchor-id="mathematical-foundation">Mathematical Foundation</h3>
+<p>We can decompose the Hamiltonian into two parts:</p>
+<p><span class="math display">\[\begin{equation}
+\hat{H} = \hat{T} + \hat{V}
+\end{equation}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(\hat{T} = \frac{-\hbar^2}{2m}\frac{\partial^2}{\partial x^2}\)</span> is the kinetic energy operator</li>
+<li><span class="math inline">\(\hat{V} = V(x)\)</span> is the potential energy operator</li>
+</ul>
+<p>The formal solution to the Schrödinger equation is:</p>
+<p><span class="math display">\[\begin{equation}
+\Psi(x, t+\Delta t) = e^{-i\hat{H}\Delta t/\hbar}\Psi(x, t)
+\end{equation}\]</span></p>
+<p>Using the Trotter-Suzuki approximation, we can split this exponential:</p>
+<p><span class="math display">\[\begin{equation}
+e^{-i(\hat{T}+\hat{V})\Delta t/\hbar} \approx e^{-i\hat{V}\Delta t/\hbar}e^{-i\hat{T}\Delta t/\hbar} + \mathcal{O}(\Delta t^2)
+\end{equation}\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The Trotter-Suzuki Approximation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The Trotter-Suzuki approximation is a fundamental technique in quantum physics that allows us to handle non-commuting operators in exponential form. When we have a Hamiltonian that is the sum of two operators <span class="math inline">\(\hat{H} = \hat{A} + \hat{B}\)</span> that don’t commute (<span class="math inline">\([\hat{A},\hat{B}] \neq 0\)</span>), we cannot simply write <span class="math inline">\(e^{-i(\hat{A}+\hat{B})t} = e^{-i\hat{A}t}e^{-i\hat{B}t}\)</span>.</p>
+<p>Instead, the first-order Trotter formula gives us:</p>
+<p><span class="math display">\[e^{-i(\hat{A}+\hat{B})\Delta t} = e^{-i\hat{A}\Delta t}e^{-i\hat{B}\Delta t} + \mathcal{O}(\Delta t^2)\]</span></p>
+<p>For better accuracy, we can use the second-order symmetric splitting:</p>
+<p><span class="math display">\[e^{-i(\hat{A}+\hat{B})\Delta t} = e^{-i\hat{A}\Delta t/2}e^{-i\hat{B}\Delta t}e^{-i\hat{A}\Delta t/2} + \mathcal{O}(\Delta t^3)\]</span></p>
+<p>In the context of the Schrödinger equation, this allows us to separately handle the kinetic energy operator (<span class="math inline">\(\hat{T}\)</span>) and potential energy operator (<span class="math inline">\(\hat{V}\)</span>) in their respective spaces where they are diagonal, making numerical solutions much more efficient.</p>
+</div>
+</div>
+</div>
+<p>This gives us:</p>
+<p><span class="math display">\[\begin{equation}
+\Psi(x, t+\Delta t) \approx e^{-i\hat{V}\Delta t/\hbar}e^{-i\hat{T}\Delta t/\hbar}\Psi(x, t)
+\end{equation}\]</span></p>
+<p>The key insight is that <span class="math inline">\(\hat{T}\)</span> is diagonal in momentum space, while <span class="math inline">\(\hat{V}\)</span> is diagonal in position space. This leads to the algorithm:</p>
+<ol type="1">
+<li>Apply the potential evolution operator: <span class="math inline">\(\Psi_1(x) = e^{-i\hat{V}\Delta t/\hbar}\Psi(x, t)\)</span></li>
+<li>Transform to momentum space: <span class="math inline">\(\tilde{\Psi}_1(k) = \mathcal{F}[\Psi_1(x)]\)</span></li>
+<li>Apply the kinetic evolution operator: <span class="math inline">\(\tilde{\Psi}_2(k) = e^{-i\hat{T}\Delta t/\hbar}\tilde{\Psi}_1(k)\)</span></li>
+<li>Transform back to position space: <span class="math inline">\(\Psi(x, t+\Delta t) = \mathcal{F}^{-1}[\tilde{\Psi}_2(k)]\)</span></li>
+</ol>
+<p>Where <span class="math inline">\(\mathcal{F}\)</span> represents the Fourier transform.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Diagonal Operators in Position and Momentum Space
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>In quantum mechanics, an operator is diagonal in a particular basis if it acts on states in that basis by simply multiplying them by a scalar value.</p>
+<p><strong>Potential Energy Operator in Position Space:</strong> The potential energy operator <span class="math inline">\(\hat{V}\)</span> is defined by its action on a wavefunction:</p>
+<p><span class="math display">\[\hat{V}\Psi(x) = V(x)\Psi(x)\]</span></p>
+<p>This is a simple multiplication operation in position space. If we represent the wavefunction as a vector of values at different positions, the potential operator becomes a diagonal matrix with <span class="math inline">\(V(x_i)\)</span> as its diagonal elements. This is why we can apply the potential evolution operator directly by multiplication:</p>
+<p><span class="math display">\[e^{-i\hat{V}\Delta t/\hbar}\Psi(x) = e^{-iV(x)\Delta t/\hbar}\Psi(x)\]</span></p>
+<p><strong>Kinetic Energy Operator in Momentum Space:</strong> The kinetic energy operator in position space is a differential operator:</p>
+<p><span class="math display">\[\hat{T} = \frac{-\hbar^2}{2m}\frac{\partial^2}{\partial x^2}\]</span></p>
+<p>This is not diagonal in position space (it’s a second derivative). However, in momentum space, it takes a simple form:</p>
+<p><span class="math display">\[\hat{T}\tilde{\Psi}(k) = \frac{\hbar^2 k^2}{2m}\tilde{\Psi}(k)\]</span></p>
+<p>In momentum space, the kinetic energy operator simply multiplies each momentum component by <span class="math inline">\(\frac{\hbar^2 k^2}{2m}\)</span>, making it diagonal. This is why we can efficiently apply the kinetic evolution operator in momentum space:</p>
+<p><span class="math display">\[e^{-i\hat{T}\Delta t/\hbar}\tilde{\Psi}(k) = e^{-i\hbar k^2\Delta t/(2m)}\tilde{\Psi}(k)\]</span></p>
+<p>The Split-Step method exploits this property by applying each operator in the space where it’s diagonal, using Fourier transforms to switch between spaces.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="setting-up-the-simulation-domain-1" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-the-simulation-domain-1">Setting Up the Simulation Domain</h3>
+<div>
+<div id="pyodide-8">
+
+</div>
+<script type="pyodide-8-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgU2V0IG5hdHVyYWwgdW5pdHNcbmhiYXIgPSAxXG5tID0gMVxuXG4jIFNldCB1cCBzcGF0aWFsIGRvbWFpblxuTiA9IDIqKjExICAjIE51bWJlciBvZiBncmlkIHBvaW50cyAocG93ZXIgb2YgMiBmb3IgZWZmaWNpZW50IEZGVClcbmR4ID0gMC4xICAgIyBTcGF0aWFsIHN0ZXBcbnggPSBkeCAqIChucC5hcmFuZ2UoTikgLSAwLjUgKiBOKSAgIyBDZW50ZXIgdGhlIGdyaWQgYXQgeD0wXG5cbiMgU2V0IHVwIHRpbWUgc3RlcFxuZHQgPSAwLjAwNSAgIyBUaW1lIHN0ZXAifQ==
+</script>
+</div>
+</section>
+<section id="potential-barrier-setup-1" class="level3">
+<h3 class="anchored" data-anchor-id="potential-barrier-setup-1">Potential Barrier Setup</h3>
+<div>
+<div id="pyodide-9">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgRGVmaW5lIGJhcnJpZXIgcGFyYW1ldGVyc1xuVjAgPSAxLjAgICMgQmFycmllciBoZWlnaHRcbmEgPSA1LjAgICAjIEJhcnJpZXIgd2lkdGhcblxuIyBDcmVhdGUgcG90ZW50aWFsIGVuZXJneSBsYW5kc2NhcGVcblZfeCA9IG5wLnplcm9zX2xpa2UoeClcblZfeFsoeCA+IDApICYgKHggPCBhKV0gPSBWMCAgIyBDZW50cmFsIGJhcnJpZXJcblZfeFtucC5hYnMoeCkgPiA5OF0gPSAxZTYgICAgIyBIaWdoIGJhcnJpZXJzIGF0IGRvbWFpbiBlZGdlcyB0byBwcmV2ZW50IGJvdW5kYXJ5IGVmZmVjdHNcblxuIyBWaXN1YWxpemUgdGhlIHBvdGVudGlhbFxucGx0LmZpZ3VyZShmaWdzaXplPWdldF9zaXplKDEwLCA2KSlcbnBsdC5wbG90KHgsIFZfeCwgJ2snLCBsYWJlbD0nUG90ZW50aWFsJylcbnBsdC55bGltKDAsIDIpXG5wbHQueGxhYmVsKCdQb3NpdGlvbiAoeCknKVxucGx0LnlsYWJlbCgnUG90ZW50aWFsIGVuZXJneSBWKHgpJylcblxuXG5wbHQudGlnaHRfbGF5b3V0KClcbnBsdC5zaG93KCkifQ==
+</script>
+</div>
+</section>
+<section id="initial-wavepacket-1" class="level3">
+<h3 class="anchored" data-anchor-id="initial-wavepacket-1">Initial Wavepacket</h3>
+<div>
+<div id="pyodide-10">
+
+</div>
+<script type="pyodide-10-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgQ3JlYXRlIGluaXRpYWwgd2F2ZXBhY2tldFxuazAgPSAxLjMgICAgICAjIEluaXRpYWwgbW9tZW50dW1cbngwID0gLTUwICAgICAgIyBJbml0aWFsIHBvc2l0aW9uXG5zaWdtYTAgPSA1ICAgICMgV2lkdGggb2Ygd2F2ZXBhY2tldFxuXG4jIEdlbmVyYXRlIGFuZCBub3JtYWxpemUgd2F2ZXBhY2tldFxucHNpID0gZ2F1c3NfeCh4LCBzaWdtYTAsIHgwLCBrMClcbnByb2IgPSBucC5hYnMocHNpKSoqMlxuZHggPSB4WzFdIC0geFswXVxucHNpID0gcHNpL25wLnNxcnQobnAuc3VtKHByb2IpKmR4KSAgIyBOb3JtYWxpemVcblxuIyBWaXN1YWxpemUgaW5pdGlhbCB3YXZlcGFja2V0XG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTAsIDYpKVxucGx0LnBsb3QoeCwgbnAuYWJzKHBzaSkqKjIsIGxhYmVsPSdJbml0aWFsIHdhdmVwYWNrZXQnKVxucGx0LnBsb3QoeCwgVl94LCAnaycsIGxhYmVsPSdQb3RlbnRpYWwnKVxucGx0LnhsYWJlbCgnUG9zaXRpb24gKHgpJylcbnBsdC55bGFiZWwocidQcm9iYWJpbGl0eSBkZW5zaXR5ICR8XFxQc2koeCl8XjIkJylcblxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpIn0=
+</script>
+</div>
+</section>
+<section id="setting-up-the-fourier-transform-space" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-the-fourier-transform-space">Setting Up the Fourier Transform Space</h3>
+<div>
+<div id="pyodide-11">
+
+</div>
+<script type="pyodide-11-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgU2V0IHVwIG1vbWVudHVtIHNwYWNlIGdyaWRcbk4gPSBsZW4oeClcbmR4ID0geFsxXSAtIHhbMF1cbmswID0gLW5wLnBpL2R4ICAjIE55cXVpc3QgZnJlcXVlbmN5XG5kayA9IDIqbnAucGkgLyAoTiAqIGR4KVxuayA9IGswICsgZGsgKiBucC5hcmFuZ2UoTilcblxuIyBQcmVwYXJlIHdhdmVmdW5jdGlvbiBmb3IgRkZUXG5wc2lfbW9keCA9IHBzaSAqIG5wLmV4cCgtMWogKiBrWzBdICogeCkgKiBkeCAvIG5wLnNxcnQoMiAqIG5wLnBpKSJ9
+</script>
+</div>
+</section>
+<section id="precomputing-phase-factors" class="level3">
+<h3 class="anchored" data-anchor-id="precomputing-phase-factors">Precomputing Phase Factors</h3>
+<p>Both the potential and kinetic evolution operators involve phase factors that remain constant throughout the simulation. We can precompute them:</p>
+<div>
+<div id="pyodide-12">
+
+</div>
+<script type="pyodide-12-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgUHJlY29tcHV0ZSBwaGFzZSBmYWN0b3JzIGZvciBwb3RlbnRpYWwgYW5kIGtpbmV0aWMgdGVybXNcbnBoYXNlX3ggPSBucC5leHAoLTFqICogVl94ICogZHQgLyBoYmFyKSAgIyBQb3RlbnRpYWwgZXZvbHV0aW9uXG5waGFzZV9rID0gbnAuZXhwKC0xaiAqIGhiYXIgKiBrKioyICogZHQgLyAoMiAqIG0pKSAgIyBLaW5ldGljIGV2b2x1dGlvbiJ9
+</script>
+</div>
+</section>
+<section id="animation-setup-1" class="level3">
+<h3 class="anchored" data-anchor-id="animation-setup-1">Animation Setup</h3>
+<div>
+<div id="pyodide-13">
+
+</div>
+<script type="pyodide-13-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgU2V0dXAgZm9yIGFuaW1hdGlvblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cygxLCAxLCBmaWdzaXplPWdldF9zaXplKDEwLCA2KSlcbnBsdC54bGltKC0xMDAsIDEwMClcbnBsdC55bGltKDAsIDAuMSlcbnBsdC54bGFiZWwoJ1Bvc2l0aW9uICh4KScpXG5wbHQueWxhYmVsKCdQcm9iYWJpbGl0eSBkZW5zaXR5ICR8XFxcXFBzaSh4KXxeMiQnKVxuXG5wbHQucGxvdCh4LCBWX3gsICdrJywgbGFiZWw9J1BvdGVudGlhbCcpXG5cbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LmRyYXcoKVxuXG5iYWNrZ3JvdW5kID0gZmlnLmNhbnZhcy5jb3B5X2Zyb21fYmJveChheC5iYm94KVxucG9pbnRzID0gYXgucGxvdCh4LCBucC5hYnMocHNpKSoqMiwgJ2cnKVswXVxucGx0LmNsb3NlKCkifQ==
+</script>
+</div>
+</section>
+<section id="animation-execution-1" class="level3">
+<h3 class="anchored" data-anchor-id="animation-execution-1">Animation Execution</h3>
+<p>The animation will show the wavepacket tunneling through the potential barrier:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup the canvas for animation</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>canvas <span class="op">=</span> Canvas(width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">300</span>, sync_image_data<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>display(canvas)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the animation</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    fig.canvas.restore_region(background)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ax.draw_artist(points)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Perform multiple time steps between animation frames for smoother results</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Apply potential evolution</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        psi_modx <span class="op">=</span> psi_modx <span class="op">*</span> phase_x</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Transform to momentum space</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        psi_modk <span class="op">=</span> fft(psi_modx)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Apply kinetic evolution</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        psi_modk <span class="op">=</span> psi_modk <span class="op">*</span> phase_k</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Transform back to position space</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        psi_modx <span class="op">=</span> ifft(psi_modk)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert back to standard wavefunction</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        psi <span class="op">=</span> psi_modx <span class="op">*</span> np.exp(<span class="ot">1j</span> <span class="op">*</span> k[<span class="dv">0</span>] <span class="op">*</span> x) <span class="op">*</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi) <span class="op">/</span> dx</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Normalize</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> np.<span class="bu">abs</span>(psi)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        norm <span class="op">=</span> np.<span class="bu">sum</span>(prob) <span class="op">*</span> dx</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        psi <span class="op">=</span> psi <span class="op">/</span> np.sqrt(norm)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> prob <span class="op">/</span> norm</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update the plot</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    points.set_data(x, prob)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    fig.canvas.blit(ax.bbox)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.array(fig.canvas.renderer.buffer_rgba())</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> hold_canvas(canvas):</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        canvas.clear()</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        canvas.put_image_data(X)</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        sleep(<span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><video src="../../lectures/lecture13/split_step_animation.mov" class="content-visible img-fluid" data-when-format="html" controls=""><a href="../../lectures/lecture13/split_step_animation.mov">Video</a></video></p>
+<figcaption>Quantum Tunneling Animation (Split-Step)</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="physical-interpretation-and-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="physical-interpretation-and-analysis">Physical Interpretation and Analysis</h2>
+<section id="whats-happening-in-the-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="whats-happening-in-the-simulation">What’s Happening in the Simulation?</h3>
+<p>In both methods, we observe:</p>
+<ol type="1">
+<li><strong>Incident Wavepacket</strong>: The Gaussian wavepacket approaches the barrier from the left</li>
+<li><strong>Reflection and Transmission</strong>: Upon reaching the barrier, the wavepacket splits:
+<ul>
+<li>A portion is reflected back (reflection)</li>
+<li>A portion passes through the barrier (tunneling)</li>
+</ul></li>
+<li><strong>Interference</strong>: After reflection, the incident and reflected components interfere, creating oscillations in the probability density</li>
+</ol>
+</section>
+<section id="factors-affecting-tunneling-probability" class="level3">
+<h3 class="anchored" data-anchor-id="factors-affecting-tunneling-probability">Factors Affecting Tunneling Probability</h3>
+<p>The tunneling probability depends on several factors:</p>
+<ol type="1">
+<li><strong>Barrier Height (<span class="math inline">\(V_0\)</span>)</strong>: Higher barriers reduce tunneling probability exponentially</li>
+<li><strong>Barrier Width (<span class="math inline">\(a\)</span>)</strong>: Wider barriers reduce tunneling probability exponentially</li>
+<li><strong>Particle Energy</strong>: Higher energy particles (larger <span class="math inline">\(k_0\)</span>) have higher tunneling probabilities</li>
+<li><strong>Particle Mass</strong>: Heavier particles have lower tunneling probabilities</li>
+</ol>
+</section>
+<section id="connection-to-quantum-theory" class="level3">
+<h3 class="anchored" data-anchor-id="connection-to-quantum-theory">Connection to Quantum Theory</h3>
+<p>For a plane wave with energy <span class="math inline">\(E = \frac{\hbar^2k^2}{2m}\)</span> incident on a rectangular barrier of height <span class="math inline">\(V_0\)</span> and width <span class="math inline">\(a\)</span>, the transmission coefficient in the case <span class="math inline">\(E &lt; V_0\)</span> is:</p>
+<p><span class="math display">\[\begin{equation}
+T \approx \frac{16E(V_0-E)}{V_0^2} e^{-2\kappa a}
+\end{equation}\]</span></p>
+<p>Where <span class="math inline">\(\kappa = \sqrt{\frac{2m(V_0-E)}{\hbar^2}}\)</span> is the attenuation coefficient inside the barrier.</p>
+<p>This exponential dependence on barrier width explains why quantum tunneling is primarily observed at microscopic scales.</p>
+</section>
+</section>
+<section id="comparison-of-numerical-methods" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-of-numerical-methods">Comparison of Numerical Methods</h2>
+<p>Both the Crank-Nicolson and Split-Step methods accurately simulate quantum tunneling, but they have different characteristics:</p>
+<section id="crank-nicolson-method" class="level3">
+<h3 class="anchored" data-anchor-id="crank-nicolson-method">Crank-Nicolson Method</h3>
+<ul>
+<li><strong>Pros</strong>: Unconditionally stable, second-order accurate in both space and time</li>
+<li><strong>Cons</strong>: Requires matrix inversion, which can be computationally expensive for large systems</li>
+</ul>
+</section>
+<section id="split-step-fourier-method" class="level3">
+<h3 class="anchored" data-anchor-id="split-step-fourier-method">Split-Step Fourier Method</h3>
+<ul>
+<li><strong>Pros</strong>: Very efficient for periodic boundary conditions, leverages fast FFT algorithms</li>
+<li><strong>Cons</strong>: Requires care with boundary conditions, first-order accurate in time (though higher-order splitting schemes exist)</li>
+</ul>
+</section>
+</section>
+<section id="further-explorations" class="level2">
+<h2 class="anchored" data-anchor-id="further-explorations">Further Explorations</h2>
+<p>Here are some suggestions for further exploration:</p>
+<ol type="1">
+<li><strong>Momentum Space Analysis</strong>: Examine how the wavepacket’s momentum distribution changes during tunneling</li>
+<li><strong>Barrier Parameters</strong>: Investigate how tunneling probability changes with barrier height and width</li>
+<li><strong>Wavepacket Parameters</strong>: Explore how the initial momentum and width of the wavepacket affect tunneling</li>
+<li><strong>Different Potentials</strong>: Try other potential shapes, such as:
+<ul>
+<li>Double barriers (resonant tunneling)</li>
+<li>Smooth potentials (e.g., Gaussian barriers)</li>
+<li>Time-dependent barriers</li>
+</ul></li>
+<li><strong>Quantum Reflection</strong>: Study reflection from potential wells instead of barriers</li>
+</ol>
+</section>
+<section id="implementation-exercises" class="level2">
+<h2 class="anchored" data-anchor-id="implementation-exercises">Implementation Exercises</h2>
+<ol type="1">
+<li>Modify the code to calculate and plot the transmission and reflection coefficients as a function of incident momentum</li>
+<li>Implement a double-barrier potential and observe resonant tunneling</li>
+<li>Visualize the wavefunction in momentum space alongside position space</li>
+<li>Implement a higher-order Split-Step method (e.g., second-order Strang splitting)</li>
+<li>Add measurement simulation to observe wavefunction collapse</li>
+</ol>
+
+
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImluZGV4VVJMIjoiaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L3B5b2RpZGUvdjAuMjYuMS9mdWxsLyJ9LCJwYWNrYWdlcyI6eyJwa2dzIjpbInB5b2RpZGVfaHR0cCIsIm1pY3JvcGlwIiwiaXB5dGhvbiIsIm1hdHBsb3RsaWIiLCJudW1weSIsInNjaXB5Il19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTEzIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEzLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTMtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEyIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEyLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTExIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTExLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTAgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTkiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl85ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzkgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzksIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS04LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzggPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl83ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS03LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoiX3B5b2RpZGVfdmFsdWVfMSA9IHtcbiAgY29uc3QgeyBoaWdobGlnaHRQeXRob24sIGI2NERlY29kZX0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBldmFsdWF0aW9uIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oe1xuICAgIGlkOiBcInB5b2RpZGUtMS1jb250ZW50c1wiLFxuICAgIGVjaG86IHRydWUsXG4gICAgb3V0cHV0OiB0cnVlXG4gIH0sIGJsb2NrLmF0dHIpO1xuXG4gIC8vIEV2YWx1YXRlIHRoZSBwcm92aWRlZCBQeXRob24gY29kZVxuICBjb25zdCByZXN1bHQgPSBweW9kaWRlT2pzLnByb2Nlc3Moe2NvZGU6IGJsb2NrLmNvZGUsIG9wdGlvbnN9LCB7fSk7XG5cbiAgLy8gRWFybHkgeWllbGQgd2hpbGUgd2Ugd2FpdCBmb3IgdGhlIGZpcnN0IGV2YWx1YXRpb24gYW5kIHJlbmRlclxuICBpZiAob3B0aW9ucy5vdXRwdXQgJiYgIShcIjFcIiBpbiBweW9kaWRlT2pzLnJlbmRlcmVkT2pzKSkge1xuICAgIGNvbnN0IGNvbnRhaW5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG4gICAgY29uc3Qgc3Bpbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG5cbiAgICBpZiAob3B0aW9ucy5lY2hvKSB7XG4gICAgICAvLyBTaG93IG91dHB1dCBhcyBoaWdobGlnaHRlZCBzb3VyY2VcbiAgICAgIGNvbnN0IHByZUVsZW0gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwicHJlXCIpO1xuICAgICAgY29udGFpbmVyLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZVwiO1xuICAgICAgcHJlRWxlbS5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGUgcHl0aG9uXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKGhpZ2hsaWdodFB5dGhvbihibG9jay5jb2RlKSk7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ncm93IHNwaW5uZXItZ3Jvdy1zbSBtLTIgcG9zaXRpb24tYWJzb2x1dGUgdG9wLTAgZW5kLTBcIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQocHJlRWxlbSk7XG4gICAgfSBlbHNlIHtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWJvcmRlciBzcGlubmVyLWJvcmRlci1zbVwiO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgIH1cblxuICAgIHlpZWxkIGNvbnRhaW5lcjtcbiAgfVxuXG4gIHB5b2RpZGVPanMucmVuZGVyZWRPanNbXCIxXCJdID0gdHJ1ZTtcbiAgeWllbGQgYXdhaXQgcmVzdWx0O1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtcHJlbHVkZSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InB5b2RpZGVPanMgPSB7XG4gIGNvbnN0IHtcbiAgICBQeW9kaWRlRXZhbHVhdG9yLFxuICAgIFB5b2RpZGVFbnZpcm9ubWVudE1hbmFnZXIsXG4gICAgc2V0dXBQeXRob24sXG4gICAgc3RhcnRQeW9kaWRlV29ya2VyLFxuICAgIGI2NERlY29kZSxcbiAgICBjb2xsYXBzZVBhdGgsXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+W10=
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W119
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../lectures/lecture13";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "../..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/fcichos\.github\.io\/CBPM\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../lectures/lecture13/2_particle_in_a_box.html" class="pagination-link" aria-label="Wavepacket in Box">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Wavepacket in Box</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
