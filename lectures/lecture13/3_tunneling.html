@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantum Tunneling Through a Potential Barrier – Computer-Based Physical Modelling</title>
+<title>Tunneling through a barrier – Computer-Based Physical Modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,14 +58,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../lectures/lecture13/2_particle_in_a_box.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -113,6 +112,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </script>
 <script type="module" src="../../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
 <link href="../../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -175,7 +178,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Python Basics</li><li class="breadcrumb-item"><a href="../../lectures/lecture13/1_quantum_dynamics.html">Lecture 13</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture13/3_tunneling.html">Tunneling</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Tunneling through a barrier</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -571,9 +574,20 @@ window.Quarto = {
  <span class="menu-text">Wavepacket in Box</span></a>
   </div>
 </li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true">
+ <span class="menu-text">Lecture 14</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../lectures/lecture13/3_tunneling.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../lectures/lecture14/3_tunneling.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tunneling</span></a>
   </div>
 </li>
@@ -584,22 +598,22 @@ window.Quarto = {
         <li class="px-0"><hr class="sidebar-divider hi "></li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true">
- <span class="menu-text">Seminars</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true">
- <span class="menu-text">Seminar01</span></a>
+ <span class="menu-text">Seminars</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+ <span class="menu-text">Seminar01</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar01/00-seminar01.html" class="sidebar-item-text sidebar-link">
@@ -616,13 +630,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar02</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar02/md1.html" class="sidebar-item-text sidebar-link">
@@ -633,13 +647,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar03</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-19" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-19" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar03/md2.html" class="sidebar-item-text sidebar-link">
@@ -650,13 +664,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar04</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-20" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-20" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar04/md3.html" class="sidebar-item-text sidebar-link">
@@ -667,13 +681,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar05</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-21" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-21" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar05/seminar05.html" class="sidebar-item-text sidebar-link">
@@ -684,13 +698,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar06</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-22" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-22" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar06/seminar06.html" class="sidebar-item-text sidebar-link">
@@ -701,13 +715,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar07</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-23" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-23" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar07/seminar07.html" class="sidebar-item-text sidebar-link">
@@ -718,13 +732,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar08</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-24" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-24" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-25" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar08/seminar08.html" class="sidebar-item-text sidebar-link">
@@ -735,13 +749,13 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="true">
  <span class="menu-text">Seminar09</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-25" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-26" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-25" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-26" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../seminars/seminar09/biot_savart.html" class="sidebar-item-text sidebar-link">
@@ -762,54 +776,36 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-time-dependent-schrödinger-equation" id="toc-the-time-dependent-schrödinger-equation" class="nav-link active" data-scroll-target="#the-time-dependent-schrödinger-equation">The Time-Dependent Schrödinger Equation</a>
+  <li><a href="#schrödinger-equation-for-the-momentum" id="toc-schrödinger-equation-for-the-momentum" class="nav-link active" data-scroll-target="#schrödinger-equation-for-the-momentum">Schrödinger equation for the momentum</a></li>
+  <li><a href="#crank-nicolson-solution" id="toc-crank-nicolson-solution" class="nav-link" data-scroll-target="#crank-nicolson-solution">Crank Nicolson Solution</a>
   <ul class="collapse">
-  <li><a href="#position-and-momentum-space-representations" id="toc-position-and-momentum-space-representations" class="nav-link" data-scroll-target="#position-and-momentum-space-representations">Position and Momentum Space Representations</a></li>
+  <li><a href="#setup-domain" id="toc-setup-domain" class="nav-link" data-scroll-target="#setup-domain">Setup Domain</a></li>
+  <li><a href="#initial-conditions" id="toc-initial-conditions" class="nav-link" data-scroll-target="#initial-conditions">Initial Conditions</a></li>
+  <li><a href="#matrix-setup" id="toc-matrix-setup" class="nav-link" data-scroll-target="#matrix-setup">Matrix Setup</a></li>
+  <li><a href="#propagation-matrix" id="toc-propagation-matrix" class="nav-link" data-scroll-target="#propagation-matrix">Propagation Matrix</a></li>
+  <li><a href="#animation-setup" id="toc-animation-setup" class="nav-link" data-scroll-target="#animation-setup">Animation setup</a></li>
+  <li><a href="#animation" id="toc-animation" class="nav-link" data-scroll-target="#animation">Animation</a></li>
   </ul></li>
-  <li><a href="#method-1-crank-nicolson-scheme" id="toc-method-1-crank-nicolson-scheme" class="nav-link" data-scroll-target="#method-1-crank-nicolson-scheme">Method 1: Crank-Nicolson Scheme</a>
+  <li><a href="#split-step-method" id="toc-split-step-method" class="nav-link" data-scroll-target="#split-step-method">Split Step Method</a>
   <ul class="collapse">
-  <li><a href="#discretization-of-the-schrödinger-equation" id="toc-discretization-of-the-schrödinger-equation" class="nav-link" data-scroll-target="#discretization-of-the-schrödinger-equation">Discretization of the Schrödinger Equation</a></li>
-  <li><a href="#setting-up-the-simulation-domain" id="toc-setting-up-the-simulation-domain" class="nav-link" data-scroll-target="#setting-up-the-simulation-domain">Setting Up the Simulation Domain</a></li>
-  <li><a href="#initial-wavepacket" id="toc-initial-wavepacket" class="nav-link" data-scroll-target="#initial-wavepacket">Initial Wavepacket</a></li>
-  <li><a href="#potential-barrier-setup" id="toc-potential-barrier-setup" class="nav-link" data-scroll-target="#potential-barrier-setup">Potential Barrier Setup</a></li>
-  <li><a href="#constructing-the-hamiltonian-matrix" id="toc-constructing-the-hamiltonian-matrix" class="nav-link" data-scroll-target="#constructing-the-hamiltonian-matrix">Constructing the Hamiltonian Matrix</a></li>
-  <li><a href="#time-evolution-matrices" id="toc-time-evolution-matrices" class="nav-link" data-scroll-target="#time-evolution-matrices">Time Evolution Matrices</a></li>
-  <li><a href="#animation-setup" id="toc-animation-setup" class="nav-link" data-scroll-target="#animation-setup">Animation Setup</a></li>
-  <li><a href="#animation-execution" id="toc-animation-execution" class="nav-link" data-scroll-target="#animation-execution">Animation Execution</a></li>
+  <li><a href="#setup-domain-1" id="toc-setup-domain-1" class="nav-link" data-scroll-target="#setup-domain-1">Setup Domain</a></li>
+  <li><a href="#potential-energy-landscape" id="toc-potential-energy-landscape" class="nav-link" data-scroll-target="#potential-energy-landscape">Potential energy landscape</a></li>
+  <li><a href="#initial-wavepacket" id="toc-initial-wavepacket" class="nav-link" data-scroll-target="#initial-wavepacket">Initial wavepacket</a></li>
+  <li><a href="#fourier-transform-setup" id="toc-fourier-transform-setup" class="nav-link" data-scroll-target="#fourier-transform-setup">Fourier Transform Setup</a></li>
+  <li><a href="#phase-factor-per-timestep" id="toc-phase-factor-per-timestep" class="nav-link" data-scroll-target="#phase-factor-per-timestep">Phase Factor per Timestep</a></li>
+  <li><a href="#animation-setup-1" id="toc-animation-setup-1" class="nav-link" data-scroll-target="#animation-setup-1">Animation setup</a></li>
+  <li><a href="#animation-1" id="toc-animation-1" class="nav-link" data-scroll-target="#animation-1">Animation</a></li>
   </ul></li>
-  <li><a href="#method-2-split-step-fourier-method" id="toc-method-2-split-step-fourier-method" class="nav-link" data-scroll-target="#method-2-split-step-fourier-method">Method 2: Split-Step Fourier Method</a>
-  <ul class="collapse">
-  <li><a href="#mathematical-foundation" id="toc-mathematical-foundation" class="nav-link" data-scroll-target="#mathematical-foundation">Mathematical Foundation</a></li>
-  <li><a href="#setting-up-the-simulation-domain-1" id="toc-setting-up-the-simulation-domain-1" class="nav-link" data-scroll-target="#setting-up-the-simulation-domain-1">Setting Up the Simulation Domain</a></li>
-  <li><a href="#potential-barrier-setup-1" id="toc-potential-barrier-setup-1" class="nav-link" data-scroll-target="#potential-barrier-setup-1">Potential Barrier Setup</a></li>
-  <li><a href="#initial-wavepacket-1" id="toc-initial-wavepacket-1" class="nav-link" data-scroll-target="#initial-wavepacket-1">Initial Wavepacket</a></li>
-  <li><a href="#setting-up-the-fourier-transform-space" id="toc-setting-up-the-fourier-transform-space" class="nav-link" data-scroll-target="#setting-up-the-fourier-transform-space">Setting Up the Fourier Transform Space</a></li>
-  <li><a href="#precomputing-phase-factors" id="toc-precomputing-phase-factors" class="nav-link" data-scroll-target="#precomputing-phase-factors">Precomputing Phase Factors</a></li>
-  <li><a href="#animation-setup-1" id="toc-animation-setup-1" class="nav-link" data-scroll-target="#animation-setup-1">Animation Setup</a></li>
-  <li><a href="#animation-execution-1" id="toc-animation-execution-1" class="nav-link" data-scroll-target="#animation-execution-1">Animation Execution</a></li>
-  </ul></li>
-  <li><a href="#physical-interpretation-and-analysis" id="toc-physical-interpretation-and-analysis" class="nav-link" data-scroll-target="#physical-interpretation-and-analysis">Physical Interpretation and Analysis</a>
-  <ul class="collapse">
-  <li><a href="#whats-happening-in-the-simulation" id="toc-whats-happening-in-the-simulation" class="nav-link" data-scroll-target="#whats-happening-in-the-simulation">What’s Happening in the Simulation?</a></li>
-  <li><a href="#factors-affecting-tunneling-probability" id="toc-factors-affecting-tunneling-probability" class="nav-link" data-scroll-target="#factors-affecting-tunneling-probability">Factors Affecting Tunneling Probability</a></li>
-  <li><a href="#connection-to-quantum-theory" id="toc-connection-to-quantum-theory" class="nav-link" data-scroll-target="#connection-to-quantum-theory">Connection to Quantum Theory</a></li>
-  </ul></li>
-  <li><a href="#comparison-of-numerical-methods" id="toc-comparison-of-numerical-methods" class="nav-link" data-scroll-target="#comparison-of-numerical-methods">Comparison of Numerical Methods</a>
-  <ul class="collapse">
-  <li><a href="#crank-nicolson-method" id="toc-crank-nicolson-method" class="nav-link" data-scroll-target="#crank-nicolson-method">Crank-Nicolson Method</a></li>
-  <li><a href="#split-step-fourier-method" id="toc-split-step-fourier-method" class="nav-link" data-scroll-target="#split-step-fourier-method">Split-Step Fourier Method</a></li>
-  </ul></li>
-  <li><a href="#further-explorations" id="toc-further-explorations" class="nav-link" data-scroll-target="#further-explorations">Further Explorations</a></li>
-  <li><a href="#where-to-go-from-here" id="toc-where-to-go-from-here" class="nav-link" data-scroll-target="#where-to-go-from-here">Where to go from here</a></li>
+  <li><a href="#where-to-go-from-here" id="toc-where-to-go-from-here" class="nav-link" data-scroll-target="#where-to-go-from-here">Where to go from here?</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Python Basics</li><li class="breadcrumb-item"><a href="../../lectures/lecture13/1_quantum_dynamics.html">Lecture 13</a></li><li class="breadcrumb-item"><a href="../../lectures/lecture13/3_tunneling.html">Tunneling</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Quantum Tunneling Through a Potential Barrier</h1>
+<h1 class="title">Tunneling through a barrier</h1>
 </div>
 
 
@@ -826,476 +822,422 @@ window.Quarto = {
 </header>
 
 
-<p>Quantum tunneling is one of the most striking manifestations of quantum mechanics with no classical analog. In classical physics, a particle cannot pass through a potential barrier if its energy is less than the barrier height. However, in quantum mechanics, there is a non-zero probability for particles to “tunnel” through barriers that would be insurmountable according to classical physics.</p>
-<p>This phenomenon has numerous practical applications:</p>
-<ul>
-<li>Scanning tunneling microscopy (STM)</li>
-<li>Nuclear fusion in stars</li>
-<li>Alpha decay in radioactive nuclei</li>
-<li>Tunnel diodes and other quantum electronic devices</li>
-</ul>
-<p>In this lecture, we’ll explore quantum tunneling by numerically solving the time-dependent Schrödinger equation for a wavepacket approaching a potential barrier. We’ll implement two different numerical methods:</p>
-<ol type="1">
-<li>The <strong>Crank-Nicolson method</strong>: A finite difference approach that is unconditionally stable</li>
-<li>The <strong>Split-Step Fourier method</strong>: An efficient approach that leverages fast Fourier transforms</li>
-</ol>
-<div>
-<div id="pyodide-1">
-
+<p>We will develop two different solutions of the same problem. Solution 1 is with the Crank Nicolson scheme and solution 2 with the Split Step method, which might be a bit more tricky.</p>
+<div id="cell-3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;skip&quot;}}" data-tags="[]" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.constants <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.sparse <span class="im">import</span> diags</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.fftpack <span class="im">import</span> fft,ifft</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> sparse <span class="im">as</span> sparse</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.sparse <span class="im">import</span> linalg <span class="im">as</span> ln</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> time <span class="im">import</span> sleep,time</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipycanvas <span class="im">import</span> MultiCanvas, hold_canvas,Canvas</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>config InlineBackend.figure_format <span class="op">=</span> <span class="st">'retina'</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># default values for plotting</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({<span class="st">'font.size'</span>: <span class="dv">16</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'axes.titlesize'</span>: <span class="dv">18</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'axes.labelsize'</span>: <span class="dv">16</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'axes.labelpad'</span>: <span class="dv">14</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'lines.linewidth'</span>: <span class="dv">1</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'lines.markersize'</span>: <span class="dv">10</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'xtick.labelsize'</span> : <span class="dv">16</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'ytick.labelsize'</span> : <span class="dv">16</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'xtick.top'</span> : <span class="va">True</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'xtick.direction'</span> : <span class="st">'in'</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'ytick.right'</span> : <span class="va">True</span>,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>                     <span class="st">'ytick.direction'</span> : <span class="st">'in'</span>,}) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<script type="pyodide-1-contents">
-eyJhdHRyIjp7ImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiZXhlY3V0ZSI6dHJ1ZX0sImNvZGUiOiJpbXBvcnQgbnVtcHkgYXMgbnBcbmltcG9ydCBtYXRwbG90bGliLnB5cGxvdCBhcyBwbHRcbmZyb20gc2NpcHkuY29uc3RhbnRzIGltcG9ydCAqXG5mcm9tIHNjaXB5LnNwYXJzZSBpbXBvcnQgZGlhZ3MsIGV5ZVxuZnJvbSBzY2lweS5zcGFyc2UubGluYWxnIGltcG9ydCBlaWdzaCwgaW52XG5mcm9tIHNjaXB5LmZmdHBhY2sgaW1wb3J0IGZmdCwgaWZmdFxuZnJvbSB0aW1lIGltcG9ydCBzbGVlcCwgdGltZVxuXG4jIFBoeXNpY2FsIGNvbnN0YW50cyAodXNpbmcgbmF0dXJhbCB1bml0cyBmb3Igc2ltcGxpY2l0eSlcbmhiYXIgPSAxLjAgICMgUmVkdWNlZCBQbGFuY2sgY29uc3RhbnQgaW4gbmF0dXJhbCB1bml0c1xubSA9IDEuMCAgICAgIyBQYXJ0aWNsZSBtYXNzIGluIG5hdHVyYWwgdW5pdHNcblxuIyBEZWZhdWx0IHBsb3R0aW5nIHBhcmFtZXRlcnNcbnBsdC5yY1BhcmFtcy51cGRhdGUoe1xuICAgICdmb250LnNpemUnOiAxMixcbiAgICAnbGluZXMubGluZXdpZHRoJzogMSxcbiAgICAnbGluZXMubWFya2Vyc2l6ZSc6IDUsXG4gICAgJ2F4ZXMubGFiZWxzaXplJzogMTEsXG4gICAgJ3h0aWNrLmxhYmVsc2l6ZSc6IDEwLFxuICAgICd5dGljay5sYWJlbHNpemUnOiAxMCxcbiAgICAneHRpY2sudG9wJzogVHJ1ZSxcbiAgICAneHRpY2suZGlyZWN0aW9uJzogJ2luJyxcbiAgICAneXRpY2sucmlnaHQnOiBUcnVlLFxuICAgICd5dGljay5kaXJlY3Rpb24nOiAnaW4nLFxufSlcblxuZGVmIGdldF9zaXplKHcsIGgpOlxuICAgIHJldHVybiAody8yLjU0LCBoLzIuNTQpIn0=
-</script>
-</div>
-<section id="the-time-dependent-schrödinger-equation" class="level2">
-<h2 class="anchored" data-anchor-id="the-time-dependent-schrödinger-equation">The Time-Dependent Schrödinger Equation</h2>
-<p>The time-dependent Schrödinger equation governs the evolution of quantum states:</p>
+<section id="schrödinger-equation-for-the-momentum" class="level2">
+<h2 class="anchored" data-anchor-id="schrödinger-equation-for-the-momentum">Schrödinger equation for the momentum</h2>
+<p>This time we want to solve the Schrödinger equation for some special situation i.e.&nbsp;a wave packet that travels towards a barrier. We have written the Schrödinger equation before, but shortly need that again</p>
 <p><span class="math display">\[\begin{equation}
-i\hbar\frac{\partial \Psi(x,t)}{\partial t} = \left ( \frac{-\hbar^2}{2m}\frac{\partial^2}{\partial x^2}+V(x,t) \right ) \Psi(x,t)
+i\hbar\frac{\partial \Psi(x,t)}{\partial t} = \left ( \frac{-\hbar^2 }{2m}\frac{\partial^2}{\partial x^2}+V(x,t) \right ) \Psi(x,t)
 \end{equation}\]</span></p>
-<p>Where:</p>
-<ul>
-<li><span class="math inline">\(\Psi(x,t)\)</span> is the wavefunction</li>
-<li><span class="math inline">\(\hbar\)</span> is the reduced Planck constant</li>
-<li><span class="math inline">\(m\)</span> is the particle mass</li>
-<li><span class="math inline">\(V(x,t)\)</span> is the potential energy function</li>
-</ul>
-<p>This equation can be represented in both position space (as above) and momentum space. The transformation between these representations is accomplished using the Fourier transform.</p>
-<section id="position-and-momentum-space-representations" class="level3">
-<h3 class="anchored" data-anchor-id="position-and-momentum-space-representations">Position and Momentum Space Representations</h3>
-<p>The wavefunction in momentum space, <span class="math inline">\(\tilde{\Psi}(k,t)\)</span>, is related to the position-space wavefunction through the Fourier transform:</p>
+<p>While this is the Schrödinger equation in position space, we may also obtain a Schrödinger equation for the momentum (k-) space. To do so, we take the fourier transform of the wavefunction</p>
 <p><span class="math display">\[\begin{equation}
-\tilde{\Psi}(k,t) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \Psi(x,t)e^{-ikx} dx
+\tilde{\Psi}(k,t)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{\infty} \Psi(x,t)e^{-ikx} dx
 \end{equation}\]</span></p>
-<p>And the inverse transformation:</p>
+<p>which yields the wavefunction in momentum space.</p>
+<p>We can also do that backwards to express the relation between the position space and the momentum space wavefunction.</p>
 <p><span class="math display">\[\begin{equation}
-\Psi(x,t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}\tilde{\Psi}(k,t)e^{ikx}dk
+\Psi(x,t)=\frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty}\tilde{\Psi}(k,t)e^{ikx}dk
 \end{equation}\]</span></p>
-<p>The Schrödinger equation in momentum space becomes:</p>
+<p>If we insert the latter equation into the Schrödinger equation we onbtain</p>
 <p><span class="math display">\[\begin{equation}
-i\hbar \frac{\partial \tilde{\Psi}}{\partial t} = \frac{\hbar^{2}k^{2}}{2m}\tilde{\Psi} + V\left(i\frac{\partial}{\partial k}\right) \tilde{\Psi}
+i\hbar \frac{\partial \tilde{\Psi}}{\partial t}=\frac{\hbar^{2}k^{2}}{2m}\tilde{\Psi}+V\left (i\frac{\partial }{\partial k}\right ) \tilde{\Psi}
 \end{equation}\]</span></p>
-<p>This duality between position and momentum space will be particularly useful in our Split-Step method.</p>
+<p>which is exactly this Schrödinger equation in momentum space.</p>
 </section>
-</section>
-<section id="method-1-crank-nicolson-scheme" class="level2">
-<h2 class="anchored" data-anchor-id="method-1-crank-nicolson-scheme">Method 1: Crank-Nicolson Scheme</h2>
-<p>The Crank-Nicolson method is a finite difference approach that offers second-order accuracy in time and is unconditionally stable. It effectively balances the forward and backward Euler methods.</p>
-<section id="discretization-of-the-schrödinger-equation" class="level3">
-<h3 class="anchored" data-anchor-id="discretization-of-the-schrödinger-equation">Discretization of the Schrödinger Equation</h3>
-<p>Starting from the time-dependent Schrödinger equation, we can approximate the time derivative using centered differences:</p>
+<section id="crank-nicolson-solution" class="level2">
+<h2 class="anchored" data-anchor-id="crank-nicolson-solution">Crank Nicolson Solution</h2>
+<p>We will pursue two different numerical solutions. The first solution, will be equivalent to the solution of the diffusion equation we did in Lecture 7. Here we need to write our Hamilton operator as a matrix with the second derivative and the potential. Lets assume you know how to create this matrix also from the last lecture.</p>
+<p>Then we just need to get the time dependence, which we obtain from finite differences as</p>
 <p><span class="math display">\[
-\frac{\Psi(x,t+\Delta t)-\Psi(x,t)}{\Delta t} \approx -\frac{i}{\hbar} \left[\frac{1}{2}H\Psi(x,t) + \frac{1}{2}H\Psi(x,t+\Delta t)\right]
+\frac{\Psi(x,t+dt)-\Psi(x,t)}{dt}\approx -\frac{i}{\hbar} H\Psi(x,t)
 \]</span></p>
-<p>Where <span class="math inline">\(H = \frac{-\hbar^2}{2m}\frac{\partial^2}{\partial x^2} + V(x)\)</span> is the Hamiltonian operator.</p>
-<p>Rearranging this equation:</p>
+<p>in the forward direction and and similarly</p>
 <p><span class="math display">\[
-\left(1-\frac{\Delta t}{2i\hbar} H\right)\Psi(x,t+\Delta t) = \left(1+\frac{\Delta t}{2i\hbar} H\right)\Psi(x,t)
+\frac{\Psi(x,t+dt)-\Psi(x,t)}{dt}\approx -\frac{i}{\hbar}  H\Psi(x,t+dt)
 \]</span></p>
-<p>And solving for <span class="math inline">\(\Psi(x,t+\Delta t)\)</span>:</p>
+<p>in the backward direcction.</p>
+<p>Therefore</p>
 <p><span class="math display">\[
-\Psi(x,t+\Delta t) = \left(1-\frac{\Delta t}{2i\hbar} H\right)^{-1}\left(1+\frac{\Delta t}{2i\hbar} H\right)\Psi(x,t)
+\frac{\Psi(x,t+dt)-\Psi(x,t)}{dt}\approx \frac{1}{2i\hbar } H\Psi(x,t)+\frac{1}{2i\hbar} H\Psi(x,t+dt)
 \]</span></p>
-<p>This gives us a formula for propagating the wavefunction forward in time.</p>
-</section>
-<section id="setting-up-the-simulation-domain" class="level3">
-<h3 class="anchored" data-anchor-id="setting-up-the-simulation-domain">Setting Up the Simulation Domain</h3>
-<p>First, we define our spatial domain and time step:</p>
-<div>
-<div id="pyodide-2">
-
-</div>
-<script type="pyodide-2-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgU2V0IHVwIHRoZSBzcGF0aWFsIGdyaWRcbk4gPSA1MDAgICMgTnVtYmVyIG9mIGdyaWQgcG9pbnRzXG54LCBkeCA9IG5wLmxpbnNwYWNlKC0xMDAsIDEwMCwgTiwgcmV0c3RlcD1UcnVlKSAgIyBEb21haW4gZnJvbSAtMTAwIHRvIDEwMFxuXG4jIFNldCB1cCB0aGUgdGltZSBzdGVwXG5kdCA9IDAuNSAgIyBUaW1lIHN0ZXAifQ==
-</script>
-</div>
-</section>
-<section id="initial-wavepacket" class="level3">
-<h3 class="anchored" data-anchor-id="initial-wavepacket">Initial Wavepacket</h3>
-<p>We create a Gaussian wavepacket with an initial momentum (represented by <span class="math inline">\(k_0\)</span>) directed toward the barrier:</p>
-<div>
-<div id="pyodide-3">
-
-</div>
-<script type="pyodide-3-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImRlZiBnYXVzc194KHgsIHNpZ21hLCB4MCwgazApOlxuICAgIFwiXCJcIlxuICAgIEdlbmVyYXRlIGEgR2F1c3NpYW4gd2F2ZXBhY2tldC5cblxuICAgIFBhcmFtZXRlcnM6XG4gICAgICAgIHg6IFBvc2l0aW9uIGFycmF5XG4gICAgICAgIHNpZ21hOiBXaWR0aCBvZiB0aGUgR2F1c3NpYW5cbiAgICAgICAgeDA6IENlbnRlciBwb3NpdGlvblxuICAgICAgICBrMDogTW9tZW50dW0gKHdhdmVudW1iZXIpXG5cbiAgICBSZXR1cm5zOlxuICAgICAgICBHYXVzc2lhbiB3YXZlcGFja2V0XG4gICAgXCJcIlwiXG4gICAgcmV0dXJuIChucC5leHAoLTAuNSAqICgoeCAtIHgwKS9zaWdtYSkqKjIgKyAxaiAqIHggKiBrMCkvKHNpZ21hICogbnAuc3FydChucC5waSkpKVxuXG4jIENyZWF0ZSBpbml0aWFsIHdhdmVwYWNrZXRcbmswID0gMS4zICAgICAgIyBJbml0aWFsIG1vbWVudHVtXG54MCA9IC01MCAgICAgICMgSW5pdGlhbCBwb3NpdGlvblxuc2lnbWEwID0gNSAgICAjIFdpZHRoIG9mIHdhdmVwYWNrZXRcblxuIyBHZW5lcmF0ZSBhbmQgbm9ybWFsaXplIHdhdmVwYWNrZXRcbnBzaSA9IGdhdXNzX3goeCwgc2lnbWEwLCB4MCwgazApXG5wcm9iID0gbnAuYWJzKHBzaSkqKjJcbnBzaSA9IHBzaS9ucC5zcXJ0KG5wLnN1bShwcm9iKSpkeCkgICMgTm9ybWFsaXplXG5cbiMgVmlzdWFsaXplIGluaXRpYWwgd2F2ZXBhY2tldFxucGx0LmZpZ3VyZShmaWdzaXplPWdldF9zaXplKDEwLCA1KSlcbnBsdC5wbG90KHgsIG5wLmFicyhwc2kpKioyLCBsYWJlbD0nSW5pdGlhbCB3YXZlcGFja2V0JylcbnBsdC54bGFiZWwoJ1Bvc2l0aW9uICh4KScpXG5wbHQueWxhYmVsKCdQcm9iYWJpbGl0eSBkZW5zaXR5ICR8XFxcXFBzaSh4KXxeMiQnKVxuXG5cbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LnNob3coKSJ9
-</script>
+<p>or</p>
+<p><span class="math display">\[
+\left(1-\frac{dt}{2i\hbar} H\right)\Psi(x,t+dt)=\left(1+\frac{dt}{2i\hbar} H\right)\Psi(x,t)
+\]</span></p>
+<p>and finally</p>
+<p><span class="math display">\[
+\Psi(x,t+dt)=\left(1-\frac{dt}{2i\hbar} H\right)^{-1}\left(1+\frac{dt}{2i\hbar} H\right)\Psi(x,t)
+\]</span></p>
+<p>Once we have calculated the Matrix of the hamiltonian and have provided an initial wavepacket, we can immediately propagate the initial wavepacket to later times. This seems easy with what we learned earlier.</p>
+<section id="setup-domain" class="level3">
+<h3 class="anchored" data-anchor-id="setup-domain">Setup Domain</h3>
+<p>As usual we need to define a spatial domain and a timstep for the solution.</p>
+<div id="cell-12" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>N<span class="op">=</span><span class="dv">500</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x, dx <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">100</span>, <span class="dv">100</span>, N, retstep<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>dt<span class="op">=</span><span class="fl">0.5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="potential-barrier-setup" class="level3">
-<h3 class="anchored" data-anchor-id="potential-barrier-setup">Potential Barrier Setup</h3>
-<p>We create a potential barrier that the wavepacket will encounter:</p>
-<div>
-<div id="pyodide-4">
-
+<section id="initial-conditions" class="level3">
+<h3 class="anchored" data-anchor-id="initial-conditions">Initial Conditions</h3>
+<p>Next we define the initial gaussian wavepacket with a certain momentum given by the wavenumber <span class="math inline">\(k_{0}\)</span>.</p>
+<div id="cell-15" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gauss_x(x, sigma, x0, k0):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (np.exp(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> ((x <span class="op">-</span> x0)<span class="op">/</span> sigma) <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> <span class="ot">1j</span> <span class="op">*</span> x <span class="op">*</span> k0)<span class="op">/</span>(sigma <span class="op">*</span> np.sqrt(np.pi)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<script type="pyodide-4-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgRGVmaW5lIHRoZSBwb3RlbnRpYWwgYmFycmllclxuYmFycmllcl93aWR0aCA9IDVcbmJhcnJpZXJfaGVpZ2h0ID0gMS4wXG5cbiMgQ3JlYXRlIHBvdGVudGlhbCBlbmVyZ3kgbGFuZHNjYXBlXG5wb3RlbnRpYWwgPSBucC5hcnJheShbYmFycmllcl9oZWlnaHQgaWYgMC4wIDwgeCA8IGJhcnJpZXJfd2lkdGggZWxzZSAwLjAgZm9yIHggaW4geF0pXG5cbiMgVmlzdWFsaXplIHRoZSBwb3RlbnRpYWxcbnBsdC5maWd1cmUoZmlnc2l6ZT1nZXRfc2l6ZSgxMCwgNSkpXG5wbHQucGxvdCh4LCBwb3RlbnRpYWwsICdrJywgbGFiZWw9J1BvdGVudGlhbCBiYXJyaWVyJylcbnBsdC54bGFiZWwoJ1Bvc2l0aW9uICh4KScpXG5wbHQueWxhYmVsKCdQb3RlbnRpYWwgZW5lcmd5IFYoeCknKVxuXG5wbHQudGlnaHRfbGF5b3V0KClcbnBsdC5zaG93KCkifQ==
-</script>
-</div>
-</section>
-<section id="constructing-the-hamiltonian-matrix" class="level3">
-<h3 class="anchored" data-anchor-id="constructing-the-hamiltonian-matrix">Constructing the Hamiltonian Matrix</h3>
-<p>We represent the Hamiltonian operator as a tridiagonal matrix:</p>
-<div>
-<div id="pyodide-5">
-
-</div>
-<script type="pyodide-5-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gc2NpcHkgaW1wb3J0IHNwYXJzZVxuXG4jIENyZWF0ZSB0aGUgSGFtaWx0b25pYW4gbWF0cml4XG5oX2RpYWcgPSBucC5vbmVzKE4pIC8gZHgqKjIgKyBwb3RlbnRpYWwgICMgRGlhZ29uYWwgZWxlbWVudHNcbmhfbm9uX2RpYWcgPSBucC5vbmVzKE4gLSAxKSAqICgtMC41IC8gZHgqKjIpICAjIE9mZi1kaWFnb25hbCBlbGVtZW50c1xuXG4jIENvbnN0cnVjdCB0cmlkaWFnb25hbCBtYXRyaXhcbmhhbWlsdG9uaWFuID0gc3BhcnNlLmRpYWdzKFtoX2RpYWcsIGhfbm9uX2RpYWcsIGhfbm9uX2RpYWddLCBbMCwgMSwgLTFdKSJ9
-</script>
+<div id="cell-16" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>k0<span class="op">=</span><span class="fl">1.3</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x0<span class="op">=-</span><span class="dv">50</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sigma0<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>psi<span class="op">=</span> gauss_x(x, sigma0, x0, k0)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>prob<span class="op">=</span>np.<span class="bu">abs</span>(psi)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#dx=x[1]-x[0]</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>psi<span class="op">=</span>psi<span class="op">/</span>np.sqrt(np.<span class="bu">sum</span>(prob)<span class="op">*</span>dx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="time-evolution-matrices" class="level3">
-<h3 class="anchored" data-anchor-id="time-evolution-matrices">Time Evolution Matrices</h3>
-<p>Following the Crank-Nicolson scheme, we create the matrices needed for time evolution:</p>
-<div>
-<div id="pyodide-6">
-
+<section id="matrix-setup" class="level3">
+<h3 class="anchored" data-anchor-id="matrix-setup">Matrix Setup</h3>
+<p>At first we define the potential energy landscape.</p>
+<div id="cell-19" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>barrier_width<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>barrier_height<span class="op">=</span><span class="fl">1.</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>potential <span class="op">=</span> np.array([barrier_height <span class="cf">if</span> <span class="fl">0.0</span> <span class="op">&lt;</span> x <span class="op">&lt;</span> barrier_width <span class="cf">else</span> <span class="fl">0.0</span> <span class="cf">for</span> x <span class="kw">in</span> x])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<script type="pyodide-6-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gc2NpcHkuc3BhcnNlIGltcG9ydCBsaW5hbGcgYXMgbG5cblxuIyBDb25zdHJ1Y3QgdGhlIGltcGxpY2l0IGFuZCBleHBsaWNpdCBvcGVyYXRvcnNcbmltcGxpY2l0ID0gKHNwYXJzZS5leWUoTikgLSBkdCAvIDIuMGogKiBoYW1pbHRvbmlhbikudG9jc2MoKVxuZXhwbGljaXQgPSAoc3BhcnNlLmV5ZShOKSArIGR0IC8gMi4waiAqIGhhbWlsdG9uaWFuKS50b2NzYygpXG5cbiMgQ3JlYXRlIHRoZSBldm9sdXRpb24gbWF0cml4XG5ldm9sdXRpb25fbWF0cml4ID0gbG4uaW52KGltcGxpY2l0KS5kb3QoZXhwbGljaXQpLnRvY3NyKCkifQ==
-</script>
+<p>Then the Hamitonion made of the second derivative and the potential energy landscape.</p>
+<div id="cell-21" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>h_diag <span class="op">=</span> np.ones(N) <span class="op">/</span> dx<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> potential</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>h_non_diag <span class="op">=</span> np.ones(N <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> (<span class="op">-</span><span class="fl">0.5</span> <span class="op">/</span> dx<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>hamiltonian <span class="op">=</span> sparse.diags([h_diag, h_non_diag, h_non_diag], [<span class="dv">0</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="propagation-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="propagation-matrix">Propagation Matrix</h3>
+<p>With the help of the hamiltonian we now define the matrices we have to multiply to the current wavefunction to obtain the wavefunction at the next timestep.</p>
+<div id="cell-24" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>implicit <span class="op">=</span> (sparse.eye(N) <span class="op">-</span> dt <span class="op">/</span> <span class="ot">2.0j</span> <span class="op">*</span> hamiltonian).tocsc()</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>explicit <span class="op">=</span> (sparse.eye(N) <span class="op">+</span> dt <span class="op">/</span> <span class="ot">2.0j</span> <span class="op">*</span> hamiltonian).tocsc() </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>evolution_matrix <span class="op">=</span> ln.inv(implicit).dot(explicit).tocsr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="animation-setup" class="level3">
-<h3 class="anchored" data-anchor-id="animation-setup">Animation Setup</h3>
-<p>Now we’ll prepare for animating the wavepacket’s evolution:</p>
-<div>
-<div id="pyodide-7">
-
-</div>
-<script type="pyodide-7-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgU2V0dXAgZm9yIGFuaW1hdGlvblxucHJvYiA9IG5wLmFicyhwc2kpKioyXG5maWcsIGF4ID0gcGx0LnN1YnBsb3RzKDEsIDEsIGZpZ3NpemU9Z2V0X3NpemUoMTAsIDYpKVxucGx0LnhsaW0oLTEwMCwgMTAwKVxucGx0LnlsaW0oMCwgMC4xKVxucGx0LnhsYWJlbCgnUG9zaXRpb24gKHgpJylcbnBsdC55bGFiZWwoJ1Byb2JhYmlsaXR5IGRlbnNpdHkgJHxcXFxcUHNpKHgpfF4yJCcpXG5cbnBsdC5wbG90KHgsIHBvdGVudGlhbCwgJ2snLCBsYWJlbD0nUG90ZW50aWFsJylcblxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuZHJhdygpXG5cbmJhY2tncm91bmQgPSBmaWcuY2FudmFzLmNvcHlfZnJvbV9iYm94KGF4LmJib3gpXG5wb2ludHMgPSBheC5wbG90KHgsIHByb2IsICdnJywgbGFiZWw9J1dhdmVwYWNrZXQnKVswXVxucGx0LmNsb3NlKCkifQ==
-</script>
+<h3 class="anchored" data-anchor-id="animation-setup">Animation setup</h3>
+<p>With that, we are ready to show the simulation result in an animation</p>
+<div id="cell-27" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;subslide&quot;}}" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> <span class="bu">abs</span>(psi)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">1</span>,figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">100</span>,<span class="dv">100</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>,<span class="dv">2</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x-position'</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'</span><span class="dv">$</span><span class="cf">|</span><span class="er">\</span><span class="vs">Psi</span><span class="kw">(</span><span class="vs">x,t</span><span class="kw">)</span><span class="cf">|</span><span class="dv">^</span><span class="vs">2</span><span class="dv">$</span><span class="vs">'</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()  </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>plt.plot(x,potential,<span class="st">'k'</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#ax.plot(x,20*prob,'g')</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>plt.draw()</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>background <span class="op">=</span> fig.canvas.copy_from_bbox(ax.bbox)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>points<span class="op">=</span>ax.plot(x,<span class="dv">20</span><span class="op">*</span>prob,<span class="st">'g'</span>)[<span class="dv">0</span>]</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.close() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="animation-execution" class="level3">
-<h3 class="anchored" data-anchor-id="animation-execution">Animation Execution</h3>
-<p>The animation will show the wavepacket approaching, partially reflecting from, and partially tunneling through the barrier:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup the canvas for animation</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>canvas <span class="op">=</span> Canvas(width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">300</span>, sync_image_data<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>display(canvas)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the animation</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">200</span>):</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Evolve the wavefunction</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    psi <span class="op">=</span> evolution_matrix.dot(psi)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> np.<span class="bu">abs</span>(psi)<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Normalize</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    norm <span class="op">=</span> np.<span class="bu">sum</span>(prob)<span class="op">*</span>dx</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">/=</span> norm</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    psi <span class="op">/=</span> np.sqrt(norm)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update the plot</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    fig.canvas.restore_region(background)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    ax.draw_artist(points)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    points.set_data(x, prob)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    fig.canvas.blit(ax.bbox)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.array(fig.canvas.renderer.buffer_rgba())</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> hold_canvas(canvas):</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        canvas.clear()</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        canvas.put_image_data(X)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        sleep(<span class="fl">0.02</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="quarto-figure quarto-figure-center">
+<section id="animation" class="level3">
+<h3 class="anchored" data-anchor-id="animation">Animation</h3>
+<div id="cell-29" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>canvas <span class="op">=</span> Canvas(width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">600</span>,sync_image_data<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>display(canvas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"2a39fd08b930430eabdc0721ddf309e9","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+</div>
+<p>For the animation, we just loop over 1000 steps, where we just calculate the product of the evolution matrix and the wavefunction. In each step, we also take care of normalizing the wavefunction again.</p>
+<div id="cell-31" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    psi <span class="op">=</span> evolution_matrix.dot(psi)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">=</span> np.<span class="bu">abs</span>(psi)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    norm <span class="op">=</span> np.<span class="bu">sum</span>(prob)<span class="op">*</span>dx</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    prob <span class="op">/=</span> norm</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    psi <span class="op">/=</span> norm<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    fig.canvas.restore_region(background)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    ax.draw_artist(points)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    points.set_data(x,<span class="dv">10</span><span class="op">*</span>prob)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    fig.canvas.blit(ax.bbox)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.array(fig.canvas.renderer.buffer_rgba())</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> hold_canvas(canvas): </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        canvas.clear()</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        canvas.put_image_data(X)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        sleep(<span class="fl">0.02</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;skip&quot;}}" data-execution_count="271">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&lt;img src="cranck_nicolson_animation.mov" width="600"&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;subslide&quot;}}" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#![Figure](cranck_nicolson_animation.mov)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="split-step-method" class="level2">
+<h2 class="anchored" data-anchor-id="split-step-method">Split Step Method</h2>
+<p>If we look at bit closer at the two Schrödinger equations in real and momentum space above, we recognize that there is some symmetry in the two Schrödinger equations, which we can use to calculate the time-dependence of the wave function. This type of method is called the split step method.</p>
+<p>We may substitute in the right side of the position Schrödinger equation</p>
+<p><span class="math display">\[\begin{equation}
+\hat{D}=\frac{-\hbar^2 }{2m}\frac{\partial^2}{\partial x^2}
+\end{equation}\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\begin{equation}
+\hat{N}=V(x,t)
+\end{equation}\]</span></p>
+<p>such that</p>
+<p><span class="math display">\[
+i\hbar\frac{\partial \Psi(x,t)}{\partial t} = [\hat{D}+\hat{N}]\, \Psi
+\]</span></p>
+<p>with the solution</p>
+<p><span class="math display">\[
+\Psi(x,t)=e^{-i(\hat{D}+\hat{N})t/\hbar}\, \Psi(x,0)
+\]</span></p>
+<p>If we only make a small timestep <span class="math inline">\(dt\)</span>, we can write the latter equation also as</p>
+<p><span class="math display">\[
+\Psi(x,t+dt)=e^{-i\hat{D}dt/\hbar}e^{-i\hat{N}dt/\hbar} \Psi(x,t)
+\]</span></p>
+<p>We may now turn to momentum space by taking the Fourier transform <span class="math inline">\(F\)</span></p>
+<p><span class="math display">\[
+\tilde{\Psi}(k,t+dt)=F\left [e^{-i\hat{D}dt/\hbar}e^{-i\hat{N}dt/\hbar}\,\Psi(k,t) \right ]
+\]</span></p>
+<p>What we know now from the momentum Schrödinger equation is that the operator <span class="math inline">\(\hat{D}\)</span> will just turn into a multiplication with <span class="math inline">\(\hbar k^2/2m\)</span> in momentum space and therefore</p>
+<p><span class="math display">\[
+\tilde{\Psi}(k,t+dt)=e^{i\frac{\hbar k^2}{2m}dt}F\left [e^{-i\hat{N}dt/\hbar}\, \Psi(k,t)\right]
+\]</span></p>
+<p>Thus if we just do the inverse Fourier transform of that, we obtain</p>
+<p><span class="math display">\[
+\Psi(x,t+dt)=F^{-1}\left [ e^{i\frac{\hbar k^2}{2m}dt} F\left [e^{-i\hat{N}dt/\hbar}\,\Psi(x,t) \right ]  \right]
+\]</span></p>
+<p>This is the receipe for the solution of the time dependent Schrödinger equation. We will do this simulation with the help of the FFT we considered already earlier.</p>
+<section id="setup-domain-1" class="level3">
+<h3 class="anchored" data-anchor-id="setup-domain-1">Setup Domain</h3>
+<p>We first need to setup our domain together with the time resolution.</p>
+<div id="cell-40" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#some constants</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>hbar<span class="op">=</span><span class="dv">1</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>m<span class="op">=</span><span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-41" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">## spatial domain</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">2</span> <span class="op">**</span> <span class="dv">11</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>dx <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> dx <span class="op">*</span> (np.arange(N) <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> N)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">## timestep of our simulation</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> <span class="fl">0.005</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="potential-energy-landscape" class="level3">
+<h3 class="anchored" data-anchor-id="potential-energy-landscape">Potential energy landscape</h3>
+<p>We want to study the tunneling of a wavepacket through a barrier, so we need to define a potential energy landscape, which contains two extremely high barriers at the left and the right side and in the middle a smaller barrier through which we can tunnel.</p>
+<div id="cell-45" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">## potential barrier height</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>V0 <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">## potential barrier width</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>a<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># potential barrier </span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>V_x <span class="op">=</span> np.array([V0 <span class="cf">if</span> <span class="fl">0.0</span> <span class="op">&lt;</span> x <span class="op">&lt;</span> a <span class="cf">else</span> <span class="fl">0.0</span> <span class="cf">for</span> x <span class="kw">in</span> x])</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>V_x[np.<span class="bu">abs</span>(x) <span class="op">&gt;</span> <span class="dv">98</span>] <span class="op">=</span> <span class="fl">1e6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-46" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;subslide&quot;}}" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.plot(x,V_x,<span class="st">'k'</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>,<span class="dv">2</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x-position'</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'$V(x)$'</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
 <figure class="figure">
-<p><video src="../../lectures/lecture13/cranck_nicolson_animation.mov" class="content-visible img-fluid" data-when-format="html" controls=""><a href="../../lectures/lecture13/cranck_nicolson_animation.mov">Video</a></video></p>
-<figcaption>Quantum Tunneling Animation (Crank-Nicolson)</figcaption>
+<p><img src="3_tunneling_files/figure-html/cell-18-output-1.png" width="970" height="375" class="figure-img"></p>
 </figure>
 </div>
-</section>
-</section>
-<section id="method-2-split-step-fourier-method" class="level2">
-<h2 class="anchored" data-anchor-id="method-2-split-step-fourier-method">Method 2: Split-Step Fourier Method</h2>
-<p>The Split-Step Fourier method leverages the efficiency of Fast Fourier Transforms (FFT) to solve the Schrödinger equation. It works by separately handling the kinetic and potential energy operators in their respective spaces where they are diagonal.</p>
-<section id="mathematical-foundation" class="level3">
-<h3 class="anchored" data-anchor-id="mathematical-foundation">Mathematical Foundation</h3>
-<p>We can decompose the Hamiltonian into two parts:</p>
-<p><span class="math display">\[\begin{equation}
-\hat{H} = \hat{T} + \hat{V}
-\end{equation}\]</span></p>
-<p>Where:</p>
-<ul>
-<li><span class="math inline">\(\hat{T} = \frac{-\hbar^2}{2m}\frac{\partial^2}{\partial x^2}\)</span> is the kinetic energy operator</li>
-<li><span class="math inline">\(\hat{V} = V(x)\)</span> is the potential energy operator</li>
-</ul>
-<p>The formal solution to the Schrödinger equation is:</p>
-<p><span class="math display">\[\begin{equation}
-\Psi(x, t+\Delta t) = e^{-i\hat{H}\Delta t/\hbar}\Psi(x, t)
-\end{equation}\]</span></p>
-<p>Using the Trotter-Suzuki approximation, we can split this exponential:</p>
-<p><span class="math display">\[\begin{equation}
-e^{-i(\hat{T}+\hat{V})\Delta t/\hbar} \approx e^{-i\hat{V}\Delta t/\hbar}e^{-i\hat{T}\Delta t/\hbar} + \mathcal{O}(\Delta t^2)
-\end{equation}\]</span></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-The Trotter-Suzuki Approximation
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The Trotter-Suzuki approximation is a fundamental technique in quantum physics that allows us to handle non-commuting operators in exponential form. When we have a Hamiltonian that is the sum of two operators <span class="math inline">\(\hat{H} = \hat{A} + \hat{B}\)</span> that don’t commute (<span class="math inline">\([\hat{A},\hat{B}] \neq 0\)</span>), we cannot simply write <span class="math inline">\(e^{-i(\hat{A}+\hat{B})t} = e^{-i\hat{A}t}e^{-i\hat{B}t}\)</span>.</p>
-<p>Instead, the first-order Trotter formula gives us:</p>
-<p><span class="math display">\[e^{-i(\hat{A}+\hat{B})\Delta t} = e^{-i\hat{A}\Delta t}e^{-i\hat{B}\Delta t} + \mathcal{O}(\Delta t^2)\]</span></p>
-<p>For better accuracy, we can use the second-order symmetric splitting:</p>
-<p><span class="math display">\[e^{-i(\hat{A}+\hat{B})\Delta t} = e^{-i\hat{A}\Delta t/2}e^{-i\hat{B}\Delta t}e^{-i\hat{A}\Delta t/2} + \mathcal{O}(\Delta t^3)\]</span></p>
-<p>In the context of the Schrödinger equation, this allows us to separately handle the kinetic energy operator (<span class="math inline">\(\hat{T}\)</span>) and potential energy operator (<span class="math inline">\(\hat{V}\)</span>) in their respective spaces where they are diagonal, making numerical solutions much more efficient.</p>
-</div>
-</div>
-</div>
-<p>This gives us:</p>
-<p><span class="math display">\[\begin{equation}
-\Psi(x, t+\Delta t) \approx e^{-i\hat{V}\Delta t/\hbar}e^{-i\hat{T}\Delta t/\hbar}\Psi(x, t)
-\end{equation}\]</span></p>
-<p>The key insight is that <span class="math inline">\(\hat{T}\)</span> is diagonal in momentum space, while <span class="math inline">\(\hat{V}\)</span> is diagonal in position space. This leads to the algorithm:</p>
-<ol type="1">
-<li>Apply the potential evolution operator: <span class="math inline">\(\Psi_1(x) = e^{-i\hat{V}\Delta t/\hbar}\Psi(x, t)\)</span></li>
-<li>Transform to momentum space: <span class="math inline">\(\tilde{\Psi}_1(k) = \mathcal{F}[\Psi_1(x)]\)</span></li>
-<li>Apply the kinetic evolution operator: <span class="math inline">\(\tilde{\Psi}_2(k) = e^{-i\hat{T}\Delta t/\hbar}\tilde{\Psi}_1(k)\)</span></li>
-<li>Transform back to position space: <span class="math inline">\(\Psi(x, t+\Delta t) = \mathcal{F}^{-1}[\tilde{\Psi}_2(k)]\)</span></li>
-</ol>
-<p>Where <span class="math inline">\(\mathcal{F}\)</span> represents the Fourier transform.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Diagonal Operators in Position and Momentum Space
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>In quantum mechanics, an operator is diagonal in a particular basis if it acts on states in that basis by simply multiplying them by a scalar value.</p>
-<p><strong>Potential Energy Operator in Position Space:</strong> The potential energy operator <span class="math inline">\(\hat{V}\)</span> is defined by its action on a wavefunction:</p>
-<p><span class="math display">\[\hat{V}\Psi(x) = V(x)\Psi(x)\]</span></p>
-<p>This is a simple multiplication operation in position space. If we represent the wavefunction as a vector of values at different positions, the potential operator becomes a diagonal matrix with <span class="math inline">\(V(x_i)\)</span> as its diagonal elements. This is why we can apply the potential evolution operator directly by multiplication:</p>
-<p><span class="math display">\[e^{-i\hat{V}\Delta t/\hbar}\Psi(x) = e^{-iV(x)\Delta t/\hbar}\Psi(x)\]</span></p>
-<p><strong>Kinetic Energy Operator in Momentum Space:</strong> The kinetic energy operator in position space is a differential operator:</p>
-<p><span class="math display">\[\hat{T} = \frac{-\hbar^2}{2m}\frac{\partial^2}{\partial x^2}\]</span></p>
-<p>This is not diagonal in position space (it’s a second derivative). However, in momentum space, it takes a simple form:</p>
-<p><span class="math display">\[\hat{T}\tilde{\Psi}(k) = \frac{\hbar^2 k^2}{2m}\tilde{\Psi}(k)\]</span></p>
-<p>In momentum space, the kinetic energy operator simply multiplies each momentum component by <span class="math inline">\(\frac{\hbar^2 k^2}{2m}\)</span>, making it diagonal. This is why we can efficiently apply the kinetic evolution operator in momentum space:</p>
-<p><span class="math display">\[e^{-i\hat{T}\Delta t/\hbar}\tilde{\Psi}(k) = e^{-i\hbar k^2\Delta t/(2m)}\tilde{\Psi}(k)\]</span></p>
-<p>The Split-Step method exploits this property by applying each operator in the space where it’s diagonal, using Fourier transforms to switch between spaces.</p>
-</div>
 </div>
 </div>
 </section>
-<section id="setting-up-the-simulation-domain-1" class="level3">
-<h3 class="anchored" data-anchor-id="setting-up-the-simulation-domain-1">Setting Up the Simulation Domain</h3>
+<section id="initial-wavepacket" class="level3">
+<h3 class="anchored" data-anchor-id="initial-wavepacket">Initial wavepacket</h3>
+<p>Our initial wavepacket will be a Gaussian wavepacket, which is centered at <span class="math inline">\(x_0=-50\)</span>.</p>
+<div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>k0<span class="op">=</span><span class="fl">1.3</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>x0<span class="op">=-</span><span class="dv">50</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sigma0<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>psi<span class="op">=</span> gauss_x(x, sigma0, x0, k0)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>prob<span class="op">=</span>np.<span class="bu">abs</span>(psi)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>dx<span class="op">=</span>x[<span class="dv">1</span>]<span class="op">-</span>x[<span class="dv">0</span>]</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>psi<span class="op">=</span>psi<span class="op">/</span>np.sqrt(np.<span class="bu">sum</span>(prob)<span class="op">*</span>dx)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-50" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;subslide&quot;}}" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>plt.plot(x,np.<span class="bu">abs</span>(psi)<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x-position'</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'$|</span><span class="er">\</span><span class="st">Psi(x)|^2$'</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
 <div>
-<div id="pyodide-8">
-
+<figure class="figure">
+<p><img src="3_tunneling_files/figure-html/cell-20-output-1.png" width="968" height="375" class="figure-img"></p>
+</figure>
 </div>
-<script type="pyodide-8-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgU2V0IG5hdHVyYWwgdW5pdHNcbmhiYXIgPSAxXG5tID0gMVxuXG4jIFNldCB1cCBzcGF0aWFsIGRvbWFpblxuTiA9IDIqKjExICAjIE51bWJlciBvZiBncmlkIHBvaW50cyAocG93ZXIgb2YgMiBmb3IgZWZmaWNpZW50IEZGVClcbmR4ID0gMC4xICAgIyBTcGF0aWFsIHN0ZXBcbnggPSBkeCAqIChucC5hcmFuZ2UoTikgLSAwLjUgKiBOKSAgIyBDZW50ZXIgdGhlIGdyaWQgYXQgeD0wXG5cbiMgU2V0IHVwIHRpbWUgc3RlcFxuZHQgPSAwLjAwNSAgIyBUaW1lIHN0ZXAifQ==
-</script>
 </div>
-</section>
-<section id="potential-barrier-setup-1" class="level3">
-<h3 class="anchored" data-anchor-id="potential-barrier-setup-1">Potential Barrier Setup</h3>
-<div>
-<div id="pyodide-9">
-
-</div>
-<script type="pyodide-9-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgRGVmaW5lIGJhcnJpZXIgcGFyYW1ldGVyc1xuVjAgPSAxLjAgICMgQmFycmllciBoZWlnaHRcbmEgPSA1LjAgICAjIEJhcnJpZXIgd2lkdGhcblxuIyBDcmVhdGUgcG90ZW50aWFsIGVuZXJneSBsYW5kc2NhcGVcblZfeCA9IG5wLnplcm9zX2xpa2UoeClcblZfeFsoeCA+IDApICYgKHggPCBhKV0gPSBWMCAgIyBDZW50cmFsIGJhcnJpZXJcblZfeFtucC5hYnMoeCkgPiA5OF0gPSAxZTYgICAgIyBIaWdoIGJhcnJpZXJzIGF0IGRvbWFpbiBlZGdlcyB0byBwcmV2ZW50IGJvdW5kYXJ5IGVmZmVjdHNcblxuIyBWaXN1YWxpemUgdGhlIHBvdGVudGlhbFxucGx0LmZpZ3VyZShmaWdzaXplPWdldF9zaXplKDEwLCA2KSlcbnBsdC5wbG90KHgsIFZfeCwgJ2snLCBsYWJlbD0nUG90ZW50aWFsJylcbnBsdC55bGltKDAsIDIpXG5wbHQueGxhYmVsKCdQb3NpdGlvbiAoeCknKVxucGx0LnlsYWJlbCgnUG90ZW50aWFsIGVuZXJneSBWKHgpJylcblxuXG5wbHQudGlnaHRfbGF5b3V0KClcbnBsdC5zaG93KCkifQ==
-</script>
 </div>
 </section>
-<section id="initial-wavepacket-1" class="level3">
-<h3 class="anchored" data-anchor-id="initial-wavepacket-1">Initial Wavepacket</h3>
-<div>
-<div id="pyodide-10">
-
+<section id="fourier-transform-setup" class="level3">
+<h3 class="anchored" data-anchor-id="fourier-transform-setup">Fourier Transform Setup</h3>
+<p>When doing the Fourier transform we switch between the spatial and the momentum domain. We will use for that purpose the Fast Fourier Transform Function as we did already earlier. As compared to what has been written in the equations above, that means we switch to a discrete space and miss some of the frequencies which would be contained in the analytical calculations above. To correct for the discrete sampling, we need to introduce a correction factor, which I leave to you for exploration.</p>
+<p>The wavefunction we have to use is</p>
+<p><span class="math display">\[
+\Psi_{\rm mod}=\Psi(x_{n},t)\frac{dx}{\sqrt{2\pi}}e^{-ik_{0}x_{n}}
+\]</span></p>
+<p>where <span class="math inline">\(x_n = a + n \Delta x\)</span> and <span class="math inline">\(k_{0}=-\pi/dx\)</span>, which is the Nyquist limit. Note that this <span class="math inline">\(k_0\)</span> is not related to the <span class="math inline">\(k_0\)</span> of the wavepacket above. Similarly we would need to create a correcting phase factor for the wavefunction in discrete Fourier space</p>
+<p><span class="math display">\[
+\tilde{\Psi}_{\rm mod}=\tilde{\Psi}(k_{m},t)e^{-im x_{0}\Delta k}
+\]</span></p>
+<p>with <span class="math inline">\(k_m = k_0 + m \Delta k\)</span>. Here we define the space for the Fourier transform.</p>
+<div id="cell-53" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;subslide&quot;}}" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>N<span class="op">=</span><span class="bu">len</span>(x)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>dx<span class="op">=</span>x[<span class="dv">1</span>]<span class="op">-</span>x[<span class="dv">0</span>]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>k0<span class="op">=-</span>np.pi<span class="op">/</span>dx</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>dk <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>np.pi <span class="op">/</span> (N <span class="op">*</span> dx)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> k0 <span class="op">+</span> dk <span class="op">*</span> np.arange(N)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<script type="pyodide-10-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgQ3JlYXRlIGluaXRpYWwgd2F2ZXBhY2tldFxuazAgPSAxLjMgICAgICAjIEluaXRpYWwgbW9tZW50dW1cbngwID0gLTUwICAgICAgIyBJbml0aWFsIHBvc2l0aW9uXG5zaWdtYTAgPSA1ICAgICMgV2lkdGggb2Ygd2F2ZXBhY2tldFxuXG4jIEdlbmVyYXRlIGFuZCBub3JtYWxpemUgd2F2ZXBhY2tldFxucHNpID0gZ2F1c3NfeCh4LCBzaWdtYTAsIHgwLCBrMClcbnByb2IgPSBucC5hYnMocHNpKSoqMlxuZHggPSB4WzFdIC0geFswXVxucHNpID0gcHNpL25wLnNxcnQobnAuc3VtKHByb2IpKmR4KSAgIyBOb3JtYWxpemVcblxuIyBWaXN1YWxpemUgaW5pdGlhbCB3YXZlcGFja2V0XG5wbHQuZmlndXJlKGZpZ3NpemU9Z2V0X3NpemUoMTAsIDYpKVxucGx0LnBsb3QoeCwgbnAuYWJzKHBzaSkqKjIsIGxhYmVsPSdJbml0aWFsIHdhdmVwYWNrZXQnKVxucGx0LnBsb3QoeCwgVl94LCAnaycsIGxhYmVsPSdQb3RlbnRpYWwnKVxucGx0LnhsYWJlbCgnUG9zaXRpb24gKHgpJylcbnBsdC55bGFiZWwocidQcm9iYWJpbGl0eSBkZW5zaXR5ICR8XFxQc2koeCl8XjIkJylcblxucGx0LnRpZ2h0X2xheW91dCgpXG5wbHQuc2hvdygpIn0=
-</script>
+<p>So the modified Gaussian wavepacket for the Fourier transform is</p>
+<div id="cell-55" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>psi_modx<span class="op">=</span>psi<span class="op">*</span>np.exp(<span class="op">-</span><span class="ot">1j</span> <span class="op">*</span> k[<span class="dv">0</span>] <span class="op">*</span> x)<span class="op">*</span> dx <span class="op">/</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="setting-up-the-fourier-transform-space" class="level3">
-<h3 class="anchored" data-anchor-id="setting-up-the-fourier-transform-space">Setting Up the Fourier Transform Space</h3>
-<div>
-<div id="pyodide-11">
-
-</div>
-<script type="pyodide-11-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgU2V0IHVwIG1vbWVudHVtIHNwYWNlIGdyaWRcbk4gPSBsZW4oeClcbmR4ID0geFsxXSAtIHhbMF1cbmswID0gLW5wLnBpL2R4ICAjIE55cXVpc3QgZnJlcXVlbmN5XG5kayA9IDIqbnAucGkgLyAoTiAqIGR4KVxuayA9IGswICsgZGsgKiBucC5hcmFuZ2UoTilcblxuIyBQcmVwYXJlIHdhdmVmdW5jdGlvbiBmb3IgRkZUXG5wc2lfbW9keCA9IHBzaSAqIG5wLmV4cCgtMWogKiBrWzBdICogeCkgKiBkeCAvIG5wLnNxcnQoMiAqIG5wLnBpKSJ9
-</script>
-</div>
-</section>
-<section id="precomputing-phase-factors" class="level3">
-<h3 class="anchored" data-anchor-id="precomputing-phase-factors">Precomputing Phase Factors</h3>
-<p>Both the potential and kinetic evolution operators involve phase factors that remain constant throughout the simulation. We can precompute them:</p>
-<div>
-<div id="pyodide-12">
-
-</div>
-<script type="pyodide-12-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgUHJlY29tcHV0ZSBwaGFzZSBmYWN0b3JzIGZvciBwb3RlbnRpYWwgYW5kIGtpbmV0aWMgdGVybXNcbnBoYXNlX3ggPSBucC5leHAoLTFqICogVl94ICogZHQgLyBoYmFyKSAgIyBQb3RlbnRpYWwgZXZvbHV0aW9uXG5waGFzZV9rID0gbnAuZXhwKC0xaiAqIGhiYXIgKiBrKioyICogZHQgLyAoMiAqIG0pKSAgIyBLaW5ldGljIGV2b2x1dGlvbiJ9
-</script>
+<section id="phase-factor-per-timestep" class="level3">
+<h3 class="anchored" data-anchor-id="phase-factor-per-timestep">Phase Factor per Timestep</h3>
+<p>According to our calculations we first have evolve the wavepacket with a phase factor containing <span class="math inline">\(\hat{N}\)</span> which contains the potential and later with <span class="math inline">\(\hat{D}\)</span>.</p>
+<p><span class="math display">\[
+\Psi(x,t+dt)=F^{-1}\left [ e^{i\frac{\hbar k^2}{2m}dt} F\left [e^{-iV(x)dt/\hbar}\Psi(x,t) \right ]  \right]
+\]</span></p>
+<p>Both are just phases factors, which stay the same for each timestep. We may thus calculate them one, and reuse them.</p>
+<div id="cell-58" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>phase_x<span class="op">=</span>np.exp(<span class="op">-</span><span class="ot">1j</span><span class="op">*</span>V_x<span class="op">*</span>dt<span class="op">/</span>hbar)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>phase_k<span class="op">=</span>np.exp(<span class="op">-</span><span class="ot">1j</span><span class="op">*</span>hbar<span class="op">*</span>k<span class="op">**</span><span class="dv">2</span><span class="op">/</span><span class="dv">2</span><span class="op">/</span>m<span class="op">*</span>dt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="animation-setup-1" class="level3">
-<h3 class="anchored" data-anchor-id="animation-setup-1">Animation Setup</h3>
-<div>
-<div id="pyodide-13">
-
+<h3 class="anchored" data-anchor-id="animation-setup-1">Animation setup</h3>
+<div id="cell-60" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;fragment&quot;}}" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>,<span class="dv">1</span>,figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>plt.xlim(<span class="op">-</span><span class="dv">100</span>,<span class="dv">100</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plt.ylim(<span class="dv">0</span>,<span class="dv">2</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x-position'</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="vs">r'</span><span class="dv">$</span><span class="cf">|</span><span class="er">\</span><span class="vs">Psi</span><span class="kw">(</span><span class="vs">x,t</span><span class="kw">)</span><span class="cf">|</span><span class="dv">^</span><span class="vs">2</span><span class="dv">$</span><span class="vs">'</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()  </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>plt.plot(x,V_x,<span class="st">'k'</span>)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>plt.draw()</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>background <span class="op">=</span> fig.canvas.copy_from_bbox(ax.bbox)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>points<span class="op">=</span>ax.plot(x,np.<span class="bu">abs</span>(psi_modx)<span class="op">**</span><span class="dv">2</span>,<span class="st">'g'</span>)[<span class="dv">0</span>]</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>plt.close() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<script type="pyodide-13-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgU2V0dXAgZm9yIGFuaW1hdGlvblxuZmlnLCBheCA9IHBsdC5zdWJwbG90cygxLCAxLCBmaWdzaXplPWdldF9zaXplKDEwLCA2KSlcbnBsdC54bGltKC0xMDAsIDEwMClcbnBsdC55bGltKDAsIDAuMSlcbnBsdC54bGFiZWwoJ1Bvc2l0aW9uICh4KScpXG5wbHQueWxhYmVsKCdQcm9iYWJpbGl0eSBkZW5zaXR5ICR8XFxcXFBzaSh4KXxeMiQnKVxuXG5wbHQucGxvdCh4LCBWX3gsICdrJywgbGFiZWw9J1BvdGVudGlhbCcpXG5cbnBsdC50aWdodF9sYXlvdXQoKVxucGx0LmRyYXcoKVxuXG5iYWNrZ3JvdW5kID0gZmlnLmNhbnZhcy5jb3B5X2Zyb21fYmJveChheC5iYm94KVxucG9pbnRzID0gYXgucGxvdCh4LCBucC5hYnMocHNpKSoqMiwgJ2cnKVswXVxucGx0LmNsb3NlKCkifQ==
+<div id="cell-61" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;subslide&quot;}}" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">## setup the canvas</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>canvas <span class="op">=</span> Canvas(width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">600</span>,sync_image_data<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>display(canvas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"b2f779d8c1184e758f16862c4cafbb23","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
-</section>
-<section id="animation-execution-1" class="level3">
-<h3 class="anchored" data-anchor-id="animation-execution-1">Animation Execution</h3>
-<p>The animation will show the wavepacket tunneling through the potential barrier:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup the canvas for animation</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>canvas <span class="op">=</span> Canvas(width<span class="op">=</span><span class="dv">800</span>, height<span class="op">=</span><span class="dv">300</span>, sync_image_data<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>display(canvas)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the animation</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    fig.canvas.restore_region(background)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ax.draw_artist(points)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Perform multiple time steps between animation frames for smoother results</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Apply potential evolution</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        psi_modx <span class="op">=</span> psi_modx <span class="op">*</span> phase_x</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Transform to momentum space</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        psi_modk <span class="op">=</span> fft(psi_modx)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Apply kinetic evolution</span></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        psi_modk <span class="op">=</span> psi_modk <span class="op">*</span> phase_k</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Transform back to position space</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        psi_modx <span class="op">=</span> ifft(psi_modk)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert back to standard wavefunction</span></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        psi <span class="op">=</span> psi_modx <span class="op">*</span> np.exp(<span class="ot">1j</span> <span class="op">*</span> k[<span class="dv">0</span>] <span class="op">*</span> x) <span class="op">*</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi) <span class="op">/</span> dx</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Normalize</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> np.<span class="bu">abs</span>(psi)<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        norm <span class="op">=</span> np.<span class="bu">sum</span>(prob) <span class="op">*</span> dx</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        psi <span class="op">=</span> psi <span class="op">/</span> np.sqrt(norm)</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> prob <span class="op">/</span> norm</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Update the plot</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    points.set_data(x, prob)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    fig.canvas.blit(ax.bbox)</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.array(fig.canvas.renderer.buffer_rgba())</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> hold_canvas(canvas):</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        canvas.clear()</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        canvas.put_image_data(X)</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        sleep(<span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><video src="../../lectures/lecture13/split_step_animation.mov" class="content-visible img-fluid" data-when-format="html" controls=""><a href="../../lectures/lecture13/split_step_animation.mov">Video</a></video></p>
-<figcaption>Quantum Tunneling Animation (Split-Step)</figcaption>
-</figure>
 </div>
 </section>
+<section id="animation-1" class="level3">
+<h3 class="anchored" data-anchor-id="animation-1">Animation</h3>
+<p>The animation runs in the same way as before.</p>
+<div id="cell-64" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;subslide&quot;}}" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>):</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    fig.canvas.restore_region(background)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    ax.draw_artist(points)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">100</span>):</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        tmp<span class="op">=</span>ifft(phase_k<span class="op">*</span>fft(psi_modx<span class="op">*</span>phase_x))</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        psi_modx<span class="op">=</span>tmp</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        psi<span class="op">=</span>tmp<span class="op">*</span>np.exp(<span class="ot">1j</span> <span class="op">*</span> k[<span class="dv">0</span>] <span class="op">*</span> x)<span class="op">*</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.pi) <span class="op">/</span> dx</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        prob <span class="op">=</span> np.<span class="bu">abs</span>(psi)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        norm<span class="op">=</span>np.<span class="bu">sum</span>(prob)<span class="op">*</span>dx</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        prob<span class="op">/=</span>norm</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    points.set_data(x,<span class="dv">10</span><span class="op">*</span>prob)    </span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#points.set_data(x,1e5*np.abs(psi_modx)**2)</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    fig.canvas.blit(ax.bbox)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    X <span class="op">=</span> np.array(fig.canvas.renderer.buffer_rgba())</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> hold_canvas(canvas): </span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>        canvas.clear()</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>        canvas.put_image_data(X)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>        sleep(<span class="fl">0.01</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-65" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;slideshow&quot;,&quot;value&quot;:{&quot;slide_type&quot;:&quot;skip&quot;}}">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&lt;img src="split_step_animation.mov" width="600"&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">notebook controller is DISPOSED. 
+
+</span><span class="ansi-red-fg ansi-bold">View Jupyter &lt;a href='command:jupyter.viewOutput'&gt;log&lt;/a&gt; for further details.</span></pre>
+</div>
+</div>
+</div>
+<p><video src="split_step_animation.mov" class="img-fluid" controls=""><a href="split_step_animation.mov">Video</a></video></p>
 </section>
-<section id="physical-interpretation-and-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="physical-interpretation-and-analysis">Physical Interpretation and Analysis</h2>
-<section id="whats-happening-in-the-simulation" class="level3">
-<h3 class="anchored" data-anchor-id="whats-happening-in-the-simulation">What’s Happening in the Simulation?</h3>
-<p>In both methods, we observe:</p>
-<ol type="1">
-<li><strong>Incident Wavepacket</strong>: The Gaussian wavepacket approaches the barrier from the left</li>
-<li><strong>Reflection and Transmission</strong>: Upon reaching the barrier, the wavepacket splits:
-<ul>
-<li>A portion is reflected back (reflection)</li>
-<li>A portion passes through the barrier (tunneling)</li>
-</ul></li>
-<li><strong>Interference</strong>: After reflection, the incident and reflected components interfere, creating oscillations in the probability density</li>
-</ol>
-</section>
-<section id="factors-affecting-tunneling-probability" class="level3">
-<h3 class="anchored" data-anchor-id="factors-affecting-tunneling-probability">Factors Affecting Tunneling Probability</h3>
-<p>The tunneling probability depends on several factors:</p>
-<ol type="1">
-<li><strong>Barrier Height (<span class="math inline">\(V_0\)</span>)</strong>: Higher barriers reduce tunneling probability exponentially</li>
-<li><strong>Barrier Width (<span class="math inline">\(a\)</span>)</strong>: Wider barriers reduce tunneling probability exponentially</li>
-<li><strong>Particle Energy</strong>: Higher energy particles (larger <span class="math inline">\(k_0\)</span>) have higher tunneling probabilities</li>
-<li><strong>Particle Mass</strong>: Heavier particles have lower tunneling probabilities</li>
-</ol>
-</section>
-<section id="connection-to-quantum-theory" class="level3">
-<h3 class="anchored" data-anchor-id="connection-to-quantum-theory">Connection to Quantum Theory</h3>
-<p>For a plane wave with energy <span class="math inline">\(E = \frac{\hbar^2k^2}{2m}\)</span> incident on a rectangular barrier of height <span class="math inline">\(V_0\)</span> and width <span class="math inline">\(a\)</span>, the transmission coefficient in the case <span class="math inline">\(E &lt; V_0\)</span> is:</p>
-<p><span class="math display">\[\begin{equation}
-T \approx \frac{16E(V_0-E)}{V_0^2} e^{-2\kappa a}
-\end{equation}\]</span></p>
-<p>Where <span class="math inline">\(\kappa = \sqrt{\frac{2m(V_0-E)}{\hbar^2}}\)</span> is the attenuation coefficient inside the barrier.</p>
-<p>This exponential dependence on barrier width explains why quantum tunneling is primarily observed at microscopic scales.</p>
-</section>
-</section>
-<section id="comparison-of-numerical-methods" class="level2">
-<h2 class="anchored" data-anchor-id="comparison-of-numerical-methods">Comparison of Numerical Methods</h2>
-<p>Both the Crank-Nicolson and Split-Step methods accurately simulate quantum tunneling, but they have different characteristics:</p>
-<section id="crank-nicolson-method" class="level3">
-<h3 class="anchored" data-anchor-id="crank-nicolson-method">Crank-Nicolson Method</h3>
-<ul>
-<li><strong>Pros</strong>: Unconditionally stable, second-order accurate in both space and time</li>
-<li><strong>Cons</strong>: Requires matrix inversion, which can be computationally expensive for large systems</li>
-</ul>
-</section>
-<section id="split-step-fourier-method" class="level3">
-<h3 class="anchored" data-anchor-id="split-step-fourier-method">Split-Step Fourier Method</h3>
-<ul>
-<li><strong>Pros</strong>: Very efficient for periodic boundary conditions, leverages fast FFT algorithms</li>
-<li><strong>Cons</strong>: Requires care with boundary conditions, first-order accurate in time (though higher-order splitting schemes exist)</li>
-</ul>
-</section>
-</section>
-<section id="further-explorations" class="level2">
-<h2 class="anchored" data-anchor-id="further-explorations">Further Explorations</h2>
-<p>Here are some suggestions for further exploration:</p>
-<ol type="1">
-<li><strong>Momentum Space Analysis</strong>: Examine how the wavepacket’s momentum distribution changes during tunneling</li>
-<li><strong>Barrier Parameters</strong>: Investigate how tunneling probability changes with barrier height and width</li>
-<li><strong>Wavepacket Parameters</strong>: Explore how the initial momentum and width of the wavepacket affect tunneling</li>
-<li><strong>Different Potentials</strong>: Try other potential shapes, such as:
-<ul>
-<li>Double barriers (resonant tunneling)</li>
-<li>Smooth potentials (e.g., Gaussian barriers)</li>
-<li>Time-dependent barriers</li>
-</ul></li>
-<li><strong>Quantum Reflection</strong>: Study reflection from potential wells instead of barriers</li>
-</ol>
 </section>
 <section id="where-to-go-from-here" class="level2">
-<h2 class="anchored" data-anchor-id="where-to-go-from-here">Where to go from here</h2>
-<ol type="1">
-<li>Modify the code to calculate and plot the transmission and reflection coefficients as a function of incident momentum</li>
-<li>Implement a double-barrier potential and observe resonant tunneling</li>
-<li>Visualize the wavefunction in momentum space alongside position space</li>
-<li>Implement a higher-order Split-Step method (e.g., second-order Strang splitting)</li>
-<li>Add measurement simulation to observe wavefunction collapse</li>
-</ol>
+<h2 class="anchored" data-anchor-id="where-to-go-from-here">Where to go from here?</h2>
+<p>We have developed two schemes of how to solve the Schrödinger equation for the tunneling case. You may want to explore the wavefunction of the particle in momentum space, i.e.&nbsp;its Fourier transform to the k-space. This gives an idea on how the momentum changes upon reflection and transmission.</p>
+<p>You can also have a look at the transmitted and reflected wave amplitudes as a function of the height an the width of the barrier.</p>
+<p>Finally, you may want to change the potential energy landscape.</p>
 
 
-<script type="pyodide-data">
-eyJvcHRpb25zIjp7ImluZGV4VVJMIjoiaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L3B5b2RpZGUvdjAuMjYuMS9mdWxsLyJ9LCJwYWNrYWdlcyI6eyJwa2dzIjpbInB5b2RpZGVfaHR0cCIsIm1pY3JvcGlwIiwiaXB5dGhvbiIsIm1hdHBsb3RsaWIiLCJudW1weSIsInNjaXB5Il19fQ==
-</script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTEzIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEzLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTMtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEyIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEyLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTExIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTExLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTAgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTkiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl85ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzkgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzksIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS04LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzggPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl83ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS03LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoiX3B5b2RpZGVfdmFsdWVfMSA9IHtcbiAgY29uc3QgeyBoaWdobGlnaHRQeXRob24sIGI2NERlY29kZX0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBldmFsdWF0aW9uIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oe1xuICAgIGlkOiBcInB5b2RpZGUtMS1jb250ZW50c1wiLFxuICAgIGVjaG86IHRydWUsXG4gICAgb3V0cHV0OiB0cnVlXG4gIH0sIGJsb2NrLmF0dHIpO1xuXG4gIC8vIEV2YWx1YXRlIHRoZSBwcm92aWRlZCBQeXRob24gY29kZVxuICBjb25zdCByZXN1bHQgPSBweW9kaWRlT2pzLnByb2Nlc3Moe2NvZGU6IGJsb2NrLmNvZGUsIG9wdGlvbnN9LCB7fSk7XG5cbiAgLy8gRWFybHkgeWllbGQgd2hpbGUgd2Ugd2FpdCBmb3IgdGhlIGZpcnN0IGV2YWx1YXRpb24gYW5kIHJlbmRlclxuICBpZiAob3B0aW9ucy5vdXRwdXQgJiYgIShcIjFcIiBpbiBweW9kaWRlT2pzLnJlbmRlcmVkT2pzKSkge1xuICAgIGNvbnN0IGNvbnRhaW5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG4gICAgY29uc3Qgc3Bpbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG5cbiAgICBpZiAob3B0aW9ucy5lY2hvKSB7XG4gICAgICAvLyBTaG93IG91dHB1dCBhcyBoaWdobGlnaHRlZCBzb3VyY2VcbiAgICAgIGNvbnN0IHByZUVsZW0gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwicHJlXCIpO1xuICAgICAgY29udGFpbmVyLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZVwiO1xuICAgICAgcHJlRWxlbS5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGUgcHl0aG9uXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKGhpZ2hsaWdodFB5dGhvbihibG9jay5jb2RlKSk7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ncm93IHNwaW5uZXItZ3Jvdy1zbSBtLTIgcG9zaXRpb24tYWJzb2x1dGUgdG9wLTAgZW5kLTBcIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQocHJlRWxlbSk7XG4gICAgfSBlbHNlIHtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWJvcmRlciBzcGlubmVyLWJvcmRlci1zbVwiO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgIH1cblxuICAgIHlpZWxkIGNvbnRhaW5lcjtcbiAgfVxuXG4gIHB5b2RpZGVPanMucmVuZGVyZWRPanNbXCIxXCJdID0gdHJ1ZTtcbiAgeWllbGQgYXdhaXQgcmVzdWx0O1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtcHJlbHVkZSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InB5b2RpZGVPanMgPSB7XG4gIGNvbnN0IHtcbiAgICBQeW9kaWRlRXZhbHVhdG9yLFxuICAgIFB5b2RpZGVFbnZpcm9ubWVudE1hbmFnZXIsXG4gICAgc2V0dXBQeXRob24sXG4gICAgc3RhcnRQeW9kaWRlV29ya2VyLFxuICAgIGI2NERlY29kZSxcbiAgICBjb2xsYXBzZVBhdGgsXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
+eyJjb250ZW50cyI6W119
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">
@@ -1321,6 +1263,9 @@ window._ojs.paths.runtimeToRoot = "../..";
 window._ojs.paths.docToRoot = "../..";
 window._ojs.selfContained = false;
 window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script type="application/vnd.jupyter.widget-state+json">
+{"state":{},"version_major":2,"version_minor":0}
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1394,7 +1339,7 @@ window._ojs.runtime.interpretFromScriptTags();
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/fcichos\.github\.io\/CBPM\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1721,15 +1666,6 @@ window._ojs.runtime.interpretFromScriptTags();
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../../lectures/lecture13/2_particle_in_a_box.html" class="pagination-link" aria-label="Wavepacket in Box">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Wavepacket in Box</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-  </div>
-</nav>
 </div> <!-- /content -->
 
 
